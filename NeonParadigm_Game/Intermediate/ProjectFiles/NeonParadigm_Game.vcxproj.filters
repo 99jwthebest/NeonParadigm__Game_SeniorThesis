@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\NeonParadigm_Game.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\NeonParadigm_Game.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\NeonParadigm_Game">
+      <UniqueIdentifier>{14F898DA-2476-37DB-AAAA-95B825EDF85A}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\NeonParadigm_Game\NeonParadigm_Game.Build.cs">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\NeonParadigm_Game.cpp">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\NeonParadigm_Game.h">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\NeonParadigm_GameCharacter.cpp">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\NeonParadigm_GameCharacter.h">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\NeonParadigm_GameGameMode.cpp">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\NeonParadigm_GameGameMode.h">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\TestActor.cpp">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\TestActor.h">
+      <Filter>Source\NeonParadigm_Game</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\AnimNotify">
+      <UniqueIdentifier>{1CB86CE4-9F20-3E02-9BF4-973DE02BBBF6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_AllowRotationOnRootMotion.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_AllowRotationOnRootMotion.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_EnabledIFrames.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_EnabledIFrames.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveDodge.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveDodge.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveHeavyAttack.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveHeavyAttack.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveLightAttack.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveLightAttack.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_ResetState.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_ResetState.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_RotationToTarget.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_RotationToTarget.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_WeaponCollision.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_WeaponCollision.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\Components">
+      <UniqueIdentifier>{A3FEEB26-B9DC-31B5-A73D-32DE53E4AF0B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Components\AttackComponent.cpp">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Components\AttackComponent.h">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Components\DamageComponent.cpp">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Components\DamageComponent.h">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\DamageType">
+      <UniqueIdentifier>{6C709622-EC5A-3E14-9F6F-002101C2ABE8}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\DamageType\NP_DamageType.cpp">
+      <Filter>Source\NeonParadigm_Game\DamageType</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\DamageType\NP_DamageType.h">
+      <Filter>Source\NeonParadigm_Game\DamageType</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\Enemies">
+      <UniqueIdentifier>{5DC7617F-0C27-3BA5-896A-34207A3DBCBB}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Enemies\NP_BaseEnemy.cpp">
+      <Filter>Source\NeonParadigm_Game\Enemies</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Enemies\NP_BaseEnemy.h">
+      <Filter>Source\NeonParadigm_Game\Enemies</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Enemies\NP_EnemySpawner.cpp">
+      <Filter>Source\NeonParadigm_Game\Enemies</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Enemies\NP_EnemySpawner.h">
+      <Filter>Source\NeonParadigm_Game\Enemies</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\Enums">
+      <UniqueIdentifier>{0732C4C2-4ABA-3053-8C1A-D522591C9825}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Enums\CharacterStateComponent.cpp">
+      <Filter>Source\NeonParadigm_Game\Enums</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Enums\CharacterStateComponent.h">
+      <Filter>Source\NeonParadigm_Game\Enums</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

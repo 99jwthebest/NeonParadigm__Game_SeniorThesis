@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_Game\\NeonParadigm_Game.Build.cs",
+		"C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_Game.Target.cs",
+		"C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_GameEditor.Target.cs"
+	],
+	"EngineVersion": "5.3.2"
+}
