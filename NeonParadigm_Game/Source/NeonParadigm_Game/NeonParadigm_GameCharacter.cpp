@@ -306,7 +306,7 @@ void ANeonParadigm_GameCharacter::ResetDoubleJump()
 
 void ANeonParadigm_GameCharacter::Dodge()
 {
-	TSubclassOf<UNP_DamageType> DamageTypeClass = UNP_DamageType::StaticClass();
+	/*TSubclassOf<UNP_DamageType> DamageTypeClass = UNP_DamageType::StaticClass();
 	if (DamageTypeClass != nullptr)
 	{
 		float Damage = UGameplayStatics::ApplyDamage(this, 10.0f, GetController(), this, DamageTypeClass);
@@ -315,7 +315,7 @@ void ANeonParadigm_GameCharacter::Dodge()
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT("DamageTypeClass is not valid."));
-	}
+	}*/
 
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);

@@ -36,6 +36,5 @@
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Enemies/NP_EnemySpawner.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Enums/CharacterStateComponent.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/NeonParadigm_Game.cpp"
-#include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/NeonParadigm_GameCharacter.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/NeonParadigm_GameGameMode.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/TestActor.cpp"
