@@ -138,13 +138,22 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 		TArray<ECharacterStates> CurrentCharacterState;
 		CurrentCharacterState.Add(ECharacterStates::Death);
 
-		if (!IsCurrentStateEqualToAny(CurrentCharacterState) && IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
+		if (!IsCurrentStateEqualToAny(CurrentCharacterState)) //&& IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
 		{
-			SetState(ECharacterStates::Disabled);
-			UpdateCharacterRotationWhenHit(DamageCauser);
-			StopAttackMovement();
-			AttackMovement(500.0f); //25.0f  should maybe be the value
-			PlayAnimMontage(GetHitReactionMontage(MyDamageType->GetDamageType()));
+			UE_LOG(LogTemp, Warning, TEXT("ENEMY STATE IS VALId!!!!!!!!"));
+			if (IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
+			{
+				SetState(ECharacterStates::Disabled);
+				UpdateCharacterRotationWhenHit(DamageCauser);
+				StopAttackMovement();
+				AttackMovement(10.0f); //15.0f  should maybe be the value
+				PlayAnimMontage(GetHitReactionMontage(MyDamageType->GetDamageType()));
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("ENEMY DAMAGETYPE NOTTTT VALId!!!!!!!!"));
+			}
+
 		}
 		else
 		{
@@ -162,24 +171,24 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
 	switch (DamageType)
 	{
 		case EDamageTypes::Default:
-			return HR_Knockback = nullptr;
+			return HR_Knockback;
 
 		case EDamageTypes::Right:
-			return HR_Right = nullptr;
+			return HR_Right;
 
 		case EDamageTypes::Left:
-			return HR_Left = nullptr;
+			return HR_Left;
 
 		case EDamageTypes::Middle:
-			return HR_Middle = nullptr;
+			return HR_Middle;
 
 		case EDamageTypes::Knockdown:
-			return HR_Knockdown = nullptr;
+			return HR_Knockdown;
 
 		case EDamageTypes::Knockback:
-			return HR_Knockback = nullptr;
+			return HR_Knockback;
 	}
-	return HR_Knockback = nullptr;
+	return HR_Knockback;
 }
 
 void ANP_BaseEnemy::PerformDeath()
@@ -193,7 +202,7 @@ void ANP_BaseEnemy::PerformDeath()
 void ANP_BaseEnemy::UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter)
 {
 	FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), DamageCauserCharacter->GetActorLocation()));
-	FRotator TargetRotator(GetActorRotation().Roll, GetActorRotation().Pitch, FindLookAtRot.Yaw);
+	FRotator TargetRotator(GetActorRotation().Pitch, FindLookAtRot.Yaw, GetActorRotation().Roll);
 	SetActorRotation(TargetRotator);
 }
 

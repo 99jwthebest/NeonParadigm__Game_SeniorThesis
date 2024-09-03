@@ -55,6 +55,8 @@ private:
 	UAnimMontage* HR_Knockdown;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Knockback;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects, meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* ImpactEffect;
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	//UAnimMontage* DeathMontage;

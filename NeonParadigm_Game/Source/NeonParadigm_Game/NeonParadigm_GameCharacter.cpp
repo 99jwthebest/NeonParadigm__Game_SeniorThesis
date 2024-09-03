@@ -347,6 +347,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()
 
 		CharacterState->SetState(ECharacterStates::Dodge);
 		PlayAnimMontage(DodgeMontage);
+		AttackComp->AttackMovement(25.0f);
 	}
 }
 
@@ -355,6 +356,7 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
 	CurrentCharacterState.Add(ECharacterStates::Death);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
@@ -845,15 +847,22 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 
 		if (CurrentHealth > 0.0f)
 		{
+
 			// Step 2: Ensure the instance is valid
 			if (MyDamageType)
 			{
+				UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
+
 				if (IsValid(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType())))
 				{
 					CharacterState->SetState(ECharacterStates::Disabled);
 					PlayAnimMontage(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType()));
 				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
 
+				}
 				// You can now use the value of Damage as needed
 				//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
 			}

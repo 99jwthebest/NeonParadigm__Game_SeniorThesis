@@ -69,6 +69,7 @@ bool UAttackComponent::CanAttack()
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
 	CurrentCharacterState.Add(ECharacterStates::Death);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 

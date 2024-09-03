@@ -86,6 +86,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 			UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *Hit.GetActor()->GetName());
 			if (!HitActors.Contains(Hit.GetActor()) && Hit.GetActor()->IsValidLowLevel())
 			{
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
 				float Damage = UGameplayStatics::ApplyDamage(Hit.GetActor(), AmountOfDamage, MyCharacter->GetController(), MyCharacter, DamageTypeClass);
 				HitActors.AddUnique(Hit.GetActor());
 				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
