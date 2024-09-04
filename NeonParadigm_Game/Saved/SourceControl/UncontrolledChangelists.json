@@ -1,0 +1,13 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/_JHernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Clair_NeonParadigm.uasset",
+				"C:/_JHernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/Projectiles/BP_Projectile.uasset"
+			]
+		}
+	]
+}
