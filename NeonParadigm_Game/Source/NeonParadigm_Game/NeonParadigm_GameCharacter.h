@@ -96,6 +96,7 @@ public:
 	void SaveDodge();
 	void SetIsDodgeSaved(bool bSetIsDodgeSaved);
 	void SetIFrames(bool bEnableIFrames);
+	UFUNCTION(BlueprintPure)
 	bool IsIFramesEnabled();
 
 

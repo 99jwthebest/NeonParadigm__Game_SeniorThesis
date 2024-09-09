@@ -94,6 +94,9 @@ public:
 
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
 	void PerformDeath();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PerformThingsAfterDeath();
+
 
 public:
 	void UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter);

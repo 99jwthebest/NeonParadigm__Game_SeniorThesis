@@ -197,6 +197,7 @@ void ANP_BaseEnemy::PerformDeath()
 	PlayAnimMontage(DeathMontage);
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	PerformThingsAfterDeath();
 }
 
 void ANP_BaseEnemy::UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter)

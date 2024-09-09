@@ -73,7 +73,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 
 	DamageComp = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage Component"));
 
-	MaxTargetingDistance = 1500.0f;
+	MaxTargetingDistance = 2500.0f;
 
 	SpeedOfRotation = 10.0f;
 	SpeedOfSoftRotation = 10.0f;
@@ -410,7 +410,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 	FVector MultiplyVec = FollowCamera->GetForwardVector() * TargetingDistance;
 	FVector EndVec = StartVec + MultiplyVec;
 	// Trace radius
-	float Radius = 150.0f;
+	float Radius = 250.0f;
 	// Object types to trace against (e.g., WorldDynamic, Pawn)
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
