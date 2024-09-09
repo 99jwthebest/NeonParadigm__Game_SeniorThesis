@@ -65,6 +65,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Target Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* TargetAction;
+
+	/** Parry Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ParryAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -128,6 +132,12 @@ public:
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	void PerformDeath();
+
+	void Parry();
+	bool CanParry();
+	void Counter(bool ProjectileCounter);
+	void SaveParry();
+	void ParryInput();
 
 
 protected:
@@ -202,6 +212,8 @@ private:
 
 	AActor* LastSoftTargetActor;
 
+	bool bIsParrySaved;
+
 public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
@@ -211,5 +223,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DeathMontage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ParryMontage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* CounterMontage;
 };
 

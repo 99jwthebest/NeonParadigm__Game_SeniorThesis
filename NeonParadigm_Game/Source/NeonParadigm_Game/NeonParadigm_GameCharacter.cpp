@@ -179,6 +179,9 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 	
 		// Target
 		EnhancedInputComponent->BindAction(TargetAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Target);
+
+		// Parry
+		EnhancedInputComponent->BindAction(ParryAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ParryInput);
 	}
 	else
 	{
@@ -358,6 +361,7 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
 	CurrentCharacterState.Add(ECharacterStates::Disabled);
 	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
 	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
@@ -839,37 +843,58 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 
 	if (!bEnabledIFrames)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Parry);
 
-		CurrentHealth -= DamageAmount;
-		// Step 1: Create or obtain an instance of UNP_DamageType
-		UNP_DamageType* MyDamageType = NewObject<UNP_DamageType>(GetWorld());
-
-		if (CurrentHealth > 0.0f)
+		if (!CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-			// Step 2: Ensure the instance is valid
-			if (MyDamageType)
+			CurrentHealth -= DamageAmount;
+			// Step 1: Create or obtain an instance of UNP_DamageType
+			UNP_DamageType* MyDamageType = NewObject<UNP_DamageType>(GetWorld());
+
+			if (CurrentHealth > 0.0f)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
 
-				if (IsValid(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType())))
+				// Step 2: Ensure the instance is valid
+				if (MyDamageType)
 				{
-					CharacterState->SetState(ECharacterStates::Disabled);
-					PlayAnimMontage(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType()));
-				}
-				else
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
+					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
 
+					if (IsValid(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType())))
+					{
+						CharacterState->SetState(ECharacterStates::Disabled);
+						PlayAnimMontage(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType()));
+					}
+					else
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
+
+					}
+					// You can now use the value of Damage as needed
+					//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
 				}
-				// You can now use the value of Damage as needed
-				//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
+			}
+			else
+			{
+				PerformDeath();
 			}
 		}
 		else
 		{
-			PerformDeath();
+			ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(DamageCauser);
+			if (Enemy)
+			{
+				Enemy->Parried();
+
+				FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Enemy->GetActorLocation()));
+
+				//GetController()->SetControlRotation(TargetRot);
+				SetActorRotation(TargetRot);
+				Counter(false);
+
+			}
 		}
 	}
 
@@ -887,4 +912,74 @@ void ANeonParadigm_GameCharacter::PerformDeath()
 	PlayAnimMontage(DeathMontage);
 	DisableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 
+}
+
+void ANeonParadigm_GameCharacter::Parry()
+{
+	if (CanParry())
+	{
+		CharacterState->SetState(ECharacterStates::Parry);
+		PlayAnimMontage(ParryMontage);
+	}
+}
+
+bool ANeonParadigm_GameCharacter::CanParry()
+{
+
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+}
+
+void ANeonParadigm_GameCharacter::Counter(bool ProjectileCounter)
+{
+	CharacterState->SetState(ECharacterStates::Attack);
+
+	if (ProjectileCounter)
+	{
+		//PlayAnimMontage(ProjectileCounterMontage);
+
+	}
+	else
+	{
+		PlayAnimMontage(CounterMontage);
+	}
+}
+
+void ANeonParadigm_GameCharacter::SaveParry()
+{
+	if (bIsParrySaved)
+	{
+		bIsParrySaved = false;
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		{
+			CharacterState->SetState(ECharacterStates::None);
+		}
+
+		Parry();
+	}
+}
+
+void ANeonParadigm_GameCharacter::ParryInput()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		bIsParrySaved = true;
+	}
+	else
+	{
+		Parry();
+	}
 }

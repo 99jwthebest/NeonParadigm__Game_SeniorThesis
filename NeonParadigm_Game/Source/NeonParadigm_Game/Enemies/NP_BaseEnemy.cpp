@@ -200,6 +200,15 @@ void ANP_BaseEnemy::PerformDeath()
 	PerformThingsAfterDeath();
 }
 
+void ANP_BaseEnemy::Parried()
+{
+	if (bCanBeParried)
+	{
+		SetState(ECharacterStates::Disabled);
+		PlayAnimMontage(ParryStaggerMontage);
+	}
+}
+
 void ANP_BaseEnemy::UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter)
 {
 	FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), DamageCauserCharacter->GetActorLocation()));

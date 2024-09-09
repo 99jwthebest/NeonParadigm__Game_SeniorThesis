@@ -144,13 +144,13 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_Inner_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_Inner = { "StatesToCheck", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 3342654299
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_Inner = { "StatesToCheck", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 1500412229
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_MetaData[] = {
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck = { "StatesToCheck", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventIsCurrentStateEqualToAny_Parms, StatesToCheck), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_MetaData), Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_MetaData) }; // 3342654299
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck = { "StatesToCheck", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventIsCurrentStateEqualToAny_Parms, StatesToCheck), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_MetaData), Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_StatesToCheck_MetaData) }; // 1500412229
 	void Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 	{
 		((NP_BaseEnemy_eventIsCurrentStateEqualToAny_Parms*)Obj)->ReturnValue = 1;
@@ -217,7 +217,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::NewProp_NewState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::NewProp_NewState = { "NewState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventSetState_Parms, NewState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 3342654299
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::NewProp_NewState = { "NewState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventSetState_Parms, NewState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 1500412229
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::NewProp_NewState_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::NewProp_NewState,
@@ -280,6 +280,15 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Knockback_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Knockback;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ParryStaggerMontage_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ParryStaggerMontage;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCanBeParried_MetaData[];
+#endif
+		static void NewProp_bCanBeParried_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanBeParried;
 		static const UECodeGen_Private::FBytePropertyParams NewProp_CurrentState_Underlying;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentState_MetaData[];
@@ -312,9 +321,9 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_ANP_BaseEnemy_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_HandleTakeAnyDamage, "HandleTakeAnyDamage" }, // 3611324083
-		{ &Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny, "IsCurrentStateEqualToAny" }, // 3687491440
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny, "IsCurrentStateEqualToAny" }, // 3945352412
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_PerformThingsAfterDeath, "PerformThingsAfterDeath" }, // 3771025194
-		{ &Z_Construct_UFunction_ANP_BaseEnemy_SetState, "SetState" }, // 2879253352
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_SetState, "SetState" }, // 4264504257
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -380,6 +389,26 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback = { "HR_Knockback", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Knockback), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage = { "ParryStaggerMontage", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, ParryStaggerMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	void Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried_SetBit(void* Obj)
+	{
+		((ANP_BaseEnemy*)Obj)->bCanBeParried = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried = { "bCanBeParried", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ANP_BaseEnemy), &Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried_MetaData) };
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_MetaData[] = {
@@ -388,7 +417,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
 	};
 #endif
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState = { "CurrentState", nullptr, (EPropertyFlags)0x0040000000000004, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, CurrentState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_MetaData) }; // 3342654299
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState = { "CurrentState", nullptr, (EPropertyFlags)0x0040000000000004, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, CurrentState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_MetaData) }; // 1500412229
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_DeathMontage_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -438,6 +467,8 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Middle,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockdown,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_DeathMontage,
@@ -483,9 +514,9 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 2207969372U) },
+		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 4196282617U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_2583603660(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_433052997(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

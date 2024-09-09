@@ -15,6 +15,7 @@ enum class ECharacterStates : uint8
 	Dodge, //UMETA(DisplayName = "Option 3"),
 	Death, //UMETA(DisplayName = "Option 4"),
 	Disabled, //UMETA(DisplayName = "Option 5"),
+	Parry,
 };
 
 class UAttackComponent;
@@ -49,6 +50,7 @@ private:
 	ECharacterStates DodgeState;
 	ECharacterStates DeathState;
 	ECharacterStates DisabledState;
+	ECharacterStates ParryState;
 
 	ANeonParadigm_GameCharacter* MyCharacter;
 	UAttackComponent* AttackComp;

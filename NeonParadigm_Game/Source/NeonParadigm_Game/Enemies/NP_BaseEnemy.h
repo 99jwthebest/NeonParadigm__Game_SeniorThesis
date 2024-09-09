@@ -49,6 +49,12 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Knockback;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ParryStaggerMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	bool bCanBeParried;
+
 private:
 
 	ECharacterStates PreviousState;
@@ -96,6 +102,8 @@ public:
 	void PerformDeath();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PerformThingsAfterDeath();
+
+	void Parried();
 
 
 public:

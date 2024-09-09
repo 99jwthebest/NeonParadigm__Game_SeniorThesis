@@ -42,6 +42,7 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 		{ "ECharacterStates::Dodge", (int64)ECharacterStates::Dodge },
 		{ "ECharacterStates::Death", (int64)ECharacterStates::Death },
 		{ "ECharacterStates::Disabled", (int64)ECharacterStates::Disabled },
+		{ "ECharacterStates::Parry", (int64)ECharacterStates::Parry },
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates_Statics::Enum_MetaDataParams[] = {
@@ -60,6 +61,9 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 		{ "Dodge.ToolTip", "UMETA(DisplayName = \"Option 2\")," },
 		{ "ModuleRelativePath", "Enums/CharacterStateComponent.h" },
 		{ "None.Name", "ECharacterStates::None" },
+		{ "Parry.Comment", "//UMETA(DisplayName = \"Option 5\"),\n" },
+		{ "Parry.Name", "ECharacterStates::Parry" },
+		{ "Parry.ToolTip", "UMETA(DisplayName = \"Option 5\")," },
 	};
 #endif
 	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates_Statics::EnumParams = {
@@ -121,7 +125,7 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UCharacterStateComponent_GetState_Statics::NewProp_ReturnValue_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UCharacterStateComponent_GetState_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterStateComponent_eventGetState_Parms, ReturnValue), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 3342654299
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UCharacterStateComponent_GetState_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterStateComponent_eventGetState_Parms, ReturnValue), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 1500412229
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCharacterStateComponent_GetState_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterStateComponent_GetState_Statics::NewProp_ReturnValue_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterStateComponent_GetState_Statics::NewProp_ReturnValue,
@@ -159,7 +163,7 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UCharacterStateComponent_SetState_Statics::NewProp_NewState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UCharacterStateComponent_SetState_Statics::NewProp_NewState = { "NewState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterStateComponent_eventSetState_Parms, NewState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 3342654299
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UCharacterStateComponent_SetState_Statics::NewProp_NewState = { "NewState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterStateComponent_eventSetState_Parms, NewState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(0, nullptr) }; // 1500412229
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCharacterStateComponent_SetState_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterStateComponent_SetState_Statics::NewProp_NewState_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterStateComponent_SetState_Statics::NewProp_NewState,
@@ -208,8 +212,8 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UCharacterStateComponent_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UCharacterStateComponent_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UCharacterStateComponent_GetState, "GetState" }, // 4080799448
-		{ &Z_Construct_UFunction_UCharacterStateComponent_SetState, "SetState" }, // 3416452497
+		{ &Z_Construct_UFunction_UCharacterStateComponent_GetState, "GetState" }, // 527585594
+		{ &Z_Construct_UFunction_UCharacterStateComponent_SetState, "SetState" }, // 2237817368
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UCharacterStateComponent_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -228,7 +232,7 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 		{ "ModuleRelativePath", "Enums/CharacterStateComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState = { "CurrentState", nullptr, (EPropertyFlags)0x0040000000000004, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UCharacterStateComponent, CurrentState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState_MetaData), Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState_MetaData) }; // 3342654299
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState = { "CurrentState", nullptr, (EPropertyFlags)0x0040000000000004, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UCharacterStateComponent, CurrentState), Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState_MetaData), Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState_MetaData) }; // 1500412229
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UCharacterStateComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UCharacterStateComponent_Statics::NewProp_CurrentState,
@@ -272,12 +276,12 @@ void EmptyLinkFunctionForGeneratedCodeCharacterStateComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_Statics::EnumInfo[] = {
-		{ ECharacterStates_StaticEnum, TEXT("ECharacterStates"), &Z_Registration_Info_UEnum_ECharacterStates, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3342654299U) },
+		{ ECharacterStates_StaticEnum, TEXT("ECharacterStates"), &Z_Registration_Info_UEnum_ECharacterStates, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1500412229U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UCharacterStateComponent, UCharacterStateComponent::StaticClass, TEXT("UCharacterStateComponent"), &Z_Registration_Info_UClass_UCharacterStateComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UCharacterStateComponent), 1624945114U) },
+		{ Z_Construct_UClass_UCharacterStateComponent, UCharacterStateComponent::StaticClass, TEXT("UCharacterStateComponent"), &Z_Registration_Info_UClass_UCharacterStateComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UCharacterStateComponent), 916186401U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_1424761933(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_2803762899(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enums_CharacterStateComponent_h_Statics::EnumInfo));

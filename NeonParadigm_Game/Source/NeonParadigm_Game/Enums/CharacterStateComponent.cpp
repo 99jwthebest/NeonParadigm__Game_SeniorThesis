@@ -19,6 +19,7 @@ UCharacterStateComponent::UCharacterStateComponent()
 	DodgeState = ECharacterStates::Dodge;
 	DeathState = ECharacterStates::Death;
 	DisabledState = ECharacterStates::Disabled;
+	ParryState = ECharacterStates::Parry;
 
 	CurrentState = ECharacterStates::None;
 
