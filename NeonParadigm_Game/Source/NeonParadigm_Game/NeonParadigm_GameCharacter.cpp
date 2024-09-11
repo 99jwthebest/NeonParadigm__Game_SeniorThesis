@@ -351,7 +351,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()
 
 		CharacterState->SetState(ECharacterStates::Dodge);
 		PlayAnimMontage(DodgeMontage);
-		AttackComp->AttackMovement(25.0f);
+		AttackComp->AttackMovement(15.0f); // maybe increase to 20 max
 	}
 }
 
