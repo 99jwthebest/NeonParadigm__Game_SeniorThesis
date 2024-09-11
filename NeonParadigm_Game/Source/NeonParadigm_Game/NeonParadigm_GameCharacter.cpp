@@ -64,8 +64,6 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	CharacterState = CreateDefaultSubobject<UCharacterStateComponent>(TEXT("Character State Component"));
 
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weapon Mesh"));
-	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
-	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
 
 	AttackComp = CreateDefaultSubobject<UAttackComponent>(TEXT("Attack Component"));
 
@@ -85,6 +83,9 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
+	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
 
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -895,6 +896,11 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 				Counter(false);
 
 			}
+			else
+			{
+
+				ParryProjectile();
+			}
 		}
 	}
 
@@ -927,6 +933,8 @@ bool ANeonParadigm_GameCharacter::CanParry()
 {
 
 	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Reserve(5);
+	// Preallocate in begin play
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
 	CurrentCharacterState.Add(ECharacterStates::Disabled);
@@ -943,7 +951,7 @@ void ANeonParadigm_GameCharacter::Counter(bool ProjectileCounter)
 
 	if (ProjectileCounter)
 	{
-		//PlayAnimMontage(ProjectileCounterMontage);
+		PlayAnimMontage(ProjectileCounterMontage);
 
 	}
 	else
@@ -982,4 +990,9 @@ void ANeonParadigm_GameCharacter::ParryInput()
 	{
 		Parry();
 	}
+}
+
+void ANeonParadigm_GameCharacter::ResetParry()
+{
+	bIsParrySaved = false;
 }

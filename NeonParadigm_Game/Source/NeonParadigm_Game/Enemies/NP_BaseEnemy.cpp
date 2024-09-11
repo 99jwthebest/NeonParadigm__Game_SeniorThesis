@@ -28,8 +28,6 @@ ANP_BaseEnemy::ANP_BaseEnemy()
 	SpeedOfAttackMovement = 300.0f;
 
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weapon Mesh"));
-	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
-	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
 
 	// Create the Widget Component and attach it to the root component
 	HealthBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("Health Bar Widget"));
@@ -43,6 +41,10 @@ ANP_BaseEnemy::ANP_BaseEnemy()
 void ANP_BaseEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
+	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
+
 
 	CurrentHealth = MaxHealth;
 

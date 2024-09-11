@@ -3,6 +3,7 @@
 	{
 		"Module.NeonParadigm_Game.cpp.obj": [
 			"AttackComponent.gen.cpp.obj",
+			"CharacterStateComponent.gen.cpp.obj",
 			"DamageComponent.gen.cpp.obj",
 			"NeonParadigm_GameGameMode.gen.cpp.obj",
 			"NP_ANS_AllowRotationOnRootMotion.gen.cpp.obj",
@@ -15,6 +16,7 @@
 			"NP_AN_RotationToTarget.gen.cpp.obj",
 			"NP_AN_SoftTarget.gen.cpp.obj",
 			"NP_AN_WeaponCollision.gen.cpp.obj",
+			"NP_BaseEnemy.gen.cpp.obj",
 			"NP_DamageType.gen.cpp.obj",
 			"NP_EnemySpawner.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
@@ -28,6 +30,7 @@
 			"NP_AN_RotationToTarget.cpp.obj",
 			"NP_AN_SoftTarget.cpp.obj",
 			"NP_AN_WeaponCollision.cpp.obj",
+			"AttackComponent.cpp.obj",
 			"DamageComponent.cpp.obj",
 			"NP_DamageType.cpp.obj",
 			"NP_BaseEnemy.cpp.obj",
@@ -35,11 +38,10 @@
 			"NeonParadigm_Game.cpp.obj",
 			"NeonParadigm_GameGameMode.cpp.obj",
 			"TestActor.cpp.obj",
-			"CharacterStateComponent.gen.cpp.obj",
 			"NeonParadigm_Game.init.gen.cpp.obj",
 			"NeonParadigm_GameCharacter.gen.cpp.obj",
-			"NP_BaseEnemy.gen.cpp.obj",
-			"AttackComponent.cpp.obj",
+			"NP_ANS_SaveParry.gen.cpp.obj",
+			"NP_ANS_SaveParry.cpp.obj",
 			"CharacterStateComponent.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj"
 		]

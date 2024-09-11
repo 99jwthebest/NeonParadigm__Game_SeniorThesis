@@ -77,7 +77,7 @@ void UCharacterStateComponent::ResetState()
 	MyCharacter->ResetTimelines();
 	MyCharacter->ResetSoftLockTarget();
 	MyCharacter->SetIsDodgeSaved(false);
-	
+	MyCharacter->ResetParry();
 }
 
 

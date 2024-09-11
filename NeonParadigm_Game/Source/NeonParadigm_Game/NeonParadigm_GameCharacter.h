@@ -130,15 +130,19 @@ public:
 
 	// Override the TakeDamage function
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	UFUNCTION()
 	void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	void PerformDeath();
 
 	void Parry();
 	bool CanParry();
+	UFUNCTION(BlueprintCallable)
 	void Counter(bool ProjectileCounter);
 	void SaveParry();
 	void ParryInput();
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void ParryProjectile();
+	void ResetParry();
 
 protected:
 
@@ -227,5 +231,9 @@ public:
 	UAnimMontage* ParryMontage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* CounterMontage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ProjectileCounterMontage;
+
+
 };
 
