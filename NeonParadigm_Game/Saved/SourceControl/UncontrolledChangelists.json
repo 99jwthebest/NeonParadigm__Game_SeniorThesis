@@ -5,6 +5,12 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Models/test_assets/Wall_M.uasset",
+				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Models/test_assets/Floor_M.uasset",
+				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/MapTemplates/SM_Template_Map_Floor.uasset",
+				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/test_assets/Wall_M.uasset",
+				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/test_assets/Floor_M.uasset",
+				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Clair_NeonParadigm.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Projectiles/BP_Projectile.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/WBP_HUD.uasset",
