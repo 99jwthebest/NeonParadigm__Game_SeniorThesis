@@ -6,6 +6,10 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/MapTemplates/SM_Template_Map_Floor.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/PrivateIntegrationData/BankLookup.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/Buses/Reverb.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/Banks/Master.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/PrivateIntegrationData/AssetLookup.uasset",
 				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/test_assets/Wall_M.uasset",
 				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/test_assets/Floor_M.uasset",
 				"C:/Users/angie/Desktop/soulfroge/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",

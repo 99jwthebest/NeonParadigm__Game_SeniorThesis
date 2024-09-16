@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Workspace" id="{c1c6515e-d9c3-49a6-8978-589d035af15c}">
+		<property name="builtBanksOutputDirectory">
+			<value>../../NeonParadigm_Game/Content/FMOD</value>
+		</property>
+		<relationship name="masterEventFolder">
+			<destination>{4d92bab8-238b-4c83-82a1-cac88ae2d6ad}</destination>
+		</relationship>
+		<relationship name="masterTagFolder">
+			<destination>{feeed9ec-38b9-4655-8b82-50eb4874ea23}</destination>
+		</relationship>
+		<relationship name="masterEffectPresetFolder">
+			<destination>{224d2d6b-6243-456b-8051-fcbd7bdd38ee}</destination>
+		</relationship>
+		<relationship name="masterParameterPresetFolder">
+			<destination>{b540bbe4-1e2e-4abe-9ae1-e29a2c6c737c}</destination>
+		</relationship>
+		<relationship name="masterBankFolder">
+			<destination>{19d64f4e-d371-4347-ac55-4269c1db7f62}</destination>
+		</relationship>
+		<relationship name="masterSandboxFolder">
+			<destination>{ab487941-8297-4d6c-8f93-26cc117b2a16}</destination>
+		</relationship>
+		<relationship name="masterAssetFolder">
+			<destination>{597a6ac2-ef8b-40c4-9dc4-6715dabb6983}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{77376064-875a-4e21-a115-5539516ee143}</destination>
+		</relationship>
+		<relationship name="profilerSessionFolder">
+			<destination>{4464eefc-d08b-48cc-a6bc-dae0af075340}</destination>
+		</relationship>
+		<relationship name="platforms">
+			<destination>{029d04b8-2b51-4e8c-aecc-20fa8f3dc886}</destination>
+		</relationship>
+	</object>
+</objects>
