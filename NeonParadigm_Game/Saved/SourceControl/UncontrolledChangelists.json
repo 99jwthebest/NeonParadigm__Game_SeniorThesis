@@ -5,6 +5,8 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Clair_NeonParadigm.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/ThirdPerson/Maps/ThirdPersonMap.umap",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/PrivateIntegrationData/BankLookup.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/Banks/TempMusic.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/Events/Music/TempMusic.uasset",
