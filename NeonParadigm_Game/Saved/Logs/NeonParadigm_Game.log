@@ -1328,3 +1328,4 @@ LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
 [2024.09.18-14.18.48:083][444]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
 [2024.09.18-14.18.48:084][444]LogUObjectHash: Compacting FUObjectHashTables data took   0.36ms
 [2024.09.18-14.18.48:104][445]LogPlayLevel: Display: Destroying online subsystem :Context_2
+[2024.09.18-14.19.51:539][137]LogDerivedDataCache: D:/profile redirect/johern12/AppData/Local/UnrealEngine/Common/DerivedDataCache: Maintenance finished in +00:00:06.049 and deleted 0 files with total size 0 MiB and 0 empty folders. Scanned 3856 files in 4472 folders with total size 99 MiB.
