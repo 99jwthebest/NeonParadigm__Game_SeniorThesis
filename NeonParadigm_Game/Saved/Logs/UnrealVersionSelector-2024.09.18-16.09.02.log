@@ -1,32 +1,38 @@
-Log started at 09/18/2024 09:15:04 (2024-09-18T14:15:04Z)
-No config file at D:\profile redirect\johern12\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Log started at 09/18/2024 16:09:02 (2024-09-18T21:09:02Z)
+No config file at C:\Users\josep\OneDrive\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
 Configuration will be read from:
-  D:\profile redirect\johern12\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
-Log file: C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Saved\Logs\UnrealVersionSelector-2024.09.18-09.15.04.log
+  C:\Users\josep\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Log file: C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Saved\Logs\UnrealVersionSelector-2024.09.18-16.09.02.log
 
-Setting temp directory to 'D:\profile redirect\johern12\AppData\Local\Temp\UnrealBuildTool\319625c3'
+Setting temp directory to 'C:\Users\josep\AppData\Local\Temp\UnrealBuildTool\319625c3'
     Registering build platform: UnrealBuildTool.AndroidPlatformFactory
+        Registering build platform: Android - buildable: False
     Registering build platform: UnrealBuildTool.IOSPlatformFactory
+        Registering build platform: IOS - buildable: False
     Registering build platform: UnrealBuildTool.LinuxPlatformFactory
+        Registering build platform: Linux - buildable: False
+        Registering build platform: LinuxArm64 - buildable: False
     Registering build platform: UnrealBuildTool.MacPlatformFactory
     Registering build platform: UnrealBuildTool.TVOSPlatformFactory
     Registering build platform: UnrealBuildTool.WindowsPlatformFactory
 Found Windows 10 SDK root at C:\Program Files (x86)\Windows Kits\10 (1)
 Found Windows 10 SDK root at C:\Program Files (x86)\Windows Kits\10 (2)
+Found Universal CRT version 10.0.10240.0 at C:\Program Files (x86)\Windows Kits\10
+Found Windows 10 SDK version 10.0.20348.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.20348.0 at C:\Program Files (x86)\Windows Kits\10
+Found Windows 10 SDK version 10.0.22000.0 at C:\Program Files (x86)\Windows Kits\10
+Found Universal CRT version 10.0.22000.0 at C:\Program Files (x86)\Windows Kits\10
 Found Windows 10 SDK version 10.0.22621.0 at C:\Program Files (x86)\Windows Kits\10
 Found Universal CRT version 10.0.22621.0 at C:\Program Files (x86)\Windows Kits\10
 Win64 Installed SDK(s): MinVersion_Sdk=10.0.00000.0, MaxVersion_Sdk=10.9.99999.0, CurrentVersion_Sdk=10.0.22621.0, Version_AutoSdk=10.0.18362.0, CurrentVersion_AutoSdk=
         Registering build platform: Win64 - buildable: True
-Log file: D:\profile redirect\johern12\AppData\Local\UnrealBuildTool\Log_GPF.txt
-Resolved project argument C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/NeonParadigm_Game.uproject to C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\NeonParadigm_Game.uproject
+Log file: C:\Users\josep\AppData\Local\UnrealBuildTool\Log_GPF.txt
+Deleting old log file: C:\Users\josep\AppData\Local\UnrealBuildTool\Log_GPF-backup-2023.12.27-07.13.20.txt
+Resolved project argument C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/NeonParadigm_Game.uproject to C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\NeonParadigm_Game.uproject
 Registering project generator UnrealBuildTool.AndroidProjectGenerator for Android
-Skipping project file generator registration for Android due to no valid BuildPlatform.
 Registering project generator UnrealBuildTool.IOSProjectGenerator for IOS
-Skipping project file generator registration for IOS due to no valid BuildPlatform.
 Registering project generator UnrealBuildTool.LinuxProjectGenerator for Linux
-Skipping project file generator registration for Linux due to no valid BuildPlatform.
 Registering project generator UnrealBuildTool.LinuxProjectGenerator for LinuxArm64
-Skipping project file generator registration for LinuxArm64 due to no valid BuildPlatform.
 Registering project generator UnrealBuildTool.MacProjectGenerator for Mac
 Skipping project file generator registration for Mac due to no valid BuildPlatform.
 Registering project generator UnrealBuildTool.TVOSProjectGenerator for TVOS
@@ -34,25 +40,31 @@ Skipping project file generator registration for TVOS due to no valid BuildPlatf
 Registering project generator UnrealBuildTool.WindowsProjectGenerator for Win64
 
 ---   SDK INFO START   ---
+
+Some Platforms were skipped due to invalid SDK setup: IOS, Android, Linux, LinuxArm64.
+See the log file for detailed information
+
 ---   SDK INFO END   ---
 
 
-Generating VisualStudio project files:
+Generating VisualStudio2022 project files:
 Discovering modules, targets and source code for project...
-Found Visual Studio installation: C:\Program Files\Microsoft Visual Studio\2022\Community (Product=Microsoft.VisualStudio.Product.Community, Version=17.11.35303.130)
+Updating C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\ProjectFiles\PrimaryProjectName.txt: contents have changed. Saving previous version to C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\ProjectFiles\PrimaryProjectName.txt.old.
+Updating C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\ProjectFiles\PrimaryProjectPath.txt: contents have changed. Saving previous version to C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\ProjectFiles\PrimaryProjectPath.txt.old.
+Found Visual Studio installation: C:\Program Files\Microsoft Visual Studio\2022\Community (Product=Microsoft.VisualStudio.Product.Community, Version=17.11.35222.181)
 Found Visual Studio toolchain: C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120 (Family=14.41.34120, FamilyRank=4, Version=14.41.34120, Is64Bit=True, ReleaseChannel=Latest, Architecture=x64, Error=False, Redist=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\14.40.33807)
-Detected supported platforms: Win64
+Detected supported platforms: Win64, IOS, Android, Linux, LinuxArm64
 Skipping C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\Build\BuildRules\UE5Rules.dll: File is installed
 Skipping C:\Program Files\Epic Games\UE_5.3\Engine\Intermediate\Build\BuildRules\UE5ProgramRules.dll: File is installed
-Generating target Editor for C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\UE5.vcxproj
-Generating target Game for C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\UE5.vcxproj
-Compiling C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\BuildRules\NeonParadigm_GameModuleRules.dll: Assembly does not exist
+Generating target Editor for C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\UE5.vcxproj
+Generating target Game for C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\UE5.vcxproj
+Compiling C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\BuildRules\NeonParadigm_GameModuleRules.dll: Assembly does not exist
 Adding event matcher: CompileEventMatcher
 Adding event matcher: LinkEventMatcher
 Adding event matcher: MicrosoftEventMatcher
 Adding event matcher: XoreaxEventMatcher
-Generating target Game for C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\NeonParadigm_Game.vcxproj
-Generating target Editor for C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\NeonParadigm_Game.vcxproj
+Generating target Game for C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\NeonParadigm_Game.vcxproj
+Generating target Editor for C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\ProjectFiles\NeonParadigm_Game.vcxproj
 Adding shader source code...
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\Developer\AITestSuite\AITestSuite.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\Developer\Android\AndroidDeviceDetection\AndroidDeviceDetection.Build.cs
@@ -568,6 +580,9 @@ AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdP
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\AMD\Amf\Amf.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\ARM\ArmlibGPUInfo\ArmlibGPUInfo.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Alembic\AlembicLib.Build.cs
+AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Android\cxa_demangle\cxademangle.Build.cs
+AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Android\detex\detex.Build.cs
+AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Android\libunwind\libunwind.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Apple\ProResLib\ProResLib.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Apple\Swift\Swift.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\AvidDNxHD\DNxHR\DNxHR.Build.cs
@@ -597,6 +612,7 @@ AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdP
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\HWCPipe\HWCPipe.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\HarfBuzz\HarfBuzz.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\ICU\ICU.Build.cs
+AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\IOS\SoundSwitch\SoundSwitch.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Imath\Imath.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Intel\Embree\Embree3.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\Intel\ExtensionsFramework\IntelExtensionsFramework.Build.cs
@@ -1747,16 +1763,16 @@ AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Plugins\Virtu
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Plugins\Web\HttpBlueprint\Source\HttpBlueprintGraph\HttpBlueprintGraph.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Plugins\Web\HttpBlueprint\Source\HttpBlueprint\HttpBlueprint.Build.cs
 AddProjectsForAllModules C:\Program Files\Epic Games\UE_5.3\Engine\Plugins\XGEController\Source\XGEController.Build.cs
-AddProjectsForAllModules C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\FMODStudioNiagara.Build.cs
-AddProjectsForAllModules C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\FMODAudioLinkEditor.Build.cs
-AddProjectsForAllModules C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\FMODAudioLink.Build.cs
-AddProjectsForAllModules C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\FMODStudioEditor.Build.cs
-AddProjectsForAllModules C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\FMODStudio.Build.cs
-AddProjectsForAllModules C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\NeonParadigm_Game.Build.cs
+AddProjectsForAllModules C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\FMODStudioNiagara.Build.cs
+AddProjectsForAllModules C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\FMODAudioLinkEditor.Build.cs
+AddProjectsForAllModules C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\FMODAudioLink.Build.cs
+AddProjectsForAllModules C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\FMODStudioEditor.Build.cs
+AddProjectsForAllModules C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\FMODStudio.Build.cs
+AddProjectsForAllModules C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\NeonParadigm_Game.Build.cs
 Binding IntelliSense data...
 @progress 'Binding IntelliSense data...' 0%
-Found target: NeonParadigm_GameEditor
 Found target: UnrealEditor
+Found target: NeonParadigm_GameEditor
 Building UnrealEditor - UnrealEditor - Win64 - Development
 Building UnrealEditor - NeonParadigm_GameEditor - Win64 - Development
 Excluding module AndroidLocalNotification: Excluded folder name
@@ -1786,12 +1802,14 @@ Excluding module LinuxTargetPlatform: Excluded folder name
 Excluding module MacPlatformEditor: Excluded folder name
 Excluding module MacTargetPlatform: Excluded folder name
 Excluding module SlateFontDialog: Does not support Platform 'Win64'
-@progress 'Binding IntelliSense data...' 25%
 Excluding module ADO: Not under compatible directories
 Excluding module AMD_AGS: Not under compatible directories
 Excluding module Amf: Not under compatible directories
 Excluding module ArmlibGPUInfo: Not under compatible directories
 Excluding module AlembicLib: Not under compatible directories
+Excluding module cxademangle: Not under compatible directories
+Excluding module detex: Not under compatible directories
+Excluding module libunwind: Not under compatible directories
 Excluding module ProResLib: Not under compatible directories
 Excluding module Swift: Not under compatible directories
 Excluding module DNxHR: Not under compatible directories
@@ -1821,6 +1839,7 @@ Excluding module SnappyLib: Not under compatible directories
 Excluding module HWCPipe: Not under compatible directories
 Excluding module HarfBuzz: Not under compatible directories
 Excluding module ICU: Not under compatible directories
+Excluding module SoundSwitch: Not under compatible directories
 Excluding module Imath: Not under compatible directories
 Excluding module Embree3: Not under compatible directories
 Excluding module IntelExtensionsFramework: Not under compatible directories
@@ -2406,6 +2425,7 @@ Excluding module LiveLinkCameraRecording: Not under compatible directories
 Excluding module LiveLinkCamera: Not under compatible directories
 Excluding module LiveLinkFreeD: Not under compatible directories
 Excluding module LiveLinkLens: Not under compatible directories
+@progress 'Binding IntelliSense data...' 25%
 Excluding module LiveLinkMasterLockitEditor: Not under compatible directories
 Excluding module LiveLinkMasterLockit: Not under compatible directories
 Excluding module LiveLinkPrestonMDREditor: Not under compatible directories
@@ -8279,6 +8299,9 @@ Found 5 shared PCH headers (listed in order of preference):
 	Slate
 	CoreUObject
 	Core
+Updating C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h: contents have changed. Saving previous version to C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.old.
+Updating C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h: contents have changed. Saving previous version to C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h.old.
+Updating C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\Definitions.FMODStudioNiagara.h: contents have changed. Saving previous version to C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\Definitions.FMODStudioNiagara.h.old.
 @progress 'Binding IntelliSense data...' 100%
 Creating common properties file...
 @progress 'Creating common properties file...' 0%
@@ -8298,9 +8321,9 @@ Saved .vsconfig
 Project generation complete (2 generated, 46 imported)
 
 Generating QueryTargets data for editor...
-WriteFileIfChanged() wrote 5 changed files of 1509 requested writes.
+WriteFileIfChanged() wrote 10 changed files of 1513 requested writes.
 Timeline:
 
 [ 0.000]
-[ 0.000](+5.781) <unknown>
-[ 5.781]
+[ 0.000](+26.722) <unknown>
+[26.722]
