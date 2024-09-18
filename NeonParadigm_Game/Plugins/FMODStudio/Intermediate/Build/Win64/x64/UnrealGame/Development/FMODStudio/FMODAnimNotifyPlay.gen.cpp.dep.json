@@ -1,0 +1,38 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealgame\\inc\\fmodstudio\\uht\\fmodanimnotifyplay.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealgame\\development\\fmodstudio\\pch.fmodstudio.h.pch",
+        "Includes": [
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\generatedcppincludes.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\metadata.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\textproperty.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodanimnotifyplay.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\animation\\animnotifies\\animnotify.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\animation\\animnotifyqueue.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\animation\\animtypes.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\misc\\memstack.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\containers\\lockfreefixedsizeallocator.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\animation\\animlinkableelement.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\uht\\animlinkableelement.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\animation\\animenums.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\uht\\animenums.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\kismet\\blueprintfunctionlibrary.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\uht\\blueprintfunctionlibrary.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\uobject\\ue5releasestreamobjectversion.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\uobject\\devobjectversion.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\uht\\animtypes.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\animation\\animnodemessages.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\uht\\animnotifyqueue.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\uht\\animnotify.generated.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodevent.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodasset.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealgame\\inc\\fmodstudio\\uht\\fmodasset.generated.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealgame\\inc\\fmodstudio\\uht\\fmodevent.generated.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealgame\\inc\\fmodstudio\\uht\\fmodanimnotifyplay.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
