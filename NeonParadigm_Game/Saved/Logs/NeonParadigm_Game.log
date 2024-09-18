@@ -1168,3 +1168,163 @@ LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
 [2024.09.18-14.17.52:531][  1]LogLiveCoding: Display: LiveCodingConsole Arguments: NeonParadigm_GameEditor Win64 Development
 [2024.09.18-14.17.52:538][  1]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
 [2024.09.18-14.17.52:625][  2]LogD3D12RHI: Cannot end block when stack is empty
+[2024.09.18-14.18.44:726][101]LogDebuggerCommands: Repeating last play command: Selected Viewport
+[2024.09.18-14.18.44:729][101]LogContentBundle: [ThirdPersonMap(Standalone)] Generating Streaming for 0 Content Bundles.
+[2024.09.18-14.18.44:729][101]LogWorldPartition: Display: GenerateStreaming for 'ThirdPersonMap' started...
+[2024.09.18-14.18.44:731][101]LogWorldPartition: Display: GenerateStreaming for 'ThirdPersonMap' took 2 ms
+[2024.09.18-14.18.44:761][101]LogFMOD: Display: Loaded bank lookup
+[2024.09.18-14.18.44:761][101]LogFMOD: Display: Loaded asset lookup
+[2024.09.18-14.18.44:763][101]LogFMOD: Default sample rate = 48000
+[2024.09.18-14.18.44:763][101]LogFMOD: System sample rate = 48000
+[2024.09.18-14.18.44:763][101]LogFMOD: Matching system sample rate 48000
+[2024.09.18-14.18.44:772][101]LogFMOD: Loading bank: ../../../../../../_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/FMOD/Desktop/TempMusic.bank
+[2024.09.18-14.18.44:811][101]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2024.09.18-14.18.44:811][101]PIE: New page: PIE session: ThirdPersonMap (Sep 18, 2024, 4:18:44 AM)
+[2024.09.18-14.18.44:815][101]LogOnline: OSS: Created online subsystem instance for: NULL
+[2024.09.18-14.18.44:815][101]LogOnline: OSS: TryLoadSubsystemAndSetDefault: Loaded subsystem for type [NULL]
+[2024.09.18-14.18.44:815][101]LogPlayLevel: Creating play world package: /Game/ThirdPerson/Maps/UEDPIE_0_ThirdPersonMap
+[2024.09.18-14.18.44:819][101]LogPlayLevel: PIE: StaticDuplicateObject took: (0.003872s)
+[2024.09.18-14.18.44:819][101]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/ThirdPerson/Maps/ThirdPersonMap.ThirdPersonMap to /Game/ThirdPerson/Maps/UEDPIE_0_ThirdPersonMap.ThirdPersonMap (0.003923s)
+[2024.09.18-14.18.44:841][101]LogUObjectHash: Compacting FUObjectHashTables data took   0.55ms
+[2024.09.18-14.18.44:843][101]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2024.09.18-14.18.44:843][101]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2024.09.18-14.18.44:843][101]LogAIModule: Creating AISystem for world ThirdPersonMap
+[2024.09.18-14.18.44:844][101]LogWorldPartition: ULevel::OnLevelLoaded(ThirdPersonMap)(bIsOwningWorldGameWorld=1, bIsOwningWorldPartitioned=1, InitializeForMainWorld=1, InitializeForEditor=0, InitializeForGame=1)
+[2024.09.18-14.18.44:844][101]LogWorldPartition: Display: WorldPartition initialize started...
+[2024.09.18-14.18.44:844][101]LogWorldPartition: UWorldPartition::Initialize : World = ThirdPersonMap, World Type = PIE, IsMainWorldPartition = 1, Location = V(0), Rotation = R(0), IsEditor = 0, IsGame = 0, IsPIEWorldTravel = 0, IsCooking = 0
+[2024.09.18-14.18.44:844][101]LogWorldPartition: UWorldPartition::Initialize Context : World NetMode = Standalone, IsServer = 0, IsDedicatedServer = 0, IsServerStreamingEnabled = 0, IsServerStreamingOutEnabled = 0, IsUsingMakingVisibleTransaction = 0, IsUsingMakingInvisibleTransaction = 0
+[2024.09.18-14.18.44:845][101]LogContentBundle: [ThirdPersonMap(Standalone)] Creating new contrainer.
+[2024.09.18-14.18.44:845][101]LogWorldPartition: Display: WorldPartition initialize took 1 ms (total: 115 ms)
+[2024.09.18-14.18.44:845][101]LogPlayLevel: PIE: World Init took: (0.002154s)
+[2024.09.18-14.18.44:845][101]LogAudio: Display: Creating Audio Device:                 Id: 2, Scope: Unique, Realtime: True
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2024.09.18-14.18.44:845][101]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2024.09.18-14.18.44:845][101]LogAudio: Display: AudioDevice MaxSources: 32
+[2024.09.18-14.18.44:845][101]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2024.09.18-14.18.44:845][101]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2024.09.18-14.18.44:845][101]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2024.09.18-14.18.44:847][101]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2024.09.18-14.18.44:860][101]LogAudioMixer: Display: Using Audio Hardware Device Headphones (Realtek(R) Audio)
+[2024.09.18-14.18.44:861][101]LogAudioMixer: Display: Initializing Sound Submixes...
+[2024.09.18-14.18.44:861][101]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2024.09.18-14.18.44:861][101]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2024.09.18-14.18.44:861][101]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=2
+[2024.09.18-14.18.44:861][101]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=2
+[2024.09.18-14.18.44:863][101]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=2
+[2024.09.18-14.18.44:863][101]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=2
+[2024.09.18-14.18.44:863][101]LogInit: FAudioDevice initialized with ID 2.
+[2024.09.18-14.18.44:863][101]LogAudio: Display: Audio Device (ID: 2) registered with world 'ThirdPersonMap'.
+[2024.09.18-14.18.44:863][101]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 2
+[2024.09.18-14.18.44:865][101]LogLoad: Game class is 'NeonParadigm_GameGameMode'
+[2024.09.18-14.18.44:868][101]LogWorld: Bringing World /Game/ThirdPerson/Maps/UEDPIE_0_ThirdPersonMap.ThirdPersonMap up for play (max tick rate 0) at 2024.09.18-09.18.44
+[2024.09.18-14.18.44:868][101]LogWorld: Bringing up level for play took: 0.003523
+[2024.09.18-14.18.44:870][101]LogOnline: OSS: Created online subsystem instance for: :Context_2
+[2024.09.18-14.18.44:874][101]LogTemp: Warning: Found CharacterState Compo!!!!!
+[2024.09.18-14.18.44:874][101]LogTemp: Warning: Found CharacterState Compo!!!!!
+[2024.09.18-14.18.44:874][101]PIE: Server logged in
+[2024.09.18-14.18.44:875][101]PIE: Play in editor total start time 0.146 seconds.
+[2024.09.18-14.18.45:071][107]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 1
+[2024.09.18-14.18.45:071][107]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 1
+[2024.09.18-14.18.45:071][107]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 90.0
+[2024.09.18-14.18.45:281][132]LogTemp: CurrentState: 0
+[2024.09.18-14.18.45:281][132]LogTemp: State to Check: 5
+[2024.09.18-14.18.45:281][132]LogTemp: Warning: Actor took damage
+[2024.09.18-14.18.45:281][132]LogTemp: Warning: vALID !!
+[2024.09.18-14.18.45:457][153]LogTemp: CurrentState: 4
+[2024.09.18-14.18.45:457][153]LogTemp: State to Check: 1
+[2024.09.18-14.18.45:457][153]LogTemp: Error: Cant ATTack!!!!
+[2024.09.18-14.18.45:457][153]LogTemp: CurrentState: 4
+[2024.09.18-14.18.45:457][153]LogTemp: State to Check: 1
+[2024.09.18-14.18.45:457][153]LogTemp: State to Check: 2
+[2024.09.18-14.18.45:457][153]LogTemp: State to Check: 4
+[2024.09.18-14.18.45:457][153]LogTemp: State to Check: 3
+[2024.09.18-14.18.45:457][153]LogTemp: State to Check: 5
+[2024.09.18-14.18.45:756][189]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 1
+[2024.09.18-14.18.45:756][189]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 2
+[2024.09.18-14.18.45:756][189]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 90.0
+[2024.09.18-14.18.46:281][252]LogTemp: Warning: RESETING STATE TRUCKER!!!!!!!!
+[2024.09.18-14.18.46:414][268]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 1
+[2024.09.18-14.18.46:414][268]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 3
+[2024.09.18-14.18.46:414][268]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 90.0
+[2024.09.18-14.18.46:557][285]LogTemp: CurrentState: 0
+[2024.09.18-14.18.46:557][285]LogTemp: State to Check: 1
+[2024.09.18-14.18.46:557][285]LogTemp: Error: Cant ATTack!!!!
+[2024.09.18-14.18.46:557][285]LogTemp: CurrentState: 0
+[2024.09.18-14.18.46:557][285]LogTemp: State to Check: 1
+[2024.09.18-14.18.46:557][285]LogTemp: State to Check: 2
+[2024.09.18-14.18.46:557][285]LogTemp: State to Check: 4
+[2024.09.18-14.18.46:557][285]LogTemp: State to Check: 3
+[2024.09.18-14.18.46:557][285]LogTemp: State to Check: 5
+[2024.09.18-14.18.46:573][287]LogTemp: Warning: Duration Of Movement: 1
+[2024.09.18-14.18.46:581][288]LogTemp: Warning: Duration Of Movement: 2
+[2024.09.18-14.18.46:589][289]LogTemp: Warning: Duration Of Movement: 3
+[2024.09.18-14.18.46:598][290]LogTemp: Warning: Duration Of Movement: 4
+[2024.09.18-14.18.46:606][291]LogTemp: Warning: Duration Of Movement: 5
+[2024.09.18-14.18.46:623][293]LogTemp: Warning: Duration Of Movement: 6
+[2024.09.18-14.18.46:631][294]LogTemp: Warning: Duration Of Movement: 7
+[2024.09.18-14.18.46:640][295]LogTemp: Warning: Duration Of Movement: 8
+[2024.09.18-14.18.46:648][296]LogTemp: Warning: Duration Of Movement: 9
+[2024.09.18-14.18.46:656][297]LogTemp: Warning: Duration Of Movement: 10
+[2024.09.18-14.18.46:673][299]LogTemp: Warning: Duration Of Movement: 11
+[2024.09.18-14.18.46:682][300]LogTemp: Warning: Duration Of Movement: 12
+[2024.09.18-14.18.46:690][301]LogTemp: Warning: Duration Of Movement: 13
+[2024.09.18-14.18.46:698][302]LogTemp: Warning: Duration Of Movement: 14
+[2024.09.18-14.18.46:707][303]LogTemp: Warning: Duration Of Movement: 15
+[2024.09.18-14.18.46:723][305]LogTemp: Warning: Duration Of Movement: 16
+[2024.09.18-14.18.46:732][306]LogTemp: Warning: Duration Of Movement: 17
+[2024.09.18-14.18.46:740][307]LogTemp: Warning: Duration Of Movement: 18
+[2024.09.18-14.18.46:748][308]LogTemp: Warning: Duration Of Movement: 19
+[2024.09.18-14.18.46:756][309]LogTemp: Warning: Duration Of Movement: 20
+[2024.09.18-14.18.46:773][311]LogTemp: Warning: Duration Of Movement: 21
+[2024.09.18-14.18.46:781][312]LogUObjectBase: Warning: NULL object
+[2024.09.18-14.18.46:781][312]LogUObjectBase: Warning: NULL object
+[2024.09.18-14.18.46:781][312]LogTemp: Warning: Duration Of Movement: 22
+[2024.09.18-14.18.46:790][313]LogTemp: Warning: Duration Of Movement: 23
+[2024.09.18-14.18.46:798][314]LogTemp: Warning: Duration Of Movement: 24
+[2024.09.18-14.18.46:806][315]LogTemp: Warning: Duration Of Movement: 25
+[2024.09.18-14.18.46:806][315]LogTemp: Warning: Duration Of Movement Reset: 0
+[2024.09.18-14.18.47:073][346]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 1
+[2024.09.18-14.18.47:073][346]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 4
+[2024.09.18-14.18.47:073][346]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 90.0
+[2024.09.18-14.18.47:662][410]LogTemp: Warning: INitializing CHARACTER IN NOTIFY!!!!!!!!
+[2024.09.18-14.18.47:662][410]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:671][411]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:679][412]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:687][413]LogTemp: Warning: INitializing CHARACTER IN NOTIFY!!!!!!!!
+[2024.09.18-14.18.47:687][413]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:696][414]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:704][415]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:712][416]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:720][417]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:728][418]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:737][419]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 2
+[2024.09.18-14.18.47:737][419]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 1
+[2024.09.18-14.18.47:737][419]LogBlueprintUserMessages: [ThirdPersonMap_C_2] 90.0
+[2024.09.18-14.18.47:737][419]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:746][420]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:754][421]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:762][422]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:771][423]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:779][424]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:787][425]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:795][426]LogTemp: Warning: INside NotifyTickFor SAVELIGHTATTACK!!!!
+[2024.09.18-14.18.47:804][427]LogTemp: Warning: RESETING STATE TRUCKER!!!!!!!!
+[2024.09.18-14.18.48:063][444]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2024.09.18-14.18.48:063][444]LogWorld: BeginTearingDown for /Game/ThirdPerson/Maps/UEDPIE_0_ThirdPersonMap
+[2024.09.18-14.18.48:063][444]LogWorld: UWorld::CleanupWorld for ThirdPersonMap, bSessionEnded=true, bCleanupResources=true
+[2024.09.18-14.18.48:064][444]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2024.09.18-14.18.48:064][444]LogContentBundle: [ThirdPersonMap(Standalone)] Deleting container.
+[2024.09.18-14.18.48:068][444]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2024.09.18-14.18.48:071][444]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2024.09.18-14.18.48:077][444]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2024.09.18-14.18.48:077][444]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 2
+[2024.09.18-14.18.48:077][444]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=2
+[2024.09.18-14.18.48:079][444]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=2
+[2024.09.18-14.18.48:083][444]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2024.09.18-14.18.48:084][444]LogUObjectHash: Compacting FUObjectHashTables data took   0.36ms
+[2024.09.18-14.18.48:104][445]LogPlayLevel: Display: Destroying online subsystem :Context_2
