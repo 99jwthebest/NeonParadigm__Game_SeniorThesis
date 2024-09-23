@@ -1,14 +1,14 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "d:\\profile redirect\\fimartin\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodeventparametersectiontemplate.gen.cpp",
+        "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodeventparametersectiontemplate.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "d:\\profile redirect\\fimartin\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
+        "PCH": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
         "Includes": [
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\generatedcppincludes.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\metadata.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\textproperty.h",
-            "d:\\profile redirect\\fimartin\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\sequencer\\fmodeventparametersectiontemplate.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\sequencer\\fmodeventparametersectiontemplate.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\moviescenetracks\\public\\evaluation\\moviesceneparametertemplate.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\moviescene\\public\\moviescenefwd.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\misc\\framerate.h",
@@ -106,8 +106,8 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\hal\\mallocansi.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\profilingdebugging\\memorytrace.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\misc\\memstack.h",
-            "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.40.33807\\include\\sanitizer\\asan_interface.h",
-            "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.40.33807\\include\\sanitizer\\common_interface_defs.h",
+            "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.41.34120\\include\\sanitizer\\asan_interface.h",
+            "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.41.34120\\include\\sanitizer\\common_interface_defs.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\misc\\timeout.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\profilingdebugging\\metadatatrace.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\profilingdebugging\\stringstrace.h",
@@ -242,7 +242,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\moviescenetracks\\uht\\moviescene3dtransformsection.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\moviescenetracks\\uht\\moviesceneparametersection.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\moviescenetracks\\uht\\moviesceneparametertemplate.generated.h",
-            "d:\\profile redirect\\fimartin\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodeventparametersectiontemplate.generated.h"
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodeventparametersectiontemplate.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
