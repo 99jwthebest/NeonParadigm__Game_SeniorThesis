@@ -10,6 +10,10 @@
 void UNP_ANS_AllowRotationOnRootMotion::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
+
+	if (MeshComp == nullptr)
+		return;
+
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
 	if (OwnerActor)
@@ -28,6 +32,9 @@ void UNP_ANS_AllowRotationOnRootMotion::NotifyBegin(USkeletalMeshComponent* Mesh
 void UNP_ANS_AllowRotationOnRootMotion::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
 {
 	Super::NotifyEnd(MeshComp, Animation, EventReference);
+
+	if (MeshComp == nullptr)
+		return;
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
