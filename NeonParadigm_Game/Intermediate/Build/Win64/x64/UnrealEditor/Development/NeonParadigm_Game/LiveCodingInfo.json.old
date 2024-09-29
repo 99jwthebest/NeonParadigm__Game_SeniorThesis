@@ -23,7 +23,6 @@
 			"NP_DamageType.gen.cpp.obj",
 			"NP_EnemySpawner.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
-			"NP_ANS_AllowRotationOnRootMotion.cpp.obj",
 			"NP_ANS_EnabledIFrames.cpp.obj",
 			"NP_ANS_SaveDodge.cpp.obj",
 			"NP_ANS_SaveHeavyAttack.cpp.obj",
@@ -43,7 +42,8 @@
 			"NeonParadigm_Game.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj",
 			"NeonParadigm_GameGameMode.cpp.obj",
-			"TestActor.cpp.obj"
+			"TestActor.cpp.obj",
+			"NP_ANS_AllowRotationOnRootMotion.cpp.obj"
 		]
 	}
 }
