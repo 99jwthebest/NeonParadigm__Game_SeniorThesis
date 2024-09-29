@@ -20,7 +20,6 @@
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/UnrealEditor/Inc/NeonParadigm_Game/UHT/NP_DamageType.gen.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/UnrealEditor/Inc/NeonParadigm_Game/UHT/NP_EnemySpawner.gen.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/UnrealEditor/Inc/NeonParadigm_Game/UHT/TestActor.gen.cpp"
-#include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_ANS_AllowRotationOnRootMotion.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_ANS_EnabledIFrames.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_ANS_SaveDodge.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_ANS_SaveHeavyAttack.cpp"
