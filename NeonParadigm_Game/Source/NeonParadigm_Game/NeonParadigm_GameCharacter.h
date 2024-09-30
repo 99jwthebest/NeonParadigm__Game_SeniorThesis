@@ -69,6 +69,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Parry Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ParryAction;
+
+	/** Test Delay Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* TestDelayAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -234,6 +238,27 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* ProjectileCounterMontage;
 
-	
+
+private:
+
+	float CurrentTimeDelay;
+	float LastBeatTime;
+	float NextBeatTime;
+	float DelayFromLastBeat;
+	float DelayFromNextBeat;
+	float PlayRateForAnimMontages;
+
+public:
+
+	void SetCurrentTimeDelay(float CurTimeDelay);
+	float GetCurrentTimeDelay();
+
+	void SetLastBeatTime(float fLastBeatTime);
+	float GetLastBeatTime();
+	void SetNextBeatTime(float fNextBeatTime);
+	float GetNextBeatTime();
+
+	void TestRhythmDelayEvent();
+
 };
 

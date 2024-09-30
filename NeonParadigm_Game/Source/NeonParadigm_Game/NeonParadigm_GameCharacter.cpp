@@ -151,6 +151,7 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 	}
 }
 
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -183,6 +184,10 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 		// Parry
 		EnhancedInputComponent->BindAction(ParryAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ParryInput);
+
+		// TestDelayAction
+		EnhancedInputComponent->BindAction(TestDelayAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::TestRhythmDelayEvent);
+
 	}
 	else
 	{
@@ -995,4 +1000,61 @@ void ANeonParadigm_GameCharacter::ParryInput()
 void ANeonParadigm_GameCharacter::ResetParry()
 {
 	bIsParrySaved = false;
+}
+
+void ANeonParadigm_GameCharacter::SetCurrentTimeDelay(float CurTimeDelay)
+{
+	CurrentTimeDelay = CurTimeDelay;
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentTimeDelay()
+{
+	return CurrentTimeDelay;
+}
+
+void ANeonParadigm_GameCharacter::SetLastBeatTime(float fLastBeatTime)
+{
+	LastBeatTime = fLastBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetLastBeatTime()
+{
+	return LastBeatTime;
+}
+
+void ANeonParadigm_GameCharacter::SetNextBeatTime(float fNextBeatTime)
+{
+	NextBeatTime = fNextBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetNextBeatTime()
+{
+	return NextBeatTime;
+}
+
+void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
+{
+	UE_LOG(LogTemp, Error, TEXT("Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	if (DelayFromLastBeat <= 0.33f)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+
+		PlayRateForAnimMontages = CurrentTimeDelay / DelayFromNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+
+
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+	}
+
 }

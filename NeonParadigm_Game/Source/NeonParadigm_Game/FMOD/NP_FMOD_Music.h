@@ -8,6 +8,7 @@
 
 class UFMODAudioComponent;
 class UFMODEvent;
+class ANeonParadigm_GameCharacter;
 
 UCLASS()
 class NEONPARADIGM_GAME_API ANP_FMOD_Music : public AActor
@@ -38,5 +39,13 @@ public:
 	// Function to handle the timeline beat event
 	UFUNCTION()
 	void OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float Tempo, int32 TimeSignatureUpper, int32 TimeSignatureLower);
+
+private:
+	ANeonParadigm_GameCharacter* PlayerCharacter;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* TempBPMParticle;
+
+	float M_CurrentTimeDelay;
+	float M_NextBeatTime;
 
 };
