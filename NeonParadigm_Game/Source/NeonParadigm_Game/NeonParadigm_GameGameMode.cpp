@@ -3,6 +3,8 @@
 #include "NeonParadigm_GameGameMode.h"
 #include "NeonParadigm_GameCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
+#include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
 
 ANeonParadigm_GameGameMode::ANeonParadigm_GameGameMode()
 {
@@ -12,4 +14,25 @@ ANeonParadigm_GameGameMode::ANeonParadigm_GameGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+}
+
+void ANeonParadigm_GameGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Your custom logic here
+	UE_LOG(LogTemp, Error, TEXT("GameMode BeginPlay has been called"));
+
+	PlayerCharacter = Cast<ANeonParadigm_GameCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	if (PlayerCharacter == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Couldn't Find PlayerCHaracter!!!!"));
+		return;
+	}
+
+
+
+
+
 }

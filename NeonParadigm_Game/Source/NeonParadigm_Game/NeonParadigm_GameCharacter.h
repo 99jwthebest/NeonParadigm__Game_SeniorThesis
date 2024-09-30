@@ -234,6 +234,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* ProjectileCounterMontage;
 
-
+	
 };
 

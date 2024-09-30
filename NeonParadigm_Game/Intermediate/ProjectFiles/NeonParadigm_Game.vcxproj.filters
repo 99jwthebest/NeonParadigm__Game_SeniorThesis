@@ -11,6 +11,7 @@
     <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -643,6 +644,15 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\Enums\CharacterStateComponent.h">
       <Filter>Source\NeonParadigm_Game\Enums</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\FMOD">
+      <UniqueIdentifier>{2B88EF5E-3738-3766-A6AA-F1DE0171731E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.cpp">
+      <Filter>Source\NeonParadigm_Game\FMOD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.h">
+      <Filter>Source\NeonParadigm_Game\FMOD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

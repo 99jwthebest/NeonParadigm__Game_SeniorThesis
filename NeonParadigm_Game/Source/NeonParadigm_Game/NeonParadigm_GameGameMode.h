@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "NeonParadigm_GameGameMode.generated.h"
 
+class ANeonParadigm_GameCharacter;
+
 UCLASS(minimalapi)
 class ANeonParadigm_GameGameMode : public AGameModeBase
 {
@@ -13,6 +15,17 @@ class ANeonParadigm_GameGameMode : public AGameModeBase
 
 public:
 	ANeonParadigm_GameGameMode();
+
+
+protected:
+	// Override BeginPlay function
+	virtual void BeginPlay() override;
+
+
+private:
+
+	ANeonParadigm_GameCharacter* PlayerCharacter;
+
 };
 
 
