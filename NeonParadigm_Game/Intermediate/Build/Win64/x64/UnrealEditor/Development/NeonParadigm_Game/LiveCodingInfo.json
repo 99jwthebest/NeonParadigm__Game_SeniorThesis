@@ -38,12 +38,14 @@
 			"NP_AN_ResetState.gen.cpp.obj",
 			"NP_AN_RotationToTarget.gen.cpp.obj",
 			"NP_AN_SoftTarget.gen.cpp.obj",
+			"NP_AN_TestRhythmPunch.gen.cpp.obj",
 			"NP_AN_WeaponCollision.gen.cpp.obj",
 			"NP_BaseEnemy.gen.cpp.obj",
 			"NP_DamageType.gen.cpp.obj",
 			"NP_EnemySpawner.gen.cpp.obj",
 			"NP_FMOD_Music.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
+			"NP_AN_TestRhythmPunch.cpp.obj",
 			"NP_FMOD_Music.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj"
 		]

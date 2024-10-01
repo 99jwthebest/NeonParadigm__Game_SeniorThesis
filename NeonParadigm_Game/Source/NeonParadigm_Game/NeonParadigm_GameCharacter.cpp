@@ -1044,17 +1044,31 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 	if (DelayFromLastBeat <= 0.33f)
 	{
-		UE_LOG(LogTemp, Error, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
 
 		PlayRateForAnimMontages = CurrentTimeDelay / DelayFromNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 
-
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + CurrentTimeDelay;
+		
+		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		PlayRateForAnimMontages = CurrentTimeDelay / TotalTimeDelayToNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
+
+	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 1.0f, 2.5f); // Definetly Might change this so make them variables. 
+
+	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
+
+	UE_LOG(LogTemp, Display, TEXT("Montage Length: %f"), MontageLength);
+
 
 }

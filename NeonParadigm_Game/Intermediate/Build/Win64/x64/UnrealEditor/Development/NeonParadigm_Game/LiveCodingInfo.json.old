@@ -2,6 +2,7 @@
 	"RemapUnityFiles": 
 	{
 		"Module.NeonParadigm_Game.cpp.obj": [
+			"NP_AN_TestRhythmPunch.gen.cpp.obj",
 			"NP_ANS_AllowRotationOnRootMotion.cpp.obj",
 			"NP_ANS_EnabledIFrames.cpp.obj",
 			"NP_ANS_SaveDodge.cpp.obj",
@@ -20,7 +21,6 @@
 			"NP_EnemySpawner.cpp.obj",
 			"CharacterStateComponent.cpp.obj",
 			"NeonParadigm_Game.cpp.obj",
-			"NeonParadigm_GameCharacter.cpp.obj",
 			"NeonParadigm_GameGameMode.cpp.obj",
 			"TestActor.cpp.obj",
 			"AttackComponent.gen.cpp.obj",
@@ -45,7 +45,9 @@
 			"NP_EnemySpawner.gen.cpp.obj",
 			"NP_FMOD_Music.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
-			"NP_FMOD_Music.cpp.obj"
+			"NP_AN_TestRhythmPunch.cpp.obj",
+			"NP_FMOD_Music.cpp.obj",
+			"NeonParadigm_GameCharacter.cpp.obj"
 		]
 	}
 }

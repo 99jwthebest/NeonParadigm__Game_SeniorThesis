@@ -246,7 +246,11 @@ private:
 	float NextBeatTime;
 	float DelayFromLastBeat;
 	float DelayFromNextBeat;
+	float TotalTimeDelayToNextBeat;
 	float PlayRateForAnimMontages;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* TestRhythmMontage;
 
 public:
 

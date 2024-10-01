@@ -66,7 +66,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 {
     UE_LOG(LogTemp, Error, TEXT("Timeline Beat Event Triggered: Bar %d, Beat %d, Tempo %f"), Bar, Beat, Tempo);
 
-    UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, PlayerCharacter->GetActorLocation(), PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
+    FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
+
+    UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 
     M_CurrentTimeDelay = 60 / Tempo;
     PlayerCharacter->SetCurrentTimeDelay(M_CurrentTimeDelay);

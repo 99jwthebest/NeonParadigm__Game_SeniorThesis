@@ -5,12 +5,10 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/FMOD/BP_NP_FMOD_Music.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/ThirdPerson/Maps/ThirdPersonMap.umap",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/1/WG/3FAOPPQ1NBBX18TPK9Z7S3.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Input/Actions/IA_TestRhythmDelay.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Input/IMC_DefaultHackAndSlash.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Clair_NeonParadigm.uasset"
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Clair_NeonParadigm.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/LightAttacks/AM_LightAttack_03.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/AnimNotify/AN_SaveRhythmPunch.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/TestRhythmAnimation/Test_RhythmAnimation.uasset"
 			]
 		}
 	]
