@@ -26,4 +26,7 @@ public:
 	void ToggleEmission();
 	void ToggleEmissionOff();
 
+	UStaticMeshComponent* Mesh;
+	UMaterialInterface* CurrentMaterial;
+	UMaterialInstanceDynamic* DynMaterial;
 };

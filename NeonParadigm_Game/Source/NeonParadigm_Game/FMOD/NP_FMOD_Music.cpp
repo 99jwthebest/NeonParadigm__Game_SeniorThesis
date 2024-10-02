@@ -102,7 +102,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         //    }, 0.5f, false);
     }
 
-    UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
+    //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 
     M_CurrentTempoDelay = 60 / Tempo;
     PlayerCharacter->SetCurrentTempoDelay(M_CurrentTempoDelay);

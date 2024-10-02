@@ -17,6 +17,7 @@ void ATestActor::BeginPlay()
 	Super::BeginPlay();
 
 
+    Mesh = FindComponentByClass<UStaticMeshComponent>();
 
 }
 
@@ -29,13 +30,12 @@ void ATestActor::Tick(float DeltaTime)
 
 void ATestActor::ToggleEmission()
 {
-    UStaticMeshComponent* Mesh = FindComponentByClass<UStaticMeshComponent>();
 
     if (Mesh)
     {
 
         // Check if the material is present in slot 0
-        UMaterialInterface* CurrentMaterial = Mesh->GetMaterial(0);
+        CurrentMaterial = Mesh->GetMaterial(0);
 
         if (!CurrentMaterial)
         {
@@ -43,7 +43,7 @@ void ATestActor::ToggleEmission()
             return;
         }
 
-        UMaterialInstanceDynamic* DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
+        DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
 
         if (DynMaterial)
         {
@@ -56,11 +56,11 @@ void ATestActor::ToggleEmission()
 
 void ATestActor::ToggleEmissionOff()
 {
-    UStaticMeshComponent* Mesh = FindComponentByClass<UStaticMeshComponent>();
+    Mesh = FindComponentByClass<UStaticMeshComponent>();
 
     if (Mesh)
     {
-        UMaterialInstanceDynamic* DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
+        DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
 
         if (DynMaterial)
         {
