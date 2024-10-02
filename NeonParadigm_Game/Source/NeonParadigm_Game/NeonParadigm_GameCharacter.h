@@ -241,7 +241,8 @@ public:
 
 private:
 
-	float CurrentTimeDelay;
+	float CurrentTempoDelay;
+	float CurrentAnimTimeDelay;
 	float LastBeatTime;
 	float NextBeatTime;
 	float DelayFromLastBeat;
@@ -254,13 +255,18 @@ private:
 
 public:
 
-	void SetCurrentTimeDelay(float CurTimeDelay);
-	float GetCurrentTimeDelay();
+	void SetCurrentTempoDelay(float CurTempoDelay);
+	float GetCurrentTempoDelay();
+
+	void SetCurrentAnimTimeDelay(float CurAnimTimeDelay);
+	float GetCurrentAnimTimeDelay();
 
 	void SetLastBeatTime(float fLastBeatTime);
 	float GetLastBeatTime();
 	void SetNextBeatTime(float fNextBeatTime);
 	float GetNextBeatTime();
+
+	float GetCurrentAnimPlayRate();
 
 	void TestRhythmDelayEvent();
 

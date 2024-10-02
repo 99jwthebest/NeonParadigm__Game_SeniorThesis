@@ -77,6 +77,9 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	SpeedOfSoftRotation = 10.0f;
 
 	bIsTargeting = false;
+
+	// SetCurrentAnimTimeDelay(1.0f);  just for testing purposes
+
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -430,7 +433,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 	// Debug draw type
-	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration;
+	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
 	// Output hit result
 	FHitResult OutHit;
 	// Ignore self
@@ -500,7 +503,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 		TArray<AActor*> ActorsToIgnore2;
 		ActorsToIgnore2.Add(this);
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration;
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
 		// Output hit result
 		FHitResult OutHit2;
 		// Ignore self
@@ -674,7 +677,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		ActorsToIgnore.Add(LastSoftTargetActor);
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration;
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; //ForDuration
 		// Output hit result
 		FHitResult OutHit;
 		// Ignore self
@@ -1002,14 +1005,24 @@ void ANeonParadigm_GameCharacter::ResetParry()
 	bIsParrySaved = false;
 }
 
-void ANeonParadigm_GameCharacter::SetCurrentTimeDelay(float CurTimeDelay)
+void ANeonParadigm_GameCharacter::SetCurrentTempoDelay(float CurTempoDelay)
 {
-	CurrentTimeDelay = CurTimeDelay;
+	CurrentTempoDelay = CurTempoDelay;
 }
 
-float ANeonParadigm_GameCharacter::GetCurrentTimeDelay()
+float ANeonParadigm_GameCharacter::GetCurrentTempoDelay()
 {
-	return CurrentTimeDelay;
+	return CurrentTempoDelay;
+}
+
+void ANeonParadigm_GameCharacter::SetCurrentAnimTimeDelay(float CurAnimTimeDelay)
+{
+	CurrentAnimTimeDelay = CurAnimTimeDelay;
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentAnimTimeDelay()
+{
+	return CurrentAnimTimeDelay;
 }
 
 void ANeonParadigm_GameCharacter::SetLastBeatTime(float fLastBeatTime)
@@ -1032,6 +1045,11 @@ float ANeonParadigm_GameCharacter::GetNextBeatTime()
 	return NextBeatTime;
 }
 
+float ANeonParadigm_GameCharacter::GetCurrentAnimPlayRate()
+{
+	return PlayRateForAnimMontages;
+}
+
 void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 {
 	UE_LOG(LogTemp, Error, TEXT("Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
@@ -1046,7 +1064,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
 
-		PlayRateForAnimMontages = CurrentTimeDelay / DelayFromNextBeat;
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 
@@ -1055,20 +1073,21 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
-		TotalTimeDelayToNextBeat = DelayFromNextBeat + CurrentTimeDelay;
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
 		
 		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
-		PlayRateForAnimMontages = CurrentTimeDelay / TotalTimeDelayToNextBeat;
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
 
-	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 1.0f, 2.5f); // Definetly Might change this so make them variables. 
+	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
 
 	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
 
 	UE_LOG(LogTemp, Display, TEXT("Montage Length: %f"), MontageLength);
+
 
 
 }

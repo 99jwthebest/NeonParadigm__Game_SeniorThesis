@@ -86,15 +86,21 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 		LightAttackIndex = 0;
 	}
 
-	if (LightAttackMontages.IsValidIndex(LightAttackIndex))
+	if (LightAttackMontages.IsValidIndex(LightAttackIndex) && LightAttackImpactTimes.IsValidIndex(LightAttackIndex))
 	{
 		UAnimMontage* Montage = LightAttackMontages[LightAttackIndex];
+		float ImpactTime = LightAttackImpactTimes[LightAttackIndex];
+		MyCharacter->SetCurrentAnimTimeDelay(ImpactTime);
+		MyCharacter->TestRhythmDelayEvent();
+
 		if (IsValid(Montage))
 		{
 			UAnimMontage* LightAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
 			AttackMovement(5.0f);
-			MyCharacter->PlayAnimMontage(LightAttackMontage);
+			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
+			// Log the impact time for debugging
+			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, ImpactTime);
 			LightAttackIndex++;
 			if (LightAttackIndex >= LightAttackMontages.Num())
 			{

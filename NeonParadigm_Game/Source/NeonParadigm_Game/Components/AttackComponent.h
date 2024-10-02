@@ -58,6 +58,8 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	TArray<UAnimMontage*> LightAttackMontages;
 	int LightAttackIndex;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	TArray<float> LightAttackImpactTimes;
 	FTimerHandle TimerForAttackMovement;
 	float SpeedOfAttackMovement;
 	float gDistance;

@@ -9,6 +9,7 @@
 class UFMODAudioComponent;
 class UFMODEvent;
 class ANeonParadigm_GameCharacter;
+class ATestActor;
 
 UCLASS()
 class NEONPARADIGM_GAME_API ANP_FMOD_Music : public AActor
@@ -45,7 +46,12 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* TempBPMParticle;
 
-	float M_CurrentTimeDelay;
+	float M_CurrentTempoDelay;
 	float M_NextBeatTime;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AActor> TempBPMMusic;
+
+	FTimerHandle TimerForBPM;
+	ATestActor* TempActor;
 };

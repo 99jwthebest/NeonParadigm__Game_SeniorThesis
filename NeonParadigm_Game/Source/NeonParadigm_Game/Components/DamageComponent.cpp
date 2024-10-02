@@ -74,7 +74,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 		ObjectTypes, 
 		false, 
 		ActorsToIgnore, 
-		EDrawDebugTrace::ForDuration, 
+		EDrawDebugTrace::None, // ForDuration
 		OutHits, 
 		true);
 

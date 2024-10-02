@@ -15,7 +15,9 @@ ATestActor::ATestActor()
 void ATestActor::BeginPlay()
 {
 	Super::BeginPlay();
-	OnTakeAnyDamage.AddDynamic(this, &ATestActor::HandleTakeAnyDamage);
+
+
+
 }
 
 // Called every frame
@@ -25,7 +27,45 @@ void ATestActor::Tick(float DeltaTime)
 
 }
 
-void ATestActor::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+void ATestActor::ToggleEmission()
 {
-	UE_LOG(LogTemp, Error, TEXT("Simple Actor %s took %f damage"), *DamagedActor->GetName(), Damage);
+    UStaticMeshComponent* Mesh = FindComponentByClass<UStaticMeshComponent>();
+
+    if (Mesh)
+    {
+
+        // Check if the material is present in slot 0
+        UMaterialInterface* CurrentMaterial = Mesh->GetMaterial(0);
+
+        if (!CurrentMaterial)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("No material found on StaticMeshComponent."));
+            return;
+        }
+
+        UMaterialInstanceDynamic* DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
+
+        if (DynMaterial)
+        {
+            //UE_LOG(LogTemp, Error, TEXT("Mother FUCKER EMITTTIN ASTUDSUDFFU Playing!!"));
+            float EmissiveValue = 20.0f;  // Turn on or off the emission
+            DynMaterial->SetScalarParameterValue(TEXT("EmissiveIntensity"), EmissiveValue);
+        }
+    }
+}
+
+void ATestActor::ToggleEmissionOff()
+{
+    UStaticMeshComponent* Mesh = FindComponentByClass<UStaticMeshComponent>();
+
+    if (Mesh)
+    {
+        UMaterialInstanceDynamic* DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
+
+        if (DynMaterial)
+        {
+            float EmissiveValue = 0.0f;  // Turn on or off the emission
+            DynMaterial->SetScalarParameterValue(TEXT("EmissiveIntensity"), EmissiveValue);
+        }
+    }
 }

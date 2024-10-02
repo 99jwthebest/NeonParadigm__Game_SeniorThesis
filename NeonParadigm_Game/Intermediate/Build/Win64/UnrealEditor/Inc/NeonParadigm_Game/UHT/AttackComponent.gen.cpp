@@ -49,6 +49,11 @@ void EmptyLinkFunctionForGeneratedCodeAttackComponent() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_LightAttackMontages_MetaData[];
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_LightAttackMontages;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_LightAttackImpactTimes_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_LightAttackImpactTimes_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_LightAttackImpactTimes;
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_HeavyAttackMontages_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeavyAttackMontages_MetaData[];
@@ -106,6 +111,15 @@ void EmptyLinkFunctionForGeneratedCodeAttackComponent() {}
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackMontages = { "LightAttackMontages", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAttackComponent, LightAttackMontages), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackMontages_MetaData), Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackMontages_MetaData) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes_Inner = { "LightAttackImpactTimes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Attack" },
+		{ "ModuleRelativePath", "Components/AttackComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes = { "LightAttackImpactTimes", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAttackComponent, LightAttackImpactTimes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes_MetaData), Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes_MetaData) };
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAttackComponent_Statics::NewProp_HeavyAttackMontages_Inner = { "HeavyAttackMontages", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAttackComponent_Statics::NewProp_HeavyAttackMontages_MetaData[] = {
@@ -121,6 +135,8 @@ void EmptyLinkFunctionForGeneratedCodeAttackComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_CharacterState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackMontages_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackMontages,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_LightAttackImpactTimes,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_HeavyAttackMontages_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAttackComponent_Statics::NewProp_HeavyAttackMontages,
 	};
@@ -162,9 +178,9 @@ void EmptyLinkFunctionForGeneratedCodeAttackComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_AttackComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAttackComponent, UAttackComponent::StaticClass, TEXT("UAttackComponent"), &Z_Registration_Info_UClass_UAttackComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAttackComponent), 3527555293U) },
+		{ Z_Construct_UClass_UAttackComponent, UAttackComponent::StaticClass, TEXT("UAttackComponent"), &Z_Registration_Info_UClass_UAttackComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAttackComponent), 2399745378U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_AttackComponent_h_375020365(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_AttackComponent_h_792134799(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_AttackComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_AttackComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

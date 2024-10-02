@@ -19,6 +19,9 @@ void UNP_AN_TestRhythmPunch::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
         if (MeshComp->GetAnimInstance()->GetCurrentActiveMontage())
         {
             CurrentTime = MeshComp->GetAnimInstance()->Montage_GetPosition(MeshComp->GetAnimInstance()->GetCurrentActiveMontage());
+            // Set the play rate of the currently active montage
+            float NewPlayRate = 1.0f;  // This will double the speed of the montage
+            MeshComp->GetAnimInstance()->Montage_SetPlayRate(MeshComp->GetAnimInstance()->GetCurrentActiveMontage(), NewPlayRate);
         }
         else
         {
