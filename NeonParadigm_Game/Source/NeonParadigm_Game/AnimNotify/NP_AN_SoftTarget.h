@@ -21,8 +21,4 @@ public:
 
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference) override;
 
-private:
-	UPROPERTY()
-	ANeonParadigm_GameCharacter* CharacterMoveComp;
-
 };

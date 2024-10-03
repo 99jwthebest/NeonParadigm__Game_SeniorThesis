@@ -5,20 +5,25 @@
 #include "NeonParadigm_Game/Enums/CharacterStateComponent.h"
 
 
+UNP_AN_ResetState::UNP_AN_ResetState()
+{
+	
+}
+
 void UNP_AN_ResetState::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
-	if(OwnerActor)
-	CharacterStateComp = OwnerActor->GetComponentByClass<UCharacterStateComponent>();
+
+	if (!OwnerActor)
+		return;
+	UCharacterStateComponent* CharacterStateComp = OwnerActor->GetComponentByClass<UCharacterStateComponent>();
 
 	if(CharacterStateComp)
-	CharacterStateComp->ResetState();
+		CharacterStateComp->ResetState();
 	else
 		UE_LOG(LogTemp, Warning, TEXT("Cant FIND COMP In NOFITY!!!!!!!!"));
 
-
 	UE_LOG(LogTemp, Warning, TEXT("RESETING STATE TRUCKER!!!!!!!!"));
-
 }

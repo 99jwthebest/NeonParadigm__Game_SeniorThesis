@@ -10,8 +10,10 @@ void UNP_ANS_SaveHeavyAttack::NotifyBegin(USkeletalMeshComponent* MeshComp, UAni
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
-	if (OwnerActor)
-		AttackComp = OwnerActor->GetComponentByClass<UAttackComponent>();
+	if (!OwnerActor)
+		return;
+	
+	UAttackComponent* AttackComp = OwnerActor->GetComponentByClass<UAttackComponent>();
 	UE_LOG(LogTemp, Warning, TEXT("INitializing CHARACTER IN NOTIFY!!!!!!!!"));
 }
 
@@ -19,10 +21,11 @@ void UNP_ANS_SaveHeavyAttack::NotifyTick(USkeletalMeshComponent* MeshComp, UAnim
 {
 	Super::NotifyTick(MeshComp, Animation, FrameDeltaTime, EventReference);
 
+	const AActor* OwnerActor = MeshComp->GetOwner();
+	if (!OwnerActor)
+		return;
+
+	UAttackComponent* AttackComp = OwnerActor->GetComponentByClass<UAttackComponent>();
 	if (AttackComp)
 		AttackComp->SaveHeavyAttack();
-	else
-		UE_LOG(LogTemp, Warning, TEXT("SaveHeavyATTACK NOT WORKIUNG!!!!"));
-
-
 }

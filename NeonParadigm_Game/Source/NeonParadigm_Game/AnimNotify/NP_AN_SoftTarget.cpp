@@ -11,8 +11,10 @@ void UNP_AN_SoftTarget::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (OwnerActor)
-		CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
+	if (!OwnerActor)
+		return;
+	
+	ANeonParadigm_GameCharacter* CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
 
 	if (CharacterMoveComp)
 	{
