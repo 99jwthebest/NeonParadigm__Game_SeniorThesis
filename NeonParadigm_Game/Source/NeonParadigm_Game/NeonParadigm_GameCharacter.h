@@ -253,6 +253,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* TestRhythmMontage;
 
+	UPROPERTY(Transient)  // Don't play to save Transient property, just temporary, use when generating in runtime. Hold a reference without getting garbage collected.
+	class UNP_DamageType* MyDamageType;
+
 public:
 
 	void SetCurrentTempoDelay(float CurTempoDelay);

@@ -31,7 +31,7 @@ void ATestActor::Tick(float DeltaTime)
 void ATestActor::ToggleEmission()
 {
 
-    if (Mesh)
+    if (IsValid(Mesh))
     {
 
         // Check if the material is present in slot 0
@@ -58,7 +58,7 @@ void ATestActor::ToggleEmissionOff()
 {
     Mesh = FindComponentByClass<UStaticMeshComponent>();
 
-    if (Mesh)
+    if (IsValid(Mesh))
     {
         DynMaterial = Mesh->CreateAndSetMaterialInstanceDynamic(0);
 

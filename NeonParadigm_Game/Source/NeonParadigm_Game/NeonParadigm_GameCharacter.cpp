@@ -87,6 +87,8 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	MyDamageType = NewObject<UNP_DamageType>(GetWorld());
+
 	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
 	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
 
@@ -860,14 +862,12 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
 			CurrentHealth -= DamageAmount;
-			// Step 1: Create or obtain an instance of UNP_DamageType
-			UNP_DamageType* MyDamageType = NewObject<UNP_DamageType>(GetWorld());
 
 			if (CurrentHealth > 0.0f)
 			{
 
 				// Step 2: Ensure the instance is valid
-				if (MyDamageType)
+				if (IsValid(MyDamageType))
 				{
 					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
 

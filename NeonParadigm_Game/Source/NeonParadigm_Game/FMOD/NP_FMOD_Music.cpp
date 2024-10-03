@@ -86,7 +86,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
 
-    if (TempActor)
+    if (IsValid(TempActor))
     {
         // Turn on the emission when the beat hits
         TempActor->ToggleEmission();
