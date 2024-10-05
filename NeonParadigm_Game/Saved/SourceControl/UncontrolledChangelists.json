@@ -5,12 +5,17 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
-				"D:/profile redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Boss_Area/Boss_Fight_Area/SM_NEO_Boss_Fight_Room.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Boss_Area/Boss_Fight_Area/SM_NEO_Boss_Fight_Wall.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Roadblock_Big.uasset",
-				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Roadblock_Small.uasset"
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Roadblock_Small.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Facade.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Bottom_floor.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/M_Logo.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_LOGO.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Facade_floor_ext.uasset",
+				"D:/profile redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap"
 			]
 		}
 	]
