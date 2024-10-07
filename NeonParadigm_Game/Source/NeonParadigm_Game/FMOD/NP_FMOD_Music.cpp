@@ -134,7 +134,7 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
         if (FMODAudioComponent)
         {
 
-            if (TimesPlayed < 5)
+            if (TimesPlayed < 7)
             {
                 FName ParameterName = "Music_Transition"; 
                 float UserValue = 0.0f;
