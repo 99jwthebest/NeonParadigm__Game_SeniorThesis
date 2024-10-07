@@ -40,6 +40,8 @@ public:
 	// Function to handle the timeline beat event
 	UFUNCTION()
 	void OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float Tempo, int32 TimeSignatureUpper, int32 TimeSignatureLower);
+	UFUNCTION()
+	void OnTimelineMarker(FString Name, int32 Position);
 
 private:
 	ANeonParadigm_GameCharacter* PlayerCharacter;
@@ -54,4 +56,7 @@ private:
 
 	FTimerHandle TimerForBPM;
 	ATestActor* TempActor;
+
+	bool FirstTime;
+	int TimesPlayed;
 };

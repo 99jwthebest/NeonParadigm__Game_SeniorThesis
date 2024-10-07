@@ -3,6 +3,7 @@
 
 #include "NeonParadigm_Game/FMOD/NP_FMOD_Music.h"
 #include "FMODAudioComponent.h"
+//#include "FMODBlueprintStatics.h"
 #include "FMODEvent.h"
 #include "Kismet/GameplayStatics.h"
 #include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
@@ -21,6 +22,7 @@ ANP_FMOD_Music::ANP_FMOD_Music()
 	FMODAudioComponent->SetupAttachment(RootComponent);
 
     FMODAudioComponent->bEnableTimelineCallbacks = true;
+
 }
 
 // Called when the game starts or when spawned
@@ -28,6 +30,8 @@ void ANP_FMOD_Music::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    FirstTime = true;
+    TimesPlayed = 0;
     // Ensure the FMODAudioComponent is valid
     if (FMODAudioComponent)
     {
@@ -46,6 +50,8 @@ void ANP_FMOD_Music::BeginPlay()
 
             // Bind the OnTimelineBeat delegate
             FMODAudioComponent->OnTimelineBeat.AddDynamic(this, &ANP_FMOD_Music::OnTimelineBeat);
+            // Bind the delegate to handle timeline beat events
+            FMODAudioComponent->OnTimelineMarker.AddDynamic(this, &ANP_FMOD_Music::OnTimelineMarker);
 
             // Start playing the FMOD event
             FMODAudioComponent->Play();
@@ -118,6 +124,65 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
 
 
+}
+
+void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
+{
+    // Example marker: if marker name is "StartAction", set the parameter to some value
+    if (Name == "SectionA_Transition" || Name == "SectionB_Transition")
+    {
+        if (FMODAudioComponent)
+        {
+
+            if (TimesPlayed < 5)
+            {
+                FName ParameterName = "Music_Transition"; 
+                float UserValue = 0.0f;
+                float FinalValue = 0.0f;
+
+                FMODAudioComponent->GetParameterValue(ParameterName, UserValue, FinalValue);
+
+                UE_LOG(LogTemp, Log, TEXT("Parameter: %s | UserValue: %f | FinalValue: %f"), *ParameterName.ToString(), UserValue, FinalValue);
+                FMODAudioComponent->SetParameter("Music_Transition", 2.0f);
+
+                FMODAudioComponent->GetParameterValue(ParameterName, UserValue, FinalValue);
+
+                UE_LOG(LogTemp, Log, TEXT("Parameter: %s | UserValue: %f | FinalValue: %f"), *ParameterName.ToString(), UserValue, FinalValue);
+
+                TimesPlayed++;
+            }
+            else
+            {
+                FName ParameterName = "Music_Transition"; 
+                float UserValue = 0.0f;
+                float FinalValue = 0.0f;
+
+                FMODAudioComponent->GetParameterValue(ParameterName, UserValue, FinalValue);
+
+                UE_LOG(LogTemp, Log, TEXT("Parameter: %s | UserValue: %f | FinalValue: %f"), *ParameterName.ToString(), UserValue, FinalValue);
+                FMODAudioComponent->SetParameter("Music_Transition", 0.0f);
+
+                FMODAudioComponent->GetParameterValue(ParameterName, UserValue, FinalValue);
+
+                UE_LOG(LogTemp, Log, TEXT("Parameter: %s | UserValue: %f | FinalValue: %f"), *ParameterName.ToString(), UserValue, FinalValue);
+
+                TimesPlayed = 0;
+            }
+
+        }
+
+        UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
+    }
+
+    if (Name == "ResetFirstTimeBool")
+    {
+        if (FMODAudioComponent)
+        {
+            TimesPlayed = 0;
+        }
+
+        UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
+    }
 }
 
 

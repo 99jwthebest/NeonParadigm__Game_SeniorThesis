@@ -14,11 +14,21 @@ void UNP_ANS_SaveLightAttack::NotifyBegin(USkeletalMeshComponent* MeshComp, UAni
 void UNP_ANS_SaveLightAttack::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime, const FAnimNotifyEventReference& EventReference)
 {
 	Super::NotifyTick(MeshComp, Animation, FrameDeltaTime, EventReference);
+
+	if (MeshComp == nullptr)
+		return;
+
 	const AActor* OwnerActor = MeshComp->GetOwner();
-	if (IsValid(OwnerActor))
+
+
+	if (!IsValid(OwnerActor))
 		return;
 		
 	UAttackComponent* AttackComp = OwnerActor->GetComponentByClass<UAttackComponent>();
+
+	if (AttackComp == nullptr)
+		return;
+
 	UE_LOG(LogTemp, Warning, TEXT("INitializing CHARACTER IN NOTIFY!!!!!!!!"));
 	if(AttackComp)
 		AttackComp->SaveLightAttack();
