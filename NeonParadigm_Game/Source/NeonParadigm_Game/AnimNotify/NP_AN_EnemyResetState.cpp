@@ -11,10 +11,12 @@ void UNP_AN_EnemyResetState::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (OwnerActor)
-		EnemyCharacter = Cast<ANP_BaseEnemy>(MeshComp->GetOwner());
+	if (!OwnerActor)
+		return;
 
-	if (EnemyCharacter)
+	ANP_BaseEnemy* EnemyCharacter = Cast<ANP_BaseEnemy>(MeshComp->GetOwner());
+
+	if (IsValid(EnemyCharacter))
 		EnemyCharacter->ResetState();
 	else
 		UE_LOG(LogTemp, Warning, TEXT("Cant FIND AllowRotation COMP In NOFITY!!!!!!!!"));

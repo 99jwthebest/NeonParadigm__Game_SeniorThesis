@@ -44,6 +44,8 @@ public:
 	void SaveHeavyAttack();
 	void ResetHeavyAttack();
 
+	void FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName);
+	float GetNotifyTriggerTime();
 
 
 
@@ -70,4 +72,5 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	TArray<UAnimMontage*> HeavyAttackMontages;
 
+	float NotifyTriggerTime;
 };

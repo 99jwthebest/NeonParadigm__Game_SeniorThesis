@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "NeonParadigm_Game",
+			"Path": "..\\Source\\NeonParadigm_Game.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "NeonParadigm_GameEditor",
+			"Path": "..\\Source\\NeonParadigm_GameEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

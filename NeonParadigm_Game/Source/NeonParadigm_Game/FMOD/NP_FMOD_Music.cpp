@@ -10,6 +10,9 @@
 #include "NeonParadigm_Game/TestActor.h"
 #include "TimerManager.h"
 
+namespace Markers {
+    FString SectionA = TEXT("SectionA_Transition");
+}
 
 // Sets default values
 ANP_FMOD_Music::ANP_FMOD_Music()
@@ -129,12 +132,12 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 {
     // Example marker: if marker name is "StartAction", set the parameter to some value
-    if (Name == "SectionA_Transition" || Name == "SectionB_Transition")
+    if (Name == Markers::SectionA || Name == "SectionB_Transition")
     {
         if (FMODAudioComponent)
         {
 
-            if (TimesPlayed < 7)
+            if (TimesPlayed < 2)
             {
                 FName ParameterName = "Music_Transition"; 
                 float UserValue = 0.0f;

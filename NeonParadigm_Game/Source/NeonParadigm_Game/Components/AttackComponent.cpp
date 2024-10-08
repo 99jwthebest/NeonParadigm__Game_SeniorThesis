@@ -86,11 +86,12 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 		LightAttackIndex = 0;
 	}
 
-	if (LightAttackMontages.IsValidIndex(LightAttackIndex) && LightAttackImpactTimes.IsValidIndex(LightAttackIndex))
+	if (LightAttackMontages.IsValidIndex(LightAttackIndex))
 	{
 		UAnimMontage* Montage = LightAttackMontages[LightAttackIndex];
-		float ImpactTime = LightAttackImpactTimes[LightAttackIndex];
-		MyCharacter->SetCurrentAnimTimeDelay(ImpactTime);
+		// Find the notify trigger time
+		FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
+		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
 		MyCharacter->TestRhythmDelayEvent();
 
 		if (IsValid(Montage))
@@ -100,7 +101,7 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 			AttackMovement(5.0f);
 			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
 			// Log the impact time for debugging
-			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, ImpactTime);
+			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
 			LightAttackIndex++;
 			if (LightAttackIndex >= LightAttackMontages.Num())
 			{
@@ -226,6 +227,8 @@ void UAttackComponent::PerformHeavyAttack(int AttackIndex)
 		UAnimMontage* Montage = HeavyAttackMontages[HeavyAttackIndex];
 		if (IsValid(Montage))
 		{
+			// Find the notify trigger time
+			FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
 			UAnimMontage* HeavyAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
 			AttackMovement(5.0f);
@@ -287,5 +290,33 @@ void UAttackComponent::ResetHeavyAttack()
 {
 	bSaveHeavyAttack = false;
 	HeavyAttackIndex = 0;
+}
+
+void UAttackComponent::FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName)
+{
+	if (!Montage)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Montage is null."));
+		return;
+	}
+
+	TArray<FAnimNotifyEvent>& NotifyEvents = Montage->Notifies; // gets ref instead copy, & from notifies array "Montage->Notifies"
+
+	for (const FAnimNotifyEvent& NotifyEvent : NotifyEvents)
+	{
+		if (NotifyEvent.Notify && NotifyEvent.Notify->GetNotifyName() == NotifyName)
+		{
+			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
+			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
+			return;
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Notify with name %s not found in montage."), *NotifyName.ToString());
+}
+
+float UAttackComponent::GetNotifyTriggerTime()
+{
+	return NotifyTriggerTime;
 }
 
