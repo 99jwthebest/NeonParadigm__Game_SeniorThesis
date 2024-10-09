@@ -70,9 +70,9 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ParryAction;
 
-	/** Test Delay Input Action */
+	/** Rage Mode Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* TestDelayAction;
+	UInputAction* RageAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -277,6 +277,23 @@ public:
 	float GetCurrentAnimPlayRate();
 
 	void TestRhythmDelayEvent();
+
+
+
+private:
+
+	bool bRageSaved;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* RageEmitter;
+
+
+public:
+
+	void Rage();
+	void RageEvent();
+	bool CanRage();
+
 
 };
 

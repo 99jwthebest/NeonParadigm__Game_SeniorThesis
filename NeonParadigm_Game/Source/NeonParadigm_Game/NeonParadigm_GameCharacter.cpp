@@ -190,8 +190,8 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		// Parry
 		EnhancedInputComponent->BindAction(ParryAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ParryInput);
 
-		// TestDelayAction
-		EnhancedInputComponent->BindAction(TestDelayAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::TestRhythmDelayEvent);
+		// Rage
+		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
 
 	}
 	else
@@ -1073,7 +1073,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
 	UE_LOG(LogTemp, Error, TEXT("Delay From Third Beat: %f"), DelayFromThirdBeat);
 
-	if (DelayFromLastBeat <= 0.33f)
+	if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
 
@@ -1082,7 +1082,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 
 	}
-	else
+	else if(GetCurrentAnimTimeDelay() <= 0.9f)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
@@ -1094,15 +1094,19 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
+	else
+	{
+		//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
 
+		//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
-	//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+		//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
-	//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromThirdBeat;
 
-	//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
 
-	//UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 
 	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
 
@@ -1113,3 +1117,54 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 
 }
+
+void ANeonParadigm_GameCharacter::Rage()
+{
+	if (CanRage())
+	{
+		RageEvent();
+	}
+	else
+	{
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState)) // this might just be for saving attacks for switching the rage attack mode if we want differnt anims
+		{
+			bRageSaved = true;
+			// savelightAttack = true;
+		}
+	}
+}
+
+void ANeonParadigm_GameCharacter::RageEvent()
+{
+	//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
+	UGameplayStatics::SpawnEmitterAttached(
+		RageEmitter,        // The particle system you want to spawn
+		GetMesh(),                 // The component to attach the particle system to (could be character mesh)
+		FName("root"),           // Socket name or bone to attach to (can be NAME_None if not using sockets)
+		FVector(0.0f, 0.0f, 0.0f),     // Optional location (relative offset)
+		FRotator(0.0f, 0.0f, 0.0f),    // Optional rotation
+		FVector(1.0f, 1.0f, 1.0f),     // Optional scale
+		EAttachLocation::KeepRelativeOffset,  // Keep relative or snap to target
+		true,                          // Auto-destroy when finished
+		EPSCPoolMethod::None,          // No pooling
+		true                           // Auto-activate);
+	);
+}
+
+bool ANeonParadigm_GameCharacter::CanRage()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();  // *** This could be changed to use while falling.
+}
+

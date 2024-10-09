@@ -12,6 +12,8 @@ void UNP_AN_WeaponCollision::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
+	if (MeshComp == nullptr)
+		return;
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
