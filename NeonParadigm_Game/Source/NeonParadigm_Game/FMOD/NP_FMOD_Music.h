@@ -50,6 +50,7 @@ private:
 
 	float M_CurrentTempoDelay;
 	float M_NextBeatTime;
+	float M_ThirdBeatTime;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AActor> TempBPMMusic;

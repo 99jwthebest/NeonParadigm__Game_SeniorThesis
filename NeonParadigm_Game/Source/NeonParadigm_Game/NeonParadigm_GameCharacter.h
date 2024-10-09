@@ -245,9 +245,12 @@ private:
 	float CurrentAnimTimeDelay;
 	float LastBeatTime;
 	float NextBeatTime;
+	float ThirdBeatTime;
 	float DelayFromLastBeat;
 	float DelayFromNextBeat;
 	float TotalTimeDelayToNextBeat;
+	float DelayFromThirdBeat;
+	float TotalTimeDelayToThirdBeat;
 	float PlayRateForAnimMontages;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
@@ -268,6 +271,8 @@ public:
 	float GetLastBeatTime();
 	void SetNextBeatTime(float fNextBeatTime);
 	float GetNextBeatTime();
+	void SetThirdBeatTime(float fThirdBeatTime);
+	float GetThirdBeatTime();
 
 	float GetCurrentAnimPlayRate();
 

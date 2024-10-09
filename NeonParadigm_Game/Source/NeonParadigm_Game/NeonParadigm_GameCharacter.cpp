@@ -1045,6 +1045,16 @@ float ANeonParadigm_GameCharacter::GetNextBeatTime()
 	return NextBeatTime;
 }
 
+void ANeonParadigm_GameCharacter::SetThirdBeatTime(float fThirdBeatTime)
+{
+	ThirdBeatTime = fThirdBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetThirdBeatTime()
+{
+	return ThirdBeatTime;
+}
+
 float ANeonParadigm_GameCharacter::GetCurrentAnimPlayRate()
 {
 	return PlayRateForAnimMontages;
@@ -1059,6 +1069,9 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
 	UE_LOG(LogTemp, Error, TEXT("Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("Delay From Third Beat: %f"), DelayFromThirdBeat);
 
 	if (DelayFromLastBeat <= 0.33f)
 	{
@@ -1081,6 +1094,15 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
+
+
+	//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+	//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+	//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+	//UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 
 	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
 

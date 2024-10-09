@@ -101,14 +101,6 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         TempActor->ToggleEmission();
 
         GetWorld()->GetTimerManager().SetTimer(TimerForBPM, TempActor, &ATestActor::ToggleEmissionOff, 0.2f, true); // 0.0167f
-
-
-        //// Optionally, turn off emission after some time (e.g., after 0.5 seconds)
-        //FTimerHandle TimerHandle;
-        //GetWorld()->GetTimerManager().SetTimer(TimerHandle, [BeatActor]()
-        //    {
-        //        TempActor->ToggleEmission(false);
-        //    }, 0.5f, false);
     }
 
     //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
@@ -126,7 +118,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     PlayerCharacter->SetNextBeatTime(M_NextBeatTime);
     UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
 
-
+    M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
+    PlayerCharacter->SetThirdBeatTime(M_ThirdBeatTime);
+    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
 }
 
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
