@@ -18,6 +18,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TimerManager.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -1130,7 +1131,7 @@ void ANeonParadigm_GameCharacter::Rage()
 		CurrentCharacterState.Add(ECharacterStates::Attack);
 		CurrentCharacterState.Add(ECharacterStates::Dodge);
 
-		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState)) // this might just be for saving attacks for switching the rage attack mode if we want differnt anims
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !bRage) // this might just be for saving attacks for switching the rage attack mode if we want differnt anims
 		{
 			bRageSaved = true;
 			// savelightAttack = true;
@@ -1141,7 +1142,7 @@ void ANeonParadigm_GameCharacter::Rage()
 void ANeonParadigm_GameCharacter::RageEvent()
 {
 	//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
-	UGameplayStatics::SpawnEmitterAttached(
+	RageParticleComponent = UGameplayStatics::SpawnEmitterAttached(
 		RageEmitter,        // The particle system you want to spawn
 		GetMesh(),                 // The component to attach the particle system to (could be character mesh)
 		FName("root"),           // Socket name or bone to attach to (can be NAME_None if not using sockets)
@@ -1153,6 +1154,31 @@ void ANeonParadigm_GameCharacter::RageEvent()
 		EPSCPoolMethod::None,          // No pooling
 		true                           // Auto-activate);
 	);
+
+	CharacterState->SetState(ECharacterStates::Attack);
+
+	PlayAnimMontage(RageAnim); // **** we can have this so that it can't be interuppted by enemy attacks.
+}
+
+void ANeonParadigm_GameCharacter::RageComplete() // ???? **** This has to be put into a notify???
+{
+	if (RageParticleComponent)
+	{
+		RageParticleComponent->DestroyComponent();
+		RageParticleComponent = nullptr;
+		bRage = true;
+		if (RageOverlayMaterial)
+		{
+			GetMesh()->SetOverlayMaterial(RageOverlayMaterial);
+		}
+		GetWorld()->GetTimerManager().SetTimer(RageTimerHandle, this, &ANeonParadigm_GameCharacter::EndRage, RageDuration, false);
+	}
+}
+
+void ANeonParadigm_GameCharacter::EndRage()
+{
+	bRage = false;
+	GetMesh()->SetOverlayMaterial(nullptr);
 }
 
 bool ANeonParadigm_GameCharacter::CanRage()
@@ -1163,8 +1189,7 @@ bool ANeonParadigm_GameCharacter::CanRage()
 	CurrentCharacterState.Add(ECharacterStates::Disabled);
 	CurrentCharacterState.Add(ECharacterStates::Death);
 	CurrentCharacterState.Add(ECharacterStates::Parry);
-	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();  // *** This could be changed to use while falling.
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling() && !bRage;  // *** This could be changed to use while falling.
 }
 

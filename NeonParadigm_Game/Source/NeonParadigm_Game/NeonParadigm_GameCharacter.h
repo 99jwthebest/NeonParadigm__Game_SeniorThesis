@@ -286,12 +286,23 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* RageEmitter;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* RageAnim;
 
+	class UParticleSystemComponent* RageParticleComponent;
+	bool bRage;
+	FTimerHandle RageTimerHandle;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageDuration;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	class UMaterialInterface* RageOverlayMaterial;
 
 public:
 
 	void Rage();
 	void RageEvent();
+	void RageComplete();
+	void EndRage();
 	bool CanRage();
 
 
