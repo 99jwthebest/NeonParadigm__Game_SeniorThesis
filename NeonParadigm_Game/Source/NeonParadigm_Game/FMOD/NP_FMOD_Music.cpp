@@ -9,6 +9,7 @@
 #include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
 #include "NeonParadigm_Game/TestActor.h"
 #include "TimerManager.h"
+#include "NeonParadigm_Game/Enemies/NP_BaseEnemy.h"
 
 namespace Markers {
     FString SectionA = TEXT("SectionA_Transition");
@@ -79,6 +80,8 @@ void ANP_FMOD_Music::BeginPlay()
     TempActor->AttachToComponent(PlayerCharacter->GetRootComponent(), AttachRules);
 
     UE_LOG(LogTemp, Log, TEXT("Spawned actor and attached to player."));
+
+    //FindAllEnemies();
 }
 
 // Called every frame
@@ -121,6 +124,12 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
     PlayerCharacter->SetThirdBeatTime(M_ThirdBeatTime);
     UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
+
+
+    if (SpawnedEnemies.Num() > 0)
+    {
+        SendMusicInfoToEnemies(Tempo);
+    }
 }
 
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
@@ -179,6 +188,70 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
         }
 
         UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
+    }
+}
+
+void ANP_FMOD_Music::FindAllEnemies()
+{
+    TArray<AActor*> FoundEnemies;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), FoundEnemies);
+
+    // Log the total number of enemies found
+    UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), FoundEnemies.Num());
+
+    // You can now iterate over FoundEnemies or cast them to ANP_BaseEnemy if needed
+    for (AActor* Actor : FoundEnemies)
+    {
+        ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(Actor);
+        if (Enemy)
+        {
+            //Enemy->TestRhythmDelayEvent();
+            //Enemy->SendMusicInfoToEnemies(,Enemy);
+        }
+    }
+}
+
+void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
+{
+    for (int i = 0; i < SpawnedEnemies.Num(); i++) 
+    {
+        if (!SpawnedEnemies[i])
+            return;
+
+        //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
+
+        M_CurrentTempoDelay = 60 / TempoOfCurrentSong;
+        SpawnedEnemies[i]->SetCurrentTempoDelay(M_CurrentTempoDelay);
+        UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: CurrentTempoDelay %f"), M_CurrentTempoDelay);
+
+        UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Beat Tick: %f"), GetWorld()->GetTimeSeconds());
+
+        SpawnedEnemies[i]->SetLastBeatTime(GetWorld()->GetTimeSeconds());
+        UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
+
+        M_NextBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay;
+        SpawnedEnemies[i]->SetNextBeatTime(M_NextBeatTime);
+        UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
+
+        M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
+        SpawnedEnemies[i]->SetThirdBeatTime(M_ThirdBeatTime);
+        UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
+
+    }
+}
+
+void ANP_FMOD_Music::AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy)
+{
+    if (SpawnedEnemy)
+    {
+        // Add the spawned enemy to the array
+        SpawnedEnemies.Add(SpawnedEnemy);
+        //SpawnedEnemies[0]->TestRhythmDelayEvent(); *****
+        // Log that the enemy has been added
+        UE_LOG(LogTemp, Warning, TEXT("Enemy %s added to FMOD Music"), *SpawnedEnemy->GetName());
+
+        UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+
     }
 }
 

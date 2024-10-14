@@ -1193,3 +1193,8 @@ bool ANeonParadigm_GameCharacter::CanRage()
 	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling() && !bRage;  // *** This could be changed to use while falling.
 }
 
+bool ANeonParadigm_GameCharacter::IsRaging()
+{
+	return bRage;
+}
+

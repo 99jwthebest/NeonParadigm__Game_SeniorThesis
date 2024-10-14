@@ -123,7 +123,7 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 	if (CurrentHealth > 0.0f)
 	{
 		// Step 1: Create or obtain an instance of UNP_DamageType
-		UNP_DamageType* MyDamageType = NewObject<UNP_DamageType>(GetWorld());
+		MyDamageType = NewObject<UNP_DamageType>(GetWorld());
 
 		/*if (MyDamageType)
 		{
@@ -263,3 +263,143 @@ void ANP_BaseEnemy::EndTarget()
 
 
 
+void ANP_BaseEnemy::SetCurrentTempoDelay(float CurTempoDelay)
+{
+	CurrentTempoDelay = CurTempoDelay;
+}
+
+float ANP_BaseEnemy::GetCurrentTempoDelay()
+{
+	return CurrentTempoDelay;
+}
+
+void ANP_BaseEnemy::SetCurrentAnimTimeDelay(float CurAnimTimeDelay)
+{
+	CurrentAnimTimeDelay = CurAnimTimeDelay;
+}
+
+float ANP_BaseEnemy::GetCurrentAnimTimeDelay()
+{
+	return CurrentAnimTimeDelay;
+}
+
+void ANP_BaseEnemy::SetLastBeatTime(float fLastBeatTime)
+{
+	LastBeatTime = fLastBeatTime;
+}
+
+float ANP_BaseEnemy::GetLastBeatTime()
+{
+	return LastBeatTime;
+}
+
+void ANP_BaseEnemy::SetNextBeatTime(float fNextBeatTime)
+{
+	NextBeatTime = fNextBeatTime;
+}
+
+float ANP_BaseEnemy::GetNextBeatTime()
+{
+	return NextBeatTime;
+}
+
+void ANP_BaseEnemy::SetThirdBeatTime(float fThirdBeatTime)
+{
+	ThirdBeatTime = fThirdBeatTime;
+}
+
+float ANP_BaseEnemy::GetThirdBeatTime()
+{
+	return ThirdBeatTime;
+}
+
+float ANP_BaseEnemy::GetCurrentAnimPlayRate()
+{
+	return PlayRateForAnimMontages;
+}
+
+void ANP_BaseEnemy::TestRhythmDelayEvent()
+{
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Delay From Third Beat: %f"), DelayFromThirdBeat);
+
+	if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ENEMY Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("ENEMY Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+
+	}
+	else if (GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ENEMY Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("ENEMY Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("ENEMY Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+	else
+	{
+		//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromThirdBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("ENEMY Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+
+
+	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
+
+	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
+
+	UE_LOG(LogTemp, Display, TEXT("ENEMY Montage Length: %f"), MontageLength);
+
+
+
+}
+
+void ANP_BaseEnemy::FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName)
+{
+	if (!Montage)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Montage is null."));
+		return;
+	}
+
+	TArray<FAnimNotifyEvent>& NotifyEvents = Montage->Notifies; // gets ref instead copy, & from notifies array "Montage->Notifies"
+
+	for (const FAnimNotifyEvent& NotifyEvent : NotifyEvents)
+	{
+		if (NotifyEvent.Notify && NotifyEvent.Notify->GetNotifyName() == NotifyName)
+		{
+			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
+			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
+			return;
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Notify with name %s not found in montage."), *NotifyName.ToString());
+}
+
+float ANP_BaseEnemy::GetNotifyTriggerTime()
+{
+	return NotifyTriggerTime;
+}

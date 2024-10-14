@@ -11,6 +11,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
 class AController;
+class UAnimMontage;
 class UDamageType;
 enum class ECharacterStates : uint8;
 #ifdef NEONPARADIGM_GAME_NP_BaseEnemy_generated_h
@@ -23,6 +24,11 @@ enum class ECharacterStates : uint8;
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_18_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execGetNotifyTriggerTime); \
+	DECLARE_FUNCTION(execFindNotifyTriggerTime); \
+	DECLARE_FUNCTION(execTestRhythmDelayEvent); \
+	DECLARE_FUNCTION(execGetCurrentAnimPlayRate); \
+	DECLARE_FUNCTION(execSetCurrentAnimTimeDelay); \
 	DECLARE_FUNCTION(execIsCurrentStateEqualToAny); \
 	DECLARE_FUNCTION(execSetState); \
 	DECLARE_FUNCTION(execHandleTakeAnyDamage);

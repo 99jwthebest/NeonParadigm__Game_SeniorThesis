@@ -10,6 +10,8 @@ class UFMODAudioComponent;
 class UFMODEvent;
 class ANeonParadigm_GameCharacter;
 class ATestActor;
+class ANP_BaseEnemy;
+
 
 UCLASS()
 class NEONPARADIGM_GAME_API ANP_FMOD_Music : public AActor
@@ -60,4 +62,15 @@ private:
 
 	bool FirstTime;
 	int TimesPlayed;
+
+
+	TArray<ANP_BaseEnemy*> SpawnedEnemies;
+
+public:
+	void FindAllEnemies();
+	void SendMusicInfoToEnemies(float TempoOfCurrentSong);
+	UFUNCTION(BlueprintCallable, Category = "Music")
+	void AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy);
+
+
 };

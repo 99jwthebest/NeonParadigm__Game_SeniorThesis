@@ -304,7 +304,7 @@ public:
 	void RageComplete();
 	void EndRage();
 	bool CanRage();
-
+	bool IsRaging();
 
 };
 

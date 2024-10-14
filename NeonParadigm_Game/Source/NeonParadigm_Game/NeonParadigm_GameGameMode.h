@@ -7,11 +7,16 @@
 #include "NeonParadigm_GameGameMode.generated.h"
 
 class ANeonParadigm_GameCharacter;
+class UScoreComponent;
 
 UCLASS(minimalapi)
 class ANeonParadigm_GameGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UScoreComponent* ScoreComp;
 
 public:
 	ANeonParadigm_GameGameMode();

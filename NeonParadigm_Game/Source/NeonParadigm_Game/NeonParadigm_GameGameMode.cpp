@@ -5,6 +5,8 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
+#include "NeonParadigm_Game/Components/ScoreComponent.h"
+
 
 ANeonParadigm_GameGameMode::ANeonParadigm_GameGameMode()
 {
@@ -14,6 +16,9 @@ ANeonParadigm_GameGameMode::ANeonParadigm_GameGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+
+	ScoreComp = CreateDefaultSubobject<UScoreComponent>(TEXT("Score Component"));
+
 }
 
 void ANeonParadigm_GameGameMode::BeginPlay()
@@ -32,6 +37,10 @@ void ANeonParadigm_GameGameMode::BeginPlay()
 	}
 
 
+	if (ScoreComp)
+	{
+		ScoreComp->Testing();
+	}
 
 
 

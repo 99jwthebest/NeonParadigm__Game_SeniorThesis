@@ -624,6 +624,12 @@
     <ClInclude Include="..\..\Source\NeonParadigm_Game\Components\DamageComponent.h">
       <Filter>Source\NeonParadigm_Game\Components</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Components\ScoreComponent.cpp">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Components\ScoreComponent.h">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClInclude>
     <Filter Include="Source\NeonParadigm_Game\DamageType">
       <UniqueIdentifier>{6C709622-EC5A-3E14-9F6F-002101C2ABE8}</UniqueIdentifier>
     </Filter>
