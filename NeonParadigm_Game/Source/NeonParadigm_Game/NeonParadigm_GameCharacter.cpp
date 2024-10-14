@@ -19,6 +19,8 @@
 #include "TimerManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "NeonParadigm_Game/Components/ScoreComponent.h"
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -71,6 +73,8 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	DoubleJumpVelocity = 1000.0f;
 
 	DamageComp = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage Component"));
+	
+	ScoreComp = CreateDefaultSubobject<UScoreComponent>(TEXT("Score Component"));
 
 	MaxTargetingDistance = 2500.0f;
 
@@ -1074,6 +1078,17 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
 	UE_LOG(LogTemp, Error, TEXT("Delay From Third Beat: %f"), DelayFromThirdBeat);
 
+	if (DelayFromLastBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was PERFECT to LAST Beat: %f"), DelayFromLastBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+
+		ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+
+	}
 	if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);

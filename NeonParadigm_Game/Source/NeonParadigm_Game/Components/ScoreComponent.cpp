@@ -39,3 +39,11 @@ void UScoreComponent::Testing()
 
 }
 
+void UScoreComponent::IncrementScore(int ScoreToAdd)
+{
+	TotalScore += ScoreToAdd;
+	UE_LOG(LogTemp, Warning, TEXT("SCORE COMP, %d Points!!!!!!!!!!!"), TotalScore);
+
+}
+
+

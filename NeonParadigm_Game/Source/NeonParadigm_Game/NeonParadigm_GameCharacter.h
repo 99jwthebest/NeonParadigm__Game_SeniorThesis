@@ -17,6 +17,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class ANP_BaseEnemy;
+class UScoreComponent;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -305,6 +306,17 @@ public:
 	void EndRage();
 	bool CanRage();
 	bool IsRaging();
+
+
+private:
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UScoreComponent* ScoreComp;
+
+
+public:
+
+
 
 };
 
