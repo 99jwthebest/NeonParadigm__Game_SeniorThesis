@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NeonParadigm_GameModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be9edc0ccefe2e7b5977cfbef8ccc0dc250ecf75")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d93c7d7f6d9bc8cb5ff22aae04de6a84e6031a23")]
 [assembly: System.Reflection.AssemblyProductAttribute("NeonParadigm_GameModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NeonParadigm_GameModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
