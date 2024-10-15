@@ -11,6 +11,8 @@ class UCharacterStateComponent;
 class UNP_DamageType;
 class ANeonParadigm_GameCharacter;
 class UAnimMontage;
+class UScoreComponent;
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class NEONPARADIGM_GAME_API UDamageComponent : public UActorComponent
@@ -42,6 +44,8 @@ private:
 	UNP_DamageType* NP_DamageType;
 
 	UCharacterStateComponent* CharacterState;
+	UScoreComponent* ScoreComp;
+
 	/*UPROPERTY(EditAnywhere, Category = "Damage")
 	TSubclassOf<class UNP_DamageType> DamageTypeClass;*/
 

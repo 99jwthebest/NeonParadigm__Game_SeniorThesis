@@ -312,11 +312,13 @@ private:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UScoreComponent* ScoreComp;
+	bool bPerfectBeatHit;
 
 
 public:
 
-
+	void SetPerfectBeatHit(bool bPerfectHit);
+	bool IsPerfectBeatHit();
 
 };
 

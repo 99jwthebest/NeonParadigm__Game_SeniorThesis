@@ -8,6 +8,7 @@
 #include "Kismet/KismetArrayLibrary.h"
 #include "NeonParadigm_Game/Enums/CharacterStateComponent.h"
 #include "Animation/AnimMontage.h"
+#include "NeonParadigm_Game/Components/ScoreComponent.h"
 
 
 
@@ -34,6 +35,12 @@ void UDamageComponent::BeginPlay()
 	if (CharacterState != nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found CharacterState Compo!!!!!"))
+	}
+
+	ScoreComp = MyCharacter->FindComponentByClass<UScoreComponent>();
+	if (ScoreComp != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found SCORE Compo!!!!!"))
 	}
 
 
@@ -91,6 +98,11 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				HitActors.AddUnique(Hit.GetActor());
 				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
 
+				if (MyCharacter->IsPerfectBeatHit())
+				{
+					ScoreComp->IncrementScore(500);
+					MyCharacter->SetPerfectBeatHit(false);
+				}
 			}
 		}
 	}

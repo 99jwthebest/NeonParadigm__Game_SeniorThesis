@@ -684,7 +684,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		ActorsToIgnore.Add(LastSoftTargetActor);
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; //ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; //ForDuration
 		// Output hit result
 		FHitResult OutHit;
 		// Ignore self
@@ -718,21 +718,11 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			{
 				if (Enemy->GetState() != ECharacterStates::Death)
 				{
-					if (OutHit.GetActor() != SoftTargetActor)
+					if (OutHit.GetActor() != SoftTargetActor || !SoftTargetActor->IsValidLowLevel())
 					{
-						if (SoftTargetActor->IsValidLowLevel())
-						{
-							LastSoftTargetActor = SoftTargetActor;
-							SoftTargetActor = OutHit.GetActor();
-						}
-						else
-						{
-							SoftTargetActor = OutHit.GetActor();
-						}
-					}
-					else
-					{
-						LastSoftTargetActor = nullptr;
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = OutHit.GetActor();
+						SoftTargetEnemy = Enemy;  
 					}
 				}
 				else
@@ -751,7 +741,9 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		}
 		else
 		{
-			LastSoftTargetActor = nullptr;
+			SoftTargetActor = nullptr;
+			SoftTargetEnemy = nullptr;
+			//LastSoftTargetActor = nullptr;
 		}
 	}
 }
@@ -1085,8 +1077,8 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
-
-		ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+		SetPerfectBeatHit(true);
+		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 
 	}
 	if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
@@ -1211,5 +1203,15 @@ bool ANeonParadigm_GameCharacter::CanRage()
 bool ANeonParadigm_GameCharacter::IsRaging()
 {
 	return bRage;
+}
+
+void ANeonParadigm_GameCharacter::SetPerfectBeatHit(bool bPerfectHit)
+{
+	bPerfectBeatHit = bPerfectHit;
+}
+
+bool ANeonParadigm_GameCharacter::IsPerfectBeatHit()
+{
+	return bPerfectBeatHit;
 }
 
