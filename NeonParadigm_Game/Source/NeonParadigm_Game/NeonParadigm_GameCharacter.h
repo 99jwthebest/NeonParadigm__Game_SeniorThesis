@@ -297,6 +297,8 @@ private:
 	float RageDuration;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
 	class UMaterialInterface* RageOverlayMaterial;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	class UMaterialInterface* InitialRageOverlayMaterial;
 
 public:
 

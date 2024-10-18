@@ -366,13 +366,32 @@ void ANP_BaseEnemy::TestRhythmDelayEvent()
 	}
 
 
-	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
+	//float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
 
-	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
+	//PlayRateForAnimMontages = ClampedValueForPlayRate;
 
-	UE_LOG(LogTemp, Display, TEXT("ENEMY Montage Length: %f"), MontageLength);
+	//float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
+
+	//UE_LOG(LogTemp, Display, TEXT("ENEMY Montage Length: %f"), MontageLength);
 
 
+
+}
+
+float ANP_BaseEnemy::CheckToWaitForBeat()
+{
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Delay From Third Beat: %f"), DelayFromThirdBeat);
+
+	return DelayFromNextBeat;
 
 }
 

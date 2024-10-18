@@ -1153,7 +1153,7 @@ void ANeonParadigm_GameCharacter::RageEvent()
 		RageEmitter,        // The particle system you want to spawn
 		GetMesh(),                 // The component to attach the particle system to (could be character mesh)
 		FName("root"),           // Socket name or bone to attach to (can be NAME_None if not using sockets)
-		FVector(0.0f, 0.0f, 0.0f),     // Optional location (relative offset)
+		FVector(0.0f, 0.0f, 200.0f),     // Optional location (relative offset)
 		FRotator(0.0f, 0.0f, 0.0f),    // Optional rotation
 		FVector(1.0f, 1.0f, 1.0f),     // Optional scale
 		EAttachLocation::KeepRelativeOffset,  // Keep relative or snap to target
@@ -1165,9 +1165,11 @@ void ANeonParadigm_GameCharacter::RageEvent()
 	CharacterState->SetState(ECharacterStates::Attack);
 
 	PlayAnimMontage(RageAnim); // **** we can have this so that it can't be interuppted by enemy attacks.
+
+	GetMesh()->SetOverlayMaterial(InitialRageOverlayMaterial);
 }
 
-void ANeonParadigm_GameCharacter::RageComplete() // ???? **** This has to be put into a notify???
+void ANeonParadigm_GameCharacter::RageComplete() 
 {
 	if (RageParticleComponent)
 	{

@@ -168,6 +168,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Music")
 	void TestRhythmDelayEvent();
+	UFUNCTION(BlueprintPure, Category = "Music")
+	float CheckToWaitForBeat();
 
 	UFUNCTION(BlueprintCallable, Category = "Music")
 	void FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName);

@@ -26,6 +26,7 @@ enum class ECharacterStates : uint8;
  \
 	DECLARE_FUNCTION(execGetNotifyTriggerTime); \
 	DECLARE_FUNCTION(execFindNotifyTriggerTime); \
+	DECLARE_FUNCTION(execCheckToWaitForBeat); \
 	DECLARE_FUNCTION(execTestRhythmDelayEvent); \
 	DECLARE_FUNCTION(execGetCurrentAnimPlayRate); \
 	DECLARE_FUNCTION(execSetCurrentAnimTimeDelay); \
