@@ -79,7 +79,8 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	MaxTargetingDistance = 2500.0f;
 
 	SpeedOfRotation = 10.0f;
-	SpeedOfSoftRotation = 10.0f;
+	SpeedOfSoftRotation = 20.0f;  
+	// this speed controls how fast the character rotates in soft rotation ******* Maybe you can let player rotate character with this soft rotation to give more control or maybe to see if it's better. so far, this makes character more magnetic to the enemy.
 
 	bIsTargeting = false;
 
@@ -753,7 +754,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			//FVector MultiplyVec2 = GetCharacterMovement()->GetLastInputVector() * TargetingDistance;
 			FVector EndVec2 = GetActorLocation();
 			// Trace radius
-			float Radius2 = 500.0f;
+			float Radius2 = 500.0f;  // adjust this for the soft lock targetting to see what value works and makes sense for player to detect enemy and hit them *************
 			// Object types to trace against (e.g., WorldDynamic, Pawn)
 			TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
 			ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
@@ -768,7 +769,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; //ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; //ForDuration
 			// Output hit result
 			FHitResult OutHit2;
 			// Ignore self

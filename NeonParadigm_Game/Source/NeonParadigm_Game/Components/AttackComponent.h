@@ -76,4 +76,7 @@ private:
 	float NotifyTriggerTime;
 
 	bool bAnythingPlayed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* LaunchAnimMontage;
 };

@@ -338,6 +338,7 @@ bool UAttackComponent::DetermineDesiredAttack()
 	if (MyCharacter->GetMoveInputValue().Y <= -0.5f) // For Air Begin Attack
 	{
 		UE_LOG(LogTemp, Warning, TEXT("CAN LAUNCH!!!!"));
+		LaunchAttack();
 		return bAnythingPlayed = true;
 	}
 
@@ -347,45 +348,28 @@ bool UAttackComponent::DetermineDesiredAttack()
 
 void UAttackComponent::LaunchAttack()
 {
-	//if (AttackIndex >= LightAttackMontages.Num())
-	//{
-	//	//Reset Light Attack Index If Index Is Equal Or Greater Than Length Of Light Attack Sequence
-	//	LightAttackIndex = 0;
-	//}
 
-	if (LightAttackMontages.IsValidIndex(LightAttackIndex))
+	if (IsValid(LaunchAnimMontage))
 	{
-		UAnimMontage* Montage = LightAttackMontages[LightAttackIndex];
 		// Find the notify trigger time
-		FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
-		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
-		MyCharacter->TestRhythmDelayEvent();
+		//FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
+		//MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
+		//MyCharacter->TestRhythmDelayEvent();
 
-		if (IsValid(Montage))
-		{
-			UAnimMontage* LightAttackMontage = Montage;
-			CharacterState->SetState(ECharacterStates::Attack);
-			AttackMovement(5.0f);
-			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
-			// Log the impact time for debugging
-			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
-			LightAttackIndex++;
-			if (LightAttackIndex >= LightAttackMontages.Num())
-			{
-				//Reset Light Attack Index If Index Becomes Equal Or Greater Than Light Attack Sequence
-				LightAttackIndex = 0;
-				return;
-			}
-			else
-			{
-				return;
-			}
-		}
-		else
-		{
-			UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
-			return;
-		}
+
+		CharacterState->SetState(ECharacterStates::Attack);
+		//AttackMovement(5.0f); // We probably don't need it!!!! ****** 
+		//MyCharacter->PlayAnimMontage(LaunchAnimMontage, MyCharacter->GetCurrentAnimPlayRate());
+		MyCharacter->PlayAnimMontage(LaunchAnimMontage, 1.0f);
+
 	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("NO LAUNCH ANIMATION!!!!"));
+		return;
+	}
+
+
+			
 }
 

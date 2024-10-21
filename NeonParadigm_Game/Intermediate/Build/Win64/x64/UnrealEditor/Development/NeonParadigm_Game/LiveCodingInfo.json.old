@@ -2,7 +2,6 @@
 	"RemapUnityFiles": 
 	{
 		"Module.NeonParadigm_Game.cpp.obj": [
-			"NP_ANS_AllowRotationOnRootMotion.cpp.obj",
 			"NP_ANS_EnabledIFrames.cpp.obj",
 			"NP_ANS_SaveDodge.cpp.obj",
 			"NP_ANS_SaveHeavyAttack.cpp.obj",
@@ -15,7 +14,6 @@
 			"NP_AN_SoftTarget.cpp.obj",
 			"NP_AN_TestRhythmPunch.cpp.obj",
 			"NP_AN_WeaponCollision.cpp.obj",
-			"AttackComponent.cpp.obj",
 			"DamageComponent.cpp.obj",
 			"ScoreComponent.cpp.obj",
 			"NP_DamageType.cpp.obj",
@@ -51,6 +49,8 @@
 			"NP_FMOD_Music.gen.cpp.obj",
 			"ScoreComponent.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
+			"NP_ANS_AllowRotationOnRootMotion.cpp.obj",
+			"AttackComponent.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj"
 		]
 	}
