@@ -11,7 +11,7 @@
 ANeonParadigm_GameGameMode::ANeonParadigm_GameGameMode()
 {
 	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/_MyFiles/Blueprints/BP_Clair_NeonParadigm"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/_MyFiles/Blueprints/BP_Player_NeonParadigm"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
