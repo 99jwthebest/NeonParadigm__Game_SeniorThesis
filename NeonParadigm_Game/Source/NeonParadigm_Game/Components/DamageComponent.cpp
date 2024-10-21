@@ -67,23 +67,40 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
     TArray<AActor*> ActorsToIgnore;
     ActorsToIgnore.Add(MyCharacter); 
 	// Object types to trace for
-	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
-	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_Pawn)); 
+	/*TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_Pawn)); */
 	// Add more ObjectTypes if needed
 	// Array to hold the hit results
 	TArray<FHitResult> OutHits;
 
-	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMultiForObjects(
-		GetWorld(), 
-		MyCharacter->GetActorLocation(), 
-		EndVec, 
-		Radius, 
-		ObjectTypes, 
-		false, 
-		ActorsToIgnore, 
-		EDrawDebugTrace::None, // ForDuration
-		OutHits, 
-		true);
+	//bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMultiForObjects(
+	//	GetWorld(), 
+	//	MyCharacter->GetActorLocation(), 
+	//	EndVec, 
+	//	Radius, 
+	//	ObjectTypes, 
+	//	false, 
+	//	ActorsToIgnore, 
+	//	EDrawDebugTrace::ForDuration, // ForDuration
+	//	OutHits, 
+	//	true);
+
+	// Perform the multi-sphere trace by channel
+	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
+		GetWorld(),                        // World context
+		MyCharacter->GetActorLocation(),                          // Start of the trace
+		EndVec,                            // End of the trace
+		Radius,                            // Radius of the sphere
+		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
+		false,                             // bTraceComplex - false unless you want complex collision
+		ActorsToIgnore,                    // Actors to ignore (MyCharacter)
+		EDrawDebugTrace::ForDuration,      // Draw the trace for debugging
+		OutHits,                           // Output array to store hit results
+		true,                              // Ignore the tracing actor (self)
+		FLinearColor::Red,               // Trace line color
+		FLinearColor::Green,                 // Hit color
+		2.0f                               // How long to draw the debug trace
+	);
 
 	if (bMultiSphereHit)
 	{
@@ -100,6 +117,21 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{
+
+					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
+
+					UGameplayStatics::SpawnEmitterAttached(
+						PerfectParticle,        
+						MyCharacter->GetMesh(),                 
+						FName("VFX_Trail"),           
+						FVector(0.0f, 0.0f, 0.0f),     
+						FRotator(0.0f, 0.0f, 0.0f),    
+						FVector(1.0f, 1.0f, 1.0f),     
+						EAttachLocation::KeepRelativeOffset,  
+						true,                          
+						EPSCPoolMethod::None,          
+						true                           
+					);
 					ScoreComp->IncrementScore(500);
 					MyCharacter->SetPerfectBeatHit(false);
 				}

@@ -440,7 +440,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 	// Debug draw type
-	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
+	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; // ForDuration
 	// Output hit result
 	FHitResult OutHit;
 	// Ignore self
@@ -510,7 +510,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 		TArray<AActor*> ActorsToIgnore2;
 		ActorsToIgnore2.Add(this);
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
 		// Output hit result
 		FHitResult OutHit2;
 		// Ignore self
@@ -679,9 +679,9 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		// Actors to ignore (e.g., this actor)
 		TArray<AActor*> ActorsToIgnore;
 		ActorsToIgnore.Add(this);
-		ActorsToIgnore.Add(SoftTargetActor);
-		ActorsToIgnore.Add(SoftTargetEnemy);
-		ActorsToIgnore.Add(LastSoftTargetActor);
+		if (SoftTargetActor) ActorsToIgnore.Add(SoftTargetActor);
+		if (SoftTargetEnemy) ActorsToIgnore.Add(SoftTargetEnemy);
+		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
 
 		// Debug draw type
 		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; //ForDuration
@@ -741,9 +741,87 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		}
 		else
 		{
-			SoftTargetActor = nullptr;
-			SoftTargetEnemy = nullptr;
-			//LastSoftTargetActor = nullptr;
+			// Trace start and end points
+			FVector StartVec2 = GetActorLocation();
+			//FVector MultiplyVec2 = GetCharacterMovement()->GetLastInputVector() * TargetingDistance;
+			FVector EndVec2 = GetActorLocation();
+			// Trace radius
+			float Radius2 = 500.0f;
+			// Object types to trace against (e.g., WorldDynamic, Pawn)
+			TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
+			ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
+			//ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_WorldDynamic));
+			// Trace against simple collision
+			bool bTraceComplex2 = false;
+			// Actors to ignore (e.g., this actor)
+			TArray<AActor*> ActorsToIgnore2;
+			ActorsToIgnore2.Add(this);
+			if (SoftTargetActor) ActorsToIgnore.Add(SoftTargetActor);
+			if (SoftTargetEnemy) ActorsToIgnore.Add(SoftTargetEnemy);
+			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
+
+			// Debug draw type
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; //ForDuration
+			// Output hit result
+			FHitResult OutHit2;
+			// Ignore self
+			bool bIgnoreSelf2 = true;
+
+			// Trace For Enemies
+			bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceSingleForObjects(
+				GetWorld(),
+				StartVec2,
+				EndVec2,
+				Radius2,
+				ObjectTypes2,
+				bTraceComplex2,
+				ActorsToIgnore2,
+				DrawDebugType2,
+				OutHit2,
+				bIgnoreSelf2,
+				FLinearColor::Red,
+				FLinearColor::Green,
+				5.0f
+			);
+
+			if (bSphereTrace2)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit2.GetActor()->GetName());
+
+				UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *OutHit2.GetActor()->GetName());
+
+				ANP_BaseEnemy* Enemy2 = Cast<ANP_BaseEnemy>(OutHit2.GetActor());
+				if (Enemy2)
+				{
+				if (Enemy2->GetState() != ECharacterStates::Death)
+					{
+						if (OutHit2.GetActor() != SoftTargetActor || !SoftTargetActor->IsValidLowLevel())
+						{
+							LastSoftTargetActor = SoftTargetActor;
+							SoftTargetActor = OutHit2.GetActor();
+							SoftTargetEnemy = Enemy2;
+						}
+					}
+					else
+					{
+						SoftTargetActor = nullptr;
+						SoftTargetEnemy = nullptr;
+						LastSoftTargetActor = nullptr;
+					}
+				}
+				else
+				{
+					SoftTargetActor = nullptr;
+					SoftTargetEnemy = nullptr;
+					LastSoftTargetActor = nullptr;
+				}
+			}
+			else
+			{
+				SoftTargetActor = nullptr;
+				SoftTargetEnemy = nullptr;
+				//LastSoftTargetActor = nullptr;
+			}
 		}
 	}
 }
@@ -786,11 +864,17 @@ void ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation()
 	{
 		if (SoftTargetEnemy->GetState() != ECharacterStates::Death)
 		{
+			// Cache the control rotation
+			FRotator CachedControlRotation = GetController()->GetControlRotation();
+
 			FRotator StartRotation(GetActorRotation());
 			FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SoftTargetActor->GetActorLocation()));
 			FRotator TargetRotator(StartRotation.Pitch, FindLookAtRot.Yaw, StartRotation.Roll);
 			FRotator AttackRotation = FMath::RInterpTo(StartRotation, TargetRotator, GetWorld()->GetDeltaSeconds(), SpeedOfSoftRotation);
 			SetActorRotation(AttackRotation);
+			
+			// Reapply cached control rotation to keep the camera steady
+			GetController()->SetControlRotation(CachedControlRotation);
 		}
 		else
 		{

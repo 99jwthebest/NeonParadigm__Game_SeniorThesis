@@ -54,6 +54,10 @@ void EmptyLinkFunctionForGeneratedCodeDamageComponent() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ImpactEffect_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ImpactEffect;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PerfectParticle_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PerfectParticle;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -125,6 +129,14 @@ void EmptyLinkFunctionForGeneratedCodeDamageComponent() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDamageComponent_Statics::NewProp_ImpactEffect = { "ImpactEffect", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UDamageComponent, ImpactEffect), Z_Construct_UClass_UParticleSystem_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UDamageComponent_Statics::NewProp_ImpactEffect_MetaData), Z_Construct_UClass_UDamageComponent_Statics::NewProp_ImpactEffect_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDamageComponent_Statics::NewProp_PerfectParticle_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Effects" },
+		{ "ModuleRelativePath", "Components/DamageComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDamageComponent_Statics::NewProp_PerfectParticle = { "PerfectParticle", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UDamageComponent, PerfectParticle), Z_Construct_UClass_UParticleSystem_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UDamageComponent_Statics::NewProp_PerfectParticle_MetaData), Z_Construct_UClass_UDamageComponent_Statics::NewProp_PerfectParticle_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UDamageComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDamageComponent_Statics::NewProp_HR_Right,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDamageComponent_Statics::NewProp_HR_Left,
@@ -132,6 +144,7 @@ void EmptyLinkFunctionForGeneratedCodeDamageComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDamageComponent_Statics::NewProp_HR_Knockdown,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDamageComponent_Statics::NewProp_HR_Knockback,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDamageComponent_Statics::NewProp_ImpactEffect,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDamageComponent_Statics::NewProp_PerfectParticle,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UDamageComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UDamageComponent>::IsAbstract,
@@ -171,9 +184,9 @@ void EmptyLinkFunctionForGeneratedCodeDamageComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_DamageComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UDamageComponent, UDamageComponent::StaticClass, TEXT("UDamageComponent"), &Z_Registration_Info_UClass_UDamageComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UDamageComponent), 939295111U) },
+		{ Z_Construct_UClass_UDamageComponent, UDamageComponent::StaticClass, TEXT("UDamageComponent"), &Z_Registration_Info_UClass_UDamageComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UDamageComponent), 1953911649U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_DamageComponent_h_868744670(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_DamageComponent_h_1706623997(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_DamageComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_DamageComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
