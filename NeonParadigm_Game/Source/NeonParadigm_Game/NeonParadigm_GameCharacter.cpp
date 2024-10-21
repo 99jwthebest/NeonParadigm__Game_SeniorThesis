@@ -194,7 +194,7 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 		// Parry
 		EnhancedInputComponent->BindAction(ParryAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ParryInput);
-
+		
 		// Rage
 		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
 
@@ -208,7 +208,7 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 void ANeonParadigm_GameCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementVector = Value.Get<FVector2D>();
 	
 	if (Controller != nullptr)
 	{
@@ -225,14 +225,21 @@ void ANeonParadigm_GameCharacter::Move(const FInputActionValue& Value)
 		// add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
+		/*const FInputActionInstance& Instance;
+		Instance.Get*/
 	}
+}
+
+FVector2D ANeonParadigm_GameCharacter::GetMoveInputValue()
+{
+	return MovementVector;
 }
 
 void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
-
+	
 	if (Controller != nullptr)
 	{
 		if (!bIsTargeting)
@@ -761,7 +768,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; //ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; //ForDuration
 			// Output hit result
 			FHitResult OutHit2;
 			// Ignore self

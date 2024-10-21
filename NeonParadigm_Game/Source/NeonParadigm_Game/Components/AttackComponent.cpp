@@ -58,8 +58,15 @@ void UAttackComponent::LightAttackEvent()
 {
 	if (CanAttack())
 	{
-		ResetHeavyAttack();
-		PerformLightAttack(LightAttackIndex);
+		if (!DetermineDesiredAttack())
+		{
+			ResetHeavyAttack();
+			PerformLightAttack(LightAttackIndex);
+		}
+		else
+		{
+
+		}
 	}
 }
 
@@ -318,5 +325,67 @@ void UAttackComponent::FindNotifyTriggerTime(UAnimMontage* Montage, FName Notify
 float UAttackComponent::GetNotifyTriggerTime()
 {
 	return NotifyTriggerTime;
+}
+
+bool UAttackComponent::DetermineDesiredAttack()
+{
+
+	MyCharacter->GetMoveInputValue().Y;
+	MyCharacter->GetMoveInputValue().X;
+
+	// he is only allowing it when targeting but i need it to work when it is also not targetting. *******
+
+	if (MyCharacter->GetMoveInputValue().Y <= -0.5f) // For Air Begin Attack
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CAN LAUNCH!!!!"));
+		return bAnythingPlayed = true;
+	}
+
+	return bAnythingPlayed = false;
+
+}
+
+void UAttackComponent::LaunchAttack()
+{
+	//if (AttackIndex >= LightAttackMontages.Num())
+	//{
+	//	//Reset Light Attack Index If Index Is Equal Or Greater Than Length Of Light Attack Sequence
+	//	LightAttackIndex = 0;
+	//}
+
+	if (LightAttackMontages.IsValidIndex(LightAttackIndex))
+	{
+		UAnimMontage* Montage = LightAttackMontages[LightAttackIndex];
+		// Find the notify trigger time
+		FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
+		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
+		MyCharacter->TestRhythmDelayEvent();
+
+		if (IsValid(Montage))
+		{
+			UAnimMontage* LightAttackMontage = Montage;
+			CharacterState->SetState(ECharacterStates::Attack);
+			AttackMovement(5.0f);
+			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
+			// Log the impact time for debugging
+			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
+			LightAttackIndex++;
+			if (LightAttackIndex >= LightAttackMontages.Num())
+			{
+				//Reset Light Attack Index If Index Becomes Equal Or Greater Than Light Attack Sequence
+				LightAttackIndex = 0;
+				return;
+			}
+			else
+			{
+				return;
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+			return;
+		}
+	}
 }
 

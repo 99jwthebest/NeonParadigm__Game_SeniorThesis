@@ -47,6 +47,9 @@ public:
 	void FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName);
 	float GetNotifyTriggerTime();
 
+	bool DetermineDesiredAttack();
+	void LaunchAttack();
+
 
 
 	UPROPERTY(VisibleAnywhere)
@@ -71,4 +74,6 @@ private:
 	TArray<UAnimMontage*> HeavyAttackMontages;
 
 	float NotifyTriggerTime;
+
+	bool bAnythingPlayed;
 };

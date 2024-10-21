@@ -154,6 +154,8 @@ protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
+	FVector2D MovementVector;
+
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
@@ -191,6 +193,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FVector2D GetMoveInputValue();
 
 private:
 
