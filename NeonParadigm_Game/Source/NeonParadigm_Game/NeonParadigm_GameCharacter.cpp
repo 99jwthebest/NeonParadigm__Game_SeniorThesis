@@ -4,6 +4,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/Controller.h"
@@ -85,7 +86,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	bIsTargeting = false;
 
 	// SetCurrentAnimTimeDelay(1.0f);  just for testing purposes
-
+	TimelineComponent = CreateDefaultSubobject<UTimelineComponent>("Timeline Component");
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -93,7 +94,13 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	if (SoftTargetCurve)
+	{
+		FOnTimelineFloat TimelineCallback;
+		TimelineCallback.BindUFunction(this, FName("SoftTargetingTimelineUpdated"));
 
+		TimelineComponent->AddInterpFloat(SoftTargetCurve, TimelineCallback);
+	}
 
 	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
 	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
@@ -140,6 +147,8 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 					FRotator NewRotation = FMath::RInterpTo(currentRotation, TargetRot, RDeltaTime, CameraRotationSpeed);
 
 					GetController()->SetControlRotation(NewRotation);
+					UE_LOG(LogTemp, Warning, TEXT("rotating Camera"));
+
 				}
 				else
 				{
@@ -602,23 +611,24 @@ void ANeonParadigm_GameCharacter::RotateToTarget()
 	{
 		StopRotateToTargetTimer();
 		GetWorld()->GetTimerManager().SetTimer(TimerForRotationToTarget, this, &ANeonParadigm_GameCharacter::UpdateCharacterRotation, 0.01f, true); // 0.0167f
+		return;
 	}
-	else
+	
+	if (SoftTargetActor->IsValidLowLevel())
 	{
-		if (SoftTargetActor->IsValidLowLevel())
+		ANP_BaseEnemy* TempSoftTargetEnemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
+		if (TempSoftTargetEnemy)
 		{
-			ANP_BaseEnemy* TempSoftTargetEnemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
-			if (TempSoftTargetEnemy)
+			if (TempSoftTargetEnemy->GetState() != ECharacterStates::Death)
 			{
-				if (TempSoftTargetEnemy->GetState() != ECharacterStates::Death)
-				{
-					SoftTargetEnemy = TempSoftTargetEnemy;
-					StopRotationToSoftTargetTimer();
-					GetWorld()->GetTimerManager().SetTimer(TimerForSoftRotationToTarget, this, &ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation, 0.01f, true); // 0.0167f
-				}
+				SoftTargetEnemy = TempSoftTargetEnemy;
+				StopRotationToSoftTargetTimer();
+				//GetWorld()->GetTimerManager().SetTimer(TimerForSoftRotationToTarget, this, &ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation, 0.01f, true); // 0.0167f
+				TimelineComponent->PlayFromStart();
 			}
 		}
 	}
+	
 }
 
 bool ANeonParadigm_GameCharacter::GetIsTargeting()
@@ -854,6 +864,8 @@ AActor* ANeonParadigm_GameCharacter::GetSoftTargetActor()
 
 void ANeonParadigm_GameCharacter::StopRotationToSoftTargetTimer()
 {
+	SoftTargetLerpAmt = 0.f;
+	UE_LOG(LogTemp, Warning, TEXT("rotating changed"))
 	GetWorld()->GetTimerManager().ClearTimer(TimerForSoftRotationToTarget); // this might not work
 }
 
@@ -873,17 +885,16 @@ void ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation()
 	{
 		if (SoftTargetEnemy->GetState() != ECharacterStates::Death)
 		{
-			// Cache the control rotation
-			FRotator CachedControlRotation = GetController()->GetControlRotation();
-
+			
+			SoftTargetLerpAmt += 0.1f;
 			FRotator StartRotation(GetActorRotation());
 			FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SoftTargetActor->GetActorLocation()));
 			FRotator TargetRotator(StartRotation.Pitch, FindLookAtRot.Yaw, StartRotation.Roll);
-			FRotator AttackRotation = FMath::RInterpTo(StartRotation, TargetRotator, GetWorld()->GetDeltaSeconds(), SpeedOfSoftRotation);
+			FRotator AttackRotation = UKismetMathLibrary::RLerp(StartRotation, TargetRotator, SoftTargetLerpAmt, false);
+			UE_LOG(LogTemp, Warning, TEXT("rotating to: %s"), *TargetRotator.ToString())
 			SetActorRotation(AttackRotation);
 			
-			// Reapply cached control rotation to keep the camera steady
-			GetController()->SetControlRotation(CachedControlRotation);
+			
 		}
 		else
 		{
@@ -939,79 +950,80 @@ void ANeonParadigm_GameCharacter::SaveDodge()
 
 void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (!bEnabledIFrames)
+	if (bEnabledIFrames)
+		return;
+	
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+
+	if (!CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
 	{
-		TArray<ECharacterStates> CurrentCharacterState;
-		CurrentCharacterState.Add(ECharacterStates::Parry);
+		UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-		if (!CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		CurrentHealth -= Damage;
+
+		if (CurrentHealth > 0.0f)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
-
-			CurrentHealth -= Damage;
-
-			if (CurrentHealth > 0.0f)
+			const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
+			if (NP_DamageType)
 			{
-				const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
-				if (NP_DamageType)
-				{
-					// Successfully cast to UNP_DamageType
-					// You can now access members or functions of UNP_DamageType
-					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
-					//NP_DamageType->DamageType;
-				}
-				else
-				{
-					// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
-					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
-
-				}
-
-				// Step 2: Ensure the instance is valid
-				if (IsValid(NP_DamageType))
-				{
-					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
-
-					if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
-					{
-						CharacterState->SetState(ECharacterStates::Disabled);
-						PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
-					}
-					else
-					{
-						UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
-
-					}
-					// You can now use the value of Damage as needed
-					//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
-				}
+				// Successfully cast to UNP_DamageType
+				// You can now access members or functions of UNP_DamageType
+				UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
+				//NP_DamageType->DamageType;
 			}
 			else
 			{
-				PerformDeath();
+				// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
+				UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
+
+			}
+
+			// Step 2: Ensure the instance is valid
+			if (IsValid(NP_DamageType))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
+
+				if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
+				{
+					CharacterState->SetState(ECharacterStates::Disabled);
+					PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
+
+				}
+				// You can now use the value of Damage as needed
+				//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
 			}
 		}
 		else
 		{
-			ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(DamageCauser);
-			if (Enemy)
-			{
-				Enemy->Parried();
-
-				FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Enemy->GetActorLocation()));
-
-				//GetController()->SetControlRotation(TargetRot);
-				SetActorRotation(TargetRot);
-				Counter(false);
-
-			}
-			else
-			{
-
-				ParryProjectile();
-			}
+			PerformDeath();
 		}
 	}
+	else
+	{
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(DamageCauser);
+		if (Enemy)
+		{
+			Enemy->Parried();
+
+			FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Enemy->GetActorLocation()));
+
+			//GetController()->SetControlRotation(TargetRot);
+			SetActorRotation(TargetRot);
+			Counter(false);
+
+		}
+		else
+		{
+
+			ParryProjectile();
+		}
+	}
+	
 }
 
 void ANeonParadigm_GameCharacter::PerformDeath()
@@ -1312,5 +1324,42 @@ void ANeonParadigm_GameCharacter::SetPerfectBeatHit(bool bPerfectHit)
 bool ANeonParadigm_GameCharacter::IsPerfectBeatHit()
 {
 	return bPerfectBeatHit;
+}
+
+void ANeonParadigm_GameCharacter::SoftTargetingTimelineUpdated(float Alpha)
+{
+	UE_LOG(LogTemp, Warning, TEXT("alpha is now: %f"), Alpha);
+	if (SoftTargetActor->IsValidLowLevel())
+	{
+		if (SoftTargetEnemy->GetState() != ECharacterStates::Death)
+		{
+			SoftTargetLerpAmt += 0.1f;
+			FRotator StartRotation(GetActorRotation());
+			FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SoftTargetActor->GetActorLocation()));
+			FRotator TargetRotator(StartRotation.Pitch, FindLookAtRot.Yaw, StartRotation.Roll);
+			FRotator AttackRotation = UKismetMathLibrary::RLerp(StartRotation, TargetRotator, Alpha, false);
+			UE_LOG(LogTemp, Warning, TEXT("rotating to: %s"), *TargetRotator.ToString())
+			SetActorRotation(AttackRotation);
+		}
+		else
+		{
+			DurationOfSoftRotation = 0;
+			UE_LOG(LogTemp, Warning, TEXT("Duration Of Soft Rotation Reset Final: %d"), DurationOfSoftRotation);
+			StopRotationToSoftTargetTimer();
+
+			SoftTargetEnemy = nullptr;
+			SoftTargetActor = nullptr;
+		}
+	}
+	else
+	{
+		DurationOfSoftRotation = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Soft Rotation Reset Final: %d"), DurationOfSoftRotation);
+		StopRotationToSoftTargetTimer();
+
+		SoftTargetEnemy = nullptr;
+		SoftTargetActor = nullptr;
+
+	}
 }
 

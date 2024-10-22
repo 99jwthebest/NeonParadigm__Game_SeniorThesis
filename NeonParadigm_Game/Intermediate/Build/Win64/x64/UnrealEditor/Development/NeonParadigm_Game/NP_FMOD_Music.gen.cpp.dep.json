@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_fmod_music.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "Includes": [
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\fmod\\np_fmod_music.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_fmod_music.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

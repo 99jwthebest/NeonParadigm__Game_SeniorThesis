@@ -321,5 +321,14 @@ public:
 	void SetPerfectBeatHit(bool bPerfectHit);
 	bool IsPerfectBeatHit();
 
+private:
+	float SoftTargetLerpAmt = 0.f;
+	class UTimelineComponent* TimelineComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Targeting")
+	UCurveFloat* SoftTargetCurve;
+
+	UFUNCTION()
+	void SoftTargetingTimelineUpdated(float Alpha);
 };
 
