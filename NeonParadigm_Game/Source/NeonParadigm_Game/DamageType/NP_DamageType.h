@@ -19,6 +19,7 @@ enum class EDamageTypes : uint8
 	Middle, //UMETA(DisplayName = "Option 4"),
 	Knockdown, //UMETA(DisplayName = "Option 5"),
 	Knockback, //UMETA(DisplayName = "Option 5"),
+	Launch, //UMETA(DisplayName = "Option 5"),
 };
 
 UCLASS()

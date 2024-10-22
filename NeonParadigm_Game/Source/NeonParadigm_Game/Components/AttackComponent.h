@@ -49,7 +49,9 @@ public:
 
 	bool DetermineDesiredAttack();
 	void LaunchAttack();
-
+	void LaunchPlayerIntoAir();
+	void MovePlayerIntoAir();
+	void StopLaunchMovement();
 
 
 	UPROPERTY(VisibleAnywhere)
@@ -79,4 +81,10 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* LaunchAnimMontage;
+
+	FTimerHandle TimerForLaunchMovement;
+	FVector LaunchLocation;
+	float SpeedOfLaunch;
+	int DurationOfLaunch;
+
 };

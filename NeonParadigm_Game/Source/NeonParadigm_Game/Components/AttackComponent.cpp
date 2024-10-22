@@ -22,7 +22,9 @@ UAttackComponent::UAttackComponent()
 	DurationOfMovement = 0;
 	LightAttackIndex = 0;
 	HeavyAttackIndex = 0;
-	// ...
+	SpeedOfLaunch = 10.0f;
+	DurationOfLaunch = 0;
+
 }
 
 
@@ -361,6 +363,7 @@ void UAttackComponent::LaunchAttack()
 		//AttackMovement(5.0f); // We probably don't need it!!!! ****** 
 		//MyCharacter->PlayAnimMontage(LaunchAnimMontage, MyCharacter->GetCurrentAnimPlayRate());
 		MyCharacter->PlayAnimMontage(LaunchAnimMontage, 1.0f);
+		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
 	}
 	else
@@ -373,3 +376,33 @@ void UAttackComponent::LaunchAttack()
 			
 }
 
+void UAttackComponent::LaunchPlayerIntoAir()
+{
+	LaunchLocation = MyCharacter->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f); // May have to lower height for players air launch attack *********
+
+	GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::MovePlayerIntoAir , 0.01f, true); // 0.0167f
+
+}
+
+void UAttackComponent::MovePlayerIntoAir()
+{
+	DurationOfLaunch++;
+	UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch: %d"), DurationOfLaunch);
+
+	if (DurationOfLaunch >= 25)  // may have to change this to 50 or more
+	{
+		StopLaunchMovement();
+		DurationOfLaunch = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch Reset: %d"), DurationOfLaunch);
+	}
+	float Alpha = 0.1f;  // You can adjust this based on how fast you want the rotation
+	// Linearly interpolate between the start and launch locations based on progress
+	FVector LaunchMovementLocation = FMath::Lerp(MyCharacter->GetActorLocation(), LaunchLocation, Alpha);
+	//FVector LaunchMovementLocation = FMath::VInterpTo(MyCharacter->GetActorLocation(), LaunchLocation, GetWorld()->GetDeltaSeconds(), SpeedOfLaunch);
+	MyCharacter->SetActorLocation(LaunchMovementLocation);
+}
+
+void UAttackComponent::StopLaunchMovement()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
+}

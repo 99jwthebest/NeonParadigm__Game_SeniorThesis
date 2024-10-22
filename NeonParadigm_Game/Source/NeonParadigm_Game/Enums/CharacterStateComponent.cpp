@@ -4,6 +4,7 @@
 #include "NeonParadigm_Game/Enums/CharacterStateComponent.h"
 #include "NeonParadigm_Game/Components/AttackComponent.h"
 #include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 
@@ -76,6 +77,7 @@ void UCharacterStateComponent::ResetState()
 	AttackComp->ResetHeavyAttack();
 	MyCharacter->ResetTimelines();
 	MyCharacter->ResetSoftLockTarget();
+	MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
 	MyCharacter->SetIsDodgeSaved(false);
 	MyCharacter->ResetParry();
 }

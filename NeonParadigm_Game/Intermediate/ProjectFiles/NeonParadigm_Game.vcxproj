@@ -352,6 +352,7 @@
     <None Include="..\..\NeonParadigm_Game.uproject"/>
     <None Include="..\..\Source\NeonParadigm_Game.Target.cs"/>
     <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs"/>
+    <None Include="..\..\.vsconfig"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>
     <None Include="..\..\Config\DefaultEngine.ini"/>
@@ -746,6 +747,12 @@
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.h"/>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_LaunchPlayer.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_3)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_3)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_LaunchPlayer.h"/>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_RageComplete.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_3)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_3)</ForcedIncludeFiles>
