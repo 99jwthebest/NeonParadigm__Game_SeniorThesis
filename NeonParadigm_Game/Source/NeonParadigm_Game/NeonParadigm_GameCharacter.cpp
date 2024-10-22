@@ -334,9 +334,11 @@ void ANeonParadigm_GameCharacter::Jump()
 void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded blueprint is called Landed in C++
 {
 	ResetDoubleJump();
-	if (CharacterState->GetOnLandReset())
+	if (CharacterState->GetOnLandReset())  // On Landed Reset
 	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		CharacterState->SetOnLandReset(false);
+		AttackComp->ResetLaunched();
 		CharacterState->ResetState();
 	}
 }

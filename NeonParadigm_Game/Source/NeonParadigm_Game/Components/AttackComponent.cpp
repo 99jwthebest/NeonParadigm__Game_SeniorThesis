@@ -66,12 +66,12 @@ void UAttackComponent::LightAttackEvent()
 			ResetHeavyAttack();
 			PerformLightAttack(LightAttackIndex);
 		}
-		else
+	}
+	else
+	{
+		if (CanAerialAttack()) 
 		{
-			if (CanAerialAttack()) 
-			{
-				PerformAerialLightAttack(LightAttackIndex);
-			}
+			PerformAerialLightAttack(LightAttackIndex);
 		}
 	}
 }
@@ -87,7 +87,7 @@ bool UAttackComponent::CanAttack()
 	CurrentCharacterState.Add(ECharacterStates::Parry);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !MyCharacter->GetCharacterMovement()->IsFalling();// && !bLaunched;
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !MyCharacter->GetCharacterMovement()->IsFalling() && !bLaunched && !MyCharacter->GetCharacterMovement()->IsFlying();
 	
 }
 
@@ -467,5 +467,10 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 
 void UAttackComponent::ResetLightAerialAttack()
 {
-	bCanAerialAttack = false;
+	bCanAerialAttack = true;
+}
+
+void UAttackComponent::ResetLaunched()
+{
+	bLaunched = false;
 }
