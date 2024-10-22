@@ -334,6 +334,11 @@ void ANeonParadigm_GameCharacter::Jump()
 void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded blueprint is called Landed in C++
 {
 	ResetDoubleJump();
+	if (CharacterState->GetOnLandReset())
+	{
+		CharacterState->SetOnLandReset(false);
+		CharacterState->ResetState();
+	}
 }
 
 void ANeonParadigm_GameCharacter::ResetDoubleJump()
@@ -950,80 +955,79 @@ void ANeonParadigm_GameCharacter::SaveDodge()
 
 void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (bEnabledIFrames)
-		return;
-	
-	TArray<ECharacterStates> CurrentCharacterState;
-	CurrentCharacterState.Add(ECharacterStates::Parry);
-
-	if (!CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	if (!bEnabledIFrames)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Parry);
 
-		CurrentHealth -= Damage;
-
-		if (CurrentHealth > 0.0f)
+		if (!CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
 		{
-			const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
-			if (NP_DamageType)
-			{
-				// Successfully cast to UNP_DamageType
-				// You can now access members or functions of UNP_DamageType
-				UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
-				//NP_DamageType->DamageType;
-			}
-			else
-			{
-				// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
-				UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
+			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-			}
+			CurrentHealth -= Damage;
 
-			// Step 2: Ensure the instance is valid
-			if (IsValid(NP_DamageType))
+			if (CurrentHealth > 0.0f)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
-
-				if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
+				const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
+				if (NP_DamageType)
 				{
-					CharacterState->SetState(ECharacterStates::Disabled);
-					PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
+					// Successfully cast to UNP_DamageType
+					// You can now access members or functions of UNP_DamageType
+					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
+					//NP_DamageType->DamageType;
 				}
 				else
 				{
-					UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
+					// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
+					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
 
 				}
-				// You can now use the value of Damage as needed
-				//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
+
+				// Step 2: Ensure the instance is valid
+				if (IsValid(NP_DamageType))
+				{
+					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
+
+					if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
+					{
+						CharacterState->SetState(ECharacterStates::Disabled);
+						PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
+					}
+					else
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Invalid Hit Reaction Montage!!"));
+
+					}
+					// You can now use the value of Damage as needed
+					//UE_LOG(LogTemp, Log, TEXT("Damage Type: %f"), Damage);
+				}
+			}
+			else
+			{
+				PerformDeath();
 			}
 		}
 		else
 		{
-			PerformDeath();
+			ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(DamageCauser);
+			if (Enemy)
+			{
+				Enemy->Parried();
+
+				FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Enemy->GetActorLocation()));
+
+				//GetController()->SetControlRotation(TargetRot);
+				SetActorRotation(TargetRot);
+				Counter(false);
+
+			}
+			else
+			{
+
+				ParryProjectile();
+			}
 		}
 	}
-	else
-	{
-		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(DamageCauser);
-		if (Enemy)
-		{
-			Enemy->Parried();
-
-			FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Enemy->GetActorLocation()));
-
-			//GetController()->SetControlRotation(TargetRot);
-			SetActorRotation(TargetRot);
-			Counter(false);
-
-		}
-		else
-		{
-
-			ParryProjectile();
-		}
-	}
-	
 }
 
 void ANeonParadigm_GameCharacter::PerformDeath()

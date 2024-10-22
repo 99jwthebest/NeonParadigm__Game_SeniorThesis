@@ -72,14 +72,35 @@ bool UCharacterStateComponent::IsCurrentStateEqualToAny(const TArray<ECharacterS
 
 void UCharacterStateComponent::ResetState()
 {
-	SetState(ECharacterStates::None);
-	AttackComp->ResetLightAttack();
-	AttackComp->ResetHeavyAttack();
-	MyCharacter->ResetTimelines();
-	MyCharacter->ResetSoftLockTarget();
-	MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
-	MyCharacter->SetIsDodgeSaved(false);
-	MyCharacter->ResetParry();
+	if (MyCharacter->GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Falling ||
+		MyCharacter->GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
+	{
+		bOnLandReset = true;
+		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	else
+	{
+		SetState(ECharacterStates::None);
+		AttackComp->ResetLightAttack();
+		AttackComp->ResetHeavyAttack();
+		MyCharacter->ResetTimelines();
+		MyCharacter->ResetSoftLockTarget();
+		MyCharacter->SetIsDodgeSaved(false);
+		AttackComp->ResetLightAerialAttack();
+		MyCharacter->ResetParry();
+	}
+
+
+}
+
+bool UCharacterStateComponent::GetOnLandReset()
+{
+	return bOnLandReset;
+}
+
+void UCharacterStateComponent::SetOnLandReset(bool SetOnlandReset)
+{
+	bOnLandReset = SetOnlandReset;
 }
 
 

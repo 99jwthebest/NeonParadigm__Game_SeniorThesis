@@ -53,6 +53,10 @@ public:
 	void MovePlayerIntoAir();
 	void StopLaunchMovement();
 
+	bool CanAerialAttack();
+	void PerformAerialLightAttack(int AttackIndex);
+	void ResetLightAerialAttack();
+
 
 	UPROPERTY(VisibleAnywhere)
 	ANeonParadigm_GameCharacter* MyCharacter;
@@ -86,5 +90,9 @@ private:
 	FVector LaunchLocation;
 	float SpeedOfLaunch;
 	int DurationOfLaunch;
+	bool bLaunched;
+	bool bCanAerialAttack;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	TArray<UAnimMontage*> LightAerialAttackMontages;
 };

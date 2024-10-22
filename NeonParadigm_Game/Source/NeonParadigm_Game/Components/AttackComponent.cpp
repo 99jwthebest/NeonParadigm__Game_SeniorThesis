@@ -24,7 +24,8 @@ UAttackComponent::UAttackComponent()
 	HeavyAttackIndex = 0;
 	SpeedOfLaunch = 10.0f;
 	DurationOfLaunch = 0;
-
+	bLaunched = false;
+	bCanAerialAttack = true;
 }
 
 
@@ -67,7 +68,10 @@ void UAttackComponent::LightAttackEvent()
 		}
 		else
 		{
-
+			if (CanAerialAttack()) 
+			{
+				PerformAerialLightAttack(LightAttackIndex);
+			}
 		}
 	}
 }
@@ -83,7 +87,7 @@ bool UAttackComponent::CanAttack()
 	CurrentCharacterState.Add(ECharacterStates::Parry);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !MyCharacter->GetCharacterMovement()->IsFalling();
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !MyCharacter->GetCharacterMovement()->IsFalling();// && !bLaunched;
 	
 }
 
@@ -364,7 +368,8 @@ void UAttackComponent::LaunchAttack()
 		//MyCharacter->PlayAnimMontage(LaunchAnimMontage, MyCharacter->GetCurrentAnimPlayRate());
 		MyCharacter->PlayAnimMontage(LaunchAnimMontage, 1.0f);
 		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
-
+		bLaunched = true;
+		LightAttackIndex = 0;
 	}
 	else
 	{
@@ -405,4 +410,62 @@ void UAttackComponent::MovePlayerIntoAir()
 void UAttackComponent::StopLaunchMovement()
 {
 	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
+}
+
+bool UAttackComponent::CanAerialAttack()
+{
+	return bCanAerialAttack && bLaunched;
+}
+
+void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
+{
+	if (AttackIndex >= LightAerialAttackMontages.Num())
+	{
+		//Reset Light Attack Index If Index Is Equal Or Greater Than Length Of Light Attack Sequence
+		LightAttackIndex = 0;
+	}
+
+	if (LightAerialAttackMontages.IsValidIndex(LightAttackIndex))
+	{
+		UAnimMontage* Montage = LightAerialAttackMontages[LightAttackIndex];
+		// Find the notify trigger time
+		//FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
+		//MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
+		//MyCharacter->TestRhythmDelayEvent();
+
+		if (IsValid(Montage))
+		{
+			UAnimMontage* LightAerialAttackMontage = Montage;
+			MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+
+			CharacterState->SetState(ECharacterStates::Attack);
+			//AttackMovement(5.0f); // we probably don't need this!!!! ********
+			MyCharacter->PlayAnimMontage(LightAerialAttackMontage, 1.0f);
+			//MyCharacter->PlayAnimMontage(LightAerialAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
+			// Log the impact time for debugging
+			//UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
+			LightAttackIndex++;
+			if (LightAttackIndex >= LightAerialAttackMontages.Num())
+			{
+				//Reset Light Attack Index If Index Becomes Equal Or Greater Than Light Attack Sequence
+				LightAttackIndex = 0;
+				bCanAerialAttack = false;
+				return;
+			}
+			else
+			{
+				return;
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("LIGHT AERIAL ATTACK MONTAGE INVALID"));
+			return;
+		}
+	}
+}
+
+void UAttackComponent::ResetLightAerialAttack()
+{
+	bCanAerialAttack = false;
 }
