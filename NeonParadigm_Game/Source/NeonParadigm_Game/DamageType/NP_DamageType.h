@@ -31,8 +31,8 @@ class NEONPARADIGM_GAME_API UNP_DamageType : public UDamageType
 public:
 	EDamageTypes GetDamageType();
 
-private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DamageType, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DamageType)
 	EDamageTypes DamageType;
+private:
 
 };

@@ -9,6 +9,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Components/WidgetComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 ANP_BaseEnemy::ANP_BaseEnemy()
@@ -122,19 +124,20 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 
 	if (CurrentHealth > 0.0f)
 	{
-		// Step 1: Create or obtain an instance of UNP_DamageType
-		MyDamageType = NewObject<UNP_DamageType>(GetWorld());
-
-		/*if (MyDamageType)
+		const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
+		if (NP_DamageType)
 		{
+			// Successfully cast to UNP_DamageType
+			// You can now access members or functions of UNP_DamageType
+			UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
+			//NP_DamageType->DamageType;
+		}
+		else
+		{
+			// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
+			UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
 
 		}
-		else 
-		{
-
-			UE_LOG(LogTemp, Error, TEXT("!@!! SOmething Wrong!!!!"));
-			return;
-		}*/
 
 
 		TArray<ECharacterStates> CurrentCharacterState;
@@ -143,13 +146,13 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 		if (!IsCurrentStateEqualToAny(CurrentCharacterState)) //&& IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("ENEMY STATE IS VALId!!!!!!!!"));
-			if (IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
+			if (IsValid(GetHitReactionMontage(NP_DamageType->DamageType)))
 			{
 				SetState(ECharacterStates::Disabled);
 				UpdateCharacterRotationWhenHit(DamageCauser);
 				StopAttackMovement();
 				AttackMovement(10.0f); //15.0f  should maybe be the value
-				PlayAnimMontage(GetHitReactionMontage(MyDamageType->GetDamageType()));
+				PlayAnimMontage(GetHitReactionMontage(NP_DamageType->DamageType));
 			}
 			else
 			{
@@ -173,23 +176,35 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
 	switch (DamageType)
 	{
 		case EDamageTypes::Default:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Default"));
 			return HR_Knockback;
 
 		case EDamageTypes::Right:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Right"));
 			return HR_Right;
 
 		case EDamageTypes::Left:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Left"));
 			return HR_Left;
 
 		case EDamageTypes::Middle:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Middle"));
 			return HR_Middle;
 
 		case EDamageTypes::Knockdown:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockdown"));
 			return HR_Knockdown;
 
 		case EDamageTypes::Knockback:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback"));
 			return HR_Knockback;
+
+		case EDamageTypes::Launch:
+			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch"));
+			LaunchEnemyIntoAir();
+			return HR_Launch;
 	}
+	UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS OUTSIDE"));
 	return HR_Knockback;
 }
 
@@ -242,9 +257,11 @@ bool ANP_BaseEnemy::IsCurrentStateEqualToAny(const TArray<ECharacterStates>& Sta
 	return StatesToCheck.Contains(CurrentState);
 }
 
-void ANP_BaseEnemy::ResetState()
+void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adjust how fast the enemy falls with player.
 {
 	SetState(ECharacterStates::None);
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);  // he sets this to walking instead of flying ******???????
+
 	/*AttackComp->ResetLightAttack();
 	AttackComp->ResetHeavyAttack();*/
 }
@@ -421,4 +438,39 @@ void ANP_BaseEnemy::FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyNam
 float ANP_BaseEnemy::GetNotifyTriggerTime()
 {
 	return NotifyTriggerTime;
+}
+
+
+
+void ANP_BaseEnemy::LaunchEnemyIntoAir()
+{
+
+	LaunchLocation = GetActorLocation() + FVector(0.0f, 0.0f, 500.0f); // May have to lower height for players air launch attack *********
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+
+	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &ANP_BaseEnemy::MoveEnemyIntoAir, 0.01f, true); // 0.0167f
+
+}
+
+void ANP_BaseEnemy::MoveEnemyIntoAir()
+{
+	DurationOfLaunch++;
+	UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch: %d"), DurationOfLaunch);
+
+	if (DurationOfLaunch >= 25)  // may have to change this to 50 or more
+	{
+		StopLaunchMovement();
+		DurationOfLaunch = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch Reset: %d"), DurationOfLaunch);
+	}
+	float Alpha = 0.1f;  // You can adjust this based on how fast you want the rotation
+	// Linearly interpolate between the start and launch locations based on progress
+	FVector LaunchMovementLocation = FMath::Lerp(GetActorLocation(), LaunchLocation, Alpha);
+	//FVector LaunchMovementLocation = FMath::VInterpTo(MyCharacter->GetActorLocation(), LaunchLocation, GetWorld()->GetDeltaSeconds(), SpeedOfLaunch);
+	SetActorLocation(LaunchMovementLocation);
+}
+
+void ANP_BaseEnemy::StopLaunchMovement()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
 }

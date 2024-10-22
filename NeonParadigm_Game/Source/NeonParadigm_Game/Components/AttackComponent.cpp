@@ -380,7 +380,7 @@ void UAttackComponent::LaunchPlayerIntoAir()
 {
 	LaunchLocation = MyCharacter->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f); // May have to lower height for players air launch attack *********
 
-	GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::MovePlayerIntoAir , 0.01f, true); // 0.0167f
+	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &UAttackComponent::MovePlayerIntoAir , 0.01f, true); // 0.0167f
 
 }
 

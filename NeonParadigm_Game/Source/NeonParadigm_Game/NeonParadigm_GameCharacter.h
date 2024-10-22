@@ -133,8 +133,6 @@ public:
 
 	void ResetTimelines();
 
-	// Override the TakeDamage function
-	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	UFUNCTION()
 	void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	void PerformDeath();
@@ -260,8 +258,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* TestRhythmMontage;
 
-	UPROPERTY(Transient)  // Don't play to save Transient property, just temporary, use when generating in runtime. Hold a reference without getting garbage collected.
-	class UNP_DamageType* MyDamageType;
 
 public:
 

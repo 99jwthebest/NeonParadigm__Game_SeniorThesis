@@ -48,12 +48,15 @@ private:
 	UAnimMontage* HR_Knockdown;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Knockback;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Launch;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* ParryStaggerMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	bool bCanBeParried;
+
 
 private:
 
@@ -175,5 +178,20 @@ public:
 	void FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName);
 	UFUNCTION(BlueprintPure, Category = "Music")
 	float GetNotifyTriggerTime();
+
+
+private:
+
+	FTimerHandle TimerForLaunchMovement;
+	FVector LaunchLocation;
+	float SpeedOfLaunch;
+	int DurationOfLaunch;
+
+
+public:
+	
+	void LaunchEnemyIntoAir();
+	void MoveEnemyIntoAir();
+	void StopLaunchMovement();
 
 };

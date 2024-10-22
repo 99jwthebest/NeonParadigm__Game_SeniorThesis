@@ -131,12 +131,11 @@ void EmptyLinkFunctionForGeneratedCodeNP_DamageType() {}
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
 		{ "Category", "DamageType" },
 		{ "ModuleRelativePath", "DamageType/NP_DamageType.h" },
 	};
 #endif
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType = { "DamageType", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNP_DamageType, DamageType), Z_Construct_UEnum_NeonParadigm_Game_EDamageTypes, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_MetaData), Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_MetaData) }; // 3617866817
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType = { "DamageType", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNP_DamageType, DamageType), Z_Construct_UEnum_NeonParadigm_Game_EDamageTypes, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_MetaData), Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_MetaData) }; // 3617866817
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UNP_DamageType_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNP_DamageType_Statics::NewProp_DamageType,
@@ -184,9 +183,9 @@ void EmptyLinkFunctionForGeneratedCodeNP_DamageType() {}
 		{ EDamageTypes_StaticEnum, TEXT("EDamageTypes"), &Z_Registration_Info_UEnum_EDamageTypes, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3617866817U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UNP_DamageType, UNP_DamageType::StaticClass, TEXT("UNP_DamageType"), &Z_Registration_Info_UClass_UNP_DamageType, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNP_DamageType), 3326870935U) },
+		{ Z_Construct_UClass_UNP_DamageType, UNP_DamageType::StaticClass, TEXT("UNP_DamageType"), &Z_Registration_Info_UClass_UNP_DamageType, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNP_DamageType), 2746216219U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_385431676(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_2425702023(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_DamageType_NP_DamageType_h_Statics::EnumInfo));

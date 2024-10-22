@@ -176,23 +176,34 @@ UAnimMontage* UDamageComponent::GetHitReactionMontage(EDamageTypes DamageType)
 	switch (DamageType)
 	{
 		case EDamageTypes::Default:
-			return HR_Knockback; 
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Default"));
+			return HR_Knockback;
 
 		case EDamageTypes::Right:
-			return HR_Right; 
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Right"));
+			return HR_Right;
 
 		case EDamageTypes::Left:
-			return HR_Left; 
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Left"));
+			return HR_Left;
 
 		case EDamageTypes::Middle:
-			return HR_Middle; 
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Middle"));
+			return HR_Middle;
 
 		case EDamageTypes::Knockdown:
-			return HR_Knockdown; 
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Knockdown"));
+			return HR_Knockdown;
 
 		case EDamageTypes::Knockback:
-			return HR_Knockback; 
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Knockback"));
+			return HR_Knockback;
+
+		case EDamageTypes::Launch:
+			UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS Launch"));
+			return HR_Knockback;
 	}
+	UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS OUTSIDE"));
 	return HR_Knockback;
 }
 

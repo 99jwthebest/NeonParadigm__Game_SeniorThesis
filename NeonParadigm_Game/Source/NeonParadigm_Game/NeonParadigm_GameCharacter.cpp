@@ -93,7 +93,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
-	MyDamageType = NewObject<UNP_DamageType>(GetWorld());
+
 
 	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
 	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
@@ -110,6 +110,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	CurrentHealth = MaxHealth;
 
 	OnTakeAnyDamage.AddDynamic(this, &ANeonParadigm_GameCharacter::HandleTakeAnyDamage);
+
 }
 
 void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
@@ -936,11 +937,8 @@ void ANeonParadigm_GameCharacter::SaveDodge()
 	}
 }
 
-float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	// Call the base class implementation
-	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
-
 	if (!bEnabledIFrames)
 	{
 		TArray<ECharacterStates> CurrentCharacterState;
@@ -950,20 +948,34 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-			CurrentHealth -= DamageAmount;
+			CurrentHealth -= Damage;
 
 			if (CurrentHealth > 0.0f)
 			{
+				const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
+				if (NP_DamageType)
+				{
+					// Successfully cast to UNP_DamageType
+					// You can now access members or functions of UNP_DamageType
+					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
+					//NP_DamageType->DamageType;
+				}
+				else
+				{
+					// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
+					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
+
+				}
 
 				// Step 2: Ensure the instance is valid
-				if (IsValid(MyDamageType))
+				if (IsValid(NP_DamageType))
 				{
 					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
 
-					if (IsValid(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType())))
+					if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
 					{
 						CharacterState->SetState(ECharacterStates::Disabled);
-						PlayAnimMontage(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType()));
+						PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
 					}
 					else
 					{
@@ -1000,13 +1012,6 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 			}
 		}
 	}
-
-	return ActualDamage;
-}
-
-void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
-{
-
 }
 
 void ANeonParadigm_GameCharacter::PerformDeath()
