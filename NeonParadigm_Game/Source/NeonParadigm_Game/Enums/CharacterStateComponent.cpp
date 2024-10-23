@@ -80,14 +80,17 @@ void UCharacterStateComponent::ResetState()
 	}
 	else
 	{
-		SetState(ECharacterStates::None);
-		AttackComp->ResetLightAttack();
-		AttackComp->ResetHeavyAttack();
-		MyCharacter->ResetTimelines();
-		MyCharacter->ResetSoftLockTarget();
-		MyCharacter->SetIsDodgeSaved(false);
-		AttackComp->ResetLightAerialAttack();
-		MyCharacter->ResetParry();
+		if (GetState() != ECharacterStates::Death)
+		{
+			SetState(ECharacterStates::None);
+			AttackComp->ResetLightAttack();
+			AttackComp->ResetHeavyAttack();
+			MyCharacter->ResetTimelines();
+			MyCharacter->ResetSoftLockTarget();
+			MyCharacter->SetIsDodgeSaved(false);
+			AttackComp->ResetLightAerialAttack();
+			MyCharacter->ResetParry();
+		}
 	}
 
 

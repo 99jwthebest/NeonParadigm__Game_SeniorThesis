@@ -215,6 +215,7 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
 			case EDamageTypes::Knockback:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback AERIAL"));
 				GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling); // set to flying maybe
+				AttackMovement(40.0f); //15.0f  should maybe be the value
 				bAirKnockback = true;
 				return HR_Air_Knockback;
 
@@ -294,7 +295,7 @@ void ANP_BaseEnemy::UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter
 void ANP_BaseEnemy::SetState(ECharacterStates NewState)
 {
 
-	if (NewState != CurrentState)
+	if (NewState != CurrentState && CurrentState != ECharacterStates::Death)
 		CurrentState = NewState;
 }
 
@@ -321,7 +322,7 @@ void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adju
 		GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
 	{
 		bOnLandReset = true;
-		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking); // this is glitching when the enemy dies ****
 	}
 	else
 	{
@@ -556,4 +557,9 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 			ResetState();
 		}
 	}
+}
+
+UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
+{
+	return HR_Getup;
 }
