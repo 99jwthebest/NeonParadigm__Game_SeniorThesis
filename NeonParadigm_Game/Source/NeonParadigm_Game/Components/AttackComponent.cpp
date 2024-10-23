@@ -238,17 +238,20 @@ void UAttackComponent::PerformHeavyAttack(int AttackIndex)
 	if (HeavyAttackMontages.IsValidIndex(HeavyAttackIndex))
 	{
 		UAnimMontage* Montage = HeavyAttackMontages[HeavyAttackIndex];
+		// Find the notify trigger time
+		FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
+		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
+		MyCharacter->TestRhythmDelayEvent();
+
 		if (IsValid(Montage))
 		{
-			// Find the notify trigger time
-			FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
 			UAnimMontage* HeavyAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
 			AttackMovement(5.0f);
-			MyCharacter->PlayAnimMontage(HeavyAttackMontage);
+			MyCharacter->PlayAnimMontage(HeavyAttackMontage, MyCharacter->GetCurrentAnimTimeDelay());
+			// Log the impact time for debugging
+			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), HeavyAttackIndex, GetNotifyTriggerTime());
 			HeavyAttackIndex++;
-
-			UE_LOG(LogTemp, Error, TEXT("Heavy Attack Index Second: %d"), HeavyAttackIndex);
 
 			if (HeavyAttackIndex >= HeavyAttackMontages.Num())
 			{
