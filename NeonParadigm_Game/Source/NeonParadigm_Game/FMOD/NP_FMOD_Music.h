@@ -71,6 +71,7 @@ public:
 	void SendMusicInfoToEnemies(float TempoOfCurrentSong);
 	UFUNCTION(BlueprintCallable, Category = "Music")
 	void AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy);
-
+	UFUNCTION(BlueprintCallable, Category = "Music")
+	void SetFirstTimeBool(bool bSetFirstTime);
 
 };

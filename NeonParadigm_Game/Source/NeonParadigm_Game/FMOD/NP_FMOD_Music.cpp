@@ -140,7 +140,7 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
         if (FMODAudioComponent)
         {
 
-            if (TimesPlayed < 2)
+            if (FirstTime)
             {
                 FName ParameterName = "Music_Transition"; 
                 float UserValue = 0.0f;
@@ -155,7 +155,7 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
                 UE_LOG(LogTemp, Log, TEXT("Parameter: %s | UserValue: %f | FinalValue: %f"), *ParameterName.ToString(), UserValue, FinalValue);
 
-                TimesPlayed++;
+                //TimesPlayed++;
             }
             else
             {
@@ -172,7 +172,7 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
                 UE_LOG(LogTemp, Log, TEXT("Parameter: %s | UserValue: %f | FinalValue: %f"), *ParameterName.ToString(), UserValue, FinalValue);
 
-                TimesPlayed = 0;
+                //TimesPlayed = 0;
             }
 
         }
@@ -184,7 +184,8 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
     {
         if (FMODAudioComponent)
         {
-            TimesPlayed = 0;
+           // TimesPlayed = 0;
+            FirstTime = true;
         }
 
         UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
@@ -253,6 +254,12 @@ void ANP_FMOD_Music::AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy)
         UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
 
     }
+}
+
+void ANP_FMOD_Music::SetFirstTimeBool(bool bSetFirstTime)
+{
+    FirstTime = bSetFirstTime;
+
 }
 
 

@@ -20,6 +20,14 @@ void EmptyLinkFunctionForGeneratedCodeNP_FMOD_Music() {}
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_ANP_FMOD_Music_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NeonParadigm_Game();
 // End Cross Module References
+	DEFINE_FUNCTION(ANP_FMOD_Music::execSetFirstTimeBool)
+	{
+		P_GET_UBOOL(Z_Param_bSetFirstTime);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetFirstTimeBool(Z_Param_bSetFirstTime);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(ANP_FMOD_Music::execAddSpawnedEnemy)
 	{
 		P_GET_OBJECT(ANP_BaseEnemy,Z_Param_SpawnedEnemy);
@@ -57,6 +65,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_FMOD_Music() {}
 			{ "AddSpawnedEnemy", &ANP_FMOD_Music::execAddSpawnedEnemy },
 			{ "OnTimelineBeat", &ANP_FMOD_Music::execOnTimelineBeat },
 			{ "OnTimelineMarker", &ANP_FMOD_Music::execOnTimelineMarker },
+			{ "SetFirstTimeBool", &ANP_FMOD_Music::execSetFirstTimeBool },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -193,6 +202,46 @@ void EmptyLinkFunctionForGeneratedCodeNP_FMOD_Music() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics
+	{
+		struct NP_FMOD_Music_eventSetFirstTimeBool_Parms
+		{
+			bool bSetFirstTime;
+		};
+		static void NewProp_bSetFirstTime_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bSetFirstTime;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::NewProp_bSetFirstTime_SetBit(void* Obj)
+	{
+		((NP_FMOD_Music_eventSetFirstTimeBool_Parms*)Obj)->bSetFirstTime = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::NewProp_bSetFirstTime = { "bSetFirstTime", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(NP_FMOD_Music_eventSetFirstTimeBool_Parms), &Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::NewProp_bSetFirstTime_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::NewProp_bSetFirstTime,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "FMOD/NP_FMOD_Music.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_FMOD_Music, nullptr, "SetFirstTimeBool", nullptr, nullptr, Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::NP_FMOD_Music_eventSetFirstTimeBool_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::NP_FMOD_Music_eventSetFirstTimeBool_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(ANP_FMOD_Music);
 	UClass* Z_Construct_UClass_ANP_FMOD_Music_NoRegister()
 	{
@@ -234,6 +283,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_FMOD_Music() {}
 		{ &Z_Construct_UFunction_ANP_FMOD_Music_AddSpawnedEnemy, "AddSpawnedEnemy" }, // 3507476801
 		{ &Z_Construct_UFunction_ANP_FMOD_Music_OnTimelineBeat, "OnTimelineBeat" }, // 4125278527
 		{ &Z_Construct_UFunction_ANP_FMOD_Music_OnTimelineMarker, "OnTimelineMarker" }, // 3013220962
+		{ &Z_Construct_UFunction_ANP_FMOD_Music_SetFirstTimeBool, "SetFirstTimeBool" }, // 838663962
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_FMOD_Music_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -318,15 +368,15 @@ void EmptyLinkFunctionForGeneratedCodeNP_FMOD_Music() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ANP_FMOD_Music);
 	ANP_FMOD_Music::~ANP_FMOD_Music() {}
-	struct Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANP_FMOD_Music, ANP_FMOD_Music::StaticClass, TEXT("ANP_FMOD_Music"), &Z_Registration_Info_UClass_ANP_FMOD_Music, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_FMOD_Music), 590864808U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_ANP_FMOD_Music, ANP_FMOD_Music::StaticClass, TEXT("ANP_FMOD_Music"), &Z_Registration_Info_UClass_ANP_FMOD_Music, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_FMOD_Music), 3636352970U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_761738647(TEXT("/Script/NeonParadigm_Game"),
-		Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_643774383(TEXT("/Script/NeonParadigm_Game"),
+		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
