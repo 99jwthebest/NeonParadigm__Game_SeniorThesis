@@ -152,9 +152,16 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 				UpdateCharacterRotationWhenHit(DamageCauser);
 				StopAttackMovement();
 
-				if (!GetCharacterMovement()->IsFalling() && !GetCharacterMovement()->IsFlying())
+				if (!GetCharacterMovement()->IsFalling() && !GetCharacterMovement()->IsFlying() && 
+					NP_DamageType->DamageType != EDamageTypes::Knockback &&
+					NP_DamageType->DamageType != EDamageTypes::Knockdown) // this might need to be an or statement or something.
 				{
 					AttackMovement(10.0f); //15.0f  should maybe be the value
+				}
+				else
+				{
+					FVector SettingEnemyActorLocation (GetActorLocation().X, GetActorLocation().Y, DamageCauser->GetActorLocation().Z);  // we could have it so that the enemy's height is a little lower than the player's **********
+					SetActorLocation(SettingEnemyActorLocation, true);
 				}
 
 				PlayAnimMontage(GetHitReactionMontage(NP_DamageType->DamageType));
@@ -207,7 +214,9 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
 
 			case EDamageTypes::Knockback:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback AERIAL"));
-				return HR_Launch;
+				GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling); // set to flying maybe
+				bAirKnockback = true;
+				return HR_Air_Knockback;
 
 			case EDamageTypes::Launch:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch AERIAL"));
@@ -257,8 +266,12 @@ void ANP_BaseEnemy::PerformDeath()
 {
 	SetState(ECharacterStates::Death);
 	PlayAnimMontage(DeathMontage);
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
+
 	PerformThingsAfterDeath();
 }
 
@@ -304,11 +317,17 @@ bool ANP_BaseEnemy::IsCurrentStateEqualToAny(const TArray<ECharacterStates>& Sta
 
 void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adjust how fast the enemy falls with player.
 {
-	SetState(ECharacterStates::None);
-	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);  // he sets this to walking instead of flying ******???????
+	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Falling ||
+		GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
+	{
+		bOnLandReset = true;
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	else
+	{
+		SetState(ECharacterStates::None);
+	}
 
-	/*AttackComp->ResetLightAttack();
-	AttackComp->ResetHeavyAttack();*/
 }
 
 void ANP_BaseEnemy::OnTargeted()
@@ -518,4 +537,23 @@ void ANP_BaseEnemy::MoveEnemyIntoAir()
 void ANP_BaseEnemy::StopLaunchMovement()
 {
 	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
+}
+
+void ANP_BaseEnemy::Landed(const FHitResult& Hit)
+{
+	if (bAirKnockback)
+	{
+		bAirKnockback = false;
+		PlayAnimMontage(HR_Air_Knockback_OnLanded);
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	else
+	{
+		if (bOnLandReset)  // On Landed Reset
+		{
+			GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+			bOnLandReset = false;
+			ResetState();
+		}
+	}
 }

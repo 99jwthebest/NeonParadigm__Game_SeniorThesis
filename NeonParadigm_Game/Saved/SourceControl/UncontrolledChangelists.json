@@ -5,18 +5,13 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_NeonParadigm_Clair.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/CF_SoftTarget.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAttack_01.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAttack_02.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAttack_03.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAttack_04.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAerialAttack_01.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAerialAttack_02.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAerialAttack_03.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAerialAttack_04.uasset",
-				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/Launch/AM_LaunchAttack.uasset"
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/NP_BP_Dummy.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/HitReactions/SurpriseUppercut_UE.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/HitReactions/AM_Air_Knockback.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAerialAttack_01.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/AerialAttacks/LightAerialAttacks/AM_LightAerialAttack_03.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/HitReactions/AM_Air_Knockback_OnLanded.uasset"
 			]
 		}
 	]

@@ -50,6 +50,10 @@ private:
 	UAnimMontage* HR_Knockback;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Launch;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Air_Knockback;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Air_Knockback_OnLanded;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* ParryStaggerMontage;
@@ -186,12 +190,16 @@ private:
 	FVector LaunchLocation;
 	float SpeedOfLaunch;
 	int DurationOfLaunch;
-
+	bool bOnLandReset;
+	bool bAirKnockback;
 
 public:
 	
 	void LaunchEnemyIntoAir();
 	void MoveEnemyIntoAir();
 	void StopLaunchMovement();
+
+	virtual void Landed(const FHitResult& Hit) override;
+
 
 };

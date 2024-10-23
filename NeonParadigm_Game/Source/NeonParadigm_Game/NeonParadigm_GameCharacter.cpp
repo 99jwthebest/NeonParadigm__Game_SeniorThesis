@@ -710,7 +710,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		ActorsToIgnore.Add(this);
 		if (SoftTargetActor) ActorsToIgnore.Add(SoftTargetActor);
 		if (SoftTargetEnemy) ActorsToIgnore.Add(SoftTargetEnemy);
-		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
+		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);  // this trace is sort of glitched, it will still detect enemy even though they are dead. *******
 
 		// Debug draw type
 		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; //ForDuration
