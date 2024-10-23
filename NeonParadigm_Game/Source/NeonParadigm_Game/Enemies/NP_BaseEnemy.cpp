@@ -151,7 +151,13 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 				SetState(ECharacterStates::Disabled);
 				UpdateCharacterRotationWhenHit(DamageCauser);
 				StopAttackMovement();
-				AttackMovement(10.0f); //15.0f  should maybe be the value
+
+				if (!GetCharacterMovement()->IsFalling() && !GetCharacterMovement()->IsFlying()) // to not move in air
+				{
+					UE_LOG(LogTemp, Error, TEXT("ENEMY ATTACK MOVEMENT SHOULDN BE GETTING CALLWEEd!!!!!!!!"));
+					AttackMovement(10.0f); //15.0f  should maybe be the value
+				}
+
 				PlayAnimMontage(GetHitReactionMontage(NP_DamageType->DamageType));
 			}
 			else
@@ -173,37 +179,76 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 
 UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
 {
-	switch (DamageType)
+	if (GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying())
 	{
-		case EDamageTypes::Default:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Default"));
-			return HR_Knockback;
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
-		case EDamageTypes::Right:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Right"));
-			return HR_Right;
+		switch (DamageType)
+		{
+			case EDamageTypes::Default:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Default AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Left:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Left"));
-			return HR_Left;
+			case EDamageTypes::Right:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Right AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Middle:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Middle"));
-			return HR_Middle;
+			case EDamageTypes::Left:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Left AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Knockdown:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockdown"));
-			return HR_Knockdown;
+			case EDamageTypes::Middle:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Middle AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Knockback:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback"));
-			return HR_Knockback;
+			case EDamageTypes::Knockdown:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockdown AERIAL"));
+				return HR_Knockdown;
 
-		case EDamageTypes::Launch:
-			UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch"));
-			LaunchEnemyIntoAir();
-			return HR_Launch;
+			case EDamageTypes::Knockback:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback AERIAL"));
+				return HR_Knockback;
+
+			case EDamageTypes::Launch:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch AERIAL"));
+				return HR_Launch;
+		}
 	}
+	else
+	{
+		switch (DamageType)
+		{
+			case EDamageTypes::Default:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Default"));
+				return HR_Knockback;
+
+			case EDamageTypes::Right:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Right"));
+				return HR_Right;
+
+			case EDamageTypes::Left:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Left"));
+				return HR_Left;
+
+			case EDamageTypes::Middle:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Middle"));
+				return HR_Middle;
+
+			case EDamageTypes::Knockdown:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockdown"));
+				return HR_Knockdown;
+
+			case EDamageTypes::Knockback:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback"));
+				return HR_Knockback;
+
+			case EDamageTypes::Launch:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch"));
+				LaunchEnemyIntoAir();
+				return HR_Launch;
+		}
+	}
+
 	UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS OUTSIDE"));
 	return HR_Knockback;
 }
@@ -212,8 +257,12 @@ void ANP_BaseEnemy::PerformDeath()
 {
 	SetState(ECharacterStates::Death);
 	PlayAnimMontage(DeathMontage);
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldDynamic, ECollisionResponse::ECR_Block);
+
 	PerformThingsAfterDeath();
 }
 

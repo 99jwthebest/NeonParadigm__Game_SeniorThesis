@@ -42,7 +42,6 @@
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/DamageComponent.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/ScoreComponent.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/DamageType/NP_DamageType.cpp"
-#include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Enemies/NP_BaseEnemy.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Enemies/NP_EnemySpawner.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Enums/CharacterStateComponent.cpp"
 #include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/FMOD/NP_FMOD_Music.cpp"
