@@ -429,9 +429,9 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 	{
 		UAnimMontage* Montage = LightAerialAttackMontages[LightAttackIndex];
 		// Find the notify trigger time
-		//FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
-		//MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
-		//MyCharacter->TestRhythmDelayEvent();
+		FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
+		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
+		MyCharacter->TestRhythmDelayEvent();
 
 		if (IsValid(Montage))
 		{
@@ -440,10 +440,10 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 
 			CharacterState->SetState(ECharacterStates::Attack);
 			//AttackMovement(5.0f); // we probably don't need this!!!! ********
-			MyCharacter->PlayAnimMontage(LightAerialAttackMontage, 1.0f);
-			//MyCharacter->PlayAnimMontage(LightAerialAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
+			//MyCharacter->PlayAnimMontage(LightAerialAttackMontage, 1.0f);
+			MyCharacter->PlayAnimMontage(LightAerialAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
 			// Log the impact time for debugging
-			//UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
+			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
 			LightAttackIndex++;
 			if (LightAttackIndex >= LightAerialAttackMontages.Num())
 			{
