@@ -45,7 +45,6 @@
 			"ScoreComponent.cpp.obj",
 			"NP_DamageType.cpp.obj",
 			"NP_EnemySpawner.cpp.obj",
-			"CharacterStateComponent.cpp.obj",
 			"NP_FMOD_Music.cpp.obj",
 			"NeonParadigm_Game.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj",
@@ -55,7 +54,8 @@
 			"NP_AN_PlayGetupAM.gen.cpp.obj",
 			"NP_BaseEnemy.gen.cpp.obj",
 			"NP_AN_PlayGetupAM.cpp.obj",
-			"NP_BaseEnemy.cpp.obj"
+			"NP_BaseEnemy.cpp.obj",
+			"CharacterStateComponent.cpp.obj"
 		]
 	}
 }
