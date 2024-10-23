@@ -358,17 +358,17 @@ void UAttackComponent::LaunchAttack()
 	if (IsValid(LaunchAnimMontage))
 	{
 		// Find the notify trigger time
-		//FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
-		//MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
-		//MyCharacter->TestRhythmDelayEvent();
+		FindNotifyTriggerTime(LaunchAnimMontage, FName("NP_AN_TestRhythmPunch"));
+		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
+		MyCharacter->TestRhythmDelayEvent();
 
 
 		CharacterState->SetState(ECharacterStates::Attack);
 		//AttackMovement(5.0f); // We probably don't need it!!!! ****** 
-		//MyCharacter->PlayAnimMontage(LaunchAnimMontage, MyCharacter->GetCurrentAnimPlayRate());
-		MyCharacter->PlayAnimMontage(LaunchAnimMontage, 1.0f);
-		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 		bLaunched = true;
+		MyCharacter->PlayAnimMontage(LaunchAnimMontage, MyCharacter->GetCurrentAnimPlayRate());
+		//MyCharacter->PlayAnimMontage(LaunchAnimMontage, 1.0f);
+		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 		LightAttackIndex = 0;
 	}
 	else
@@ -383,7 +383,7 @@ void UAttackComponent::LaunchAttack()
 
 void UAttackComponent::LaunchPlayerIntoAir()
 {
-	LaunchLocation = MyCharacter->GetActorLocation() + FVector(0.0f, 0.0f, 500.0f); // May have to lower height for players air launch attack *********
+	LaunchLocation = MyCharacter->GetActorLocation() + FVector(0.0f, 0.0f, 300.0f); // May have to lower height for players air launch attack *********
 
 	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &UAttackComponent::MovePlayerIntoAir , 0.01f, true); // 0.0167f
 
@@ -473,4 +473,9 @@ void UAttackComponent::ResetLightAerialAttack()
 void UAttackComponent::ResetLaunched()
 {
 	bLaunched = false;
+}
+
+bool UAttackComponent::GetLaunched()
+{
+	return bLaunched;
 }

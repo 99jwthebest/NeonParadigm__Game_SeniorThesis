@@ -183,8 +183,16 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 	}
 }
 
-UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
+UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // ****************  
 {
+	/*if (DamageType != EDamageTypes::Launch &&
+		DamageType != EDamageTypes::Default &&
+		DamageType != EDamageTypes::Knockback &&
+		DamageType != EDamageTypes::Knockdown &&
+		DamageType != EDamageTypes::Left &&
+		DamageType != EDamageTypes::Right &&
+		DamageType != EDamageTypes::Middle)
+		return HR_Left;*/
 
 	if (GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying())
 	{
@@ -510,7 +518,7 @@ float ANP_BaseEnemy::GetNotifyTriggerTime()
 void ANP_BaseEnemy::LaunchEnemyIntoAir()
 {
 
-	LaunchLocation = GetActorLocation() + FVector(0.0f, 0.0f, 500.0f); // May have to lower height for players air launch attack *********
+	LaunchLocation = GetActorLocation() + FVector(0.0f, 0.0f, 300.0f); // May have to lower height for players air launch attack *********
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
 	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &ANP_BaseEnemy::MoveEnemyIntoAir, 0.01f, true); // 0.0167f
@@ -525,6 +533,7 @@ void ANP_BaseEnemy::MoveEnemyIntoAir()
 	if (DurationOfLaunch >= 25)  // may have to change this to 50 or more
 	{
 		StopLaunchMovement();
+		GetCharacterMovement()->GravityScale = 1.0f;   // gravity scale **********************
 		DurationOfLaunch = 0;
 		UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch Reset: %d"), DurationOfLaunch);
 	}
@@ -547,6 +556,8 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 		bAirKnockback = false;
 		PlayAnimMontage(HR_Air_Knockback_OnLanded);
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
+
 	}
 	else
 	{
@@ -555,6 +566,8 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 			GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 			bOnLandReset = false;
 			ResetState();
+			GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
+
 		}
 	}
 }

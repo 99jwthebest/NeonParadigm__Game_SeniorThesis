@@ -57,6 +57,7 @@ public:
 	void PerformAerialLightAttack(int AttackIndex);
 	void ResetLightAerialAttack();
 	void ResetLaunched();
+	bool GetLaunched();
 
 	UPROPERTY(VisibleAnywhere)
 	ANeonParadigm_GameCharacter* MyCharacter;

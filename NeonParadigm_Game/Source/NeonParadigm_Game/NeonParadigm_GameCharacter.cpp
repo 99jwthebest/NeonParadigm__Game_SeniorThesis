@@ -691,7 +691,7 @@ void ANeonParadigm_GameCharacter::UpdateCharacterRotation()
 
 void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 {
-	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f))
+	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f) || AttackComp->GetLaunched())  // This is probably not a good fix for making player snap to enemy when launching ******
 	{
 		// Trace start and end points
 		FVector StartVec = GetActorLocation();
