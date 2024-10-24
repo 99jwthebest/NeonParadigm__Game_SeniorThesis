@@ -55,6 +55,16 @@ void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 void UAttackComponent::SetSaveLightAttack(bool bSetSaveLightAttack)
 {
 	bSaveLightAttack = bSetSaveLightAttack;
+
+	if (MyCharacter->GetMesh()->GetAnimInstance()->IsAnyMontagePlaying())
+	{
+		UE_LOG(LogTemp, Log, TEXT("A montage is currently playing."));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("No montage is playing."));
+		CharacterState->SetState(ECharacterStates::None);
+	}
 }
 
 void UAttackComponent::LightAttackEvent()

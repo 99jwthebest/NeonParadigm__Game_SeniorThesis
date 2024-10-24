@@ -717,7 +717,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);  // this trace is sort of glitched, it will still detect enemy even though they are dead. *******
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; //ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; //ForDuration
 		// Output hit result
 		FHitResult OutHit;
 		// Ignore self
@@ -794,7 +794,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; //ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; //ForDuration
 			// Output hit result
 			FHitResult OutHit2;
 			// Ignore self
@@ -1270,6 +1270,8 @@ void ANeonParadigm_GameCharacter::Rage()
 
 void ANeonParadigm_GameCharacter::RageEvent()
 {
+	SetIFrames(true);
+
 	//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
 	RageParticleComponent = UGameplayStatics::SpawnEmitterAttached(
 		RageEmitter,        // The particle system you want to spawn
@@ -1310,6 +1312,7 @@ void ANeonParadigm_GameCharacter::EndRage()
 {
 	bRage = false;
 	GetMesh()->SetOverlayMaterial(nullptr);
+	SetIFrames(false);
 }
 
 bool ANeonParadigm_GameCharacter::CanRage()
