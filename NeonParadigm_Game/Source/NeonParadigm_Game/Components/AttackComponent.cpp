@@ -357,6 +357,7 @@ bool UAttackComponent::DetermineDesiredAttack()
 
 void UAttackComponent::LaunchAttack()
 {
+	MyCharacter->SoftTarget();
 
 	if (IsValid(LaunchAnimMontage))
 	{

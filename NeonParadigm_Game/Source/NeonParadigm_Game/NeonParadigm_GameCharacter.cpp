@@ -695,7 +695,7 @@ void ANeonParadigm_GameCharacter::UpdateCharacterRotation()
 
 void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 {
-	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f) || AttackComp->GetLaunched())  // This is probably not a good fix for making player snap to enemy when launching ******
+	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f))  
 	{
 		// Trace start and end points
 		FVector StartVec = GetActorLocation();
@@ -717,7 +717,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);  // this trace is sort of glitched, it will still detect enemy even though they are dead. *******
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; //ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; //ForDuration
 		// Output hit result
 		FHitResult OutHit;
 		// Ignore self
@@ -794,7 +794,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; //ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; //ForDuration
 			// Output hit result
 			FHitResult OutHit2;
 			// Ignore self
