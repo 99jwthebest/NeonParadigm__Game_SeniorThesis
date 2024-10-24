@@ -485,7 +485,7 @@ float ANP_BaseEnemy::CheckToWaitForBeat()
 
 }
 
-void ANP_BaseEnemy::FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName)
+void ANP_BaseEnemy::EnemFindNotifyTriggerTime(UAnimMontage* Montage, FString NotifyName)
 {
 	if (!Montage)
 	{
@@ -497,15 +497,19 @@ void ANP_BaseEnemy::FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyNam
 
 	for (const FAnimNotifyEvent& NotifyEvent : NotifyEvents)
 	{
-		if (NotifyEvent.Notify && NotifyEvent.Notify->GetNotifyName() == NotifyName)
+		UE_LOG(LogTemp, Log, TEXT("I'm checking Notify: %s"), *NotifyEvent.Notify->GetNotifyName());
+		FString ActualNotifyName = NotifyEvent.Notify->GetNotifyName();
+		UE_LOG(LogTemp, Log, TEXT("I'm checking Actual Notify Name: %s"), *ActualNotifyName);
+
+		if (NotifyEvent.Notify && ActualNotifyName.StartsWith(NotifyName))
 		{
 			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
-			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
+			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName, NotifyTriggerTime);
 			return;
 		}
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Notify with name %s not found in montage."), *NotifyName.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("Notify with name %s not found in montage."), *NotifyName);
 }
 
 float ANP_BaseEnemy::GetNotifyTriggerTime()
@@ -560,8 +564,12 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 		PlayAnimMontage(HR_Air_Knockback_OnLanded);
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
-		ResetAIToWorkAgain();
-		SetState(ECharacterStates::None);
+
+		if (CurrentState != ECharacterStates::Death)
+		{
+			ResetAIToWorkAgain();
+			SetState(ECharacterStates::None);
+		}
 	}
 	else
 	{
@@ -571,8 +579,12 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 			bOnLandReset = false;
 			ResetState();
 			GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
-			ResetAIToWorkAgain();
-			SetState(ECharacterStates::None);
+			
+			if (CurrentState != ECharacterStates::Death)
+			{
+				ResetAIToWorkAgain();
+				SetState(ECharacterStates::None);
+			}
 		}
 	}
 	//SetState(ECharacterStates::None);

@@ -182,7 +182,7 @@ public:
 	float CheckToWaitForBeat();
 
 	UFUNCTION(BlueprintCallable, Category = "Music")
-	void FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName);
+	void EnemFindNotifyTriggerTime(UAnimMontage* Montage, FString NotifyName);
 	UFUNCTION(BlueprintPure, Category = "Music")
 	float GetNotifyTriggerTime();
 

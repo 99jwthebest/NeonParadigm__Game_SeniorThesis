@@ -346,7 +346,7 @@ void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded bl
 		AttackComp->ResetLaunched();
 		CharacterState->ResetState();
 	}
-	//AttackComp->ResetLaunched();
+	AttackComp->ResetLaunched();  
 
 }
 

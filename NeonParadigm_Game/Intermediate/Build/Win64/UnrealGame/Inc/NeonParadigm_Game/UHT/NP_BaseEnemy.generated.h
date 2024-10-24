@@ -25,7 +25,7 @@ enum class ECharacterStates : uint8;
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execGetNotifyTriggerTime); \
-	DECLARE_FUNCTION(execFindNotifyTriggerTime); \
+	DECLARE_FUNCTION(execEnemFindNotifyTriggerTime); \
 	DECLARE_FUNCTION(execCheckToWaitForBeat); \
 	DECLARE_FUNCTION(execTestRhythmDelayEvent); \
 	DECLARE_FUNCTION(execGetCurrentAnimPlayRate); \

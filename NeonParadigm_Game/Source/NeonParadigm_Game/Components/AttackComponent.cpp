@@ -86,7 +86,7 @@ bool UAttackComponent::CanAttack()
 	CurrentCharacterState.Add(ECharacterStates::Death);
 	CurrentCharacterState.Add(ECharacterStates::Parry);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
-
+	UE_LOG(LogTemp, Log, TEXT("Is bLaunched False??: %s"), bLaunched ? TEXT("true") : TEXT("false"));
 	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !MyCharacter->GetCharacterMovement()->IsFalling() && !bLaunched && !MyCharacter->GetCharacterMovement()->IsFlying();
 	
 }
