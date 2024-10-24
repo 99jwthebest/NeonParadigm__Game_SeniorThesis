@@ -113,7 +113,8 @@ public:
 	void PerformThingsAfterDeath();
 
 	void Parried();
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void ResetAIToWorkAgain();
 
 public:
 	void UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter);

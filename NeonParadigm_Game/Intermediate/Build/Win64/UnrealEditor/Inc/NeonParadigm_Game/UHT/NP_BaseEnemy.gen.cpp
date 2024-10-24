@@ -100,6 +100,11 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	{
 		ProcessEvent(FindFunctionChecked(NAME_ANP_BaseEnemy_PerformThingsAfterDeath),NULL);
 	}
+	static FName NAME_ANP_BaseEnemy_ResetAIToWorkAgain = FName(TEXT("ResetAIToWorkAgain"));
+	void ANP_BaseEnemy::ResetAIToWorkAgain()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ANP_BaseEnemy_ResetAIToWorkAgain),NULL);
+	}
 	void ANP_BaseEnemy::StaticRegisterNativesANP_BaseEnemy()
 	{
 		UClass* Class = ANP_BaseEnemy::StaticClass();
@@ -398,6 +403,28 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "ResetAIToWorkAgain", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics
 	{
 		struct NP_BaseEnemy_eventSetCurrentAnimTimeDelay_Parms
@@ -605,6 +632,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_HandleTakeAnyDamage, "HandleTakeAnyDamage" }, // 3611324083
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny, "IsCurrentStateEqualToAny" }, // 3945352412
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_PerformThingsAfterDeath, "PerformThingsAfterDeath" }, // 3771025194
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain, "ResetAIToWorkAgain" }, // 2764731982
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay, "SetCurrentAnimTimeDelay" }, // 938796568
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_SetState, "SetState" }, // 4264504257
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent, "TestRhythmDelayEvent" }, // 1271510468
@@ -856,9 +884,9 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 3277407859U) },
+		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 345273217U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_4155541963(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_909035003(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

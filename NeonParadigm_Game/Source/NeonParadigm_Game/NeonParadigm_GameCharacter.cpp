@@ -336,6 +336,8 @@ void ANeonParadigm_GameCharacter::Jump()
 
 void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded blueprint is called Landed in C++
 {
+	Super::Landed(Hit);
+
 	ResetDoubleJump();
 	if (CharacterState->GetOnLandReset())  // On Landed Reset
 	{
@@ -344,6 +346,8 @@ void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded bl
 		AttackComp->ResetLaunched();
 		CharacterState->ResetState();
 	}
+	//AttackComp->ResetLaunched();
+
 }
 
 void ANeonParadigm_GameCharacter::ResetDoubleJump()
@@ -468,7 +472,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 	// Debug draw type
-	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; // ForDuration
+	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
 	// Output hit result
 	FHitResult OutHit;
 	// Ignore self
@@ -538,7 +542,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 		TArray<AActor*> ActorsToIgnore2;
 		ActorsToIgnore2.Add(this);
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
 		// Output hit result
 		FHitResult OutHit2;
 		// Ignore self
@@ -713,7 +717,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);  // this trace is sort of glitched, it will still detect enemy even though they are dead. *******
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; //ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; //ForDuration
 		// Output hit result
 		FHitResult OutHit;
 		// Ignore self
@@ -790,7 +794,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; //ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; //ForDuration
 			// Output hit result
 			FHitResult OutHit2;
 			// Ignore self

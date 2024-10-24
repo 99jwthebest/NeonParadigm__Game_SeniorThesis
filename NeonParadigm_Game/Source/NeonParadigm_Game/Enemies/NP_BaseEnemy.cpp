@@ -520,6 +520,7 @@ void ANP_BaseEnemy::LaunchEnemyIntoAir()
 
 	LaunchLocation = GetActorLocation() + FVector(0.0f, 0.0f, 300.0f); // May have to lower height for players air launch attack *********
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+	PerformThingsAfterDeath();
 
 	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &ANP_BaseEnemy::MoveEnemyIntoAir, 0.01f, true); // 0.0167f
 
@@ -551,13 +552,16 @@ void ANP_BaseEnemy::StopLaunchMovement()
 
 void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 {
+	Super::Landed(Hit);
+
 	if (bAirKnockback)
 	{
 		bAirKnockback = false;
 		PlayAnimMontage(HR_Air_Knockback_OnLanded);
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
-
+		ResetAIToWorkAgain();
+		SetState(ECharacterStates::None);
 	}
 	else
 	{
@@ -567,9 +571,13 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 			bOnLandReset = false;
 			ResetState();
 			GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
-
+			ResetAIToWorkAgain();
+			SetState(ECharacterStates::None);
 		}
 	}
+	//SetState(ECharacterStates::None);
+
+
 }
 
 UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
