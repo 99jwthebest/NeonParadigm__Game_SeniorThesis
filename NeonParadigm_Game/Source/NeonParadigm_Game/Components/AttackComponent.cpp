@@ -52,7 +52,7 @@ void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
-void UAttackComponent::SetSaveLightAttack(bool bSetSaveLightAttack)
+void UAttackComponent::SetSaveLightAttack(bool bSetSaveLightAttack)  // this was a temp fix to make the player be able to reset state ***********
 {
 	bSaveLightAttack = bSetSaveLightAttack;
 
