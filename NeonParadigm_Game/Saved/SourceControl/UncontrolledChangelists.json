@@ -6,6 +6,10 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/Plane.uasset",
+				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/Cylinder.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestMaps/RyanScene.umap",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/GM_HackAndSlash.uasset",
+				"C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/NP_BP_RangedEnemy.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Boss_Area/Boss_Fight_Area/SM_NEO_Boss_Fight_Room.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Boss_Area/Boss_Fight_Area/SM_NEO_Boss_Fight_Wall.uasset",
@@ -221,7 +225,6 @@
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Props/SM_PenHolder.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/T_Doors_Bars.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/M_Pillar_test.uasset",
-				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/Cylinder.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/M_Pillar.uasset",
 				"D:/Profile Redirect/cneal/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Boss_Area/Boss_Fight_Area/NEO_SM_Boss_Fight_Tentacles.uasset",
 				"D:/Profile Redirect/cneal/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/Template.uasset",
