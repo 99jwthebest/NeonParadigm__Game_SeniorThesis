@@ -87,6 +87,12 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Damage, meta = (AllowPrivateAccess = "true"))
 	UDamageComponent* DamageComp;
 
+	/** BPM Orb Spring Arm */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Mesh, meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* BPM_OrbSpringArm;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* BPM_OrbMesh;
 
 private:
 
@@ -330,5 +336,16 @@ private:
 
 	UFUNCTION()
 	void SoftTargetingTimelineUpdated(float Alpha);
+
+public:
+
+	void ToggleOrbEmission();
+	void ToggleOrbEmissionOff();
+	UStaticMeshComponent* GetBPM_OrbMesh();
+
+private:
+	UMaterialInterface* CurrentOrbMaterial;
+	UMaterialInstanceDynamic* DynOrbMaterial;
+
 };
 

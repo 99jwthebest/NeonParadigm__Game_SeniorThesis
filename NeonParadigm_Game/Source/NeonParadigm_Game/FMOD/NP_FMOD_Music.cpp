@@ -65,21 +65,6 @@ void ANP_FMOD_Music::BeginPlay()
         }
     }
 
-    //ActorInfo->OwnerActor.Get()
-    AActor* PlayerActor = PlayerCharacter->GetOwner();
-
-    FActorSpawnParameters SpawnParams;
-    FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(80.0f, 100.0f, 0.0f) + FVector(0.0f, 0.0f, 110.0f);
-    FRotator Rotation = PlayerActor->GetActorRotation();      // Rotation
-    TempActor = GetWorld()->SpawnActor<ATestActor>(TempBPMMusic, SpawnPoint, Rotation, SpawnParams);
-
-    // Attach the spawned actor to the player character
-    FAttachmentTransformRules AttachRules(EAttachmentRule::KeepWorld, true);
-
-    // Attach to the player character's root component (or any specific component)
-    TempActor->AttachToComponent(PlayerCharacter->GetRootComponent(), AttachRules);
-
-    UE_LOG(LogTemp, Log, TEXT("Spawned actor and attached to player."));
 
     //FindAllEnemies();
 }
@@ -98,13 +83,10 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
 
-    if (IsValid(TempActor))
-    {
-        // Turn on the emission when the beat hits
-        TempActor->ToggleEmission();
+    // Turn on the emission when the beat hits
+    PlayerCharacter->ToggleOrbEmission();
 
-        GetWorld()->GetTimerManager().SetTimer(TimerForBPM, TempActor, &ATestActor::ToggleEmissionOff, 0.2f, true); // 0.0167f
-    }
+    GetWorld()->GetTimerManager().SetTimer(TimerForBPM, PlayerCharacter, &ANeonParadigm_GameCharacter::ToggleOrbEmissionOff, 0.2f, true); // 0.0167f
 
     //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 

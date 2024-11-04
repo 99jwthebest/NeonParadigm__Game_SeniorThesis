@@ -87,12 +87,29 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 
 	// SetCurrentAnimTimeDelay(1.0f);  just for testing purposes
 	TimelineComponent = CreateDefaultSubobject<UTimelineComponent>("Timeline Component");
+
+	BPM_OrbSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("BPM Orb Spring Arm"));
+	BPM_OrbSpringArm->SetupAttachment(RootComponent);
+	BPM_OrbSpringArm->TargetArmLength = 200.0f;  // Temp Length, Needs to be tweaked depending on user needs.
+	BPM_OrbSpringArm->bUsePawnControlRotation = true;  // Rotate the arm based on the controller
+	BPM_OrbSpringArm->bEnableCameraLag = true;
+	BPM_OrbSpringArm->bEnableCameraRotationLag = true;
+	// Default Setting speeds, Extremely low, probably need to change.
+	BPM_OrbSpringArm->CameraLagSpeed = 1.0f;
+	BPM_OrbSpringArm->CameraRotationLagSpeed = 1.0f;
+
+	// Create BPM Music Orb
+	BPM_OrbMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BPM Orb Mesh"));
+	BPM_OrbMesh->SetupAttachment(BPM_OrbSpringArm, USpringArmComponent::SocketName);
+
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	DynOrbMaterial = BPM_OrbMesh->CreateAndSetMaterialInstanceDynamic(0);
 
 	if (SoftTargetCurve)
 	{
@@ -1377,5 +1394,42 @@ void ANeonParadigm_GameCharacter::SoftTargetingTimelineUpdated(float Alpha)
 		SoftTargetActor = nullptr;
 
 	}
+}
+
+void ANeonParadigm_GameCharacter::ToggleOrbEmission()
+{
+	// Check if the material is present in slot 0
+	CurrentOrbMaterial = BPM_OrbMesh->GetMaterial(0);
+
+	if (!CurrentOrbMaterial)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No material found on StaticMeshComponent."));
+		return;
+	}
+
+	if (DynOrbMaterial)
+	{
+		float EmissiveValue = 20.0f;  // Turn on or off the emission
+		DynOrbMaterial->SetScalarParameterValue(TEXT("EmissiveIntensity"), EmissiveValue);
+		UE_LOG(LogTemp, Warning, TEXT("YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!"));
+
+	}
+}
+
+void ANeonParadigm_GameCharacter::ToggleOrbEmissionOff()
+{
+
+	if (DynOrbMaterial)
+	{
+		float EmissiveValue = 0.0f;  // Turn on or off the emission
+		DynOrbMaterial->SetScalarParameterValue(TEXT("EmissiveIntensity"), EmissiveValue);
+		UE_LOG(LogTemp, Warning, TEXT("YEAH NOOOOOOOOOOOOO!!!!!!!"));
+
+	}
+}
+
+UStaticMeshComponent* ANeonParadigm_GameCharacter::GetBPM_OrbMesh()
+{
+	return BPM_OrbMesh;
 }
 
