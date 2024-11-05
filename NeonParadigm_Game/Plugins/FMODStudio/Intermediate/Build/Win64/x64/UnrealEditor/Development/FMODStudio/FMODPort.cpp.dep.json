@@ -1,15 +1,15 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\fmodport.cpp",
+        "Source": "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\fmodport.cpp",
         "ProvidedModule": "",
-        "PCH": "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
+        "PCH": "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
         "Includes": [
-            "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodport.h",
-            "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodasset.h",
-            "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodasset.generated.h",
-            "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodport.generated.h",
-            "d:\\profile redirect\\cneal\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmodstudiomodule.h",
+            "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodport.h",
+            "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodasset.h",
+            "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodasset.generated.h",
+            "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodport.generated.h",
+            "e:\\senior thesis\\neon\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmodstudiomodule.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\modules\\modulemanager.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\modules\\boilerplate\\moduleboilerplate.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\modules\\moduleinterface.h"
