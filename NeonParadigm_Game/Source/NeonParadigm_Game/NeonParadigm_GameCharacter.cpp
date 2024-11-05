@@ -374,17 +374,6 @@ void ANeonParadigm_GameCharacter::ResetDoubleJump()
 
 void ANeonParadigm_GameCharacter::Dodge()
 {
-	/*TSubclassOf<UNP_DamageType> DamageTypeClass = UNP_DamageType::StaticClass();
-	if (DamageTypeClass != nullptr)
-	{
-		float Damage = UGameplayStatics::ApplyDamage(this, 10.0f, GetController(), this, DamageTypeClass);
-		UE_LOG(LogTemp, Warning, TEXT("Applied %f damage to self."), Damage);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("DamageTypeClass is not valid."));
-	}*/
-
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
