@@ -121,18 +121,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
-					UGameplayStatics::SpawnEmitterAttached(
-						PerfectParticle,        
-						MyCharacter->GetMesh(),                 
-						FName("VFX_Trail"),           
-						FVector(0.0f, 0.0f, 0.0f),     
-						FRotator(0.0f, 0.0f, 0.0f),    
-						FVector(1.0f, 1.0f, 1.0f),     
-						EAttachLocation::KeepRelativeOffset,  
-						true,                          
-						EPSCPoolMethod::None,          
-						true                           
-					);
+					PerfectHitOperations();
 					ScoreComp->IncrementScore(500);
 					MyCharacter->SetPerfectBeatHit(false);
 				}
@@ -205,6 +194,26 @@ UAnimMontage* UDamageComponent::GetHitReactionMontage(EDamageTypes DamageType)
 	}
 	UE_LOG(LogTemp, Error, TEXT("PLAYER HIT REACTION IS OUTSIDE"));
 	return HR_Knockback;
+}
+
+void UDamageComponent::PerfectHitOperations()
+{
+	UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
+
+	UGameplayStatics::SpawnEmitterAttached(
+		PerfectParticle,
+		MyCharacter->GetMesh(),
+		FName("VFX_Trail"),
+		FVector(0.0f, 0.0f, 0.0f),
+		FRotator(0.0f, 0.0f, 0.0f),
+		FVector(1.0f, 1.0f, 1.0f),
+		EAttachLocation::KeepRelativeOffset,
+		true,
+		EPSCPoolMethod::None,
+		true
+	);
+
+	MyCharacter->SetPerfectBeatHit(false);
 }
 
 //void UDamageComponent::PerformDeath()

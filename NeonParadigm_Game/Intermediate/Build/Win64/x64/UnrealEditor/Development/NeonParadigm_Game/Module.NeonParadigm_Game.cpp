@@ -41,8 +41,6 @@
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_AN_SoftTarget.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_AN_TestRhythmPunch.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/AnimNotify/NP_AN_WeaponCollision.cpp"
-#include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/AttackComponent.cpp"
-#include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/DamageComponent.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/ScoreComponent.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/DamageType/NP_DamageType.cpp"
 #include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Enemies/NP_BaseEnemy.cpp"

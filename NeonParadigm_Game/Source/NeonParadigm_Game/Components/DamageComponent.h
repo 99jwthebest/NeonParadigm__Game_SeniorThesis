@@ -36,6 +36,8 @@ public:
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
 	//void PerformDeath();
 
+	void PerfectHitOperations();
+
 private:
 	
 	TArray<AActor*> HitActors;

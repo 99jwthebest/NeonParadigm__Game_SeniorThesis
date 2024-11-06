@@ -388,7 +388,7 @@ void ANeonParadigm_GameCharacter::Dodge()
 	}
 }
 
-void ANeonParadigm_GameCharacter::DodgeEvent()
+void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over this for the perfect timing, i might be causing some glitches, maybe ********
 {
 	if (CanDodge())
 	{
@@ -403,6 +403,11 @@ void ANeonParadigm_GameCharacter::DodgeEvent()
 		}
 
 		CharacterState->SetState(ECharacterStates::Dodge);
+		TestRhythmDelayEvent();
+		if (bPerfectBeatHit)
+		{
+			DamageComp->PerfectHitOperations();
+		}
 		PlayAnimMontage(DodgeMontage);
 		AttackComp->AttackMovement(15.0f); // maybe increase to 20 max
 	}
@@ -1205,11 +1210,26 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
-		SetPerfectBeatHit(true);
+		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 
 	}
-	if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
+	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was PERFECT to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
+		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+
+	}
+	else if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
 
@@ -1249,8 +1269,6 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
 
 	UE_LOG(LogTemp, Display, TEXT("Montage Length: %f"), MontageLength);
-
-
 
 }
 

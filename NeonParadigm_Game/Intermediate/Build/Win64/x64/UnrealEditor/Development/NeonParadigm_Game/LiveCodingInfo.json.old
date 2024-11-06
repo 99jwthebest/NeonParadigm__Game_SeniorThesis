@@ -44,7 +44,6 @@
 			"NP_AN_SoftTarget.cpp.obj",
 			"NP_AN_TestRhythmPunch.cpp.obj",
 			"NP_AN_WeaponCollision.cpp.obj",
-			"AttackComponent.cpp.obj",
 			"DamageComponent.cpp.obj",
 			"ScoreComponent.cpp.obj",
 			"NP_DamageType.cpp.obj",
@@ -53,9 +52,10 @@
 			"CharacterStateComponent.cpp.obj",
 			"NP_FMOD_Music.cpp.obj",
 			"NeonParadigm_Game.cpp.obj",
-			"NeonParadigm_GameCharacter.cpp.obj",
 			"NeonParadigm_GameGameMode.cpp.obj",
-			"TestActor.cpp.obj"
+			"TestActor.cpp.obj",
+			"AttackComponent.cpp.obj",
+			"NeonParadigm_GameCharacter.cpp.obj"
 		]
 	}
 }
