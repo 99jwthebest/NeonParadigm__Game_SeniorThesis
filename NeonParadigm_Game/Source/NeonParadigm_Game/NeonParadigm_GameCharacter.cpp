@@ -1055,7 +1055,7 @@ void ANeonParadigm_GameCharacter::PerformDeath()
 	CharacterState->SetState(ECharacterStates::Death);
 	PlayAnimMontage(DeathMontage);
 	DisableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
-
+	SpawnLoseMenu();
 }
 
 void ANeonParadigm_GameCharacter::Parry()
