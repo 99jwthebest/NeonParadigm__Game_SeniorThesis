@@ -238,6 +238,10 @@ public:
 	float CurrentHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
 	float MaxHealth;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
+	float CurrentRage = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
+	float MaxRage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DeathMontage;
@@ -348,6 +352,15 @@ public:
 private:
 	UMaterialInterface* CurrentOrbMaterial;
 	UMaterialInstanceDynamic* DynOrbMaterial;
+
+
+public:
+	
+	void AddToCurrentRage(float RageToAdd);
+	float GetCurrentRage();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateRageBarEvent();
+
 
 };
 

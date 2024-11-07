@@ -102,6 +102,8 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	BPM_OrbMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BPM Orb Mesh"));
 	BPM_OrbMesh->SetupAttachment(BPM_OrbSpringArm, USpringArmComponent::SocketName);
 
+	MaxRage = 100.0f;
+
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -988,7 +990,7 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 
 			if (CurrentHealth > 0.0f)
 			{
-				const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
+				const UNP_DamageType* NP_DamageType = Cast<UNP_DamageType>(DamageType);
 				if (NP_DamageType)
 				{
 					// Successfully cast to UNP_DamageType
@@ -1438,5 +1440,19 @@ void ANeonParadigm_GameCharacter::ToggleOrbEmissionOff()
 UStaticMeshComponent* ANeonParadigm_GameCharacter::GetBPM_OrbMesh()
 {
 	return BPM_OrbMesh;
+}
+
+void ANeonParadigm_GameCharacter::AddToCurrentRage(float RageToAdd)
+{
+	if (CurrentRage >= 100)
+		return;
+
+	CurrentRage += RageToAdd;
+	UpdateRageBarEvent();  // this might need to be changed   ************
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentRage()
+{
+	return CurrentRage;
 }
 
