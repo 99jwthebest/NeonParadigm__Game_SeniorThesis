@@ -1456,3 +1456,13 @@ float ANeonParadigm_GameCharacter::GetCurrentRage()
 	return CurrentRage;
 }
 
+void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
+{
+	if (CurrentHealth >= 1000)
+		return;
+	UE_LOG(LogTemp, Warning, TEXT("ADD ING TO CURRENT HEALT !!!!!!!"));
+
+	CurrentHealth += HealthToAdd;
+	UpdateHealthBarEvent();  // this might need to be changed   ************
+}
+

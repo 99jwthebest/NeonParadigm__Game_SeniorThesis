@@ -355,12 +355,17 @@ private:
 
 
 public:
-	
+
+	UFUNCTION(BlueprintCallable)
 	void AddToCurrentRage(float RageToAdd);
 	float GetCurrentRage();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateRageBarEvent();
 
+	UFUNCTION(BlueprintCallable)
+	void AddToCurrentHealth(float HealthToAdd);
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateHealthBarEvent();
 
 };
 
