@@ -115,11 +115,12 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				HitActors.AddUnique(Hit.GetActor());
 				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
 
-				// This is where rage points being added!! **********
-				MyCharacter->AddToCurrentRage(10.0f);
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{
+					// This is where rage points being added!! **********
+					MyCharacter->AddToCurrentRage(5.0f);
+
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
 
 					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));

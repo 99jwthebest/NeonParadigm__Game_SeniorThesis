@@ -1,1 +1,1 @@
-#include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/DamageComponent.h"
+#include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Source/NeonParadigm_Game/Components/DamageComponent.h"

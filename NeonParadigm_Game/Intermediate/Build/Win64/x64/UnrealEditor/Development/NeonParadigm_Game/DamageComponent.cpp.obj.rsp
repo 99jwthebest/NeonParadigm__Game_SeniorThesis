@@ -1,11 +1,11 @@
-"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\DamageComponent.cpp"
-/FI"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/FI"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Definitions.NeonParadigm_Game.h"
-/Yu"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/Fp"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
-/Fo"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\DamageComponent.cpp.obj"
-/sourceDependencies "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\DamageComponent.cpp.dep.json"
-@"C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\NeonParadigm_Game.Shared.rsp"
+"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\DamageComponent.cpp"
+/FI"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/FI"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Definitions.NeonParadigm_Game.h"
+/Yu"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/Fp"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
+/Fo"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\DamageComponent.cpp.obj"
+/sourceDependencies "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\DamageComponent.cpp.dep.json"
+@"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\NeonParadigm_Game.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi
