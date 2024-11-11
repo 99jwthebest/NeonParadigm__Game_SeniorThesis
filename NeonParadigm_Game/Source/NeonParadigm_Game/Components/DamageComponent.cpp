@@ -118,8 +118,20 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{
-					// This is where rage points being added!! **********
-					MyCharacter->AddToCurrentRage(5.0f);
+					FVector SpawnLocation(Hit.ImpactPoint); // Set location for spawning
+					FRotator SpawnRotation(0.0f, 0.0f, 0.0f);  // Set rotation for spawning
+					FActorSpawnParameters SpawnParams;
+					SpawnParams.Owner = MyCharacter;                   // Set the owner of the spawned actor, optional
+					SpawnParams.Instigator = MyCharacter->GetInstigator();   // Set the instigator, optional
+
+					if (GetWorld())
+					{
+						AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(RagePickup, SpawnLocation, SpawnRotation, SpawnParams); // need the pick spawns location!!!!!
+						if (SpawnedActor)
+						{
+							// Optional: do something with the spawned actor
+						}
+					}
 
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
 

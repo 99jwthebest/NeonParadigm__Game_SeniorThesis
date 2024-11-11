@@ -5,8 +5,12 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
-				"C:/_Jhernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Pickups/BP_HealthPickup.uasset",
-				"C:/_Jhernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset"
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/NP_BP_Dummy.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Pickups/BP_RagePickup.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BP_Spawner.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/8/3A/OFY19M51PO23MSDEHDBTD2.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/HT/MFCV4BG3Q8QXYG4Y0M80RH.uasset"
 			]
 		}
 	]

@@ -69,4 +69,7 @@ private:
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	//UAnimMontage* DeathMontage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AActor> RagePickup;
 };

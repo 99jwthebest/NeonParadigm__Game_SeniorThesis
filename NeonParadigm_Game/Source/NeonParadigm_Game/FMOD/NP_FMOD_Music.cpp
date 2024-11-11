@@ -111,6 +111,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     if (SpawnedEnemies.Num() > 0)
     {
         SendMusicInfoToEnemies(Tempo);
+        // Turn On Walls
     }
 }
 
@@ -174,32 +175,55 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
     }
 }
 
-void ANP_FMOD_Music::FindAllEnemies()
-{
-    TArray<AActor*> FoundEnemies;
-    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), FoundEnemies);
-
-    // Log the total number of enemies found
-    UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), FoundEnemies.Num());
-
-    // You can now iterate over FoundEnemies or cast them to ANP_BaseEnemy if needed
-    for (AActor* Actor : FoundEnemies)
-    {
-        ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(Actor);
-        if (Enemy)
-        {
-            //Enemy->TestRhythmDelayEvent();
-            //Enemy->SendMusicInfoToEnemies(,Enemy);
-        }
-    }
-}
+//void ANP_FMOD_Music::FindAllEnemies()
+//{
+//    TArray<AActor*> FoundEnemies;
+//    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), FoundEnemies);
+//
+//    // Log the total number of enemies found
+//    UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), FoundEnemies.Num());
+//
+//    // You can now iterate over FoundEnemies or cast them to ANP_BaseEnemy if needed
+//    for (AActor* Actor : FoundEnemies)
+//    {
+//        ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(Actor);
+//        if (Enemy)
+//        {
+//            //Enemy->TestRhythmDelayEvent();
+//            //Enemy->SendMusicInfoToEnemies(,Enemy);
+//        }
+//    }
+//}
 
 void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
 {
     for (int i = 0; i < SpawnedEnemies.Num(); i++) 
     {
-        if (!SpawnedEnemies[i])
+        /*if (!SpawnedEnemies[i])
+        {
             return;
+        }*/
+
+        if (!SpawnedEnemies[i])
+        {
+            SpawnedEnemies.RemoveAt(i);
+            UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+            continue;
+        }
+
+        // Check if the enemy is dead and remove if true
+        if (SpawnedEnemies[i]->GetState() == ECharacterStates::Death)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("Enemy %s is dead and removed from the array"), *SpawnedEnemies[i]->GetName());
+            SpawnedEnemies.RemoveAt(i);
+            UE_LOG(LogTemp, Error, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+            if (SpawnedEnemies.Num() <= 0)
+            {
+                // Turn off Walls 
+            }
+
+            continue; // Skip further processing for this enemy
+        }
 
         //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 
@@ -219,7 +243,7 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
         M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
         SpawnedEnemies[i]->SetThirdBeatTime(M_ThirdBeatTime);
         UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
-
+        
     }
 }
 
@@ -229,7 +253,7 @@ void ANP_FMOD_Music::AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy)
     {
         // Add the spawned enemy to the array
         SpawnedEnemies.Add(SpawnedEnemy);
-        //SpawnedEnemies[0]->TestRhythmDelayEvent(); *****
+
         // Log that the enemy has been added
         UE_LOG(LogTemp, Warning, TEXT("Enemy %s added to FMOD Music"), *SpawnedEnemy->GetName());
 

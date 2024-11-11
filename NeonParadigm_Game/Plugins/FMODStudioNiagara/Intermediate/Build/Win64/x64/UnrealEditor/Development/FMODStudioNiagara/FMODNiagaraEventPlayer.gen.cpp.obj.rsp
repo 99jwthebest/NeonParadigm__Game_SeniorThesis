@@ -1,11 +1,11 @@
-"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT\FMODNiagaraEventPlayer.gen.cpp"
-/FI"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/FI"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\Definitions.FMODStudioNiagara.h"
-/Yu"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/Fp"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
-/Fo"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\FMODNiagaraEventPlayer.gen.cpp.obj"
-/sourceDependencies "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\FMODNiagaraEventPlayer.gen.cpp.dep.json"
-@"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\FMODStudioNiagara.Shared.rsp"
+"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT\FMODNiagaraEventPlayer.gen.cpp"
+/FI"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/FI"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\Definitions.FMODStudioNiagara.h"
+/Yu"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/Fp"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
+/Fo"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\FMODNiagaraEventPlayer.gen.cpp.obj"
+/sourceDependencies "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\FMODNiagaraEventPlayer.gen.cpp.dep.json"
+@"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioNiagara\FMODStudioNiagara.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

@@ -1,13 +1,13 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\_jhernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_an_resetstate.gen.cpp",
+        "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_an_resetstate.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\_jhernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "PCH": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
         "Includes": [
-            "c:\\_jhernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
-            "c:\\_jhernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\animnotify\\np_an_resetstate.h",
-            "c:\\_jhernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_an_resetstate.generated.h"
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\animnotify\\np_an_resetstate.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_an_resetstate.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
