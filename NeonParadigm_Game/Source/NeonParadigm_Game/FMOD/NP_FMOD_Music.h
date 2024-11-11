@@ -66,6 +66,10 @@ private:
 
 	TArray<ANP_BaseEnemy*> SpawnedEnemies;
 
+	// Array of blocking actors
+	UPROPERTY()
+	TArray<AActor*> BlockingActors;
+
 public:
 	void FindAllEnemies();
 	void SendMusicInfoToEnemies(float TempoOfCurrentSong);
@@ -73,5 +77,8 @@ public:
 	void AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy);
 	UFUNCTION(BlueprintCallable, Category = "Music")
 	void SetFirstTimeBool(bool bSetFirstTime);
+
+	UFUNCTION(BlueprintCallable, Category = "State")
+	void SetWallBlockActors(const TArray<AActor*>& WallBlockActors);
 
 };

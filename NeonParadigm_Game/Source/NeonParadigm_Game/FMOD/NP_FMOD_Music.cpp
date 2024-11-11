@@ -219,7 +219,16 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
             UE_LOG(LogTemp, Error, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
             if (SpawnedEnemies.Num() <= 0)
             {
-                // Turn off Walls 
+                for (AActor* BlockingActor : BlockingActors)  // **** this code is obviously ugly!!!!!
+                {
+                    if (BlockingActor)
+                    {
+                        // Disable or hide the blocking actor (e.g., turn off collision, hide actor)
+                        BlockingActor->SetActorHiddenInGame(true);
+                        BlockingActor->SetActorEnableCollision(false);
+                        UE_LOG(LogTemp, Warning, TEXT("Disabled blocking actor: %s"), *BlockingActor->GetName());
+                    }
+                }
             }
 
             continue; // Skip further processing for this enemy
@@ -266,6 +275,20 @@ void ANP_FMOD_Music::SetFirstTimeBool(bool bSetFirstTime)
 {
     FirstTime = bSetFirstTime;
 
+}
+
+void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
+{
+    BlockingActors = WallBlockActors;
+
+    // Log that blocking actors have been set
+    for (AActor* BlockingActor : BlockingActors)
+    {
+        if (BlockingActor)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("Blocking Actor %s added to FMOD Music"), *BlockingActor->GetName());
+        }
+    }
 }
 
 

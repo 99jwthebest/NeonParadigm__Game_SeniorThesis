@@ -9,6 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AActor;
 class ANP_BaseEnemy;
 #ifdef NEONPARADIGM_GAME_NP_FMOD_Music_generated_h
 #error "NP_FMOD_Music.generated.h already included, missing '#pragma once' in NP_FMOD_Music.h"
@@ -20,6 +21,7 @@ class ANP_BaseEnemy;
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_19_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_FMOD_NP_FMOD_Music_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execSetWallBlockActors); \
 	DECLARE_FUNCTION(execSetFirstTimeBool); \
 	DECLARE_FUNCTION(execAddSpawnedEnemy); \
 	DECLARE_FUNCTION(execOnTimelineMarker); \
