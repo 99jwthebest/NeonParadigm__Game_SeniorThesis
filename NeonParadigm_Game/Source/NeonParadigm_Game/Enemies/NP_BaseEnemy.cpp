@@ -596,3 +596,4 @@ UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
 {
 	return HR_Getup;
 }
+

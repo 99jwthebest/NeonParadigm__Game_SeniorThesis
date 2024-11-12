@@ -368,6 +368,8 @@ public:
 	void UpdateHealthBarEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateScoreEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleCombatStyleGrade();
 
 };
 

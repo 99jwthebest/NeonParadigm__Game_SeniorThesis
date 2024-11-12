@@ -195,6 +195,7 @@ private:
 	int DurationOfLaunch;
 	bool bOnLandReset;
 	bool bAirKnockback;
+	int TotalEnemiesAlive;
 
 public:
 	

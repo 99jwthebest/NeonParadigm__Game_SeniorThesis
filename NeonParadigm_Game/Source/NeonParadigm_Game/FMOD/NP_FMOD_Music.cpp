@@ -229,6 +229,7 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
                         UE_LOG(LogTemp, Warning, TEXT("Disabled blocking actor: %s"), *BlockingActor->GetName());
                     }
                 }
+                PlayerCharacter->ToggleCombatStyleGrade();
             }
 
             continue; // Skip further processing for this enemy
