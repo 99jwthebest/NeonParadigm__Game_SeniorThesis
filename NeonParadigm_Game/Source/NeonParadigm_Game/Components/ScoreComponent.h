@@ -34,7 +34,8 @@ public:
 
 	void Testing();
 	void IncrementScore(int ScoreToAdd);
-
+	UFUNCTION(BlueprintPure)
+	float GetCurrentScore();
 
 
 };

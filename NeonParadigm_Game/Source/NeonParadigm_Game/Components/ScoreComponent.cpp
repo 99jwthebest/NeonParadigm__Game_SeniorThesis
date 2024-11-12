@@ -46,4 +46,9 @@ void UScoreComponent::IncrementScore(int ScoreToAdd)
 
 }
 
+float UScoreComponent::GetCurrentScore()
+{
+	return TotalScore;
+}
+
 

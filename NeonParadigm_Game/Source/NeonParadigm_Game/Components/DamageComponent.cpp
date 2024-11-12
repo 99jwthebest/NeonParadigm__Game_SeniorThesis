@@ -139,6 +139,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 					PerfectHitOperations();
 					ScoreComp->IncrementScore(500);
+					MyCharacter->UpdateScoreEvent();
 					MyCharacter->SetPerfectBeatHit(false);
 				}
 			}

@@ -366,6 +366,8 @@ public:
 	void AddToCurrentHealth(float HealthToAdd);
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateHealthBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateScoreEvent();
 
 };
 
