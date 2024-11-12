@@ -28,7 +28,15 @@ public:
 private:
 
 	int TotalScore;
+	int CurrentScore;
 
+	// Grade thresholds
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 ThresholdBGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 ThresholdAGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 ThresholdSGrade;
 
 public:
 
@@ -36,6 +44,7 @@ public:
 	void IncrementScore(int ScoreToAdd);
 	UFUNCTION(BlueprintPure)
 	float GetCurrentScore();
-
+	UFUNCTION(BlueprintCallable, Category = "Score")
+	FString CalculateGrade() const;
 
 };
