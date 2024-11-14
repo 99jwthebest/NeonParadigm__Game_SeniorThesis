@@ -714,29 +714,31 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		FVector StartVec = GetActorLocation();
 		FVector MultiplyVec = GetCharacterMovement()->GetLastInputVector() * TargetingDistance;
 		FVector EndVec = StartVec + MultiplyVec;
+
 		// Trace radius
 		float Radius = 80.0f;
+
 		// Object types to trace against (e.g., WorldDynamic, Pawn)
 		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 		ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
-		//ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_WorldDynamic));
+
 		// Trace against simple collision
 		bool bTraceComplex = false;
+
 		// Actors to ignore (e.g., this actor)
 		TArray<AActor*> ActorsToIgnore;
-		ActorsToIgnore.Add(this);
-		if (SoftTargetActor) ActorsToIgnore.Add(SoftTargetActor);
-		if (SoftTargetEnemy) ActorsToIgnore.Add(SoftTargetEnemy);
-		if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);  // this trace is sort of glitched, it will still detect enemy even though they are dead. *******
+		ActorsToIgnore.Add(this); // Ignore self
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; //ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration;
+
 		// Output hit result
 		FHitResult OutHit;
+
 		// Ignore self
 		bool bIgnoreSelf = true;
 
-		// Trace For Enemies
+		// Trace for enemies
 		bool bSphereTrace = UKismetSystemLibrary::SphereTraceSingleForObjects(
 			GetWorld(),
 			StartVec,
@@ -789,31 +791,32 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		{
 			// Trace start and end points
 			FVector StartVec2 = GetActorLocation();
-			//FVector MultiplyVec2 = GetCharacterMovement()->GetLastInputVector() * TargetingDistance;
-			FVector EndVec2 = GetActorLocation();
+			FVector EndVec2 = StartVec2; // EndVec2 can be updated based on targeting distance if needed
+
 			// Trace radius
-			float Radius2 = 500.0f;  // adjust this for the soft lock targetting to see what value works and makes sense for player to detect enemy and hit them *************
+			float Radius2 = 500.0f; // Adjust this value to balance the detection range for the lock-on system
+
 			// Object types to trace against (e.g., WorldDynamic, Pawn)
 			TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
 			ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
-			//ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_WorldDynamic));
+
 			// Trace against simple collision
 			bool bTraceComplex2 = false;
+
 			// Actors to ignore (e.g., this actor)
 			TArray<AActor*> ActorsToIgnore2;
-			ActorsToIgnore2.Add(this);
-			if (SoftTargetActor) ActorsToIgnore.Add(SoftTargetActor);
-			if (SoftTargetEnemy) ActorsToIgnore.Add(SoftTargetEnemy);
-			if (LastSoftTargetActor) ActorsToIgnore.Add(LastSoftTargetActor);
+			ActorsToIgnore2.Add(this); // Ignore self
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; //ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration;
+
 			// Output hit result
 			FHitResult OutHit2;
+
 			// Ignore self
 			bool bIgnoreSelf2 = true;
 
-			// Trace For Enemies
+			// Trace for enemies
 			bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceSingleForObjects(
 				GetWorld(),
 				StartVec2,
@@ -834,40 +837,108 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit2.GetActor()->GetName());
 
-				UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *OutHit2.GetActor()->GetName());
-
 				ANP_BaseEnemy* Enemy2 = Cast<ANP_BaseEnemy>(OutHit2.GetActor());
-				if (Enemy2)
+				if (Enemy2 && Enemy2->GetState() != ECharacterStates::Death)
 				{
-				if (Enemy2->GetState() != ECharacterStates::Death)
+					if (!SoftTargetActor || SoftTargetActor != OutHit2.GetActor())
 					{
-						if (OutHit2.GetActor() != SoftTargetActor || !SoftTargetActor->IsValidLowLevel())
-						{
-							LastSoftTargetActor = SoftTargetActor;
-							SoftTargetActor = OutHit2.GetActor();
-							SoftTargetEnemy = Enemy2;
-						}
-					}
-					else
-					{
-						SoftTargetActor = nullptr;
-						SoftTargetEnemy = nullptr;
-						LastSoftTargetActor = nullptr;
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = OutHit2.GetActor();
+						SoftTargetEnemy = Enemy2;
 					}
 				}
 				else
 				{
+					// Reset targets if the hit actor is invalid or dead
+					LastSoftTargetActor = nullptr;
 					SoftTargetActor = nullptr;
 					SoftTargetEnemy = nullptr;
-					LastSoftTargetActor = nullptr;
 				}
 			}
 			else
 			{
+				// Reset targets if nothing is hit
+				LastSoftTargetActor = nullptr;
 				SoftTargetActor = nullptr;
 				SoftTargetEnemy = nullptr;
-				//LastSoftTargetActor = nullptr;
 			}
+
+		}
+	}
+	else
+	{
+		// Trace start and end points
+		FVector StartVec2 = GetActorLocation();
+		FVector EndVec2 = StartVec2; // EndVec2 can be updated based on targeting distance if needed
+
+		// Trace radius
+		float Radius2 = 500.0f; // Adjust this value to balance the detection range for the lock-on system
+
+		// Object types to trace against (e.g., WorldDynamic, Pawn)
+		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
+		ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
+
+		// Trace against simple collision
+		bool bTraceComplex2 = false;
+
+		// Actors to ignore (e.g., this actor)
+		TArray<AActor*> ActorsToIgnore2;
+		ActorsToIgnore2.Add(this); // Ignore self
+
+		// Debug draw type
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration;
+
+		// Output hit result
+		FHitResult OutHit2;
+
+		// Ignore self
+		bool bIgnoreSelf2 = true;
+
+		// Trace for enemies
+		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceSingleForObjects(
+			GetWorld(),
+			StartVec2,
+			EndVec2,
+			Radius2,
+			ObjectTypes2,
+			bTraceComplex2,
+			ActorsToIgnore2,
+			DrawDebugType2,
+			OutHit2,
+			bIgnoreSelf2,
+			FLinearColor::Red,
+			FLinearColor::Green,
+			5.0f
+		);
+
+		if (bSphereTrace2)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit2.GetActor()->GetName());
+
+			ANP_BaseEnemy* Enemy2 = Cast<ANP_BaseEnemy>(OutHit2.GetActor());
+			if (Enemy2 && Enemy2->GetState() != ECharacterStates::Death)
+			{
+				if (!SoftTargetActor || SoftTargetActor != OutHit2.GetActor())
+				{
+					LastSoftTargetActor = SoftTargetActor;
+					SoftTargetActor = OutHit2.GetActor();
+					SoftTargetEnemy = Enemy2;
+				}
+			}
+			else
+			{
+				// Reset targets if the hit actor is invalid or dead
+				LastSoftTargetActor = nullptr;
+				SoftTargetActor = nullptr;
+				SoftTargetEnemy = nullptr;
+			}
+		}
+		else
+		{
+			// Reset targets if nothing is hit
+			LastSoftTargetActor = nullptr;
+			SoftTargetActor = nullptr;
+			SoftTargetEnemy = nullptr;
 		}
 	}
 }
