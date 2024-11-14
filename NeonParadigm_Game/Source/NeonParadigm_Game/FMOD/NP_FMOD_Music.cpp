@@ -113,6 +113,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         SendMusicInfoToEnemies(Tempo);
         // Turn On Walls
     }
+
+    // BPM UI
+    //PlayerCharacter->PlayBPM_HalfCirle(Tempo);
 }
 
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)

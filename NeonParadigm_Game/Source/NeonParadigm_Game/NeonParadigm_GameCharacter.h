@@ -370,6 +370,8 @@ public:
 	void UpdateScoreEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void ToggleCombatStyleGrade();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayBPM_HalfCirle(float CurrentTempo);
 
 };
 
