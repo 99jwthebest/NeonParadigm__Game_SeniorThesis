@@ -6,10 +6,14 @@
 //#include "FMODBlueprintStatics.h"
 #include "FMODEvent.h"
 #include "Kismet/GameplayStatics.h"
+
+#include "TimerManager.h"
+
 #include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
 #include "NeonParadigm_Game/TestActor.h"
-#include "TimerManager.h"
 #include "NeonParadigm_Game/Enemies/NP_BaseEnemy.h"
+
+#include "NeonParadigm_Game/Framework/NP_GameInstance.h"
 
 namespace Markers {
     FString SectionA = TEXT("SectionA_Transition");
@@ -34,6 +38,12 @@ void ANP_FMOD_Music::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    NPGameInstance = Cast<UNP_GameInstance>(GetGameInstance());
+    if (IsValid(NPGameInstance))
+    {
+        NPGameInstance->InitAudioInterface(this);
+    }
+
     FirstTime = true;
     TimesPlayed = 0;
     // Ensure the FMODAudioComponent is valid
@@ -61,10 +71,8 @@ void ANP_FMOD_Music::BeginPlay()
             FMODAudioComponent->Play();
 
             UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
-
         }
     }
-
 
     //FindAllEnemies();
 }
@@ -108,11 +116,8 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
 
 
-    if (SpawnedEnemies.Num() > 0)
-    {
-        SendMusicInfoToEnemies(Tempo);
-        // Turn On Walls
-    }
+    
+    SendMusicInfoToEnemies(Tempo);
 
     // BPM UI
     //PlayerCharacter->PlayBPM_HalfCirle(Tempo);
@@ -200,27 +205,31 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
 void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
 {
-    for (int i = 0; i < SpawnedEnemies.Num(); i++) 
+    if (!IsValid(NPGameInstance)) return;
+
+    if (NPGameInstance->GetSpawnedEnemies().Num() == 0) return;
+    
+    for (int i = 0; i < NPGameInstance->GetSpawnedEnemies().Num(); i++)
     {
         /*if (!SpawnedEnemies[i])
         {
             return;
         }*/
 
-        if (!SpawnedEnemies[i])
+        if (!NPGameInstance->GetSpawnedEnemies()[i])
         {
-            SpawnedEnemies.RemoveAt(i);
-            UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+            NPGameInstance->GetSpawnedEnemies().RemoveAt(i);
+            UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), NPGameInstance->GetSpawnedEnemies().Num());
             continue;
         }
 
         // Check if the enemy is dead and remove if true
-        if (SpawnedEnemies[i]->GetState() == ECharacterStates::Death)
+        if (NPGameInstance->GetSpawnedEnemies()[i]->GetState() == ECharacterStates::Death)
         {
-            UE_LOG(LogTemp, Warning, TEXT("Enemy %s is dead and removed from the array"), *SpawnedEnemies[i]->GetName());
-            SpawnedEnemies.RemoveAt(i);
-            UE_LOG(LogTemp, Error, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
-            if (SpawnedEnemies.Num() <= 0)
+            UE_LOG(LogTemp, Warning, TEXT("Enemy %s is dead and removed from the array"), *NPGameInstance->GetSpawnedEnemies()[i]->GetName());
+            NPGameInstance->GetSpawnedEnemies().RemoveAt(i);
+            UE_LOG(LogTemp, Error, TEXT("Total Enemies Found: %d"), NPGameInstance->GetSpawnedEnemies().Num());
+            if (NPGameInstance->GetSpawnedEnemies().Num() <= 0)
             {
                 for (AActor* BlockingActor : BlockingActors)  // **** this code is obviously ugly!!!!!
                 {
@@ -240,38 +249,20 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
 
         //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 
-        M_CurrentTempoDelay = 60 / TempoOfCurrentSong;
-        SpawnedEnemies[i]->SetCurrentTempoDelay(M_CurrentTempoDelay);
+        NPGameInstance->GetSpawnedEnemies()[i]->SetCurrentTempoDelay(M_CurrentTempoDelay);
         UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: CurrentTempoDelay %f"), M_CurrentTempoDelay);
 
         UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Beat Tick: %f"), GetWorld()->GetTimeSeconds());
 
-        SpawnedEnemies[i]->SetLastBeatTime(GetWorld()->GetTimeSeconds());
+        NPGameInstance->GetSpawnedEnemies()[i]->SetLastBeatTime(GetWorld()->GetTimeSeconds());
         UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
 
-        M_NextBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay;
-        SpawnedEnemies[i]->SetNextBeatTime(M_NextBeatTime);
+        NPGameInstance->GetSpawnedEnemies()[i]->SetNextBeatTime(M_NextBeatTime);
         UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
 
-        M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
-        SpawnedEnemies[i]->SetThirdBeatTime(M_ThirdBeatTime);
+        NPGameInstance->GetSpawnedEnemies()[i]->SetThirdBeatTime(M_ThirdBeatTime);
         UE_LOG(LogTemp, Warning, TEXT("ENEMY Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
         
-    }
-}
-
-void ANP_FMOD_Music::AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy)
-{
-    if (SpawnedEnemy)
-    {
-        // Add the spawned enemy to the array
-        SpawnedEnemies.Add(SpawnedEnemy);
-
-        // Log that the enemy has been added
-        UE_LOG(LogTemp, Warning, TEXT("Enemy %s added to FMOD Music"), *SpawnedEnemy->GetName());
-
-        UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
-
     }
 }
 
@@ -293,6 +284,21 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
             UE_LOG(LogTemp, Warning, TEXT("Blocking Actor %s added to FMOD Music"), *BlockingActor->GetName());
         }
     }
+}
+
+float ANP_FMOD_Music::GetCurrentTempDelay()
+{
+    return 0.0f;
+}
+
+float ANP_FMOD_Music::GetNextBeatTime()
+{
+    return 0.0f;
+}
+
+float ANP_FMOD_Music::GetThirdBeatTime()
+{
+    return 0.0f;
 }
 
 

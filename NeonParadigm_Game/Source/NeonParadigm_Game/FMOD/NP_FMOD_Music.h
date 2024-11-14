@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "NeonParadigm_Game/Framework/IAudio.h"
 #include "NP_FMOD_Music.generated.h"
 
 class UFMODAudioComponent;
@@ -12,9 +13,8 @@ class ANeonParadigm_GameCharacter;
 class ATestActor;
 class ANP_BaseEnemy;
 
-
 UCLASS()
-class NEONPARADIGM_GAME_API ANP_FMOD_Music : public AActor
+class NEONPARADIGM_GAME_API ANP_FMOD_Music : public AActor, public IAudio
 {
 	GENERATED_BODY()
 	
@@ -46,6 +46,8 @@ public:
 	void OnTimelineMarker(FString Name, int32 Position);
 
 private:
+	class UNP_GameInstance* NPGameInstance;
+
 	ANeonParadigm_GameCharacter* PlayerCharacter;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* TempBPMParticle;
@@ -63,22 +65,24 @@ private:
 	bool FirstTime;
 	int TimesPlayed;
 
-
-	TArray<ANP_BaseEnemy*> SpawnedEnemies;
-
 	// Array of blocking actors
 	UPROPERTY()
 	TArray<AActor*> BlockingActors;
 
 public:
-	void FindAllEnemies();
 	void SendMusicInfoToEnemies(float TempoOfCurrentSong);
-	UFUNCTION(BlueprintCallable, Category = "Music")
-	void AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy);
+	
 	UFUNCTION(BlueprintCallable, Category = "Music")
 	void SetFirstTimeBool(bool bSetFirstTime);
 
 	UFUNCTION(BlueprintCallable, Category = "State")
-	void SetWallBlockActors(const TArray<AActor*>& WallBlockActors);
+	void SetWallBlockActors(const TArray<AActor*>& WallBlockActors); // Can Move To Somewhere Else
+
+public:
+	float GetCurrentTempDelay() override;
+
+	float GetNextBeatTime() override;
+
+	float GetThirdBeatTime() override;
 
 };

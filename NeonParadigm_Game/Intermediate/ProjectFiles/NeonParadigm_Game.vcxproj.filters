@@ -11,6 +11,7 @@
     <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -682,6 +683,21 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.h">
       <Filter>Source\NeonParadigm_Game\FMOD</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\Framework">
+      <UniqueIdentifier>{D5900B32-2DF0-3531-A07B-DD9C64ECDBDE}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Framework\IAudio.cpp">
+      <Filter>Source\NeonParadigm_Game\Framework</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Framework\IAudio.h">
+      <Filter>Source\NeonParadigm_Game\Framework</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Framework\NP_GameInstance.cpp">
+      <Filter>Source\NeonParadigm_Game\Framework</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Framework\NP_GameInstance.h">
+      <Filter>Source\NeonParadigm_Game\Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
