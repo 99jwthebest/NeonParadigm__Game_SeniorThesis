@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{97C08673-9BFE-3A58-AA40-61EDD14C436C}</ProjectGuid>
+    <ProjectGuid>{9D0CB938-79B0-3D25-AB74-6E7B98A882E7}</ProjectGuid>
     <RootNamespace>NeonParadigm_Game</RootNamespace>
   </PropertyGroup>
   <Import Project="UECommon.props" />

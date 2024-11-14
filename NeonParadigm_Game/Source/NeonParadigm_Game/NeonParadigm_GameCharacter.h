@@ -373,5 +373,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayBPM_HalfCirle(float CurrentTempo);
 
+
+public:
+
+	void RotateCameraForSoftTargetting();
+
 };
 
