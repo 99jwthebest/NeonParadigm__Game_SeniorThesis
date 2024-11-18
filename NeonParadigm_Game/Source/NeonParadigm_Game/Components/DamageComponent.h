@@ -37,6 +37,7 @@ public:
 	//void PerformDeath();
 
 	void PerfectHitOperations();
+	void SpawnRagePickups(FHitResult& HitResult);
 
 private:
 	

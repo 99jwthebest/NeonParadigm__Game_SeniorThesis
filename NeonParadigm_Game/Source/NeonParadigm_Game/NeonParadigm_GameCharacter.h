@@ -132,6 +132,7 @@ public:
 	void SoftTarget();
 	void ResetSoftLockTarget();
 	AActor* GetSoftTargetActor();
+	bool IsTargetValid(ANP_BaseEnemy* Target);
 
 public:
 	void StopRotationToSoftTargetTimer();
@@ -231,6 +232,8 @@ private:
 	AActor* LastSoftTargetActor;
 
 	bool bIsParrySaved;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Targeting, meta = (AllowPrivateAccess = "true"))
+	float MaxSoftTargetDistance = 500.0f;
 
 public:
 
@@ -238,10 +241,17 @@ public:
 	float CurrentHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
 	float MaxHealth;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
 	float CurrentRage = 0.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
 	float MaxRage;
+	FTimerHandle RageDepletionTimerHandle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageDepletionRate = 1.0f;  // Decrease rage every second
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageDepletionAmount = 10.0f;  // Amount to reduce per tick
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageActivationThreshold = 50.0f;  
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DeathMontage;
@@ -303,9 +313,6 @@ private:
 
 	class UParticleSystemComponent* RageParticleComponent;
 	bool bRage;
-	FTimerHandle RageTimerHandle;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
-	float RageDuration;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
 	class UMaterialInterface* RageOverlayMaterial;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
@@ -319,6 +326,7 @@ public:
 	void EndRage();
 	bool CanRage();
 	bool IsRaging();
+	void DepleteRage();
 
 
 private:

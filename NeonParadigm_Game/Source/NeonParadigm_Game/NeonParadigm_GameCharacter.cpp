@@ -737,7 +737,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 
 		// Ignore self
 		bool bIgnoreSelf = true;
-
+		
 		// Trace for enemies
 		bool bSphereTrace = UKismetSystemLibrary::SphereTraceSingleForObjects(
 			GetWorld(),
@@ -867,35 +867,20 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 	}
 	else
 	{
-		// Trace start and end points
 		FVector StartVec2 = GetActorLocation();
-		FVector EndVec2 = StartVec2; // EndVec2 can be updated based on targeting distance if needed
+		FVector EndVec2 = StartVec2; 
 
-		// Trace radius
-		float Radius2 = 500.0f; // Adjust this value to balance the detection range for the lock-on system
-
-		// Object types to trace against (e.g., WorldDynamic, Pawn)
+		float Radius2 = 500.0f; 
 		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
 		ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
 
-		// Trace against simple collision
 		bool bTraceComplex2 = false;
-
-		// Actors to ignore (e.g., this actor)
 		TArray<AActor*> ActorsToIgnore2;
-		ActorsToIgnore2.Add(this); // Ignore self
-
-		// Debug draw type
+		ActorsToIgnore2.Add(this); 
 		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration;
+		TArray<FHitResult> OutHits2;
 
-		// Output hit result
-		FHitResult OutHit2;
-
-		// Ignore self
-		bool bIgnoreSelf2 = true;
-
-		// Trace for enemies
-		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceSingleForObjects(
+		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
 			GetWorld(),
 			StartVec2,
 			EndVec2,
@@ -904,8 +889,8 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			bTraceComplex2,
 			ActorsToIgnore2,
 			DrawDebugType2,
-			OutHit2,
-			bIgnoreSelf2,
+			OutHits2,
+			true, // Ignore self
 			FLinearColor::Red,
 			FLinearColor::Green,
 			5.0f
@@ -913,29 +898,58 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 
 		if (bSphereTrace2)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit2.GetActor()->GetName());
+			float ClosestDistance = FLT_MAX;
+			AActor* ClosestActor = nullptr;
 
-			ANP_BaseEnemy* Enemy2 = Cast<ANP_BaseEnemy>(OutHit2.GetActor());
-			if (Enemy2 && Enemy2->GetState() != ECharacterStates::Death)
+			for (const FHitResult& Hit : OutHits2)
 			{
-				if (!SoftTargetActor || SoftTargetActor != OutHit2.GetActor())
+				if (AActor* HitActor = Hit.GetActor())
 				{
-					LastSoftTargetActor = SoftTargetActor;
-					SoftTargetActor = OutHit2.GetActor();
-					SoftTargetEnemy = Enemy2;
+					// Calculate distance
+					float Distance = FVector::Dist(StartVec2, Hit.ImpactPoint);
+
+					// Debug log
+					UE_LOG(LogTemp, Warning, TEXT("Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
+
+					// Find the closest actor
+					if (Distance < ClosestDistance)
+					{
+						ClosestDistance = Distance;
+						ClosestActor = HitActor;
+					}
 				}
+			}
+
+			// Check if the current target is valid (alive and within range)
+			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
+			{
+				// Do nothing, keep the current target
+				UE_LOG(LogTemp, Warning, TEXT("Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
 			}
 			else
 			{
-				// Reset targets if the hit actor is invalid or dead
-				LastSoftTargetActor = nullptr;
-				SoftTargetActor = nullptr;
-				SoftTargetEnemy = nullptr;
+				// Set the closest actor as the target
+				if (ClosestActor)
+				{
+					ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestActor);
+					if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
+					{
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = ClosestActor;
+						SoftTargetEnemy = ClosestEnemy;
+
+						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
+					}
+					else
+					{
+						SoftTargetActor = nullptr;
+						SoftTargetEnemy = nullptr;
+					}
+				}
 			}
 		}
 		else
 		{
-			// Reset targets if nothing is hit
 			LastSoftTargetActor = nullptr;
 			SoftTargetActor = nullptr;
 			SoftTargetEnemy = nullptr;
@@ -958,6 +972,16 @@ void ANeonParadigm_GameCharacter::ResetSoftLockTarget()
 AActor* ANeonParadigm_GameCharacter::GetSoftTargetActor()
 {
 	return SoftTargetActor;
+}
+
+bool ANeonParadigm_GameCharacter::IsTargetValid(ANP_BaseEnemy* Target)
+{
+	if (Target && Target->GetState() != ECharacterStates::Death)
+	{
+		float Distance = FVector::Dist(GetActorLocation(), Target->GetActorLocation());
+		return Distance <= MaxSoftTargetDistance;  // Only valid if within range
+	}
+	return false;
 }
 
 void ANeonParadigm_GameCharacter::StopRotationToSoftTargetTimer()
@@ -1401,7 +1425,7 @@ void ANeonParadigm_GameCharacter::RageComplete()
 		{
 			GetMesh()->SetOverlayMaterial(RageOverlayMaterial);
 		}
-		GetWorld()->GetTimerManager().SetTimer(RageTimerHandle, this, &ANeonParadigm_GameCharacter::EndRage, RageDuration, false);
+		GetWorld()->GetTimerManager().SetTimer(RageDepletionTimerHandle, this, &ANeonParadigm_GameCharacter::DepleteRage, RageDepletionRate, true);
 	}
 }
 
@@ -1410,6 +1434,8 @@ void ANeonParadigm_GameCharacter::EndRage()
 	bRage = false;
 	GetMesh()->SetOverlayMaterial(nullptr);
 	SetIFrames(false);
+
+	GetWorld()->GetTimerManager().ClearTimer(RageDepletionTimerHandle);  // Stop depletion
 }
 
 bool ANeonParadigm_GameCharacter::CanRage()
@@ -1421,12 +1447,30 @@ bool ANeonParadigm_GameCharacter::CanRage()
 	CurrentCharacterState.Add(ECharacterStates::Death);
 	CurrentCharacterState.Add(ECharacterStates::Parry);
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling() && !bRage;  // *** This could be changed to use while falling.
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling() && !bRage && CurrentRage > RageActivationThreshold;  // **** This could be changed to use while falling.
 }
 
 bool ANeonParadigm_GameCharacter::IsRaging()
 {
 	return bRage;
+}
+
+void ANeonParadigm_GameCharacter::DepleteRage()
+{
+	if (CurrentRage > 0.0f)
+	{
+		CurrentRage -= RageDepletionAmount;
+		UpdateRageBarEvent();  // Update UI or rage bar
+		if (CurrentRage <= 0.0f)
+		{
+			CurrentRage = 0.0f;
+			EndRage();  // Stop rage mode if depleted
+		}
+	}
+	else
+	{
+		EndRage();  // Stop rage mode if depleted
+	}
 }
 
 void ANeonParadigm_GameCharacter::SetPerfectBeatHit(bool bPerfectHit)

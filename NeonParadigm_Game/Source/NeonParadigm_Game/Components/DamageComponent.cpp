@@ -73,18 +73,6 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 	// Array to hold the hit results
 	TArray<FHitResult> OutHits;
 
-	//bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMultiForObjects(
-	//	GetWorld(), 
-	//	MyCharacter->GetActorLocation(), 
-	//	EndVec, 
-	//	Radius, 
-	//	ObjectTypes, 
-	//	false, 
-	//	ActorsToIgnore, 
-	//	EDrawDebugTrace::ForDuration, // ForDuration
-	//	OutHits, 
-	//	true);
-
 	// Perform the multi-sphere trace by channel
 	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
 		GetWorld(),                        // World context
@@ -118,20 +106,8 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{
-					FVector SpawnLocation(Hit.ImpactPoint); // Set location for spawning
-					FRotator SpawnRotation(0.0f, 0.0f, 0.0f);  // Set rotation for spawning
-					FActorSpawnParameters SpawnParams;
-					SpawnParams.Owner = MyCharacter;                   // Set the owner of the spawned actor, optional
-					SpawnParams.Instigator = MyCharacter->GetInstigator();   // Set the instigator, optional
 
-					if (GetWorld())
-					{
-						AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(RagePickup, SpawnLocation, SpawnRotation, SpawnParams); // need the pick spawns location!!!!!
-						if (SpawnedActor)
-						{
-							// Optional: do something with the spawned actor
-						}
-					}
+					SpawnRagePickups(Hit);
 
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
 
@@ -231,6 +207,59 @@ void UDamageComponent::PerfectHitOperations()
 	);
 
 	MyCharacter->SetPerfectBeatHit(false);
+}
+
+void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
+{
+	FRotator SpawnRotation(0.0f, 0.0f, 0.0f);  // Set rotation for spawning
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = MyCharacter;                   // Set the owner of the spawned actor, optional
+	SpawnParams.Instigator = MyCharacter->GetInstigator();   // Set the instigator, optional
+
+	if (GetWorld())
+	{
+		int32 NumPickupsToSpawn = 5; // Number of pickups to spawn
+		float RandomRange = 100.0f; // Range for random spawn offset
+		float ExplosionForce = 1000.0f; // Force magnitude for impulse
+		float UpwardForce = 300.0f; // Additional upward force
+
+		for (int32 i = 0; i < NumPickupsToSpawn; ++i)
+		{
+			// Generate a random direction with limited vertical randomness
+			FVector RandomDirection = FMath::VRand();
+			RandomDirection.Z *= 0.3f; // Scale Z for less vertical randomness
+			RandomDirection.Normalize();
+
+			// Calculate random offset for spawning
+			FVector RandomOffset = RandomDirection * RandomRange;
+
+			// Height Spawn Offset
+			float HeightSpawnOffset = 100.0f;
+
+			// Calculate spawn location
+			FVector SpawnLocation = HitResult.GetActor()->GetActorLocation() + FVector(0.0f, 0.0f, HeightSpawnOffset) + RandomOffset;
+
+			// Debug visualization of spawn location
+			DrawDebugSphere(GetWorld(), SpawnLocation, 10.0f, 12, FColor::Green, false, 2.0f);
+
+			// Spawn the actor
+			AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(RagePickup, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+			if (SpawnedActor)
+			{
+				// Add impulse to the spawned actor
+				UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(SpawnedActor->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+				if (MeshComp && MeshComp->IsSimulatingPhysics())
+				{
+					// Calculate explosion force direction and apply impulse
+					FVector ExplosionForceDirection = RandomDirection;
+					MeshComp->AddImpulse(ExplosionForceDirection * ExplosionForce, NAME_None, true);
+
+					// Apply optional upward force
+					MeshComp->AddImpulse(FVector(0, 0, UpwardForce), NAME_None, true);
+				}
+			}
+		}
+	}
 }
 
 //void UDamageComponent::PerformDeath()

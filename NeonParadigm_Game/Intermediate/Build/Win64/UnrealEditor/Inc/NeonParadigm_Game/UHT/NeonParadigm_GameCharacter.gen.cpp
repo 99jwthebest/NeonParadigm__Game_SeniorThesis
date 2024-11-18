@@ -645,6 +645,10 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_TargetingDistance;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxSoftTargetDistance_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxSoftTargetDistance;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentHealth_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentHealth;
@@ -660,6 +664,18 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxRage_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxRage;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_RageDepletionRate_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_RageDepletionRate;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_RageDepletionAmount_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_RageDepletionAmount;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_RageActivationThreshold_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_RageActivationThreshold;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DeathMontage_MetaData[];
 #endif
@@ -688,10 +704,6 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_RageAnim_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_RageAnim;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_RageDuration_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_RageDuration;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_RageOverlayMaterial_MetaData[];
 #endif
@@ -1019,6 +1031,14 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TargetingDistance = { "TargetingDistance", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, TargetingDistance), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TargetingDistance_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TargetingDistance_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxSoftTargetDistance_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Targeting" },
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxSoftTargetDistance = { "MaxSoftTargetDistance", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, MaxSoftTargetDistance), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxSoftTargetDistance_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxSoftTargetDistance_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CurrentHealth_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Stats" },
@@ -1037,7 +1057,7 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CurrentRage_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Stats" },
+		{ "Category", "Rage" },
 		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
 	};
 #endif
@@ -1045,11 +1065,47 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxRage_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Stats" },
+		{ "Category", "Rage" },
 		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxRage = { "MaxRage", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, MaxRage), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxRage_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxRage_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionRate_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Rage" },
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionRate = { "RageDepletionRate", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, RageDepletionRate), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionRate_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionRate_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionAmount_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Rage" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Decrease rage every second\n" },
+#endif
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Decrease rage every second" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionAmount = { "RageDepletionAmount", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, RageDepletionAmount), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionAmount_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionAmount_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageActivationThreshold_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Rage" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Amount to reduce per tick\n" },
+#endif
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Amount to reduce per tick" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageActivationThreshold = { "RageActivationThreshold", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, RageActivationThreshold), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageActivationThreshold_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageActivationThreshold_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_DeathMontage_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -1107,14 +1163,6 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageAnim = { "RageAnim", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, RageAnim), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageAnim_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageAnim_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDuration_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Rage" },
-		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDuration = { "RageDuration", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, RageDuration), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDuration_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDuration_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageOverlayMaterial_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Rage" },
@@ -1171,10 +1219,14 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TargetingOffset,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CameraRotationSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TargetingDistance,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxSoftTargetDistance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CurrentHealth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxHealth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CurrentRage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_MaxRage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionRate,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDepletionAmount,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageActivationThreshold,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_DeathMontage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ParryMontage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CounterMontage,
@@ -1182,7 +1234,6 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TestRhythmMontage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageEmitter,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageAnim,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageDuration,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageOverlayMaterial,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_InitialRageOverlayMaterial,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ScoreComp,
@@ -1221,15 +1272,15 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ANeonParadigm_GameCharacter);
 	ANeonParadigm_GameCharacter::~ANeonParadigm_GameCharacter() {}
-	struct Z_CompiledInDeferFile_FID__Jhernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID__Jhernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 967897563U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 4152075152U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID__Jhernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_1758276271(TEXT("/Script/NeonParadigm_Game"),
-		Z_CompiledInDeferFile_FID__Jhernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID__Jhernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_3163868361(TEXT("/Script/NeonParadigm_Game"),
+		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
