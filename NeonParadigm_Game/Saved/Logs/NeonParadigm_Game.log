@@ -1647,3 +1647,33 @@ Minimum required: 527.27
 [2024.11.18-16.07.31:885][349]LogEditorActor: Deleted 1 Actors (0.032 secs)
 [2024.11.18-16.07.32:908][389]Cmd: TRANSACTION UNDO
 [2024.11.18-16.07.32:908][389]LogEditorTransaction: Undo Delete Elements
+[2024.11.18-16.15.45:072][ 25]LogUObjectHash: Compacting FUObjectHashTables data took   1.16ms
+[2024.11.18-16.15.45:556][ 25]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/_MyFiles/Levels/LevelDesign_Auto4
+[2024.11.18-16.15.45:557][ 25]LogSavePackage: Moving 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/LevelDesign_Auto43C15FAC34D1287C5D590CCA3375A92CC.tmp' to 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Levels/LevelDesign_Auto4.umap'
+[2024.11.18-16.15.45:561][ 25]LogAssetRegistry: Warning: ScanPathsSynchronous: E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Levels/LevelDesign_Auto4.umap is in the /Temp path, will not scan.
+[2024.11.18-16.15.45:562][ 25]LogFileHelpers: Editor autosave (incl. external actors) for '/Game/_MyFiles/Levels/LevelDesign' took 0.502
+[2024.11.18-16.15.45:562][ 25]LogFileHelpers: Editor autosave (incl. sublevels & external actors) for all levels took 0.502
+[2024.11.18-16.15.45:562][ 25]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/_MyFiles/Environment_TestAssets/Second_Area/SM_Cell] ([1] browsable assets)...
+[2024.11.18-16.15.45:562][ 25]OBJ SavePackage: Finished generating thumbnails for package [/Game/_MyFiles/Environment_TestAssets/Second_Area/SM_Cell]
+[2024.11.18-16.15.45:577][ 25]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/_MyFiles/Environment_TestAssets/Second_Area/SM_Cell_Auto4
+[2024.11.18-16.15.45:577][ 25]LogSavePackage: Moving 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/SM_Cell_Auto4048CAAC541392FD3473E499EE1320F3C.tmp' to 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Environment_TestAssets/Second_Area/SM_Cell_Auto4.uasset'
+[2024.11.18-16.15.45:578][ 25]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_RoadBlock] ([1] browsable assets)...
+[2024.11.18-16.15.45:578][ 25]OBJ SavePackage: Finished generating thumbnails for package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_RoadBlock]
+[2024.11.18-16.15.45:589][ 25]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_RoadBlock_Auto4
+[2024.11.18-16.15.45:589][ 25]LogSavePackage: Moving 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/SM_RoadBlock_Auto45CD1563943CF25B5DE9F46B5B34505F2.tmp' to 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_RoadBlock_Auto4.uasset'
+[2024.11.18-16.15.45:590][ 25]OBJ SavePackage: Generating thumbnails for [1] asset(s) in package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_SquarePlanter] ([1] browsable assets)...
+[2024.11.18-16.15.45:668][ 25]OBJ SavePackage:     Rendered thumbnail for [StaticMesh /Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_SquarePlanter.SM_SquarePlanter]
+[2024.11.18-16.15.45:668][ 25]OBJ SavePackage: Finished generating thumbnails for package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_SquarePlanter]
+[2024.11.18-16.15.45:677][ 25]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_SquarePlanter_Auto4
+[2024.11.18-16.15.45:677][ 25]LogSavePackage: Moving 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/SM_SquarePlanter_Auto4A74DADE8442740DFEBDD5D98401A1BBD.tmp' to 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_SquarePlanter_Auto4.uasset'
+[2024.11.18-16.15.45:680][ 25]OBJ SavePackage: Generating thumbnails for [1] asset(s) in package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_Trashcan] ([1] browsable assets)...
+[2024.11.18-16.15.45:710][ 25]OBJ SavePackage:     Rendered thumbnail for [StaticMesh /Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_Trashcan.SM_Trashcan]
+[2024.11.18-16.15.45:710][ 25]OBJ SavePackage: Finished generating thumbnails for package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_Trashcan]
+[2024.11.18-16.15.45:717][ 25]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_Trashcan_Auto4
+[2024.11.18-16.15.45:717][ 25]LogSavePackage: Moving 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/SM_Trashcan_Auto45E769AA64D6E5192228A77B409E865FB.tmp' to 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_Trashcan_Auto4.uasset'
+[2024.11.18-16.15.45:719][ 25]OBJ SavePackage: Generating thumbnails for [1] asset(s) in package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_satellite] ([1] browsable assets)...
+[2024.11.18-16.15.45:743][ 25]OBJ SavePackage:     Rendered thumbnail for [StaticMesh /Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_satellite.SM_satellite]
+[2024.11.18-16.15.45:743][ 25]OBJ SavePackage: Finished generating thumbnails for package [/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_satellite]
+[2024.11.18-16.15.45:756][ 25]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_satellite_Auto4
+[2024.11.18-16.15.45:756][ 25]LogSavePackage: Moving 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/SM_satellite_Auto4164BD76A4D2A7E5F7DF12CA6B3139EFC.tmp' to 'E:/senior thesis/NEON/github/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Saved/Autosaves/Game/_MyFiles/Environment_TestAssets/Outside_Area/SM_satellite_Auto4.uasset'
+[2024.11.18-16.15.45:757][ 25]LogFileHelpers: Auto-saving content packages took 0.196
