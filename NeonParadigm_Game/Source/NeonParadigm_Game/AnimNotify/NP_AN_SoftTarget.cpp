@@ -18,7 +18,7 @@ void UNP_AN_SoftTarget::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 
 	if (CharacterMoveComp)
 	{
-		CharacterMoveComp->SoftTarget();
+		CharacterMoveComp->SoftTarget(TargetRadius);
 	}
 	else
 		UE_LOG(LogTemp, Warning, TEXT("Cant FIND SoftTarget COMP In NOFITY!!!!!!!!"));

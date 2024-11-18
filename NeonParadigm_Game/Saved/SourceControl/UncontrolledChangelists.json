@@ -5,6 +5,13 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BP_Spawner.uasset",
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Projectiles/BP_NewProjectileBase.uasset",
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/Ranged/AM_Player_Ranged_Fire.uasset",
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset",
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Input/IMC_DefaultHackAndSlash.uasset",
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Projectiles/BP_Projectile.uasset",
+				"C:/Users/drake/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Projectiles/BP_ProjectileBase.uasset",
 				"D:/profile redirect/almorin1/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/GameInstance/BP_NeonGameInstance.uasset",
 				"D:/profile redirect/almorin1/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BP_Spawner.uasset",
 				"D:/profile redirect/almorin1/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/BP_NP_EnemySpawner.uasset",

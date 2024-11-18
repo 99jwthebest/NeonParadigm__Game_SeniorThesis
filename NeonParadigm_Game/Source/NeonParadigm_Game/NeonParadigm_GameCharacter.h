@@ -75,6 +75,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* RageAction;
 	
+	/** Ranged Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* RangedAction;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
 
@@ -128,8 +132,8 @@ public:
 	void StopRotateToTargetTimer();
 	void UpdateCharacterRotation();
 
-	void FindSoftLockTarget();
-	void SoftTarget();
+	void FindSoftLockTarget(float Radius);
+	void SoftTarget(float Radius);
 	void ResetSoftLockTarget();
 	AActor* GetSoftTargetActor();
 
@@ -154,6 +158,14 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void ParryProjectile();
 	void ResetParry();
+
+public:
+	UFUNCTION()
+	void DoRangedAttack();
+
+	// This is temporary
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	class UAnimMontage* RangedAttackMontage;
 
 protected:
 

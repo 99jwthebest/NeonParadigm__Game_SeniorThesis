@@ -28,7 +28,6 @@ UAttackComponent::UAttackComponent()
 	bCanAerialAttack = true;
 }
 
-
 // Called when the game starts
 void UAttackComponent::BeginPlay()
 {
@@ -42,7 +41,6 @@ void UAttackComponent::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("Found CharacterState Compo!!!!!"))
 	}
 }
-
 
 // Called every frame
 void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -367,7 +365,7 @@ bool UAttackComponent::DetermineDesiredAttack()
 
 void UAttackComponent::LaunchAttack()
 {
-	MyCharacter->SoftTarget();
+	MyCharacter->SoftTarget(80.0f);
 
 	if (IsValid(LaunchAnimMontage))
 	{

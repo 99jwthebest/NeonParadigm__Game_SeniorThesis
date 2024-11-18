@@ -288,17 +288,17 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
 
 float ANP_FMOD_Music::GetCurrentTempDelay()
 {
-    return 0.0f;
+    return M_CurrentTempoDelay;
 }
 
 float ANP_FMOD_Music::GetNextBeatTime()
 {
-    return 0.0f;
+    return M_NextBeatTime;
 }
 
 float ANP_FMOD_Music::GetThirdBeatTime()
 {
-    return 0.0f;
+    return M_ThirdBeatTime;
 }
 
 

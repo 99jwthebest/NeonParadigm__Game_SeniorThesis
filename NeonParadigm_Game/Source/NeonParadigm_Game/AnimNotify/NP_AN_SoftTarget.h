@@ -21,4 +21,8 @@ public:
 
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference) override;
 
+private:
+	UPROPERTY(EditAnywhere, Category = "Soft Target")
+	float TargetRadius = 80.0f;
+
 };

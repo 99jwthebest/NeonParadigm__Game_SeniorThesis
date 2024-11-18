@@ -228,6 +228,9 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		// Rage
 		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
 
+		// Ranged
+		EnhancedInputComponent->BindAction(RangedAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::DoRangedAttack);
+
 	}
 	else
 	{
@@ -706,7 +709,7 @@ void ANeonParadigm_GameCharacter::UpdateCharacterRotation()
 
 }
 
-void ANeonParadigm_GameCharacter::FindSoftLockTarget()
+void ANeonParadigm_GameCharacter::FindSoftLockTarget(float Radius = 80.0f)
 {
 	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f))  
 	{
@@ -714,9 +717,6 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		FVector StartVec = GetActorLocation();
 		FVector MultiplyVec = GetCharacterMovement()->GetLastInputVector() * TargetingDistance;
 		FVector EndVec = StartVec + MultiplyVec;
-
-		// Trace radius
-		float Radius = 80.0f;
 
 		// Object types to trace against (e.g., WorldDynamic, Pawn)
 		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
@@ -943,7 +943,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 	}
 }
 
-void ANeonParadigm_GameCharacter::SoftTarget()
+void ANeonParadigm_GameCharacter::SoftTarget(float Radius = 80.0f)
 {
 	if (!bIsTargeting)
 		FindSoftLockTarget();
@@ -1206,6 +1206,24 @@ void ANeonParadigm_GameCharacter::ParryInput()
 void ANeonParadigm_GameCharacter::ResetParry()
 {
 	bIsParrySaved = false;
+}
+
+void ANeonParadigm_GameCharacter::DoRangedAttack()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		// Set this up in AttackComp
+		PlayAnimMontage(RangedAttackMontage);
+	}
+	else
+	{
+		//If Current State is Not Attacking Then Attempt To Attack
+		UE_LOG(LogTemp, Error, TEXT("Cant ATTack!!!!"));
+		AttackComp->LightAttackEvent();
+	}
 }
 
 void ANeonParadigm_GameCharacter::SetCurrentTempoDelay(float CurTempoDelay)

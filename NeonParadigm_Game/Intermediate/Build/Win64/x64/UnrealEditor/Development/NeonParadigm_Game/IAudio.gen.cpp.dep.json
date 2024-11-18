@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\drake\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\iaudio.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\drake\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\drake\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
+            "c:\\users\\drake\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\framework\\iaudio.h",
+            "c:\\users\\drake\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\iaudio.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

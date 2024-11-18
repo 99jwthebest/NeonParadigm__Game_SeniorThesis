@@ -609,6 +609,12 @@
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.h">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SpawnObject.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SpawnObject.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_TestRhythmPunch.cpp">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClCompile>
@@ -698,6 +704,15 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\Framework\NP_GameInstance.h">
       <Filter>Source\NeonParadigm_Game\Framework</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\Projectile">
+      <UniqueIdentifier>{CF22B4FA-8615-36E5-B08E-08AE88606419}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Projectile\NP_Projectile.cpp">
+      <Filter>Source\NeonParadigm_Game\Projectile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Projectile\NP_Projectile.h">
+      <Filter>Source\NeonParadigm_Game\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

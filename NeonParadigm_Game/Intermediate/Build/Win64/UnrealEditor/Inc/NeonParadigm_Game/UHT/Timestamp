@@ -1,28 +1,30 @@
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\NeonParadigm_GameCharacter.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\NeonParadigm_GameGameMode.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\TestActor.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_AllowRotationOnRootMotion.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveHeavyAttack.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveParry.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_EnabledIFrames.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveDodge.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveLightAttack.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_LaunchPlayer.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_RotationToTarget.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_TestRhythmPunch.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_WeaponCollision.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_PlayGetupAM.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\AttackComponent.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\ScoreComponent.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\DamageComponent.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\DamageType\NP_DamageType.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Enemies\NP_BaseEnemy.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Enemies\NP_EnemySpawner.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_RageComplete.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Enums\CharacterStateComponent.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Framework\NP_GameInstance.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Framework\IAudio.h
-D:\profile redirect\almorin1\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_ResetState.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\NeonParadigm_GameCharacter.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\NeonParadigm_GameGameMode.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\TestActor.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_AllowRotationOnRootMotion.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_EnabledIFrames.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveDodge.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveHeavyAttack.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveLightAttack.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveParry.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_LaunchPlayer.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_RageComplete.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_ResetState.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_RotationToTarget.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_TestRhythmPunch.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\AttackComponent.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_SpawnObject.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_PlayGetupAM.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\AnimNotify\NP_AN_WeaponCollision.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Enums\CharacterStateComponent.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\DamageType\NP_DamageType.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Framework\NP_GameInstance.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Framework\IAudio.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Enemies\NP_EnemySpawner.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Projectile\NP_Projectile.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\DamageComponent.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Components\ScoreComponent.h
+C:\Users\drake\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Source\NeonParadigm_Game\Enemies\NP_BaseEnemy.h
