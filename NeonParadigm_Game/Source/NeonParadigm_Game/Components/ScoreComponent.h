@@ -38,6 +38,23 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 ThresholdSGrade;
 
+
+	// below for Style Letter Progress Bar
+	UPROPERTY(BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	int32 CurrentRankIndex;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	float RankProgress;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	float DepletionRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	float ProgressIncreaseRate;
+
+	FTimerHandle DepletionTimer;
+
+
 public:
 
 	void Testing();
@@ -46,5 +63,10 @@ public:
 	float GetCurrentScore();
 	UFUNCTION(BlueprintCallable, Category = "Score")
 	int32 CalculateGrade() const;
+
+	void AddProgress(float Amount);
+	void DepleteProgress();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateRank();
 
 };

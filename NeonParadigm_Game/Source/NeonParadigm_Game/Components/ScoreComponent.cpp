@@ -10,6 +10,10 @@ UScoreComponent::UScoreComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
+	CurrentRankIndex = 0;
+	RankProgress = 0.0f;
+	DepletionRate = 0.01f;
+	ProgressIncreaseRate = 0.10f; // Points to progress bar when scoring
 	// ...
 }
 
@@ -43,7 +47,7 @@ void UScoreComponent::IncrementScore(int ScoreToAdd)
 {
 	TotalScore += ScoreToAdd;
 	UE_LOG(LogTemp, Warning, TEXT("SCORE COMP, %d Points!!!!!!!!!!!"), TotalScore);
-
+	AddProgress(ProgressIncreaseRate);
 }
 
 float UScoreComponent::GetCurrentScore()
@@ -70,5 +74,37 @@ int32 UScoreComponent::CalculateGrade() const
 		return 0;
 	}
 }
+
+void UScoreComponent::AddProgress(float Amount)
+{
+	RankProgress += Amount;
+
+	// Check if we've filled the bar
+	if (RankProgress >= 1.0f)
+	{
+		RankProgress = 0.0f;
+
+		// Move to the next rank
+		CurrentRankIndex = FMath::Clamp(CurrentRankIndex + 1, 0, 3);
+	}
+
+	UpdateRank();
+}
+
+void UScoreComponent::DepleteProgress()
+{
+	RankProgress -= DepletionRate;
+	RankProgress = FMath::Clamp(RankProgress, 0.0f, 1.0f);
+
+	// Check if we've depleted the bar completely
+	if (RankProgress == 0.0f && CurrentRankIndex > 0)
+	{
+		CurrentRankIndex = FMath::Clamp(CurrentRankIndex - 1, 0, 3);
+		RankProgress = 1.0f; // Reset to full for the previous rank
+	}
+
+	UpdateRank();
+}
+
 
 
