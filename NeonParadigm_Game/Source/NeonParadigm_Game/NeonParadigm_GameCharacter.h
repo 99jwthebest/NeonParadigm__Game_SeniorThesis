@@ -386,7 +386,6 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void TogglePerfectHitTextBox();
 
-
 public:
 
 	void RotateCameraForSoftTargetting();

@@ -87,8 +87,6 @@ void UScoreComponent::AddProgress(float Amount)
 		// Move to the next rank
 		CurrentRankIndex = FMath::Clamp(CurrentRankIndex + 1, 0, 3);
 	}
-
-	UpdateRank();
 }
 
 void UScoreComponent::DepleteProgress()
@@ -102,9 +100,9 @@ void UScoreComponent::DepleteProgress()
 		CurrentRankIndex = FMath::Clamp(CurrentRankIndex - 1, 0, 3);
 		RankProgress = 1.0f; // Reset to full for the previous rank
 	}
-
-	UpdateRank();
 }
+
+
 
 
 
