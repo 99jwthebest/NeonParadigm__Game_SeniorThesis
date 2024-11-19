@@ -34,6 +34,7 @@ void ANP_FMOD_Music::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    BPM_Started = false;
     FirstTime = true;
     TimesPlayed = 0;
     // Ensure the FMODAudioComponent is valid
@@ -172,6 +173,22 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
         {
            // TimesPlayed = 0;
             FirstTime = true;
+        }
+
+        UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
+    }
+
+
+    if (Name == "BPM_Start")
+    {
+        if (FMODAudioComponent)
+        {
+            if (!BPM_Started)
+            {
+                PlayerCharacter->BeginBPM_Bar();
+                UE_LOG(LogTemp, Warning, TEXT("Timeline MARKER Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
+                BPM_Started = true;
+            }
         }
 
         UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);

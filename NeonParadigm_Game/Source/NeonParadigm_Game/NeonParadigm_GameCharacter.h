@@ -339,6 +339,7 @@ private:
 public:
 
 	void SetPerfectBeatHit(bool bPerfectHit);
+	UFUNCTION(BlueprintCallable)
 	bool IsPerfectBeatHit();
 
 private:
@@ -380,6 +381,10 @@ public:
 	void ToggleCombatStyleGrade();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayBPM_HalfCirle(float CurrentTempo);
+	UFUNCTION(BlueprintImplementableEvent)
+	void BeginBPM_Bar();
+	UFUNCTION(BlueprintImplementableEvent)
+	void TogglePerfectHitTextBox();
 
 
 public:

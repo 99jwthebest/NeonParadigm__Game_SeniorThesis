@@ -62,7 +62,7 @@ private:
 
 	bool FirstTime;
 	int TimesPlayed;
-
+	bool BPM_Started;
 
 	TArray<ANP_BaseEnemy*> SpawnedEnemies;
 

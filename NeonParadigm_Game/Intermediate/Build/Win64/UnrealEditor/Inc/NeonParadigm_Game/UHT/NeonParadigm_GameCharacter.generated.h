@@ -25,6 +25,7 @@ class UDamageType;
 	DECLARE_FUNCTION(execAddToCurrentHealth); \
 	DECLARE_FUNCTION(execAddToCurrentRage); \
 	DECLARE_FUNCTION(execSoftTargetingTimelineUpdated); \
+	DECLARE_FUNCTION(execIsPerfectBeatHit); \
 	DECLARE_FUNCTION(execCounter); \
 	DECLARE_FUNCTION(execHandleTakeAnyDamage); \
 	DECLARE_FUNCTION(execIsIFramesEnabled);

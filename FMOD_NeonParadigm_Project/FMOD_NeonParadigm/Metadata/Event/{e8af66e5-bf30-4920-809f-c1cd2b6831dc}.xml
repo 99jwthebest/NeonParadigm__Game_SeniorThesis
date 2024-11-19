@@ -103,6 +103,7 @@
 			<destination>{3d9fa576-6ea5-4a8d-8cf2-b2aa0a98ca9e}</destination>
 			<destination>{c47513ae-5c3e-40f6-96a4-39aa022e3301}</destination>
 			<destination>{63cfc63e-9b4e-430b-b257-7eb5584ccf99}</destination>
+			<destination>{a3a9c50a-529d-4847-a75a-1d7c90539068}</destination>
 		</relationship>
 	</object>
 	<object class="ParameterProxy" id="{a1811c0f-df0b-497c-9510-342073319270}">
@@ -355,6 +356,20 @@
 		</property>
 		<property name="name">
 			<value>ResetFirstTimeBool</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{5b52071e-8763-425f-b0ba-e9db70794d47}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{8308271c-767b-47ed-b220-63da0e11035a}</destination>
+		</relationship>
+	</object>
+	<object class="NamedMarker" id="{a3a9c50a-529d-4847-a75a-1d7c90539068}">
+		<property name="position">
+			<value>0.11143000201829927</value>
+		</property>
+		<property name="name">
+			<value>BPM_Start</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{5b52071e-8763-425f-b0ba-e9db70794d47}</destination>
