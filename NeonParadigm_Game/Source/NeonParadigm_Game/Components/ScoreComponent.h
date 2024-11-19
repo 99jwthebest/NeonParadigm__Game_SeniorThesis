@@ -64,9 +64,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Score")
 	int32 CalculateGrade() const;
 
+	UFUNCTION(BlueprintPure)
+	float GetRankProgress();
+
 	void AddProgress(float Amount);
+	UFUNCTION(BlueprintCallable)
 	void DepleteProgress();
-	UFUNCTION(BlueprintImplementableEvent)
-	void UpdateRank();
 
 };
