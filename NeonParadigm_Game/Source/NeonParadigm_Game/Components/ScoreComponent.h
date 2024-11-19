@@ -45,6 +45,6 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetCurrentScore();
 	UFUNCTION(BlueprintCallable, Category = "Score")
-	FString CalculateGrade() const;
+	int32 CalculateGrade() const;
 
 };

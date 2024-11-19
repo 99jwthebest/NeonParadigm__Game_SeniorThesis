@@ -51,23 +51,23 @@ float UScoreComponent::GetCurrentScore()
 	return TotalScore;
 }
 
-FString UScoreComponent::CalculateGrade() const
+int32 UScoreComponent::CalculateGrade() const
 {
 	if (TotalScore >= ThresholdSGrade)
 	{
-		return "S";
+		return 3;
 	}
 	else if (TotalScore >= ThresholdAGrade)
 	{
-		return "A";
+		return 2;
 	}
 	else if (TotalScore >= ThresholdBGrade)
 	{
-		return "B";
+		return 1;
 	}
 	else
 	{
-		return "C";
+		return 0;
 	}
 }
 
