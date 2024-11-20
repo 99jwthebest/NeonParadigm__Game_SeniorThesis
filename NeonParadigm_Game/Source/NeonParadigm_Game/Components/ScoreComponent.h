@@ -27,8 +27,13 @@ public:
 
 private:
 
+	// Base score tracking
 	int TotalScore;
 	int CurrentScore;
+
+	// JustTiming Score
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scoring")
+	int32 PerfectHits; // Tracks the number of perfect hits
 
 	// Grade thresholds
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))

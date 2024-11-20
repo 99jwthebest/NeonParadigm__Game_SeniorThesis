@@ -143,7 +143,10 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
+	/*if (!bIsTargeting)
+		return;*/
+
+	if (bIsTargeting && SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
 	{
 		// Attempt to cast TargetActor to NP_BaseEnemy
 		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
