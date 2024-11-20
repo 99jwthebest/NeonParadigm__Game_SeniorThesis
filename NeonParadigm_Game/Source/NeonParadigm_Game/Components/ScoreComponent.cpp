@@ -88,9 +88,9 @@ void UScoreComponent::AddProgress(float Amount)
 	RankProgress += Amount;
 
 	// Check if we've filled the bar
-	if (RankProgress >= 1.0f)
+	if (RankProgress >= 1.0f)  // check to see if max rank!!! *****************
 	{
-		RankProgress = 0.0f;
+		RankProgress = 0.2f; // Set to 20% for the new rank
 
 		// Move to the next rank
 		CurrentRankIndex = FMath::Clamp(CurrentRankIndex + 1, 0, 3);
@@ -102,11 +102,20 @@ void UScoreComponent::DepleteProgress()
 	RankProgress -= DepletionRate;
 	RankProgress = FMath::Clamp(RankProgress, 0.0f, 1.0f);
 
-	// Check if we've depleted the bar completely
-	if (RankProgress == 0.0f && CurrentRankIndex > 0)
+	if (RankProgress == 0.0f)
 	{
-		CurrentRankIndex = FMath::Clamp(CurrentRankIndex - 1, 0, 3);
-		RankProgress = 1.0f; // Reset to full for the previous rank
+		if (CurrentRankIndex > 0)
+		{
+			CurrentRankIndex = FMath::Clamp(CurrentRankIndex - 1, 0, 3);
+			RankProgress = 0.9f; // Set to 90% for the previous rank
+
+			UE_LOG(LogTemp, Warning, TEXT("Rank decreased to: %d"), CurrentRankIndex);
+		}
+		else
+		{
+			RankProgress = 0.0f;
+			UE_LOG(LogTemp, Warning, TEXT("Rank At lowest rank: %d"), CurrentRankIndex);
+		}
 	}
 }
 
