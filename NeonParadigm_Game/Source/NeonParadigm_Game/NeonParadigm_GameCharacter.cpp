@@ -1583,74 +1583,9 @@ void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 	UpdateHealthBarEvent();  // this might need to be changed   ************
 }
 
-void ANeonParadigm_GameCharacter::RotateCameraForSoftTargetting()
+
+
+void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
-	/*
-	if (SoftTargetActor)
-	{
-		FVector CameraLocation = GetActorLocation(); // Use your camera's current location
-		FVector TargetLocation = SoftTargetActor->GetActorLocation();
-
-		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(CameraLocation, TargetLocation);
-
-		// Apply the rotation to the camera
-		FollowCamera->SetWorldRotation(LookAtRotation);
-	}
-
-
-	if (SoftTargetActor)
-	{
-		FVector CameraLocation = GetActorLocation(); // Use your camera's current location
-		FVector TargetLocation = SoftTargetActor->GetActorLocation();
-
-		FRotator CurrentRotation = CameraComponent->GetComponentRotation(); // Replace `CameraComponent` with your camera reference
-		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(CameraLocation, TargetLocation);
-
-		// Interpolate rotation
-		FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, LookAtRotation, GetWorld()->DeltaTimeSeconds, 5.0f);
-
-		// Apply the smooth rotation to the camera
-		CameraComponent->SetWorldRotation(SmoothRotation);
-	}
-
-	if (bIsLockedOn && SoftTargetActor)
-	{
-		FVector CameraLocation = GetActorLocation();
-		FVector TargetLocation = SoftTargetActor->GetActorLocation();
-
-		FRotator CurrentRotation = CameraComponent->GetComponentRotation();
-		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(CameraLocation, TargetLocation);
-
-		FRotator SmoothRotation = FMath::RInterpTo(CurrentRotation, LookAtRotation, GetWorld()->DeltaTimeSeconds, 5.0f);
-		CameraComponent->SetWorldRotation(SmoothRotation);
-	}
-
-
-	// alternative
-	if (bIsLockedOn && SoftTargetActor)
-	{
-		FVector TargetLocation = SoftTargetActor->GetActorLocation();
-
-		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(SpringArmComponent->GetComponentLocation(), TargetLocation);
-
-		FRotator SmoothRotation = FMath::RInterpTo(SpringArmComponent->GetComponentRotation(), LookAtRotation, GetWorld()->DeltaTimeSeconds, 5.0f);
-
-		SpringArmComponent->SetWorldRotation(SmoothRotation);
-	}
-
-	if (SoftTargetActor)
-	{
-		bIsLockedOn = true;
-	}
-	else
-	{
-		bIsLockedOn = false;
-
-		// Optionally reset camera to default view
-		FRotator DefaultRotation = FRotator(-10.0f, 0.0f, 0.0f); // Example default values
-		FRotator SmoothRotation = FMath::RInterpTo(CameraComponent->GetComponentRotation(), DefaultRotation, GetWorld()->DeltaTimeSeconds, 5.0f);
-		CameraComponent->SetWorldRotation(SmoothRotation);
-	}
-	*/
+	ScoreComp->EndEncounter();
 }
-

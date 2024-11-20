@@ -250,6 +250,7 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
                     }
                 }
                 PlayerCharacter->ToggleCombatStyleGrade();
+                PlayerCharacter->EndEnemyEncounter();
             }
 
             continue; // Skip further processing for this enemy

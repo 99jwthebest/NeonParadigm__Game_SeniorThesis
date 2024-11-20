@@ -57,7 +57,10 @@ float UScoreComponent::GetCurrentScore()
 
 int32 UScoreComponent::CalculateGrade() const
 {
-	if (TotalScore >= ThresholdSGrade)
+
+	return CurrentRankIndex;
+
+	/*if (TotalScore >= ThresholdSGrade)
 	{
 		return 3;
 	}
@@ -72,7 +75,7 @@ int32 UScoreComponent::CalculateGrade() const
 	else
 	{
 		return 0;
-	}
+	}*/
 }
 
 float UScoreComponent::GetRankProgress()

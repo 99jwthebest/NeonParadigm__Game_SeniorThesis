@@ -389,7 +389,12 @@ public:
 
 public:
 
-	void RotateCameraForSoftTargetting();
+
+	//FORCEINLINE 
+	/** Returns ScoreComp SubObject **/
+	FORCEINLINE class UScoreComponent* GetScoreComponent() const { return ScoreComp; }
+
+	void EndEnemyEncounter();
 
 };
 
