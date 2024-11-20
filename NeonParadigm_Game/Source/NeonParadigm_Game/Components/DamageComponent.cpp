@@ -103,6 +103,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				HitActors.AddUnique(Hit.GetActor());
 				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
 
+				ScoreComp->TrackHit(MyCharacter->IsPerfectBeatHit());
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{

@@ -32,8 +32,30 @@ private:
 	int CurrentScore;
 
 	// JustTiming Score
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scoring")
-	int32 PerfectHits; // Tracks the number of perfect hits
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 PerfectHits; // Tracks the number of perfect hits
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 TotalHits; // Tracks the total number of hits
+
+	// Time Efficiency
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float EncounterStartTime; // Time when the encounter started
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float EncounterEndTime; // Time when the encounter ended
+
+	// Time thresholds
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 TimeThresholdBGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 TimeThresholdAGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 TimeThresholdSGrade;
+
+	// Final Rank and Overall Score
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallScore;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 FinalRank; // 0 = C, 1 = B, 2 = A, 3 = S
 
 	// Grade thresholds
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -75,5 +97,19 @@ public:
 	void AddProgress(float Amount);
 	UFUNCTION(BlueprintCallable)
 	void DepleteProgress();
+
+
+	void TrackHit(bool bIsPerfectHit);
+
+	float CalculateJustTimingBonus() const;
+
+	UFUNCTION(BlueprintCallable)
+		void StartEncounter();
+	UFUNCTION(BlueprintCallable)
+		void EndEncounter();
+
+	float CalculateTimeBonus() const;
+
+	void CalculateOverallScore();
 
 };

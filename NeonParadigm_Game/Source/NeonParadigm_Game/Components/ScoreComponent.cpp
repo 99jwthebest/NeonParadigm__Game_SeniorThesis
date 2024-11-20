@@ -108,4 +108,83 @@ void UScoreComponent::DepleteProgress()
 }
 
 
+void UScoreComponent::TrackHit(bool bIsPerfectHit)
+{
+	TotalHits++;
+
+	if (bIsPerfectHit)
+	{
+		PerfectHits++;
+	}
+}
+
+float UScoreComponent::CalculateJustTimingBonus() const
+{
+	if (TotalHits == 0) return 0.0f;
+
+	float PerfectHitPercentage = (float)PerfectHits / (float)TotalHits;
+	// Example: Bonus = 1000 points for 100% average
+	return PerfectHitPercentage * 1000.0f;
+}
+
+void UScoreComponent::StartEncounter()
+{
+	// Set the starting time to the current game time
+	EncounterStartTime = GetWorld()->GetTimeSeconds();
+}
+
+void UScoreComponent::EndEncounter()
+{
+	// Set the ending time to the current game time
+	EncounterEndTime = GetWorld()->GetTimeSeconds();
+}
+
+float UScoreComponent::CalculateTimeBonus() const
+{
+	float EncounterDuration = EncounterEndTime - EncounterStartTime;
+
+	// Determine rank based on time thresholds
+	if (EncounterDuration <= TimeThresholdSGrade)
+	{
+		return 1500.0f; // S rank
+	}
+	else if (EncounterDuration <= TimeThresholdAGrade)
+	{
+		return 1000.0f; // A rank
+	}
+	else if (EncounterDuration <= TimeThresholdBGrade)
+	{
+		return 500.0f; // B rank
+	}
+	else
+	{
+		return 0.0f; // C rank
+	}
+}
+
+void UScoreComponent::CalculateOverallScore()
+{
+	// Combine all scores
+	float JustTimingBonus = CalculateJustTimingBonus();
+	float TimeBonus = CalculateTimeBonus();
+	OverallScore = TotalScore + JustTimingBonus + TimeBonus;
+
+	// Determine final rank based on OverallScore thresholds
+	if (OverallScore >= 5000)
+	{
+		FinalRank = 3; // S rank
+	}
+	else if (OverallScore >= 4000)
+	{
+		FinalRank = 2; // A rank
+	}
+	else if (OverallScore >= 3000)
+	{
+		FinalRank = 1; // B rank
+	}
+	else
+	{
+		FinalRank = 0; // C rank
+	}
+}
 

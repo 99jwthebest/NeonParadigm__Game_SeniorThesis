@@ -19,6 +19,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_13_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execEndEncounter); \
+	DECLARE_FUNCTION(execStartEncounter); \
 	DECLARE_FUNCTION(execDepleteProgress); \
 	DECLARE_FUNCTION(execGetRankProgress); \
 	DECLARE_FUNCTION(execCalculateGrade); \
