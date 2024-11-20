@@ -101,6 +101,14 @@ private:
 	UAnimMontage* DodgeMontage;
 	bool bEnabledIFrames;
 	
+
+	int32 PerfectDodgeCount = 0; // Tracks consecutive perfect dodges
+	float DodgePushMultiplier = 1.0f; // Increases push distance
+	float DodgeCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxPerfectDodges = 3; // Maximum consecutive dodges
+	const float CooldownDuration = 1.0f; // Beat delay (in seconds) before dodge resets
+
+
 	bool DoubleJumped;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DoubleJumpMontage;
