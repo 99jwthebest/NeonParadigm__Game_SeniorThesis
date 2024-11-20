@@ -143,21 +143,20 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (bIsTargeting && TargetActor->IsValidLowLevel())
+	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
 	{
 		// Attempt to cast TargetActor to NP_BaseEnemy
-		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(TargetActor);
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
 		if(Enemy)
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("Successfully casted to NP_BaseEnemy and called SomeEnemyFunction."));
 			if (Enemy->GetState() != ECharacterStates::Death)
 			{
 				// If The Distance Between the player and Enemy is greater than MaxTargetingDistance Then Stop Targeting.
-				if (GetDistanceTo(TargetActor) < MaxTargetingDistance)
+				if (GetDistanceTo(SoftTargetActor) < MaxTargetingDistance)
 				{
 					FRotator currentRotation = GetController()->GetControlRotation();
 
-					FVector TargetVector = TargetActor->GetActorLocation() - TargetingOffset;
+					FVector TargetVector = SoftTargetActor->GetActorLocation() - TargetingOffset;
 
 					FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetVector));
 

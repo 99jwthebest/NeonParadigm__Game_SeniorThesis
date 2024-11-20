@@ -53,9 +53,9 @@
 			"CharacterStateComponent.cpp.obj",
 			"NP_FMOD_Music.cpp.obj",
 			"NeonParadigm_Game.cpp.obj",
-			"NeonParadigm_GameCharacter.cpp.obj",
 			"NeonParadigm_GameGameMode.cpp.obj",
-			"TestActor.cpp.obj"
+			"TestActor.cpp.obj",
+			"NeonParadigm_GameCharacter.cpp.obj"
 		]
 	}
 }
