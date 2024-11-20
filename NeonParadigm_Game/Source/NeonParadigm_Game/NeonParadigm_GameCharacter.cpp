@@ -427,6 +427,9 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 	CurrentCharacterState.Add(ECharacterStates::Parry);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
+	// Check if cooldown has ended
+	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
+
 	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
 }
 
