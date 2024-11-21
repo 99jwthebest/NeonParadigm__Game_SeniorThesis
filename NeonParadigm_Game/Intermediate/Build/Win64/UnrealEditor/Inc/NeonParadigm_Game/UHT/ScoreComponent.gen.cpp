@@ -42,6 +42,13 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		*(float*)Z_Param__Result=P_THIS->GetRankProgress();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UScoreComponent::execGetCurrentRankIndex)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(int32*)Z_Param__Result=P_THIS->GetCurrentRankIndex();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UScoreComponent::execCalculateGrade)
 	{
 		P_FINISH;
@@ -63,6 +70,7 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 			{ "CalculateGrade", &UScoreComponent::execCalculateGrade },
 			{ "DepleteProgress", &UScoreComponent::execDepleteProgress },
 			{ "EndEncounter", &UScoreComponent::execEndEncounter },
+			{ "GetCurrentRankIndex", &UScoreComponent::execGetCurrentRankIndex },
 			{ "GetCurrentScore", &UScoreComponent::execGetCurrentScore },
 			{ "GetRankProgress", &UScoreComponent::execGetRankProgress },
 			{ "StartEncounter", &UScoreComponent::execStartEncounter },
@@ -145,6 +153,40 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_EndEncounter_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics
+	{
+		struct ScoreComponent_eventGetCurrentRankIndex_Parms
+		{
+			int32 ReturnValue;
+		};
+		static const UECodeGen_Private::FIntPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ScoreComponent_eventGetCurrentRankIndex_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UScoreComponent, nullptr, "GetCurrentRankIndex", nullptr, nullptr, Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::PropPointers), sizeof(Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::ScoreComponent_eventGetCurrentRankIndex_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::Function_MetaDataParams), Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::ScoreComponent_eventGetCurrentRankIndex_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -327,6 +369,7 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		{ &Z_Construct_UFunction_UScoreComponent_CalculateGrade, "CalculateGrade" }, // 609094439
 		{ &Z_Construct_UFunction_UScoreComponent_DepleteProgress, "DepleteProgress" }, // 1311843279
 		{ &Z_Construct_UFunction_UScoreComponent_EndEncounter, "EndEncounter" }, // 290903661
+		{ &Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex, "GetCurrentRankIndex" }, // 3102506199
 		{ &Z_Construct_UFunction_UScoreComponent_GetCurrentScore, "GetCurrentScore" }, // 1017296062
 		{ &Z_Construct_UFunction_UScoreComponent_GetRankProgress, "GetRankProgress" }, // 807171787
 		{ &Z_Construct_UFunction_UScoreComponent_StartEncounter, "StartEncounter" }, // 1206630286
@@ -572,9 +615,9 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UScoreComponent, UScoreComponent::StaticClass, TEXT("UScoreComponent"), &Z_Registration_Info_UClass_UScoreComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UScoreComponent), 2829053964U) },
+		{ Z_Construct_UClass_UScoreComponent, UScoreComponent::StaticClass, TEXT("UScoreComponent"), &Z_Registration_Info_UClass_UScoreComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UScoreComponent), 3948180799U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_2661215429(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_526175776(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

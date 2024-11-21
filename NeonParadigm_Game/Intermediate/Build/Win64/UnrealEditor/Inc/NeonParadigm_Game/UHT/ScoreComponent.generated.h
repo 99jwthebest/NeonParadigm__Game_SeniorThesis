@@ -23,6 +23,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execStartEncounter); \
 	DECLARE_FUNCTION(execDepleteProgress); \
 	DECLARE_FUNCTION(execGetRankProgress); \
+	DECLARE_FUNCTION(execGetCurrentRankIndex); \
 	DECLARE_FUNCTION(execCalculateGrade); \
 	DECLARE_FUNCTION(execGetCurrentScore);
 

@@ -92,6 +92,9 @@ public:
 	int32 CalculateGrade() const;
 
 	UFUNCTION(BlueprintPure)
+	int32 GetCurrentRankIndex() const;
+
+	UFUNCTION(BlueprintPure)
 	float GetRankProgress();
 
 	void AddProgress(float Amount);

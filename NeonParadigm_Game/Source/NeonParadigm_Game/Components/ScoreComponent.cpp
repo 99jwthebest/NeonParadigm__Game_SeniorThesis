@@ -55,27 +55,9 @@ float UScoreComponent::GetCurrentScore()
 	return TotalScore;
 }
 
-int32 UScoreComponent::CalculateGrade() const
+int32 UScoreComponent::GetCurrentRankIndex() const
 {
-
 	return CurrentRankIndex;
-
-	/*if (TotalScore >= ThresholdSGrade)
-	{
-		return 3;
-	}
-	else if (TotalScore >= ThresholdAGrade)
-	{
-		return 2;
-	}
-	else if (TotalScore >= ThresholdBGrade)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}*/
 }
 
 float UScoreComponent::GetRankProgress()
@@ -171,6 +153,26 @@ float UScoreComponent::CalculateTimeBonus() const
 	else
 	{
 		return 0.0f; // C rank
+	}
+}
+
+int32 UScoreComponent::CalculateGrade() const
+{
+	if (TotalScore >= ThresholdSGrade)
+	{
+		return 3; // S rank
+	}
+	else if (TotalScore >= ThresholdAGrade)
+	{
+		return 2; // A rank
+	}
+	else if (TotalScore >= ThresholdBGrade)
+	{
+		return 1; // B rank
+	}
+	else
+	{
+		return 0; // C rank
 	}
 }
 
