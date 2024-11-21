@@ -143,8 +143,8 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	/*if (!bIsTargeting)
-		return;*/
+	if (bIsTargeting)
+		return;
 
 	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
 	{
