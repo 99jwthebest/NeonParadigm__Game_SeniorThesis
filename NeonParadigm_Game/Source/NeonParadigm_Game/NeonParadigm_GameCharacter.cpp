@@ -146,7 +146,7 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 	/*if (!bIsTargeting)
 		return;*/
 
-	if (bIsTargeting && SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
+	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
 	{
 		// Attempt to cast TargetActor to NP_BaseEnemy
 		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
@@ -402,18 +402,35 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 		if (GetDesiredRotation() != FRotator(0.0f, 0.0f, 0.0f))
 		{
 			SetActorRotation(GetDesiredRotation());
-			/*CharacterState->SetState(ECharacterStates::Dodge);
-			PlayAnimMontage(DodgeMontage);*/
 		}
 
 		CharacterState->SetState(ECharacterStates::Dodge);
 		TestRhythmDelayEvent();
+
 		if (bPerfectBeatHit)
 		{
+			PerfectDodgeCount++;
+			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
 			DamageComp->PerfectHitOperations();
 		}
+		else
+		{
+			PerfectDodgeCount = 0;
+			DodgePushMultiplier = 1.0f;
+		}
+
 		PlayAnimMontage(DodgeMontage);
-		AttackComp->AttackMovement(15.0f); // maybe increase to 20 max
+
+		// Apply movement with multiplier
+		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+
+		if (PerfectDodgeCount >= MaxPerfectDodges)
+		{
+			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+			PerfectDodgeCount = 0;
+			DodgePushMultiplier = 1.0f;
+		}
+
 	}
 }
 
@@ -430,7 +447,7 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 	// Check if cooldown has ended
 	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
 }
 
 FRotator ANeonParadigm_GameCharacter::GetDesiredRotation() const
