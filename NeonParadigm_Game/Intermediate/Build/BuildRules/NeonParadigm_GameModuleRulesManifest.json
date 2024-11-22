@@ -1,13 +1,13 @@
 {
 	"SourceFiles": [
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_Game\\NeonParadigm_Game.Build.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudioNiagara\\Source\\FMODStudioNiagara\\FMODStudioNiagara.Build.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODAudioLinkEditor\\FMODAudioLinkEditor.Build.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODAudioLink\\FMODAudioLink.Build.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODStudioEditor\\FMODStudioEditor.Build.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODStudio\\FMODStudio.Build.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_Game.Target.cs",
-		"C:\\Angie\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_GameEditor.Target.cs"
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_Game\\NeonParadigm_Game.Build.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudioNiagara\\Source\\FMODStudioNiagara\\FMODStudioNiagara.Build.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODAudioLinkEditor\\FMODAudioLinkEditor.Build.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODAudioLink\\FMODAudioLink.Build.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODStudioEditor\\FMODStudioEditor.Build.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Plugins\\FMODStudio\\Source\\FMODStudio\\FMODStudio.Build.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_Game.Target.cs",
+		"D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Source\\NeonParadigm_GameEditor.Target.cs"
 	],
 	"EngineVersion": "5.3.2"
 }
