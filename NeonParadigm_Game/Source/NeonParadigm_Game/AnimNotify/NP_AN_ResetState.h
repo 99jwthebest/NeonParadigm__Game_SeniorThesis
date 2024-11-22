@@ -17,10 +17,7 @@ class NEONPARADIGM_GAME_API UNP_AN_ResetState : public UAnimNotify
 	GENERATED_BODY()
 	
 public:
-
+	UNP_AN_ResetState();
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference) override;
 
-private:
-	UPROPERTY()
-	class UCharacterStateComponent* CharacterStateComp;
 };

@@ -19,6 +19,7 @@ enum class EDamageTypes : uint8
 	Middle, //UMETA(DisplayName = "Option 4"),
 	Knockdown, //UMETA(DisplayName = "Option 5"),
 	Knockback, //UMETA(DisplayName = "Option 5"),
+	Launch, //UMETA(DisplayName = "Option 5"),
 };
 
 UCLASS()
@@ -30,8 +31,8 @@ class NEONPARADIGM_GAME_API UNP_DamageType : public UDamageType
 public:
 	EDamageTypes GetDamageType();
 
-private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DamageType, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DamageType)
 	EDamageTypes DamageType;
+private:
 
 };

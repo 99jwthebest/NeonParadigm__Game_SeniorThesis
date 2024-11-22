@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\FMODBus.cpp"
 /FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h"
 /FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Definitions.h"
@@ -6,6 +7,16 @@
 /Fo"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\FMODBus.cpp.obj"
 /sourceDependencies "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\FMODBus.cpp.dep.json"
 @"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\FMODStudio.Shared.rsp"
+=======
+"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\FMODBus.cpp"
+/FI"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h"
+/FI"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Definitions.h"
+/Yu"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h"
+/Fp"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.pch"
+/Fo"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\FMODBus.cpp.obj"
+/sourceDependencies "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\FMODBus.cpp.dep.json"
+@"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\FMODStudio.Shared.rsp"
+>>>>>>> ScoreComp_TestingMergge
 /Zc:inline
 /nologo
 /Oi

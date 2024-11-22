@@ -8,6 +8,9 @@ void UNP_AN_RotationToTarget::Notify(USkeletalMeshComponent* MeshComp, UAnimSequ
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
+	if (MeshComp == nullptr)
+		return;
+
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
 	if (OwnerActor)

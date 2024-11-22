@@ -21,8 +21,11 @@ void UNP_ANS_AllowRotationOnRootMotion::NotifyBegin(USkeletalMeshComponent* Mesh
 
 	if (CharacterMoveComp)
 	{
-		if(!CharacterMoveComp->GetIsTargeting() && !IsValid(CharacterMoveComp->GetSoftTargetActor()))
+		if (!CharacterMoveComp->GetIsTargeting() && !IsValid(CharacterMoveComp->GetSoftTargetActor()))
+		{
 			CharacterMoveComp->GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = true;
+			UE_LOG(LogTemp, Error, TEXT("DO WE KNOW MOTHER FUKCERJDLSKFJSDLKFJ AllowRotation COMP In NOFITY!!!!!!!!"));
+		}
 	}
 	else
 		UE_LOG(LogTemp, Warning, TEXT("Cant FIND AllowRotation COMP In NOFITY!!!!!!!!"));

@@ -1,3 +1,7 @@
 // PCH for Runtime/Engine/Public/EngineSharedPCH.h
+<<<<<<< HEAD
 #include "D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/Engine/SharedDefinitions.Engine.Cpp20.h"
+=======
+#include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/Engine/SharedDefinitions.Engine.Cpp20.h"
+>>>>>>> ScoreComp_TestingMergge
 #include "Runtime/Engine/Public/EngineSharedPCH.h"

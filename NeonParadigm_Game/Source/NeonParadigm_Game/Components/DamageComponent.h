@@ -11,6 +11,8 @@ class UCharacterStateComponent;
 class UNP_DamageType;
 class ANeonParadigm_GameCharacter;
 class UAnimMontage;
+class UScoreComponent;
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class NEONPARADIGM_GAME_API UDamageComponent : public UActorComponent
@@ -34,6 +36,9 @@ public:
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
 	//void PerformDeath();
 
+	void PerfectHitOperations();
+	void SpawnRagePickups(FHitResult& HitResult);
+
 private:
 	
 	TArray<AActor*> HitActors;
@@ -42,6 +47,8 @@ private:
 	UNP_DamageType* NP_DamageType;
 
 	UCharacterStateComponent* CharacterState;
+	UScoreComponent* ScoreComp;
+
 	/*UPROPERTY(EditAnywhere, Category = "Damage")
 	TSubclassOf<class UNP_DamageType> DamageTypeClass;*/
 
@@ -58,6 +65,12 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects, meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* ImpactEffect;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Effects, meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* PerfectParticle;
+
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	//UAnimMontage* DeathMontage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AActor> RagePickup;
 };

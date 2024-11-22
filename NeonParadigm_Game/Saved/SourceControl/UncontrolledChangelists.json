@@ -5,6 +5,7 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+<<<<<<< HEAD
 				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/Plane.uasset",
 				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/Cylinder.uasset",
 				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
@@ -293,6 +294,23 @@
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Facade_floor_ext.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Outside_Area/SM_NEO_Facade.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/interior_blocks/interior_full.uasset"
+=======
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/WBP_HUD.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasks_Boss/BTTask_BossStrafe.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BT_Boss_Euphony.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestScenes/Test_BossScene.umap",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/NP_BP_Boss_Euphony.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/Assets/ScoreSystem/Style_Letters_S.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/8/3A/OFY19M51PO23MSDEHDBTD2.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BP_Spawner.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/Assets/ScoreSystem/Style_Letters_A.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/Assets/ScoreSystem/Style_Letters_B.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/Assets/ScoreSystem/Style_Letters_C.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestScenes/RyanScene.umap",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestScenes/Test_RyanScene.umap",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasksBoss/BTTask_BossStrafe.uasset"
+>>>>>>> ScoreComp_TestingMergge
 			]
 		}
 	]

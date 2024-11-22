@@ -4,6 +4,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/Controller.h"
@@ -18,6 +19,9 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TimerManager.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "NeonParadigm_Game/Components/ScoreComponent.h"
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -70,19 +74,52 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	DoubleJumpVelocity = 1000.0f;
 
 	DamageComp = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage Component"));
+	
+	ScoreComp = CreateDefaultSubobject<UScoreComponent>(TEXT("Score Component"));
 
 	MaxTargetingDistance = 2500.0f;
 
 	SpeedOfRotation = 10.0f;
-	SpeedOfSoftRotation = 10.0f;
+	SpeedOfSoftRotation = 20.0f;  
+	// this speed controls how fast the character rotates in soft rotation ******* Maybe you can let player rotate character with this soft rotation to give more control or maybe to see if it's better. so far, this makes character more magnetic to the enemy.
 
 	bIsTargeting = false;
+
+	// SetCurrentAnimTimeDelay(1.0f);  just for testing purposes
+	TimelineComponent = CreateDefaultSubobject<UTimelineComponent>("Timeline Component");
+
+	BPM_OrbSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("BPM Orb Spring Arm"));
+	BPM_OrbSpringArm->SetupAttachment(RootComponent);
+	BPM_OrbSpringArm->TargetArmLength = 200.0f;  // Temp Length, Needs to be tweaked depending on user needs.
+	BPM_OrbSpringArm->bUsePawnControlRotation = true;  // Rotate the arm based on the controller
+	BPM_OrbSpringArm->bEnableCameraLag = true;
+	BPM_OrbSpringArm->bEnableCameraRotationLag = true;
+	// Default Setting speeds, Extremely low, probably need to change.
+	BPM_OrbSpringArm->CameraLagSpeed = 1.0f;
+	BPM_OrbSpringArm->CameraRotationLagSpeed = 1.0f;
+
+	// Create BPM Music Orb
+	BPM_OrbMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BPM Orb Mesh"));
+	BPM_OrbMesh->SetupAttachment(BPM_OrbSpringArm, USpringArmComponent::SocketName);
+
+	MaxRage = 100.0f;
+
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	DynOrbMaterial = BPM_OrbMesh->CreateAndSetMaterialInstanceDynamic(0);
+
+	if (SoftTargetCurve)
+	{
+		FOnTimelineFloat TimelineCallback;
+		TimelineCallback.BindUFunction(this, FName("SoftTargetingTimelineUpdated"));
+
+		TimelineComponent->AddInterpFloat(SoftTargetCurve, TimelineCallback);
+	}
 
 	// Attach the StaticMesh to the SkeletalMesh (Parent) at a specified socket
 	WeaponMesh->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
@@ -99,27 +136,30 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	CurrentHealth = MaxHealth;
 
 	OnTakeAnyDamage.AddDynamic(this, &ANeonParadigm_GameCharacter::HandleTakeAnyDamage);
+
 }
 
 void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (bIsTargeting && TargetActor->IsValidLowLevel())
+	if (bIsTargeting)
+		return;
+
+	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
 	{
 		// Attempt to cast TargetActor to NP_BaseEnemy
-		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(TargetActor);
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
 		if(Enemy)
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("Successfully casted to NP_BaseEnemy and called SomeEnemyFunction."));
 			if (Enemy->GetState() != ECharacterStates::Death)
 			{
 				// If The Distance Between the player and Enemy is greater than MaxTargetingDistance Then Stop Targeting.
-				if (GetDistanceTo(TargetActor) < MaxTargetingDistance)
+				if (GetDistanceTo(SoftTargetActor) < MaxTargetingDistance)
 				{
 					FRotator currentRotation = GetController()->GetControlRotation();
 
-					FVector TargetVector = TargetActor->GetActorLocation() - TargetingOffset;
+					FVector TargetVector = SoftTargetActor->GetActorLocation() - TargetingOffset;
 
 					FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetVector));
 
@@ -128,6 +168,8 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 					FRotator NewRotation = FMath::RInterpTo(currentRotation, TargetRot, RDeltaTime, CameraRotationSpeed);
 
 					GetController()->SetControlRotation(NewRotation);
+					UE_LOG(LogTemp, Warning, TEXT("rotating Camera"));
+
 				}
 				else
 				{
@@ -150,6 +192,7 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 		EndTarget();
 	}
 }
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -183,6 +226,10 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 		// Parry
 		EnhancedInputComponent->BindAction(ParryAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ParryInput);
+		
+		// Rage
+		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
+
 	}
 	else
 	{
@@ -193,8 +240,11 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 void ANeonParadigm_GameCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementVector = Value.Get<FVector2D>();
 	
+	if (GetCharacterMovement()->IsFlying())  // this is causing trace for softtarget to not work!!! ***********
+		return;
+
 	if (Controller != nullptr)
 	{
 		// find out which way is forward
@@ -210,14 +260,21 @@ void ANeonParadigm_GameCharacter::Move(const FInputActionValue& Value)
 		// add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
+		/*const FInputActionInstance& Instance;
+		Instance.Get*/
 	}
+}
+
+FVector2D ANeonParadigm_GameCharacter::GetMoveInputValue()
+{
+	return MovementVector;
 }
 
 void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
-
+	
 	if (Controller != nullptr)
 	{
 		if (!bIsTargeting)
@@ -298,9 +355,20 @@ void ANeonParadigm_GameCharacter::Jump()
 
 }
 
-void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)
+void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded blueprint is called Landed in C++
 {
+	Super::Landed(Hit);
+
 	ResetDoubleJump();
+	if (CharacterState->GetOnLandReset())  // On Landed Reset
+	{
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		CharacterState->SetOnLandReset(false);
+		AttackComp->ResetLaunched();
+		CharacterState->ResetState();
+	}
+	AttackComp->ResetLaunched();  
+
 }
 
 void ANeonParadigm_GameCharacter::ResetDoubleJump()
@@ -310,17 +378,6 @@ void ANeonParadigm_GameCharacter::ResetDoubleJump()
 
 void ANeonParadigm_GameCharacter::Dodge()
 {
-	/*TSubclassOf<UNP_DamageType> DamageTypeClass = UNP_DamageType::StaticClass();
-	if (DamageTypeClass != nullptr)
-	{
-		float Damage = UGameplayStatics::ApplyDamage(this, 10.0f, GetController(), this, DamageTypeClass);
-		UE_LOG(LogTemp, Warning, TEXT("Applied %f damage to self."), Damage);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("DamageTypeClass is not valid."));
-	}*/
-
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
@@ -335,7 +392,7 @@ void ANeonParadigm_GameCharacter::Dodge()
 	}
 }
 
-void ANeonParadigm_GameCharacter::DodgeEvent()
+void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over this for the perfect timing, i might be causing some glitches, maybe ********
 {
 	if (CanDodge())
 	{
@@ -345,13 +402,35 @@ void ANeonParadigm_GameCharacter::DodgeEvent()
 		if (GetDesiredRotation() != FRotator(0.0f, 0.0f, 0.0f))
 		{
 			SetActorRotation(GetDesiredRotation());
-			/*CharacterState->SetState(ECharacterStates::Dodge);
-			PlayAnimMontage(DodgeMontage);*/
 		}
 
 		CharacterState->SetState(ECharacterStates::Dodge);
+		TestRhythmDelayEvent();
+
+		if (bPerfectBeatHit)
+		{
+			PerfectDodgeCount++;
+			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
+			DamageComp->PerfectHitOperations();
+		}
+		else
+		{
+			PerfectDodgeCount = 0;
+			DodgePushMultiplier = 1.0f;
+		}
+
 		PlayAnimMontage(DodgeMontage);
-		AttackComp->AttackMovement(15.0f); // maybe increase to 20 max
+
+		// Apply movement with multiplier
+		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+
+		if (PerfectDodgeCount >= MaxPerfectDodges)
+		{
+			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+			PerfectDodgeCount = 0;
+			DodgePushMultiplier = 1.0f;
+		}
+
 	}
 }
 
@@ -365,7 +444,10 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 	CurrentCharacterState.Add(ECharacterStates::Parry);
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+	// Check if cooldown has ended
+	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
+
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
 }
 
 FRotator ANeonParadigm_GameCharacter::GetDesiredRotation() const
@@ -425,7 +507,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
 	// Debug draw type
-	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration;
+	EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
 	// Output hit result
 	FHitResult OutHit;
 	// Ignore self
@@ -495,7 +577,7 @@ void ANeonParadigm_GameCharacter::StartTargeting()
 		TArray<AActor*> ActorsToIgnore2;
 		ActorsToIgnore2.Add(this);
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration;
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
 		// Output hit result
 		FHitResult OutHit2;
 		// Ignore self
@@ -578,23 +660,24 @@ void ANeonParadigm_GameCharacter::RotateToTarget()
 	{
 		StopRotateToTargetTimer();
 		GetWorld()->GetTimerManager().SetTimer(TimerForRotationToTarget, this, &ANeonParadigm_GameCharacter::UpdateCharacterRotation, 0.01f, true); // 0.0167f
+		return;
 	}
-	else
+	
+	if (SoftTargetActor->IsValidLowLevel())
 	{
-		if (SoftTargetActor->IsValidLowLevel())
+		ANP_BaseEnemy* TempSoftTargetEnemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
+		if (TempSoftTargetEnemy)
 		{
-			ANP_BaseEnemy* TempSoftTargetEnemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
-			if (TempSoftTargetEnemy)
+			if (TempSoftTargetEnemy->GetState() != ECharacterStates::Death)
 			{
-				if (TempSoftTargetEnemy->GetState() != ECharacterStates::Death)
-				{
-					SoftTargetEnemy = TempSoftTargetEnemy;
-					StopRotationToSoftTargetTimer();
-					GetWorld()->GetTimerManager().SetTimer(TimerForSoftRotationToTarget, this, &ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation, 0.01f, true); // 0.0167f
-				}
+				SoftTargetEnemy = TempSoftTargetEnemy;
+				StopRotationToSoftTargetTimer();
+				//GetWorld()->GetTimerManager().SetTimer(TimerForSoftRotationToTarget, this, &ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation, 0.01f, true); // 0.0167f
+				TimelineComponent->PlayFromStart();
 			}
 		}
 	}
+	
 }
 
 bool ANeonParadigm_GameCharacter::GetIsTargeting()
@@ -647,35 +730,37 @@ void ANeonParadigm_GameCharacter::UpdateCharacterRotation()
 
 void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 {
-	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f))
+	if (UKismetMathLibrary::NotEqual_VectorVector(GetCharacterMovement()->GetLastInputVector(), FVector(0.0f, 0.0f, 0.0f), 0.05f))  
 	{
 		// Trace start and end points
 		FVector StartVec = GetActorLocation();
 		FVector MultiplyVec = GetCharacterMovement()->GetLastInputVector() * TargetingDistance;
 		FVector EndVec = StartVec + MultiplyVec;
+
 		// Trace radius
 		float Radius = 80.0f;
+
 		// Object types to trace against (e.g., WorldDynamic, Pawn)
 		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 		ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
-		//ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECC_WorldDynamic));
+
 		// Trace against simple collision
 		bool bTraceComplex = false;
+
 		// Actors to ignore (e.g., this actor)
 		TArray<AActor*> ActorsToIgnore;
-		ActorsToIgnore.Add(this);
-		ActorsToIgnore.Add(SoftTargetActor);
-		ActorsToIgnore.Add(SoftTargetEnemy);
-		ActorsToIgnore.Add(LastSoftTargetActor);
+		ActorsToIgnore.Add(this); // Ignore self
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration;
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
+
 		// Output hit result
 		FHitResult OutHit;
+
 		// Ignore self
 		bool bIgnoreSelf = true;
-
-		// Trace For Enemies
+		
+		// Trace for enemies
 		bool bSphereTrace = UKismetSystemLibrary::SphereTraceSingleForObjects(
 			GetWorld(),
 			StartVec,
@@ -703,21 +788,11 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			{
 				if (Enemy->GetState() != ECharacterStates::Death)
 				{
-					if (OutHit.GetActor() != SoftTargetActor)
+					if (OutHit.GetActor() != SoftTargetActor || !SoftTargetActor->IsValidLowLevel())
 					{
-						if (SoftTargetActor->IsValidLowLevel())
-						{
-							LastSoftTargetActor = SoftTargetActor;
-							SoftTargetActor = OutHit.GetActor();
-						}
-						else
-						{
-							SoftTargetActor = OutHit.GetActor();
-						}
-					}
-					else
-					{
-						LastSoftTargetActor = nullptr;
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = OutHit.GetActor();
+						SoftTargetEnemy = Enemy;  
 					}
 				}
 				else
@@ -736,7 +811,170 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		}
 		else
 		{
+			// Trace start and end points
+			FVector StartVec2 = GetActorLocation();
+			FVector EndVec2 = StartVec2; // EndVec2 can be updated based on targeting distance if needed
+
+			// Trace radius
+			float Radius2 = 500.0f; // Adjust this value to balance the detection range for the lock-on system
+
+			// Object types to trace against (e.g., WorldDynamic, Pawn)
+			TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
+			ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
+
+			// Trace against simple collision
+			bool bTraceComplex2 = false;
+
+			// Actors to ignore (e.g., this actor)
+			TArray<AActor*> ActorsToIgnore2;
+			ActorsToIgnore2.Add(this); // Ignore self
+
+			// Debug draw type
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+
+			// Output hit result
+			FHitResult OutHit2;
+
+			// Ignore self
+			bool bIgnoreSelf2 = true;
+
+			// Trace for enemies
+			bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceSingleForObjects(
+				GetWorld(),
+				StartVec2,
+				EndVec2,
+				Radius2,
+				ObjectTypes2,
+				bTraceComplex2,
+				ActorsToIgnore2,
+				DrawDebugType2,
+				OutHit2,
+				bIgnoreSelf2,
+				FLinearColor::Red,
+				FLinearColor::Green,
+				5.0f
+			);
+
+			if (bSphereTrace2)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit2.GetActor()->GetName());
+
+				ANP_BaseEnemy* Enemy2 = Cast<ANP_BaseEnemy>(OutHit2.GetActor());
+				if (Enemy2 && Enemy2->GetState() != ECharacterStates::Death)
+				{
+					if (!SoftTargetActor || SoftTargetActor != OutHit2.GetActor())
+					{
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = OutHit2.GetActor();
+						SoftTargetEnemy = Enemy2;
+					}
+				}
+				else
+				{
+					// Reset targets if the hit actor is invalid or dead
+					LastSoftTargetActor = nullptr;
+					SoftTargetActor = nullptr;
+					SoftTargetEnemy = nullptr;
+				}
+			}
+			else
+			{
+				// Reset targets if nothing is hit
+				LastSoftTargetActor = nullptr;
+				SoftTargetActor = nullptr;
+				SoftTargetEnemy = nullptr;
+			}
+
+		}
+	}
+	else
+	{
+		FVector StartVec2 = GetActorLocation();
+		FVector EndVec2 = StartVec2; 
+
+		float Radius2 = 500.0f; 
+		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
+		ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
+
+		bool bTraceComplex2 = false;
+		TArray<AActor*> ActorsToIgnore2;
+		ActorsToIgnore2.Add(this); 
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+		TArray<FHitResult> OutHits2;
+
+		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
+			GetWorld(),
+			StartVec2,
+			EndVec2,
+			Radius2,
+			ObjectTypes2,
+			bTraceComplex2,
+			ActorsToIgnore2,
+			DrawDebugType2,
+			OutHits2,
+			true, // Ignore self
+			FLinearColor::Red,
+			FLinearColor::Green,
+			5.0f
+		);
+
+		if (bSphereTrace2)
+		{
+			float ClosestDistance = FLT_MAX;
+			AActor* ClosestActor = nullptr;
+
+			for (const FHitResult& Hit : OutHits2)
+			{
+				if (AActor* HitActor = Hit.GetActor())
+				{
+					// Calculate distance
+					float Distance = FVector::Dist(StartVec2, Hit.ImpactPoint);
+
+					// Debug log
+					UE_LOG(LogTemp, Warning, TEXT("Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
+
+					// Find the closest actor
+					if (Distance < ClosestDistance)
+					{
+						ClosestDistance = Distance;
+						ClosestActor = HitActor;
+					}
+				}
+			}
+
+			// Check if the current target is valid (alive and within range)
+			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
+			{
+				// Do nothing, keep the current target
+				UE_LOG(LogTemp, Warning, TEXT("Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
+			}
+			else
+			{
+				// Set the closest actor as the target
+				if (ClosestActor)
+				{
+					ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestActor);
+					if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
+					{
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = ClosestActor;
+						SoftTargetEnemy = ClosestEnemy;
+
+						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
+					}
+					else
+					{
+						SoftTargetActor = nullptr;
+						SoftTargetEnemy = nullptr;
+					}
+				}
+			}
+		}
+		else
+		{
 			LastSoftTargetActor = nullptr;
+			SoftTargetActor = nullptr;
+			SoftTargetEnemy = nullptr;
 		}
 	}
 }
@@ -758,8 +996,20 @@ AActor* ANeonParadigm_GameCharacter::GetSoftTargetActor()
 	return SoftTargetActor;
 }
 
+bool ANeonParadigm_GameCharacter::IsTargetValid(ANP_BaseEnemy* Target)
+{
+	if (Target && Target->GetState() != ECharacterStates::Death)
+	{
+		float Distance = FVector::Dist(GetActorLocation(), Target->GetActorLocation());
+		return Distance <= MaxSoftTargetDistance;  // Only valid if within range
+	}
+	return false;
+}
+
 void ANeonParadigm_GameCharacter::StopRotationToSoftTargetTimer()
 {
+	SoftTargetLerpAmt = 0.f;
+	UE_LOG(LogTemp, Warning, TEXT("rotating changed"))
 	GetWorld()->GetTimerManager().ClearTimer(TimerForSoftRotationToTarget); // this might not work
 }
 
@@ -779,11 +1029,16 @@ void ANeonParadigm_GameCharacter::UpdateCharacterSoftRotation()
 	{
 		if (SoftTargetEnemy->GetState() != ECharacterStates::Death)
 		{
+			
+			SoftTargetLerpAmt += 0.1f;
 			FRotator StartRotation(GetActorRotation());
 			FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SoftTargetActor->GetActorLocation()));
 			FRotator TargetRotator(StartRotation.Pitch, FindLookAtRot.Yaw, StartRotation.Roll);
-			FRotator AttackRotation = FMath::RInterpTo(StartRotation, TargetRotator, GetWorld()->GetDeltaSeconds(), SpeedOfSoftRotation);
+			FRotator AttackRotation = UKismetMathLibrary::RLerp(StartRotation, TargetRotator, SoftTargetLerpAmt, false);
+			UE_LOG(LogTemp, Warning, TEXT("rotating to: %s"), *TargetRotator.ToString())
 			SetActorRotation(AttackRotation);
+			
+			
 		}
 		else
 		{
@@ -837,11 +1092,8 @@ void ANeonParadigm_GameCharacter::SaveDodge()
 	}
 }
 
-float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	// Call the base class implementation
-	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
-
 	if (!bEnabledIFrames)
 	{
 		TArray<ECharacterStates> CurrentCharacterState;
@@ -851,22 +1103,34 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-			CurrentHealth -= DamageAmount;
-			// Step 1: Create or obtain an instance of UNP_DamageType
-			UNP_DamageType* MyDamageType = NewObject<UNP_DamageType>(GetWorld());
+			CurrentHealth -= Damage;
 
 			if (CurrentHealth > 0.0f)
 			{
+				const UNP_DamageType* NP_DamageType = Cast<UNP_DamageType>(DamageType);
+				if (NP_DamageType)
+				{
+					// Successfully cast to UNP_DamageType
+					// You can now access members or functions of UNP_DamageType
+					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
+					//NP_DamageType->DamageType;
+				}
+				else
+				{
+					// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
+					UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
+
+				}
 
 				// Step 2: Ensure the instance is valid
-				if (MyDamageType)
+				if (IsValid(NP_DamageType))
 				{
 					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
 
-					if (IsValid(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType())))
+					if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
 					{
 						CharacterState->SetState(ECharacterStates::Disabled);
-						PlayAnimMontage(DamageComp->GetHitReactionMontage(MyDamageType->GetDamageType()));
+						PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
 					}
 					else
 					{
@@ -903,13 +1167,6 @@ float ANeonParadigm_GameCharacter::TakeDamage(float DamageAmount, FDamageEvent c
 			}
 		}
 	}
-
-	return ActualDamage;
-}
-
-void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
-{
-
 }
 
 void ANeonParadigm_GameCharacter::PerformDeath()
@@ -917,7 +1174,7 @@ void ANeonParadigm_GameCharacter::PerformDeath()
 	CharacterState->SetState(ECharacterStates::Death);
 	PlayAnimMontage(DeathMontage);
 	DisableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
-
+	SpawnLoseMenu();
 }
 
 void ANeonParadigm_GameCharacter::Parry()
@@ -995,4 +1252,360 @@ void ANeonParadigm_GameCharacter::ParryInput()
 void ANeonParadigm_GameCharacter::ResetParry()
 {
 	bIsParrySaved = false;
+}
+
+void ANeonParadigm_GameCharacter::SetCurrentTempoDelay(float CurTempoDelay)
+{
+	CurrentTempoDelay = CurTempoDelay;
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentTempoDelay()
+{
+	return CurrentTempoDelay;
+}
+
+void ANeonParadigm_GameCharacter::SetCurrentAnimTimeDelay(float CurAnimTimeDelay)
+{
+	CurrentAnimTimeDelay = CurAnimTimeDelay;
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentAnimTimeDelay()
+{
+	return CurrentAnimTimeDelay;
+}
+
+void ANeonParadigm_GameCharacter::SetLastBeatTime(float fLastBeatTime)
+{
+	LastBeatTime = fLastBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetLastBeatTime()
+{
+	return LastBeatTime;
+}
+
+void ANeonParadigm_GameCharacter::SetNextBeatTime(float fNextBeatTime)
+{
+	NextBeatTime = fNextBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetNextBeatTime()
+{
+	return NextBeatTime;
+}
+
+void ANeonParadigm_GameCharacter::SetThirdBeatTime(float fThirdBeatTime)
+{
+	ThirdBeatTime = fThirdBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetThirdBeatTime()
+{
+	return ThirdBeatTime;
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentAnimPlayRate()
+{
+	return PlayRateForAnimMontages;
+}
+
+void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
+{
+	UE_LOG(LogTemp, Error, TEXT("Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("Delay From Third Beat: %f"), DelayFromThirdBeat);
+
+	if (DelayFromLastBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was PERFECT to LAST Beat: %f"), DelayFromLastBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
+		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+
+	}
+	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was PERFECT to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
+		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+
+	}
+	else if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+
+	}
+	else if(GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+		
+		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+	else
+	{
+		//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromThirdBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+
+
+	float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
+
+	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
+
+	UE_LOG(LogTemp, Display, TEXT("Montage Length: %f"), MontageLength);
+
+}
+
+void ANeonParadigm_GameCharacter::Rage()
+{
+	if (CanRage())
+	{
+		RageEvent();
+	}
+	else
+	{
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !bRage) // this might just be for saving attacks for switching the rage attack mode if we want differnt anims
+		{
+			bRageSaved = true;
+			// savelightAttack = true;
+		}
+	}
+}
+
+void ANeonParadigm_GameCharacter::RageEvent()
+{
+	SetIFrames(true);
+
+	//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
+	RageParticleComponent = UGameplayStatics::SpawnEmitterAttached(
+		RageEmitter,        // The particle system you want to spawn
+		GetMesh(),                 // The component to attach the particle system to (could be character mesh)
+		FName("root"),           // Socket name or bone to attach to (can be NAME_None if not using sockets)
+		FVector(0.0f, 0.0f, 200.0f),     // Optional location (relative offset)
+		FRotator(0.0f, 0.0f, 0.0f),    // Optional rotation
+		FVector(1.0f, 1.0f, 1.0f),     // Optional scale
+		EAttachLocation::KeepRelativeOffset,  // Keep relative or snap to target
+		true,                          // Auto-destroy when finished
+		EPSCPoolMethod::None,          // No pooling
+		true                           // Auto-activate);
+	);
+
+	CharacterState->SetState(ECharacterStates::Attack);
+
+	PlayAnimMontage(RageAnim); // **** we can have this so that it can't be interuppted by enemy attacks.
+
+	GetMesh()->SetOverlayMaterial(InitialRageOverlayMaterial);
+}
+
+void ANeonParadigm_GameCharacter::RageComplete() 
+{
+	if (RageParticleComponent)
+	{
+		RageParticleComponent->DestroyComponent();
+		RageParticleComponent = nullptr;
+		bRage = true;
+		if (RageOverlayMaterial)
+		{
+			GetMesh()->SetOverlayMaterial(RageOverlayMaterial);
+		}
+		GetWorld()->GetTimerManager().SetTimer(RageDepletionTimerHandle, this, &ANeonParadigm_GameCharacter::DepleteRage, RageDepletionRate, true);
+	}
+}
+
+void ANeonParadigm_GameCharacter::EndRage()
+{
+	bRage = false;
+	GetMesh()->SetOverlayMaterial(nullptr);
+	SetIFrames(false);
+
+	GetWorld()->GetTimerManager().ClearTimer(RageDepletionTimerHandle);  // Stop depletion
+}
+
+bool ANeonParadigm_GameCharacter::CanRage()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling() && !bRage && CurrentRage > RageActivationThreshold;  // **** This could be changed to use while falling.
+}
+
+bool ANeonParadigm_GameCharacter::IsRaging()
+{
+	return bRage;
+}
+
+void ANeonParadigm_GameCharacter::DepleteRage()
+{
+	if (CurrentRage > 0.0f)
+	{
+		CurrentRage -= RageDepletionAmount;
+		UpdateRageBarEvent();  // Update UI or rage bar
+		if (CurrentRage <= 0.0f)
+		{
+			CurrentRage = 0.0f;
+			EndRage();  // Stop rage mode if depleted
+		}
+	}
+	else
+	{
+		EndRage();  // Stop rage mode if depleted
+	}
+}
+
+void ANeonParadigm_GameCharacter::SetPerfectBeatHit(bool bPerfectHit)
+{
+	bPerfectBeatHit = bPerfectHit;
+}
+
+bool ANeonParadigm_GameCharacter::IsPerfectBeatHit()
+{
+	return bPerfectBeatHit;
+}
+
+void ANeonParadigm_GameCharacter::SoftTargetingTimelineUpdated(float Alpha)
+{
+	UE_LOG(LogTemp, Warning, TEXT("alpha is now: %f"), Alpha);
+	if (SoftTargetActor->IsValidLowLevel())
+	{
+		if (SoftTargetEnemy->GetState() != ECharacterStates::Death)
+		{
+			SoftTargetLerpAmt += 0.1f;
+			FRotator StartRotation(GetActorRotation());
+			FRotator FindLookAtRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SoftTargetActor->GetActorLocation()));
+			FRotator TargetRotator(StartRotation.Pitch, FindLookAtRot.Yaw, StartRotation.Roll);
+			FRotator AttackRotation = UKismetMathLibrary::RLerp(StartRotation, TargetRotator, Alpha, false);
+			UE_LOG(LogTemp, Warning, TEXT("rotating to: %s"), *TargetRotator.ToString())
+			SetActorRotation(AttackRotation);
+		}
+		else
+		{
+			DurationOfSoftRotation = 0;
+			UE_LOG(LogTemp, Warning, TEXT("Duration Of Soft Rotation Reset Final: %d"), DurationOfSoftRotation);
+			StopRotationToSoftTargetTimer();
+
+			SoftTargetEnemy = nullptr;
+			SoftTargetActor = nullptr;
+		}
+	}
+	else
+	{
+		DurationOfSoftRotation = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Soft Rotation Reset Final: %d"), DurationOfSoftRotation);
+		StopRotationToSoftTargetTimer();
+
+		SoftTargetEnemy = nullptr;
+		SoftTargetActor = nullptr;
+
+	}
+}
+
+void ANeonParadigm_GameCharacter::ToggleOrbEmission()
+{
+	// Check if the material is present in slot 0
+	CurrentOrbMaterial = BPM_OrbMesh->GetMaterial(0);
+
+	if (!CurrentOrbMaterial)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No material found on StaticMeshComponent."));
+		return;
+	}
+
+	if (DynOrbMaterial)
+	{
+		float EmissiveValue = 20.0f;  // Turn on or off the emission
+		DynOrbMaterial->SetScalarParameterValue(TEXT("EmissiveIntensity"), EmissiveValue);
+		UE_LOG(LogTemp, Warning, TEXT("YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!"));
+
+	}
+}
+
+void ANeonParadigm_GameCharacter::ToggleOrbEmissionOff()
+{
+
+	if (DynOrbMaterial)
+	{
+		float EmissiveValue = 0.0f;  // Turn on or off the emission
+		DynOrbMaterial->SetScalarParameterValue(TEXT("EmissiveIntensity"), EmissiveValue);
+		UE_LOG(LogTemp, Warning, TEXT("YEAH NOOOOOOOOOOOOO!!!!!!!"));
+
+	}
+}
+
+UStaticMeshComponent* ANeonParadigm_GameCharacter::GetBPM_OrbMesh()
+{
+	return BPM_OrbMesh;
+}
+
+void ANeonParadigm_GameCharacter::AddToCurrentRage(float RageToAdd)
+{
+	if (CurrentRage >= 100)
+		return;
+
+	CurrentRage += RageToAdd;
+	UpdateRageBarEvent();  // this might need to be changed   ************
+}
+
+float ANeonParadigm_GameCharacter::GetCurrentRage()
+{
+	return CurrentRage;
+}
+
+void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
+{
+	if (CurrentHealth >= 1000)
+		return;
+	UE_LOG(LogTemp, Warning, TEXT("ADD ING TO CURRENT HEALT !!!!!!!"));
+
+	CurrentHealth += HealthToAdd;
+	UpdateHealthBarEvent();  // this might need to be changed   ************
+}
+
+
+
+void ANeonParadigm_GameCharacter::EndEnemyEncounter()
+{
+	ScoreComp->EndEncounter();
 }

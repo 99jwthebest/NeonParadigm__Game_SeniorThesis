@@ -17,6 +17,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class ANP_BaseEnemy;
+class UScoreComponent;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -69,6 +70,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Parry Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ParryAction;
+
+	/** Rage Mode Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* RageAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -82,6 +87,12 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Damage, meta = (AllowPrivateAccess = "true"))
 	UDamageComponent* DamageComp;
 
+	/** BPM Orb Spring Arm */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Mesh, meta = (AllowPrivateAccess = "true"))
+	USpringArmComponent* BPM_OrbSpringArm;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* BPM_OrbMesh;
 
 private:
 
@@ -90,6 +101,14 @@ private:
 	UAnimMontage* DodgeMontage;
 	bool bEnabledIFrames;
 	
+
+	int32 PerfectDodgeCount = 0; // Tracks consecutive perfect dodges
+	float DodgePushMultiplier = 1.0f; // Increases push distance
+	float DodgeCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxPerfectDodges = 3; // Maximum consecutive dodges
+	const float CooldownDuration = 1.0f; // Beat delay (in seconds) before dodge resets
+
+
 	bool DoubleJumped;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DoubleJumpMontage;
@@ -121,6 +140,7 @@ public:
 	void SoftTarget();
 	void ResetSoftLockTarget();
 	AActor* GetSoftTargetActor();
+	bool IsTargetValid(ANP_BaseEnemy* Target);
 
 public:
 	void StopRotationToSoftTargetTimer();
@@ -128,11 +148,11 @@ public:
 
 	void ResetTimelines();
 
-	// Override the TakeDamage function
-	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	UFUNCTION()
 	void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	void PerformDeath();
+	UFUNCTION(BlueprintImplementableEvent)
+	void SpawnLoseMenu();
 
 	void Parry();
 	bool CanParry();
@@ -148,6 +168,8 @@ protected:
 
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
+
+	FVector2D MovementVector;
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
@@ -186,6 +208,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FVector2D GetMoveInputValue();
 
 private:
 
@@ -217,6 +240,8 @@ private:
 	AActor* LastSoftTargetActor;
 
 	bool bIsParrySaved;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Targeting, meta = (AllowPrivateAccess = "true"))
+	float MaxSoftTargetDistance = 500.0f;
 
 public:
 
@@ -224,6 +249,17 @@ public:
 	float CurrentHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (AllowPrivateAccess = "true"))
 	float MaxHealth;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float CurrentRage = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float MaxRage;
+	FTimerHandle RageDepletionTimerHandle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageDepletionRate = 1.0f;  // Decrease rage every second
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageDepletionAmount = 10.0f;  // Amount to reduce per tick
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	float RageActivationThreshold = 50.0f;  
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* DeathMontage;
@@ -234,6 +270,139 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CounterS, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* ProjectileCounterMontage;
 
+
+private:
+
+	float CurrentTempoDelay;
+	float CurrentAnimTimeDelay;
+	float LastBeatTime;
+	float NextBeatTime;
+	float ThirdBeatTime;
+	float DelayFromLastBeat;
+	float DelayFromNextBeat;
+	float TotalTimeDelayToNextBeat;
+	float DelayFromThirdBeat;
+	float TotalTimeDelayToThirdBeat;
+	float PlayRateForAnimMontages;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* TestRhythmMontage;
+
+
+public:
+
+	void SetCurrentTempoDelay(float CurTempoDelay);
+	float GetCurrentTempoDelay();
+
+	void SetCurrentAnimTimeDelay(float CurAnimTimeDelay);
+	float GetCurrentAnimTimeDelay();
+
+	void SetLastBeatTime(float fLastBeatTime);
+	float GetLastBeatTime();
+	void SetNextBeatTime(float fNextBeatTime);
+	float GetNextBeatTime();
+	void SetThirdBeatTime(float fThirdBeatTime);
+	float GetThirdBeatTime();
+
+	float GetCurrentAnimPlayRate();
+
+	void TestRhythmDelayEvent();
+
+
+
+private:
+
+	bool bRageSaved;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* RageEmitter;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* RageAnim;
+
+	class UParticleSystemComponent* RageParticleComponent;
+	bool bRage;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	class UMaterialInterface* RageOverlayMaterial;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Rage", meta = (AllowPrivateAccess = "true"))
+	class UMaterialInterface* InitialRageOverlayMaterial;
+
+public:
+
+	void Rage();
+	void RageEvent();
+	void RageComplete();
+	void EndRage();
+	bool CanRage();
+	bool IsRaging();
+	void DepleteRage();
+
+
+private:
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UScoreComponent* ScoreComp;
+	bool bPerfectBeatHit;
+
+
+public:
+
+	void SetPerfectBeatHit(bool bPerfectHit);
+	UFUNCTION(BlueprintCallable)
+	bool IsPerfectBeatHit();
+
+private:
+	float SoftTargetLerpAmt = 0.f;
+	class UTimelineComponent* TimelineComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Targeting")
+	UCurveFloat* SoftTargetCurve;
+
+	UFUNCTION()
+	void SoftTargetingTimelineUpdated(float Alpha);
+
+public:
+
+	void ToggleOrbEmission();
+	void ToggleOrbEmissionOff();
+	UStaticMeshComponent* GetBPM_OrbMesh();
+
+private:
+	UMaterialInterface* CurrentOrbMaterial;
+	UMaterialInstanceDynamic* DynOrbMaterial;
+
+
+public:
+
+	UFUNCTION(BlueprintCallable)
+	void AddToCurrentRage(float RageToAdd);
+	float GetCurrentRage();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateRageBarEvent();
+
+	UFUNCTION(BlueprintCallable)
+	void AddToCurrentHealth(float HealthToAdd);
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateHealthBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateScoreEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleCombatStyleGrade();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayBPM_HalfCirle(float CurrentTempo);
+	UFUNCTION(BlueprintImplementableEvent)
+	void BeginBPM_Bar();
+	UFUNCTION(BlueprintImplementableEvent)
+	void TogglePerfectHitTextBox();
+
+
+public:
+
+
+	//FORCEINLINE 
+	/** Returns ScoreComp SubObject **/
+	FORCEINLINE class UScoreComponent* GetScoreComponent() const { return ScoreComp; }
+
+	void EndEnemyEncounter();
 
 };
 

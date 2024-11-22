@@ -44,8 +44,20 @@ public:
 	void SaveHeavyAttack();
 	void ResetHeavyAttack();
 
+	void FindNotifyTriggerTime(UAnimMontage* Montage, FName NotifyName);
+	float GetNotifyTriggerTime();
 
+	bool DetermineDesiredAttack();
+	void LaunchAttack();
+	void LaunchPlayerIntoAir();
+	void MovePlayerIntoAir();
+	void StopLaunchMovement();
 
+	bool CanAerialAttack();
+	void PerformAerialLightAttack(int AttackIndex);
+	void ResetLightAerialAttack();
+	void ResetLaunched();
+	bool GetLaunched();
 
 	UPROPERTY(VisibleAnywhere)
 	ANeonParadigm_GameCharacter* MyCharacter;
@@ -68,4 +80,20 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	TArray<UAnimMontage*> HeavyAttackMontages;
 
+	float NotifyTriggerTime;
+
+	bool bAnythingPlayed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* LaunchAnimMontage;
+
+	FTimerHandle TimerForLaunchMovement;
+	FVector LaunchLocation;
+	float SpeedOfLaunch;
+	int DurationOfLaunch;
+	bool bLaunched;
+	bool bCanAerialAttack;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	TArray<UAnimMontage*> LightAerialAttackMontages;
 };

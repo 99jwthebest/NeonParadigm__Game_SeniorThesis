@@ -4,6 +4,7 @@
 #include "NeonParadigm_Game/Enums/CharacterStateComponent.h"
 #include "NeonParadigm_Game/Components/AttackComponent.h"
 #include "NeonParadigm_Game/NeonParadigm_GameCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 
@@ -71,13 +72,39 @@ bool UCharacterStateComponent::IsCurrentStateEqualToAny(const TArray<ECharacterS
 
 void UCharacterStateComponent::ResetState()
 {
-	SetState(ECharacterStates::None);
-	AttackComp->ResetLightAttack();
-	AttackComp->ResetHeavyAttack();
-	MyCharacter->ResetTimelines();
-	MyCharacter->ResetSoftLockTarget();
-	MyCharacter->SetIsDodgeSaved(false);
-	MyCharacter->ResetParry();
+	if (MyCharacter->GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Falling ||
+		MyCharacter->GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
+	{
+		bOnLandReset = true;
+		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	}
+	else
+	{
+		if (GetState() != ECharacterStates::Death)
+		{
+			SetState(ECharacterStates::None);
+			AttackComp->ResetLightAttack();
+			AttackComp->ResetHeavyAttack();
+			MyCharacter->ResetTimelines();
+			MyCharacter->ResetSoftLockTarget();
+			MyCharacter->SetIsDodgeSaved(false);
+			AttackComp->ResetLightAerialAttack();
+			MyCharacter->ResetParry();
+			AttackComp->ResetLaunched();  // this might cause glitches, resetting the Launched Variable ****************
+		}
+	}
+
+
+}
+
+bool UCharacterStateComponent::GetOnLandReset()
+{
+	return bOnLandReset;
+}
+
+void UCharacterStateComponent::SetOnLandReset(bool SetOnlandReset)
+{
+	bOnLandReset = SetOnlandReset;
 }
 
 

@@ -1,6 +1,7 @@
 {
     "Version": "1.2",
     "Data": {
+<<<<<<< HEAD
         "Source": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\damagecomponent.gen.cpp",
         "ProvidedModule": "",
         "PCH": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
@@ -10,6 +11,17 @@
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\damagetype\\np_damagetype.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_damagetype.generated.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\damagecomponent.generated.h"
+=======
+        "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\damagecomponent.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\components\\damagecomponent.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\damagetype\\np_damagetype.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\np_damagetype.generated.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\damagecomponent.generated.h"
+>>>>>>> ScoreComp_TestingMergge
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

@@ -55,6 +55,8 @@ private:
 	ANeonParadigm_GameCharacter* MyCharacter;
 	UAttackComponent* AttackComp;
 
+	bool bOnLandReset;
+
 
 public:
 	UFUNCTION()
@@ -65,5 +67,6 @@ public:
 	bool IsCurrentStateEqualToAny(const TArray<ECharacterStates>& StatesToCheck);
 
 	void ResetState();
-		
+	bool GetOnLandReset();
+	void SetOnLandReset(bool SetOnlandReset);
 };

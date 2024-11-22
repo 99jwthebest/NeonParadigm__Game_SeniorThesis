@@ -10,7 +10,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNP_AN_SoftTarget() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_UAnimNotify();
-	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_ANeonParadigm_GameCharacter_NoRegister();
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_UNP_AN_SoftTarget();
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_UNP_AN_SoftTarget_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NeonParadigm_Game();
@@ -29,11 +28,6 @@ void EmptyLinkFunctionForGeneratedCodeNP_AN_SoftTarget() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_CharacterMoveComp_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_CharacterMoveComp;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
@@ -49,15 +43,6 @@ void EmptyLinkFunctionForGeneratedCodeNP_AN_SoftTarget() {}
 		{ "ModuleRelativePath", "AnimNotify/NP_AN_SoftTarget.h" },
 	};
 #endif
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNP_AN_SoftTarget_Statics::NewProp_CharacterMoveComp_MetaData[] = {
-		{ "ModuleRelativePath", "AnimNotify/NP_AN_SoftTarget.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UNP_AN_SoftTarget_Statics::NewProp_CharacterMoveComp = { "CharacterMoveComp", nullptr, (EPropertyFlags)0x0040000000000010, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UNP_AN_SoftTarget, CharacterMoveComp), Z_Construct_UClass_ANeonParadigm_GameCharacter_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UNP_AN_SoftTarget_Statics::NewProp_CharacterMoveComp_MetaData), Z_Construct_UClass_UNP_AN_SoftTarget_Statics::NewProp_CharacterMoveComp_MetaData) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UNP_AN_SoftTarget_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNP_AN_SoftTarget_Statics::NewProp_CharacterMoveComp,
-	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UNP_AN_SoftTarget_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UNP_AN_SoftTarget>::IsAbstract,
 	};
@@ -67,16 +52,15 @@ void EmptyLinkFunctionForGeneratedCodeNP_AN_SoftTarget() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		Z_Construct_UClass_UNP_AN_SoftTarget_Statics::PropPointers,
+		nullptr,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		UE_ARRAY_COUNT(Z_Construct_UClass_UNP_AN_SoftTarget_Statics::PropPointers),
+		0,
 		0,
 		0x001120A0u,
 		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UNP_AN_SoftTarget_Statics::Class_MetaDataParams), Z_Construct_UClass_UNP_AN_SoftTarget_Statics::Class_MetaDataParams)
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UNP_AN_SoftTarget_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_UNP_AN_SoftTarget()
 	{
 		if (!Z_Registration_Info_UClass_UNP_AN_SoftTarget.OuterSingleton)
@@ -92,15 +76,15 @@ void EmptyLinkFunctionForGeneratedCodeNP_AN_SoftTarget() {}
 	UNP_AN_SoftTarget::UNP_AN_SoftTarget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UNP_AN_SoftTarget);
 	UNP_AN_SoftTarget::~UNP_AN_SoftTarget() {}
-	struct Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UNP_AN_SoftTarget, UNP_AN_SoftTarget::StaticClass, TEXT("UNP_AN_SoftTarget"), &Z_Registration_Info_UClass_UNP_AN_SoftTarget, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNP_AN_SoftTarget), 1154507086U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_UNP_AN_SoftTarget, UNP_AN_SoftTarget::StaticClass, TEXT("UNP_AN_SoftTarget"), &Z_Registration_Info_UClass_UNP_AN_SoftTarget, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UNP_AN_SoftTarget), 3604410523U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_647858930(TEXT("/Script/NeonParadigm_Game"),
-		Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_2681218013(TEXT("/Script/NeonParadigm_Game"),
+		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_AnimNotify_NP_AN_SoftTarget_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

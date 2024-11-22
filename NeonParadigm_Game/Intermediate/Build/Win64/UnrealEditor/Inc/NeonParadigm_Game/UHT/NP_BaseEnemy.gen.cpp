@@ -17,10 +17,56 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_ANP_BaseEnemy();
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_ANP_BaseEnemy_NoRegister();
+	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_UNP_DamageType_NoRegister();
 	NEONPARADIGM_GAME_API UEnum* Z_Construct_UEnum_NeonParadigm_Game_ECharacterStates();
 	UMG_API UClass* Z_Construct_UClass_UWidgetComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NeonParadigm_Game();
 // End Cross Module References
+	DEFINE_FUNCTION(ANP_BaseEnemy::execGetNotifyTriggerTime)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->GetNotifyTriggerTime();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ANP_BaseEnemy::execEnemFindNotifyTriggerTime)
+	{
+		P_GET_OBJECT(UAnimMontage,Z_Param_Montage);
+		P_GET_PROPERTY(FStrProperty,Z_Param_NotifyName);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->EnemFindNotifyTriggerTime(Z_Param_Montage,Z_Param_NotifyName);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ANP_BaseEnemy::execCheckToWaitForBeat)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->CheckToWaitForBeat();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ANP_BaseEnemy::execTestRhythmDelayEvent)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->TestRhythmDelayEvent();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ANP_BaseEnemy::execGetCurrentAnimPlayRate)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->GetCurrentAnimPlayRate();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ANP_BaseEnemy::execSetCurrentAnimTimeDelay)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_CurAnimTimeDelay);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetCurrentAnimTimeDelay(Z_Param_CurAnimTimeDelay);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(ANP_BaseEnemy::execIsCurrentStateEqualToAny)
 	{
 		P_GET_TARRAY_REF(ECharacterStates,Z_Param_Out_StatesToCheck);
@@ -49,20 +95,219 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		P_THIS->HandleTakeAnyDamage(Z_Param_DamagedActor,Z_Param_Damage,Z_Param_DamageType,Z_Param_InstigatedBy,Z_Param_DamageCauser);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(ANP_BaseEnemy::execAttackMovement)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_Distance);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->AttackMovement(Z_Param_Distance);
+		P_NATIVE_END;
+	}
 	static FName NAME_ANP_BaseEnemy_PerformThingsAfterDeath = FName(TEXT("PerformThingsAfterDeath"));
 	void ANP_BaseEnemy::PerformThingsAfterDeath()
 	{
 		ProcessEvent(FindFunctionChecked(NAME_ANP_BaseEnemy_PerformThingsAfterDeath),NULL);
 	}
+	static FName NAME_ANP_BaseEnemy_ResetAIToWorkAgain = FName(TEXT("ResetAIToWorkAgain"));
+	void ANP_BaseEnemy::ResetAIToWorkAgain()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ANP_BaseEnemy_ResetAIToWorkAgain),NULL);
+	}
 	void ANP_BaseEnemy::StaticRegisterNativesANP_BaseEnemy()
 	{
 		UClass* Class = ANP_BaseEnemy::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "AttackMovement", &ANP_BaseEnemy::execAttackMovement },
+			{ "CheckToWaitForBeat", &ANP_BaseEnemy::execCheckToWaitForBeat },
+			{ "EnemFindNotifyTriggerTime", &ANP_BaseEnemy::execEnemFindNotifyTriggerTime },
+			{ "GetCurrentAnimPlayRate", &ANP_BaseEnemy::execGetCurrentAnimPlayRate },
+			{ "GetNotifyTriggerTime", &ANP_BaseEnemy::execGetNotifyTriggerTime },
 			{ "HandleTakeAnyDamage", &ANP_BaseEnemy::execHandleTakeAnyDamage },
 			{ "IsCurrentStateEqualToAny", &ANP_BaseEnemy::execIsCurrentStateEqualToAny },
+			{ "SetCurrentAnimTimeDelay", &ANP_BaseEnemy::execSetCurrentAnimTimeDelay },
 			{ "SetState", &ANP_BaseEnemy::execSetState },
+			{ "TestRhythmDelayEvent", &ANP_BaseEnemy::execTestRhythmDelayEvent },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics
+	{
+		struct NP_BaseEnemy_eventAttackMovement_Parms
+		{
+			float Distance;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_Distance;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::NewProp_Distance = { "Distance", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventAttackMovement_Parms, Distance), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::NewProp_Distance,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Attack" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "AttackMovement", nullptr, nullptr, Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::NP_BaseEnemy_eventAttackMovement_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::NP_BaseEnemy_eventAttackMovement_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics
+	{
+		struct NP_BaseEnemy_eventCheckToWaitForBeat_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventCheckToWaitForBeat_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "CheckToWaitForBeat", nullptr, nullptr, Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::NP_BaseEnemy_eventCheckToWaitForBeat_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::NP_BaseEnemy_eventCheckToWaitForBeat_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics
+	{
+		struct NP_BaseEnemy_eventEnemFindNotifyTriggerTime_Parms
+		{
+			UAnimMontage* Montage;
+			FString NotifyName;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Montage;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_NotifyName;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::NewProp_Montage = { "Montage", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventEnemFindNotifyTriggerTime_Parms, Montage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::NewProp_NotifyName = { "NotifyName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventEnemFindNotifyTriggerTime_Parms, NotifyName), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::NewProp_Montage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::NewProp_NotifyName,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "EnemFindNotifyTriggerTime", nullptr, nullptr, Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::NP_BaseEnemy_eventEnemFindNotifyTriggerTime_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::NP_BaseEnemy_eventEnemFindNotifyTriggerTime_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics
+	{
+		struct NP_BaseEnemy_eventGetCurrentAnimPlayRate_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventGetCurrentAnimPlayRate_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "GetCurrentAnimPlayRate", nullptr, nullptr, Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::NP_BaseEnemy_eventGetCurrentAnimPlayRate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::NP_BaseEnemy_eventGetCurrentAnimPlayRate_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics
+	{
+		struct NP_BaseEnemy_eventGetNotifyTriggerTime_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventGetNotifyTriggerTime_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "GetNotifyTriggerTime", nullptr, nullptr, Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::NP_BaseEnemy_eventGetNotifyTriggerTime_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::NP_BaseEnemy_eventGetNotifyTriggerTime_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_ANP_BaseEnemy_HandleTakeAnyDamage_Statics
 	{
@@ -202,6 +447,63 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "ResetAIToWorkAgain", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics
+	{
+		struct NP_BaseEnemy_eventSetCurrentAnimTimeDelay_Parms
+		{
+			float CurAnimTimeDelay;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_CurAnimTimeDelay;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::NewProp_CurAnimTimeDelay = { "CurAnimTimeDelay", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NP_BaseEnemy_eventSetCurrentAnimTimeDelay_Parms, CurAnimTimeDelay), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::NewProp_CurAnimTimeDelay,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "SetCurrentAnimTimeDelay", nullptr, nullptr, Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::NP_BaseEnemy_eventSetCurrentAnimTimeDelay_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::NP_BaseEnemy_eventSetCurrentAnimTimeDelay_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics
 	{
 		struct NP_BaseEnemy_eventSetState_Parms
@@ -237,6 +539,29 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_SetState_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Music" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "TestRhythmDelayEvent", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -281,6 +606,22 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Knockback;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Launch_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Launch;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Air_Knockback_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Air_Knockback;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Air_Knockback_OnLanded_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Air_Knockback_OnLanded;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Getup_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Getup;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ParryStaggerMontage_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ParryStaggerMontage;
@@ -310,6 +651,14 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_LockOnWidget_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_LockOnWidget;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_TestRhythmMontage_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_TestRhythmMontage;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MyDamageType_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_MyDamageType;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -320,10 +669,18 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_ANP_BaseEnemy_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement, "AttackMovement" }, // 2493292664
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat, "CheckToWaitForBeat" }, // 1671672958
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime, "EnemFindNotifyTriggerTime" }, // 566104182
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate, "GetCurrentAnimPlayRate" }, // 1714036484
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime, "GetNotifyTriggerTime" }, // 3270409843
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_HandleTakeAnyDamage, "HandleTakeAnyDamage" }, // 3611324083
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_IsCurrentStateEqualToAny, "IsCurrentStateEqualToAny" }, // 3945352412
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_PerformThingsAfterDeath, "PerformThingsAfterDeath" }, // 3771025194
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_ResetAIToWorkAgain, "ResetAIToWorkAgain" }, // 2764731982
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_SetCurrentAnimTimeDelay, "SetCurrentAnimTimeDelay" }, // 938796568
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_SetState, "SetState" }, // 4264504257
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_TestRhythmDelayEvent, "TestRhythmDelayEvent" }, // 1271510468
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -389,6 +746,38 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback = { "HR_Knockback", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Knockback), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch = { "HR_Launch", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Launch), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback = { "HR_Air_Knockback", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Air_Knockback), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_OnLanded_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_OnLanded = { "HR_Air_Knockback_OnLanded", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Air_Knockback_OnLanded), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_OnLanded_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_OnLanded_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Getup_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Getup = { "HR_Getup", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Getup), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Getup_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Getup_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -459,6 +848,26 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_LockOnWidget = { "LockOnWidget", nullptr, (EPropertyFlags)0x004000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, LockOnWidget), Z_Construct_UClass_UWidgetComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_LockOnWidget_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_LockOnWidget_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_TestRhythmMontage_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Test" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_TestRhythmMontage = { "TestRhythmMontage", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, TestRhythmMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_TestRhythmMontage_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_TestRhythmMontage_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_MyDamageType_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Don't play to save Transient property, just temporary, use when generating in runtime. Hold a reference without getting garbage collected.\n" },
+#endif
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Don't play to save Transient property, just temporary, use when generating in runtime. Hold a reference without getting garbage collected." },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_MyDamageType = { "MyDamageType", nullptr, (EPropertyFlags)0x0040000000002000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, MyDamageType), Z_Construct_UClass_UNP_DamageType_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_MyDamageType_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_MyDamageType_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANP_BaseEnemy_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentHealth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_MaxHealth,
@@ -467,6 +876,10 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Middle,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockdown,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_OnLanded,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Getup,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_ParryStaggerMontage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_bCanBeParried,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_CurrentState_Underlying,
@@ -475,6 +888,8 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_WeaponMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HealthBarWidget,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_LockOnWidget,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_TestRhythmMontage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_MyDamageType,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANP_BaseEnemy_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ANP_BaseEnemy>::IsAbstract,
@@ -509,15 +924,15 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ANP_BaseEnemy);
 	ANP_BaseEnemy::~ANP_BaseEnemy() {}
-	struct Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 4196282617U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 2041217066U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_433052997(TEXT("/Script/NeonParadigm_Game"),
-		Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_892072165(TEXT("/Script/NeonParadigm_Game"),
+		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/UnrealEd/SharedDefinitions.UnrealEd.Cpp20.h"
+=======
+#include "C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/UnrealEd/SharedDefinitions.UnrealEd.Cpp20.h"
+>>>>>>> ScoreComp_TestingMergge
 #undef UE_IS_ENGINE_MODULE
 #undef DEPRECATED_FORGAME
 #define DEPRECATED_FORGAME DEPRECATED
@@ -27,3 +31,7 @@
 #define WITH_GAMEPLAY_DEBUGGER 1
 #define WITH_GAMEPLAY_DEBUGGER_MENU 1
 #define AIMODULE_API DLLIMPORT
+#define FMODSTUDIO_LINK_LOGGING 1
+#define FMODSTUDIO_API DLLIMPORT
+#define MEDIA_API DLLIMPORT
+#define COLORMANAGEMENT_API DLLIMPORT

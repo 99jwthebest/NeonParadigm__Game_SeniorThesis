@@ -6,7 +6,14 @@
 /NAME:"UnrealEditor-NeonParadigm_Game.dll"
 /IGNORE:4221
 /NODEFAULTLIB
+<<<<<<< HEAD
 "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
 "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp.obj"
 "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Default.rc2.res"
 /OUT:"D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\UnrealEditor-NeonParadigm_Game.lib"
+=======
+"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
+"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp.obj"
+"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Default.rc2.res"
+/OUT:"C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\UnrealEditor-NeonParadigm_Game.lib"
+>>>>>>> ScoreComp_TestingMergge

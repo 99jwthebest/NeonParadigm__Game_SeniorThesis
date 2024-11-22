@@ -48,12 +48,21 @@ private:
 	UAnimMontage* HR_Knockdown;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Knockback;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Launch;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Air_Knockback;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Air_Knockback_OnLanded;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Getup;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* ParryStaggerMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	bool bCanBeParried;
+
 
 private:
 
@@ -90,7 +99,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	UFUNCTION(BlueprintCallable, Category = "Attack")
 	void AttackMovement(float Distance);
 	void StopAttackMovement();
 	void UpdateCharacterLocation();
@@ -104,7 +113,8 @@ public:
 	void PerformThingsAfterDeath();
 
 	void Parried();
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void ResetAIToWorkAgain();
 
 public:
 	void UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter);
@@ -123,5 +133,78 @@ public:
 
 	void OnTargeted();
 	void EndTarget();
+
+
+private:
+
+	float CurrentTempoDelay;
+	float CurrentAnimTimeDelay;
+	float LastBeatTime;
+	float NextBeatTime;
+	float ThirdBeatTime;
+	float DelayFromLastBeat;
+	float DelayFromNextBeat;
+	float TotalTimeDelayToNextBeat;
+	float DelayFromThirdBeat;
+	float TotalTimeDelayToThirdBeat;
+	float PlayRateForAnimMontages;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* TestRhythmMontage;
+
+	UPROPERTY(Transient)  // Don't play to save Transient property, just temporary, use when generating in runtime. Hold a reference without getting garbage collected.
+		class UNP_DamageType* MyDamageType;
+
+	float NotifyTriggerTime;
+
+
+public:
+	
+	void SetCurrentTempoDelay(float CurTempoDelay);
+	float GetCurrentTempoDelay();
+
+	UFUNCTION(BlueprintCallable, Category = "Music")
+	void SetCurrentAnimTimeDelay(float CurAnimTimeDelay);
+	float GetCurrentAnimTimeDelay();
+
+	void SetLastBeatTime(float fLastBeatTime);
+	float GetLastBeatTime();
+	void SetNextBeatTime(float fNextBeatTime);
+	float GetNextBeatTime();
+	void SetThirdBeatTime(float fThirdBeatTime);
+	float GetThirdBeatTime();
+	UFUNCTION(BlueprintPure, Category = "Music")
+	float GetCurrentAnimPlayRate();
+
+	UFUNCTION(BlueprintCallable, Category = "Music")
+	void TestRhythmDelayEvent();
+	UFUNCTION(BlueprintPure, Category = "Music")
+	float CheckToWaitForBeat();
+
+	UFUNCTION(BlueprintCallable, Category = "Music")
+	void EnemFindNotifyTriggerTime(UAnimMontage* Montage, FString NotifyName);
+	UFUNCTION(BlueprintPure, Category = "Music")
+	float GetNotifyTriggerTime();
+
+
+private:
+
+	FTimerHandle TimerForLaunchMovement;
+	FVector LaunchLocation;
+	float SpeedOfLaunch;
+	int DurationOfLaunch;
+	bool bOnLandReset;
+	bool bAirKnockback;
+	int TotalEnemiesAlive;
+
+public:
+	
+	void LaunchEnemyIntoAir();
+	void MoveEnemyIntoAir();
+	void StopLaunchMovement();
+
+	virtual void Landed(const FHitResult& Hit) override;
+
+	UAnimMontage* GetGetupAnimMontage();
 
 };

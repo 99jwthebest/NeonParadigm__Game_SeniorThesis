@@ -11,7 +11,6 @@
     <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
-    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -573,6 +572,24 @@
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.h">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_LaunchPlayer.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_LaunchPlayer.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_PlayGetupAM.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_PlayGetupAM.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_RageComplete.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_RageComplete.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_ResetState.cpp">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClCompile>
@@ -589,6 +606,12 @@
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_TestRhythmPunch.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_TestRhythmPunch.h">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_WeaponCollision.cpp">
@@ -610,6 +633,12 @@
       <Filter>Source\NeonParadigm_Game\Components</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\Components\DamageComponent.h">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\Components\ScoreComponent.cpp">
+      <Filter>Source\NeonParadigm_Game\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\Components\ScoreComponent.h">
       <Filter>Source\NeonParadigm_Game\Components</Filter>
     </ClInclude>
     <Filter Include="Source\NeonParadigm_Game\DamageType">
@@ -644,6 +673,15 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\Enums\CharacterStateComponent.h">
       <Filter>Source\NeonParadigm_Game\Enums</Filter>
+    </ClInclude>
+    <Filter Include="Source\NeonParadigm_Game\FMOD">
+      <UniqueIdentifier>{2B88EF5E-3738-3766-A6AA-F1DE0171731E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.cpp">
+      <Filter>Source\NeonParadigm_Game\FMOD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\FMOD\NP_FMOD_Music.h">
+      <Filter>Source\NeonParadigm_Game\FMOD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

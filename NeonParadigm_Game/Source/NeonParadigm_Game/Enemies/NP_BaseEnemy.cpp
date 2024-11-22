@@ -9,6 +9,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Components/WidgetComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 ANP_BaseEnemy::ANP_BaseEnemy()
@@ -122,19 +124,20 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 
 	if (CurrentHealth > 0.0f)
 	{
-		// Step 1: Create or obtain an instance of UNP_DamageType
-		UNP_DamageType* MyDamageType = NewObject<UNP_DamageType>(GetWorld());
-
-		/*if (MyDamageType)
+		const UNP_DamageType* NP_DamageType = Cast<const UNP_DamageType>(DamageType);
+		if (NP_DamageType)
 		{
+			// Successfully cast to UNP_DamageType
+			// You can now access members or functions of UNP_DamageType
+			UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething RIGHT!!!!"));
+			//NP_DamageType->DamageType;
+		}
+		else
+		{
+			// Handle case where the cast failed (if the damage type is not of UNP_DamageType)
+			UE_LOG(LogTemp, Error, TEXT("DAMAGE TYPE!@!! SOmething Wrong!!!!"));
 
 		}
-		else 
-		{
-
-			UE_LOG(LogTemp, Error, TEXT("!@!! SOmething Wrong!!!!"));
-			return;
-		}*/
 
 
 		TArray<ECharacterStates> CurrentCharacterState;
@@ -143,13 +146,25 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 		if (!IsCurrentStateEqualToAny(CurrentCharacterState)) //&& IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("ENEMY STATE IS VALId!!!!!!!!"));
-			if (IsValid(GetHitReactionMontage(MyDamageType->GetDamageType())))
+			if (IsValid(GetHitReactionMontage(NP_DamageType->DamageType)))
 			{
 				SetState(ECharacterStates::Disabled);
 				UpdateCharacterRotationWhenHit(DamageCauser);
 				StopAttackMovement();
-				AttackMovement(10.0f); //15.0f  should maybe be the value
-				PlayAnimMontage(GetHitReactionMontage(MyDamageType->GetDamageType()));
+
+				if (!GetCharacterMovement()->IsFalling() && !GetCharacterMovement()->IsFlying() && 
+					NP_DamageType->DamageType != EDamageTypes::Knockback &&
+					NP_DamageType->DamageType != EDamageTypes::Knockdown) // this might need to be an or statement or something.
+				{
+					AttackMovement(10.0f); //15.0f  should maybe be the value
+				}
+				else
+				{
+					FVector SettingEnemyActorLocation (GetActorLocation().X, GetActorLocation().Y, DamageCauser->GetActorLocation().Z);  // we could have it so that the enemy's height is a little lower than the player's **********
+					SetActorLocation(SettingEnemyActorLocation, true);
+				}
+
+				PlayAnimMontage(GetHitReactionMontage(NP_DamageType->DamageType));
 			}
 			else
 			{
@@ -168,28 +183,91 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 	}
 }
 
-UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)
+UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // ****************  
 {
-	switch (DamageType)
+	/*if (DamageType != EDamageTypes::Launch &&
+		DamageType != EDamageTypes::Default &&
+		DamageType != EDamageTypes::Knockback &&
+		DamageType != EDamageTypes::Knockdown &&
+		DamageType != EDamageTypes::Left &&
+		DamageType != EDamageTypes::Right &&
+		DamageType != EDamageTypes::Middle)
+		return HR_Left;*/
+
+	if (GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying())
 	{
-		case EDamageTypes::Default:
-			return HR_Knockback;
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
-		case EDamageTypes::Right:
-			return HR_Right;
+		switch (DamageType)
+		{
+			case EDamageTypes::Default:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Default AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Left:
-			return HR_Left;
+			case EDamageTypes::Right:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Right AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Middle:
-			return HR_Middle;
+			case EDamageTypes::Left:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Left AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Knockdown:
-			return HR_Knockdown;
+			case EDamageTypes::Middle:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Middle AERIAL"));
+				return HR_Launch;
 
-		case EDamageTypes::Knockback:
-			return HR_Knockback;
+			case EDamageTypes::Knockdown:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockdown AERIAL"));
+				return HR_Launch;
+
+			case EDamageTypes::Knockback:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback AERIAL"));
+				GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling); // set to flying maybe
+				AttackMovement(40.0f); //15.0f  should maybe be the value
+				bAirKnockback = true;
+				return HR_Air_Knockback;
+
+			case EDamageTypes::Launch:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch AERIAL"));
+				return HR_Launch;
+		}
 	}
+	else
+	{
+		switch (DamageType)
+		{
+			case EDamageTypes::Default:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Default"));
+				return HR_Knockback;
+
+			case EDamageTypes::Right:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Right"));
+				return HR_Right;
+
+			case EDamageTypes::Left:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Left"));
+				return HR_Left;
+
+			case EDamageTypes::Middle:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Middle"));
+				return HR_Middle;
+
+			case EDamageTypes::Knockdown:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockdown"));
+				return HR_Knockdown;
+
+			case EDamageTypes::Knockback:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Knockback"));
+				return HR_Knockback;
+
+			case EDamageTypes::Launch:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch"));
+				LaunchEnemyIntoAir();
+				return HR_Launch;
+		}
+	}
+
+	UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS OUTSIDE"));
 	return HR_Knockback;
 }
 
@@ -197,8 +275,12 @@ void ANP_BaseEnemy::PerformDeath()
 {
 	SetState(ECharacterStates::Death);
 	PlayAnimMontage(DeathMontage);
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
+
 	PerformThingsAfterDeath();
 }
 
@@ -221,7 +303,7 @@ void ANP_BaseEnemy::UpdateCharacterRotationWhenHit(AActor* DamageCauserCharacter
 void ANP_BaseEnemy::SetState(ECharacterStates NewState)
 {
 
-	if (NewState != CurrentState)
+	if (NewState != CurrentState && CurrentState != ECharacterStates::Death)
 		CurrentState = NewState;
 }
 
@@ -242,11 +324,19 @@ bool ANP_BaseEnemy::IsCurrentStateEqualToAny(const TArray<ECharacterStates>& Sta
 	return StatesToCheck.Contains(CurrentState);
 }
 
-void ANP_BaseEnemy::ResetState()
+void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adjust how fast the enemy falls with player.
 {
-	SetState(ECharacterStates::None);
-	/*AttackComp->ResetLightAttack();
-	AttackComp->ResetHeavyAttack();*/
+	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Falling ||
+		GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
+	{
+		bOnLandReset = true;
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking); // this is glitching when the enemy dies ****
+	}
+	else
+	{
+		SetState(ECharacterStates::None);
+	}
+
 }
 
 void ANP_BaseEnemy::OnTargeted()
@@ -262,4 +352,248 @@ void ANP_BaseEnemy::EndTarget()
 }
 
 
+
+void ANP_BaseEnemy::SetCurrentTempoDelay(float CurTempoDelay)
+{
+	CurrentTempoDelay = CurTempoDelay;
+}
+
+float ANP_BaseEnemy::GetCurrentTempoDelay()
+{
+	return CurrentTempoDelay;
+}
+
+void ANP_BaseEnemy::SetCurrentAnimTimeDelay(float CurAnimTimeDelay)
+{
+	CurrentAnimTimeDelay = CurAnimTimeDelay;
+}
+
+float ANP_BaseEnemy::GetCurrentAnimTimeDelay()
+{
+	return CurrentAnimTimeDelay;
+}
+
+void ANP_BaseEnemy::SetLastBeatTime(float fLastBeatTime)
+{
+	LastBeatTime = fLastBeatTime;
+}
+
+float ANP_BaseEnemy::GetLastBeatTime()
+{
+	return LastBeatTime;
+}
+
+void ANP_BaseEnemy::SetNextBeatTime(float fNextBeatTime)
+{
+	NextBeatTime = fNextBeatTime;
+}
+
+float ANP_BaseEnemy::GetNextBeatTime()
+{
+	return NextBeatTime;
+}
+
+void ANP_BaseEnemy::SetThirdBeatTime(float fThirdBeatTime)
+{
+	ThirdBeatTime = fThirdBeatTime;
+}
+
+float ANP_BaseEnemy::GetThirdBeatTime()
+{
+	return ThirdBeatTime;
+}
+
+float ANP_BaseEnemy::GetCurrentAnimPlayRate()
+{
+	return PlayRateForAnimMontages;
+}
+
+void ANP_BaseEnemy::TestRhythmDelayEvent()
+{
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY Delay From Third Beat: %f"), DelayFromThirdBeat);
+
+	if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ENEMY Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("ENEMY Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+
+	}
+	else if (GetCurrentAnimTimeDelay() <= 0.9f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ENEMY Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("ENEMY Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("ENEMY Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+	else
+	{
+		//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
+
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromThirdBeat;
+
+		UE_LOG(LogTemp, Error, TEXT("ENEMY Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+
+
+	//float ClampedValueForPlayRate = FMath::Clamp(PlayRateForAnimMontages, 0.5f, 2.5f); // Definetly Might change this so make them variables. 
+
+	//PlayRateForAnimMontages = ClampedValueForPlayRate;
+
+	//float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
+
+	//UE_LOG(LogTemp, Display, TEXT("ENEMY Montage Length: %f"), MontageLength);
+
+
+
+}
+
+float ANP_BaseEnemy::CheckToWaitForBeat()
+{
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("ENEMY CHECK Delay From Third Beat: %f"), DelayFromThirdBeat);
+
+	return DelayFromNextBeat;
+
+}
+
+void ANP_BaseEnemy::EnemFindNotifyTriggerTime(UAnimMontage* Montage, FString NotifyName)
+{
+	if (!Montage)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Montage is null."));
+		return;
+	}
+
+	TArray<FAnimNotifyEvent>& NotifyEvents = Montage->Notifies; // gets ref instead copy, & from notifies array "Montage->Notifies"
+
+	for (const FAnimNotifyEvent& NotifyEvent : NotifyEvents)
+	{
+		UE_LOG(LogTemp, Log, TEXT("I'm checking Notify: %s"), *NotifyEvent.Notify->GetNotifyName());
+		FString ActualNotifyName = NotifyEvent.Notify->GetNotifyName();
+		UE_LOG(LogTemp, Log, TEXT("I'm checking Actual Notify Name: %s"), *ActualNotifyName);
+
+		if (NotifyEvent.Notify && ActualNotifyName.StartsWith(NotifyName))
+		{
+			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
+			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName, NotifyTriggerTime);
+			return;
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Notify with name %s not found in montage."), *NotifyName);
+}
+
+float ANP_BaseEnemy::GetNotifyTriggerTime()
+{
+	return NotifyTriggerTime;
+}
+
+
+
+void ANP_BaseEnemy::LaunchEnemyIntoAir()
+{
+
+	LaunchLocation = GetActorLocation() + FVector(0.0f, 0.0f, 300.0f); // May have to lower height for players air launch attack *********
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+	PerformThingsAfterDeath();
+
+	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &ANP_BaseEnemy::MoveEnemyIntoAir, 0.01f, true); // 0.0167f
+
+}
+
+void ANP_BaseEnemy::MoveEnemyIntoAir()
+{
+	DurationOfLaunch++;
+	UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch: %d"), DurationOfLaunch);
+
+	if (DurationOfLaunch >= 25)  // may have to change this to 50 or more
+	{
+		StopLaunchMovement();
+		GetCharacterMovement()->GravityScale = 1.0f;   // gravity scale **********************
+		DurationOfLaunch = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Launch Reset: %d"), DurationOfLaunch);
+	}
+	float Alpha = 0.1f;  // You can adjust this based on how fast you want the rotation
+	// Linearly interpolate between the start and launch locations based on progress
+	FVector LaunchMovementLocation = FMath::Lerp(GetActorLocation(), LaunchLocation, Alpha);
+	//FVector LaunchMovementLocation = FMath::VInterpTo(MyCharacter->GetActorLocation(), LaunchLocation, GetWorld()->GetDeltaSeconds(), SpeedOfLaunch);
+	SetActorLocation(LaunchMovementLocation);
+}
+
+void ANP_BaseEnemy::StopLaunchMovement()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
+}
+
+void ANP_BaseEnemy::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+
+	if (bAirKnockback)
+	{
+		bAirKnockback = false;
+		PlayAnimMontage(HR_Air_Knockback_OnLanded);
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
+
+		if (CurrentState != ECharacterStates::Death)
+		{
+			ResetAIToWorkAgain();
+			SetState(ECharacterStates::None);
+		}
+	}
+	else
+	{
+		if (bOnLandReset)  // On Landed Reset
+		{
+			GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+			bOnLandReset = false;
+			ResetState();
+			GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
+			
+			if (CurrentState != ECharacterStates::Death)
+			{
+				ResetAIToWorkAgain();
+				SetState(ECharacterStates::None);
+			}
+		}
+	}
+	//SetState(ECharacterStates::None);
+
+
+}
+
+UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
+{
+	return HR_Getup;
+}
 

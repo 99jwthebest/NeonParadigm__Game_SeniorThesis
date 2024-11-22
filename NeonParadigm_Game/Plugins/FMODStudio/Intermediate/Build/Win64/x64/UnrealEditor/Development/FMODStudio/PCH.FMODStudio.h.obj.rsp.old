@@ -1,9 +1,22 @@
+<<<<<<< HEAD
 "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.cpp"
 /I "."
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Private"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Private"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private"
+=======
+<<<<<<<< HEAD:NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.h.obj.rsp.old
+"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.cpp"
+========
+"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.cpp"
+>>>>>>>> ScoreComp_TestingMergge:NeonParadigm_Game/Plugins/FMODStudio/Intermediate/Build/Win64/x64/UnrealEditor/Development/FMODStudio/PCH.FMODStudio.h.obj.rsp.old
+/I "."
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Private"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Private"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private"
+>>>>>>> ScoreComp_TestingMergge
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\UHT"
 /I "Runtime\MovieScene\Public"
 /I "Runtime\Core\Public"
@@ -261,12 +274,21 @@
 /I "Developer\PhysicsUtilities\Public"
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\WidgetRegistration\UHT"
 /I "Developer\WidgetRegistration\Public"
+<<<<<<< HEAD
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
 /I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
+=======
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
+/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
+>>>>>>> ScoreComp_TestingMergge
 /I "Runtime\Media\Public"
 /I "Runtime\ColorManagement\Public"
 /external:W0
@@ -278,11 +300,26 @@
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
+<<<<<<< HEAD
 /FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Definitions.h"
 /Yc"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h"
 /Fp"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.pch"
 /Fo"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.obj"
 /sourceDependencies "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.dep.json"
+=======
+<<<<<<<< HEAD:NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.h.obj.rsp.old
+/Yc"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/Fp"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
+/Fo"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
+/sourceDependencies "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.dep.json"
+========
+/FI"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Definitions.h"
+/Yc"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h"
+/Fp"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.pch"
+/Fo"C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.obj"
+/sourceDependencies "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\PCH.FMODStudio.h.dep.json"
+>>>>>>>> ScoreComp_TestingMergge:NeonParadigm_Game/Plugins/FMODStudio/Intermediate/Build/Win64/x64/UnrealEditor/Development/FMODStudio/PCH.FMODStudio.h.obj.rsp.old
+>>>>>>> ScoreComp_TestingMergge
 /Zc:inline
 /nologo
 /Oi

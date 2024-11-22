@@ -1,6 +1,7 @@
 {
     "Version": "1.2",
     "Data": {
+<<<<<<< HEAD
         "Source": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodniagaraeventplayer.gen.cpp",
         "ProvidedModule": "",
         "PCH": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
@@ -12,6 +13,19 @@
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodasset.generated.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodevent.generated.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodaudiocomponent.h",
+=======
+        "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodniagaraeventplayer.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudioniagara\\definitions.fmodstudioniagara.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\public\\fmodniagaraeventplayer.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodevent.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodasset.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodasset.generated.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodevent.generated.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodaudiocomponent.h",
+>>>>>>> ScoreComp_TestingMergge
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\audiodevice.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\audiodynamicparameter.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\audiovirtualloop.h",
@@ -45,6 +59,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\tasks\\pipe.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\tasks\\task.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\audioenginesubsystem.generated.h",
+<<<<<<< HEAD
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmodstudiomodule.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmodutils.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_studio.hpp",
@@ -58,6 +73,21 @@
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_studio.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod.hpp",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodaudiocomponent.generated.h",
+=======
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmodstudiomodule.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmodutils.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_studio.hpp",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_studio_common.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_common.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_codec.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_dsp.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_dsp_effects.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_output.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_studio.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod.hpp",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodaudiocomponent.generated.h",
+>>>>>>> ScoreComp_TestingMergge
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\fx\\niagara\\source\\niagara\\public\\niagaracommon.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\particles\\particleperfstats.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\fx\\niagara\\source\\niagara\\public\\niagaracomponentpoolmethodenum.h",
@@ -125,8 +155,13 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\particles\\particlesystem.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\particlesystem.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\fx\\niagara\\intermediate\\build\\win64\\unrealeditor\\inc\\niagara\\uht\\niagarasystem.generated.h",
+<<<<<<< HEAD
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\public\\fmodstudioniagara.h",
             "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodniagaraeventplayer.generated.h"
+=======
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\public\\fmodstudioniagara.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodniagaraeventplayer.generated.h"
+>>>>>>> ScoreComp_TestingMergge
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
