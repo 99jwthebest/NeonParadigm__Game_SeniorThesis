@@ -2,17 +2,10 @@
 	"RemapUnityFiles": 
 	{
 		"Module.FMODStudioNiagara.cpp.obj": [
-<<<<<<< HEAD
-			"FMODNiagaraEventPlayer.gen.cpp.obj",
-			"FMODStudioNiagara.init.gen.cpp.obj",
-			"FMODNiagaraEventPlayer.cpp.obj",
-			"FMODStudioNiagara.cpp.obj"
-=======
 			"FMODNiagaraEventPlayer.cpp.obj",
 			"FMODStudioNiagara.cpp.obj",
 			"FMODNiagaraEventPlayer.gen.cpp.obj",
 			"FMODStudioNiagara.init.gen.cpp.obj"
->>>>>>> ScoreComp_TestingMergge
 		]
 	}
 }

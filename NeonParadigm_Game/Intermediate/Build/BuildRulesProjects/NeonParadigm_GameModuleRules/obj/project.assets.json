@@ -1,9 +1,6 @@
 {
   "version": 3,
   "targets": {
-<<<<<<< HEAD
-    "net6.0": {}
-=======
     "net6.0": {
       "Blake3/0.5.1": {
         "type": "package",
@@ -8035,51 +8032,33 @@
       "path": "../../../../../../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj",
       "msbuildProject": "../../../../../../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj"
     }
->>>>>>> ScoreComp_TestingMergge
   },
-  "libraries": {},
   "projectFileDependencyGroups": {
     "net6.0": [
-      "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj",
-      "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj",
-      "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj",
-      "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj"
+      "EpicGames.Build >= 1.0.0",
+      "UE5ProgramRules >= 1.0.0",
+      "UE5Rules >= 1.0.0",
+      "UnrealBuildTool >= 1.0.0"
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "D:\\Profile Redirect\\anmart28\\.nuget\\packages\\": {},
-=======
     "C:\\Users\\josep\\.nuget\\packages\\": {},
->>>>>>> ScoreComp_TestingMergge
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
-      "projectName": "NeonParadigm_GameModuleRules",
-      "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
-      "packagesPath": "D:\\Profile Redirect\\anmart28\\.nuget\\packages\\",
-      "outputPath": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\obj\\",
-=======
       "projectUniqueName": "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
       "projectName": "NeonParadigm_GameModuleRules",
       "projectPath": "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
       "packagesPath": "C:\\Users\\josep\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\obj\\",
->>>>>>> ScoreComp_TestingMergge
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
-        "D:\\Profile Redirect\\anmart28\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
         "C:\\Users\\josep\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> ScoreComp_TestingMergge
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8094,17 +8073,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj": {
-              "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj"
+            "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj": {
+              "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj"
             },
-            "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj": {
-              "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj"
+            "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj": {
+              "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj"
             },
-            "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj": {
-              "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj"
+            "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj": {
+              "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj"
             },
-            "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj": {
-              "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj"
+            "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj": {
+              "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj"
             }
           }
         }
@@ -8142,43 +8121,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  }
 }

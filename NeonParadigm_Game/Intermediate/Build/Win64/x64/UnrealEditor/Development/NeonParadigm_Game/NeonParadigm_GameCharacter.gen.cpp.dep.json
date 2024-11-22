@@ -1,21 +1,12 @@
 {
     "Version": "1.2",
     "Data": {
-<<<<<<< HEAD
-        "Source": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\neonparadigm_gamecharacter.gen.cpp",
-        "ProvidedModule": "",
-        "PCH": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
-        "Includes": [
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\neonparadigm_gamecharacter.h",
-=======
         "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\neonparadigm_gamecharacter.gen.cpp",
         "ProvidedModule": "",
         "PCH": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
         "Includes": [
             "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\neonparadigm_game\\definitions.neonparadigm_game.h",
             "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\source\\neonparadigm_game\\neonparadigm_gamecharacter.h",
->>>>>>> ScoreComp_TestingMergge
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\experimental\\iris\\core\\public\\iris\\serialization\\irisobjectreferencepackagemap.h",
@@ -24,11 +15,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
-<<<<<<< HEAD
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\neonparadigm_gamecharacter.generated.h"
-=======
             "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\unrealeditor\\inc\\neonparadigm_game\\uht\\neonparadigm_gamecharacter.generated.h"
->>>>>>> ScoreComp_TestingMergge
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

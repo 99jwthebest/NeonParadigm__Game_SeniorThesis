@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NeonParadigm_GameModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca941c319d606c027269e13e6563202f6097bacc")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+552e6ad806d4f75ba6955eb4707ebe8deff5c9dd")]
->>>>>>> ScoreComp_TestingMergge
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2c428287e0ae9bd10830782919f5710bf041e03")]
 [assembly: System.Reflection.AssemblyProductAttribute("NeonParadigm_GameModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NeonParadigm_GameModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,13 +1,8 @@
+/I "."
 <<<<<<< HEAD
-/I "."
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
 =======
-<<<<<<<< HEAD:NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/Engine/SharedPCH.Engine.Cpp20.h.obj.rsp.old
-"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\Engine\SharedPCH.Engine.Cpp20.cpp"
-========
->>>>>>>> ScoreComp_TestingMergge:NeonParadigm_Game/Plugins/FMODStudioNiagara/Intermediate/Build/Win64/x64/UnrealEditor/Development/FMODStudioNiagara/FMODStudioNiagara.Shared.rsp.old
-/I "."
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
 >>>>>>> ScoreComp_TestingMergge
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\UHT"
 /I "Runtime\CoreUObject\Public"
@@ -267,21 +262,21 @@
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\WidgetRegistration\UHT"
 /I "Developer\WidgetRegistration\Public"
 <<<<<<< HEAD
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
 =======
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
 >>>>>>> ScoreComp_TestingMergge
 /I "Runtime\Media\Public"
 /I "Runtime\ColorManagement\Public"
@@ -297,13 +292,13 @@
 /I "..\Plugins\FX\Niagara\Source\NiagaraShader\Public"
 /I "..\Plugins\FX\Niagara\Source\NiagaraVertexFactories\Public"
 <<<<<<< HEAD
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
-/I "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
+/I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
 =======
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
-/I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
+/I "C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
 >>>>>>> ScoreComp_TestingMergge
 /external:W0
 /external:I "ThirdParty\mimalloc\include"
@@ -313,55 +308,4 @@
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
-<<<<<<< HEAD
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-=======
-<<<<<<<< HEAD:NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/Engine/SharedPCH.Engine.Cpp20.h.obj.rsp.old
-/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-/Yc"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\Engine\SharedPCH.Engine.Cpp20.h"
-/Fp"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.pch"
-/Fo"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
-/sourceDependencies "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\Engine\SharedPCH.Engine.Cpp20.h.dep.json"
-/Zc:inline
-/nologo
-/Oi
-/FC
-/c
-/Gw
-/Gy
-/utf-8
-/wd4819
-/DSAL_NO_ATTRIBUTE_DECLARATIONS=1
-/permissive-
-/Zc:strictStrings-
-/Zc:__cplusplus
-/D_CRT_STDIO_LEGACY_WIDE_SPECIFIERS=1
-/D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1
-/D_WINDLL
-/D_DISABLE_EXTENDED_ALIGNED_STORAGE
-/Ob2
-/Ox
-/Ot
-/GF
-/errorReport:prompt
-/EHsc
-/DPLATFORM_EXCEPTIONS_DISABLED=0
-/Z7
-/MD
-/bigobj
-/fp:fast
-/Zo
-/Zp8
-/we4668
-/wd4244
-/wd4838
-/TP
-/GR-
-/W4
-/std:c++20
-/Zc:preprocessor
-/wd5054
-========
-/external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
->>>>>>>> ScoreComp_TestingMergge:NeonParadigm_Game/Plugins/FMODStudioNiagara/Intermediate/Build/Win64/x64/UnrealEditor/Development/FMODStudioNiagara/FMODStudioNiagara.Shared.rsp.old
->>>>>>> ScoreComp_TestingMergge

@@ -1,49 +1,5 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "rmslbkM793U=",
-  "success": false,
-  "projectFilePath": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
-  "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
-=======
   "dgSpecHash": "QBoxrts6fk0=",
   "success": true,
   "projectFilePath": "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
@@ -186,5 +142,4 @@
     "C:\\Users\\josep\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
->>>>>>> ScoreComp_TestingMergge
 }

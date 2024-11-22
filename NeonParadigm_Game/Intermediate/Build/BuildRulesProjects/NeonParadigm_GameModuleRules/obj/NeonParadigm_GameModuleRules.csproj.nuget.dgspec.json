@@ -1,23 +1,12 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj": {}
-=======
     "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj": {}
->>>>>>> ScoreComp_TestingMergge
   },
   "projects": {
-    "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj": {
+    "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj": {
       "version": "1.0.0",
       "restore": {
-<<<<<<< HEAD
-        "projectUniqueName": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
-        "projectName": "NeonParadigm_GameModuleRules",
-        "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
-        "packagesPath": "D:\\Profile Redirect\\anmart28\\.nuget\\packages\\",
-        "outputPath": "D:\\Profile Redirect\\anmart28\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\obj\\",
-=======
         "projectUniqueName": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj",
         "projectName": "UE5ProgramRules",
         "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj",
@@ -1080,17 +1069,12 @@
         "projectPath": "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
         "packagesPath": "C:\\Users\\josep\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\josep\\Documents\\Unreal Projects\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\obj\\",
->>>>>>> ScoreComp_TestingMergge
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "D:\\Profile Redirect\\anmart28\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
           "C:\\Users\\josep\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> ScoreComp_TestingMergge
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -1105,17 +1089,17 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj": {
-                "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj"
+              "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj": {
+                "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5ProgramRules\\UE5ProgramRules.csproj"
               },
-              "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj": {
-                "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj"
+              "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj": {
+                "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Intermediate\\Build\\BuildRulesProjects\\UE5Rules\\UE5Rules.csproj"
               },
-              "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj": {
-                "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj"
+              "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj": {
+                "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\Shared\\EpicGames.Build\\EpicGames.Build.csproj"
               },
-              "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj": {
-                "projectPath": "D:\\Profile Redirect\\anmart28\\Documents\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj"
+              "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj": {
+                "projectPath": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source\\Programs\\UnrealBuildTool\\UnrealBuildTool.csproj"
               }
             }
           }
