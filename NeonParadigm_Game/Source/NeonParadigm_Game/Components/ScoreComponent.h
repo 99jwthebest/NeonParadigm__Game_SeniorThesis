@@ -101,15 +101,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DepleteProgress();
 
+	UFUNCTION(BlueprintCallable)
+		void StartEncounter();
+	UFUNCTION(BlueprintCallable)
+		void EndEncounter();
 
 	void TrackHit(bool bIsPerfectHit);
 
 	float CalculateJustTimingBonus() const;
 
-	UFUNCTION(BlueprintCallable)
-		void StartEncounter();
-	UFUNCTION(BlueprintCallable)
-		void EndEncounter();
 
 	float CalculateTimeBonus() const;
 

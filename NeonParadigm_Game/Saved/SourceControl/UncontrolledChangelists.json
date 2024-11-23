@@ -6,7 +6,10 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
-				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_TriggerWallBlocks.uasset"
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_TriggerWallBlocks.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestMaps/RyanScene.umap",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/UI/WBP_HUD.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/BP_Player_NeonParadigm.uasset"
 			]
 		}
 	]

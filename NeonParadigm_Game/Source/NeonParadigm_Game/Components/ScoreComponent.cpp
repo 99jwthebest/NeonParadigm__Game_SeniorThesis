@@ -101,6 +101,17 @@ void UScoreComponent::DepleteProgress()
 	}
 }
 
+void UScoreComponent::StartEncounter()
+{
+	// Set the starting time to the current game time
+	EncounterStartTime = GetWorld()->GetTimeSeconds();
+}
+
+void UScoreComponent::EndEncounter()
+{
+	// Set the ending time to the current game time
+	EncounterEndTime = GetWorld()->GetTimeSeconds();
+}
 
 void UScoreComponent::TrackHit(bool bIsPerfectHit)
 {
@@ -121,17 +132,6 @@ float UScoreComponent::CalculateJustTimingBonus() const
 	return PerfectHitPercentage * 1000.0f;
 }
 
-void UScoreComponent::StartEncounter()
-{
-	// Set the starting time to the current game time
-	EncounterStartTime = GetWorld()->GetTimeSeconds();
-}
-
-void UScoreComponent::EndEncounter()
-{
-	// Set the ending time to the current game time
-	EncounterEndTime = GetWorld()->GetTimeSeconds();
-}
 
 float UScoreComponent::CalculateTimeBonus() const
 {

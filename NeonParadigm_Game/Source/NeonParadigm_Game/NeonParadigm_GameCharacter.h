@@ -393,6 +393,8 @@ public:
 	void BeginBPM_Bar();
 	UFUNCTION(BlueprintImplementableEvent)
 	void TogglePerfectHitTextBox();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleEncounterResults();
 
 
 public:

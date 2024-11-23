@@ -1608,4 +1608,5 @@ void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
+	ToggleEncounterResults();
 }
