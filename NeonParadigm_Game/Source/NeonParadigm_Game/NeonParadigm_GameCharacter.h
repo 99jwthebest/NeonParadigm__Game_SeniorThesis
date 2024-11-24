@@ -74,6 +74,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Rage Mode Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* RageAction;
+
+	/** Projectile Weapon Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ProjectileWeaponAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -405,6 +409,23 @@ public:
 	FORCEINLINE class UScoreComponent* GetScoreComponent() const { return ScoreComp; }
 
 	void EndEnemyEncounter();
+
+
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ProjectileWeaponMontage;
+	bool bIsShootSaved;
+
+public:
+
+	void ProjectileWeapon();
+	void ProjectileWeaponEvent();
+	bool CanShoot();
+
+	void SetIsShootSaved(bool bSetIsShootSaved);
+
+	void SaveShoot();
 
 };
 

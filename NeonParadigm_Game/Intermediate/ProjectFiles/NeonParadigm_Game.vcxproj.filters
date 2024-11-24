@@ -11,6 +11,7 @@
     <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -600,6 +601,12 @@
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_RotationToTarget.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SaveShoot.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SaveShoot.h">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_SoftTarget.cpp">

@@ -230,6 +230,9 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		// Rage
 		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
 
+		// Projectile Weapon
+		EnhancedInputComponent->BindAction(ProjectileWeaponAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeapon);
+
 	}
 	else
 	{
@@ -1609,4 +1612,111 @@ void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
 	ToggleEncounterResults();
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeapon()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		bIsShootSaved = true;
+	}
+	else
+	{
+		ProjectileWeaponEvent();
+	}
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
+{
+	if (CanShoot())
+	{
+		AttackComp->ResetLightAttack();
+		AttackComp->ResetHeavyAttack();
+
+
+		if (IsValid(ProjectileWeaponMontage))
+		{
+			AttackComp->FindNotifyTriggerTime(ProjectileWeaponMontage, FName("NP_AN_TestRhythmPunch"));
+			SetCurrentAnimTimeDelay(AttackComp->GetNotifyTriggerTime());
+			TestRhythmDelayEvent();
+			CharacterState->SetState(ECharacterStates::Attack);
+			
+			PlayAnimMontage(ProjectileWeaponMontage, GetCurrentAnimPlayRate());
+		}
+
+
+
+		//if (bPerfectBeatHit)
+		//{
+		//	PerfectDodgeCount++;
+		//	DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
+		//	DamageComp->PerfectHitOperations();
+		//}
+		//else
+		//{
+		//	PerfectDodgeCount = 0;
+		//	DodgePushMultiplier = 1.0f;
+		//}
+
+
+		// Apply movement with multiplier
+		//AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+
+		//if (PerfectDodgeCount >= MaxPerfectDodges)
+		//{
+		//	DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+		//	PerfectDodgeCount = 0;
+		//	DodgePushMultiplier = 1.0f;
+		//}
+
+	}
+}
+
+bool ANeonParadigm_GameCharacter::CanShoot()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	// Check if cooldown has ended
+	//const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
+	//return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+}
+
+
+void ANeonParadigm_GameCharacter::SetIsShootSaved(bool bSetIsShootSaved)
+{
+	bIsShootSaved = bSetIsShootSaved;
+}
+
+void ANeonParadigm_GameCharacter::SaveShoot()
+{
+	if (bIsShootSaved)
+	{
+		bIsShootSaved = false;
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		{
+			CharacterState->SetState(ECharacterStates::None);
+		}
+
+		ProjectileWeaponEvent();
+	}
+	else
+	{
+		return;
+	}
 }
