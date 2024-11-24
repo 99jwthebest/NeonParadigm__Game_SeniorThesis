@@ -61,12 +61,20 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 PerfectTimingThresholdSGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float PerfectHitPercentage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		float PerfectTimingPercent;
 
 
 	// Final Rank and Overall Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 OverallScore;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallScoreBThreshold;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallScoreAThreshold;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallScoreSThreshold;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 FinalRank; // 0 = C, 1 = B, 2 = A, 3 = S
 
@@ -100,19 +108,21 @@ public:
 	void Testing();
 	void IncrementScore(int ScoreToAdd);
 	UFUNCTION(BlueprintPure)
-	float GetCurrentScore();
+		float GetCurrentScore();
 	UFUNCTION(BlueprintCallable, Category = "Score")
 	int32 CalculateGrade() const;
+	UFUNCTION(BlueprintPure)
+		float CalculateGradeBonus();
 
 	UFUNCTION(BlueprintPure)
-	int32 GetCurrentRankIndex() const;
+		int32 GetCurrentRankIndex() const;
 
 	UFUNCTION(BlueprintPure)
-	float GetRankProgress();
+		float GetRankProgress();
 
 	void AddProgress(float Amount);
 	UFUNCTION(BlueprintCallable)
-	void DepleteProgress();
+		void DepleteProgress();
 
 	UFUNCTION(BlueprintCallable)
 		void StartEncounter();
@@ -122,20 +132,22 @@ public:
 	void TrackHit(bool bIsPerfectHit);
 
 	UFUNCTION(BlueprintPure)
-	float CalculatePerfectTimingBonus();
+		float CalculatePerfectTimingBonus();
 	void SetPerfectTimingPercentage(float PerfectHitPercentageF);
 	UFUNCTION(BlueprintPure)
-	float GetPerfectTimingPercentage();
+		float GetPerfectTimingPercentage();
 	UFUNCTION(BlueprintPure)
-	int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const;
+		int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const;
 
 	UFUNCTION(BlueprintPure)
-	float CalculateClearTimeBonus();
+		float CalculateClearTimeBonus();
 	UFUNCTION(BlueprintPure)
-	int32 CalculateClearTimingGrade();
+		int32 CalculateClearTimingGrade();
 	UFUNCTION(BlueprintPure)
-	float GetClearTime();
-
-	void CalculateOverallScore();
+		float GetClearTime();
+	UFUNCTION(BlueprintPure)
+		float CalculateOverallScore();
+	UFUNCTION(BlueprintPure)
+		int GetOverallScoreGrade();
 
 };

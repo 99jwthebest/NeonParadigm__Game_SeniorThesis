@@ -129,7 +129,7 @@ float UScoreComponent::CalculatePerfectTimingBonus()
 {
 	if (TotalHits == 0) return 0.0f;
 
-	float PerfectHitPercentage = (float)PerfectHits / (float)TotalHits;
+	PerfectHitPercentage = (float)PerfectHits / (float)TotalHits;
 
 	CalculatePerfectTimingGrade(PerfectHitPercentage);
 	SetPerfectTimingPercentage(PerfectHitPercentage);
@@ -241,29 +241,54 @@ int32 UScoreComponent::CalculateGrade() const
 	}
 }
 
-void UScoreComponent::CalculateOverallScore()
+float UScoreComponent::CalculateGradeBonus()
 {
-	// Combine all scores
-	float JustTimingBonus = CalculatePerfectTimingBonus();
-	float TimeBonus = CalculateTimeBonus();
-	OverallScore = TotalScore + JustTimingBonus + TimeBonus;
-
-	// Determine final rank based on OverallScore thresholds
-	if (OverallScore >= 5000)
+	if (TotalScore >= ThresholdSGrade)
 	{
-		FinalRank = 3; // S rank
+		return 2000.0f; // S rank
 	}
-	else if (OverallScore >= 4000)
+	else if (TotalScore >= ThresholdAGrade)
 	{
-		FinalRank = 2; // A rank
+		return 1500.0f; // A rank
 	}
-	else if (OverallScore >= 3000)
+	else if (TotalScore >= ThresholdBGrade)
 	{
-		FinalRank = 1; // B rank
+		return 1000.0f; // B rank
 	}
 	else
 	{
-		FinalRank = 0; // C rank
+		return 0.0f; // C rank
+	}
+}
+
+float UScoreComponent::CalculateOverallScore()
+{
+	// Combine all scores
+	float BaseScoreGradeBonus = CalculateGradeBonus();
+	float JustTimingBonus = CalculatePerfectTimingBonus();
+	float TimeBonus = CalculateClearTimeBonus();
+	
+	return OverallScore = TotalScore + BaseScoreGradeBonus + JustTimingBonus + TimeBonus;
+}
+
+int UScoreComponent::GetOverallScoreGrade()
+{
+	// Determine final rank based on OverallScore thresholds
+	if (OverallScore >= OverallScoreSThreshold)
+	{
+		return 3; // S rank
+	}
+	else if (OverallScore >= OverallScoreAThreshold)
+	{
+		return 2; // A rank
+	}
+	else if (OverallScore >= OverallScoreBThreshold)
+	{
+		return 1; // B rank
+	}
+	else
+	{
+		return 0; // C rank
 	}
 }
 
