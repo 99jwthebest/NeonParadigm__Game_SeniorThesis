@@ -14,6 +14,8 @@ UScoreComponent::UScoreComponent()
 	RankProgress = 0.0f;
 	DepletionRate = 0.01f;
 	ProgressIncreaseRate = 0.10f; // Points to progress bar when scoring
+	PerfectTimingPercent = 0.0f;
+
 	// ...
 }
 
@@ -123,13 +125,48 @@ void UScoreComponent::TrackHit(bool bIsPerfectHit)
 	}
 }
 
-float UScoreComponent::CalculateJustTimingBonus() const
+float UScoreComponent::CalculatePerfectTimingBonus()
 {
 	if (TotalHits == 0) return 0.0f;
 
 	float PerfectHitPercentage = (float)PerfectHits / (float)TotalHits;
+
+	CalculatePerfectTimingGrade(PerfectHitPercentage);
+	SetPerfectTimingPercentage(PerfectHitPercentage);
+
 	// Example: Bonus = 1000 points for 100% average
-	return PerfectHitPercentage * 1000.0f;
+	return PerfectHitPercentage * 1000.0f; //
+}
+
+void UScoreComponent::SetPerfectTimingPercentage(float PerfectTimingPercentF)
+{
+	PerfectTimingPercent = PerfectTimingPercentF;
+}
+
+float UScoreComponent::GetPerfectTimingPercentage()
+{
+	return PerfectTimingPercent * 100.0f;
+}
+
+int32 UScoreComponent::CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const
+{
+	// Determine rank based on time thresholds
+	if (PerfectHitPercentageIn >= PerfectTimingThresholdSGrade)
+	{
+		return 3; // S rank
+	}
+	else if (PerfectHitPercentageIn >= PerfectTimingThresholdAGrade)
+	{
+		return 2; // A rank
+	}
+	else if (PerfectHitPercentageIn >= PerfectTimingThresholdBGrade)
+	{
+		return 1; // B rank
+	}
+	else
+	{
+		return 0; // C rank
+	}
 }
 
 
@@ -179,7 +216,7 @@ int32 UScoreComponent::CalculateGrade() const
 void UScoreComponent::CalculateOverallScore()
 {
 	// Combine all scores
-	float JustTimingBonus = CalculateJustTimingBonus();
+	float JustTimingBonus = CalculatePerfectTimingBonus();
 	float TimeBonus = CalculateTimeBonus();
 	OverallScore = TotalScore + JustTimingBonus + TimeBonus;
 

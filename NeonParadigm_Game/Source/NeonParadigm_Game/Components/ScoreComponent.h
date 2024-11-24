@@ -31,7 +31,7 @@ private:
 	int TotalScore;
 	int CurrentScore;
 
-	// JustTiming Score
+	// Perfect Timing Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 PerfectHits; // Tracks the number of perfect hits
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -51,6 +51,17 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 TimeThresholdSGrade;
 
+	// Pefect Timing thresholds
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 PerfectTimingThresholdBGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 PerfectTimingThresholdAGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 PerfectTimingThresholdSGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float PerfectTimingPercent;
+
+
 	// Final Rank and Overall Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 OverallScore;
@@ -68,16 +79,16 @@ private:
 
 	// below for Style Letter Progress Bar
 	UPROPERTY(BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-	int32 CurrentRankIndex;
+		int32 CurrentRankIndex;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-	float RankProgress;
+		float RankProgress;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-	float DepletionRate;
+		float DepletionRate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-	float ProgressIncreaseRate;
+		float ProgressIncreaseRate;
 
 	FTimerHandle DepletionTimer;
 
@@ -108,8 +119,13 @@ public:
 
 	void TrackHit(bool bIsPerfectHit);
 
-	float CalculateJustTimingBonus() const;
-
+	UFUNCTION(BlueprintPure)
+	float CalculatePerfectTimingBonus();
+	void SetPerfectTimingPercentage(float PerfectHitPercentageF);
+	UFUNCTION(BlueprintPure)
+	float GetPerfectTimingPercentage();
+	UFUNCTION(BlueprintPure)
+	int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const;
 
 	float CalculateTimeBonus() const;
 

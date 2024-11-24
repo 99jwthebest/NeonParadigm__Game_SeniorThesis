@@ -14,6 +14,28 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_UScoreComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NeonParadigm_Game();
 // End Cross Module References
+	DEFINE_FUNCTION(UScoreComponent::execCalculatePerfectTimingGrade)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_PerfectHitPercentageIn);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(int32*)Z_Param__Result=P_THIS->CalculatePerfectTimingGrade(Z_Param_PerfectHitPercentageIn);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UScoreComponent::execGetPerfectTimingPercentage)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->GetPerfectTimingPercentage();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UScoreComponent::execCalculatePerfectTimingBonus)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->CalculatePerfectTimingBonus();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UScoreComponent::execEndEncounter)
 	{
 		P_FINISH;
@@ -68,10 +90,13 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		UClass* Class = UScoreComponent::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "CalculateGrade", &UScoreComponent::execCalculateGrade },
+			{ "CalculatePerfectTimingBonus", &UScoreComponent::execCalculatePerfectTimingBonus },
+			{ "CalculatePerfectTimingGrade", &UScoreComponent::execCalculatePerfectTimingGrade },
 			{ "DepleteProgress", &UScoreComponent::execDepleteProgress },
 			{ "EndEncounter", &UScoreComponent::execEndEncounter },
 			{ "GetCurrentRankIndex", &UScoreComponent::execGetCurrentRankIndex },
 			{ "GetCurrentScore", &UScoreComponent::execGetCurrentScore },
+			{ "GetPerfectTimingPercentage", &UScoreComponent::execGetPerfectTimingPercentage },
 			{ "GetRankProgress", &UScoreComponent::execGetRankProgress },
 			{ "StartEncounter", &UScoreComponent::execStartEncounter },
 		};
@@ -109,6 +134,78 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_CalculateGrade_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics
+	{
+		struct ScoreComponent_eventCalculatePerfectTimingBonus_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ScoreComponent_eventCalculatePerfectTimingBonus_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UScoreComponent, nullptr, "CalculatePerfectTimingBonus", nullptr, nullptr, Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::PropPointers), sizeof(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::ScoreComponent_eventCalculatePerfectTimingBonus_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::Function_MetaDataParams), Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::ScoreComponent_eventCalculatePerfectTimingBonus_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics
+	{
+		struct ScoreComponent_eventCalculatePerfectTimingGrade_Parms
+		{
+			float PerfectHitPercentageIn;
+			int32 ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_PerfectHitPercentageIn;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::NewProp_PerfectHitPercentageIn = { "PerfectHitPercentageIn", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ScoreComponent_eventCalculatePerfectTimingGrade_Parms, PerfectHitPercentageIn), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ScoreComponent_eventCalculatePerfectTimingGrade_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::NewProp_PerfectHitPercentageIn,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UScoreComponent, nullptr, "CalculatePerfectTimingGrade", nullptr, nullptr, Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::PropPointers), sizeof(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::ScoreComponent_eventCalculatePerfectTimingGrade_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::Function_MetaDataParams), Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::ScoreComponent_eventCalculatePerfectTimingGrade_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -224,6 +321,40 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics
+	{
+		struct ScoreComponent_eventGetPerfectTimingPercentage_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ScoreComponent_eventGetPerfectTimingPercentage_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UScoreComponent, nullptr, "GetPerfectTimingPercentage", nullptr, nullptr, Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::PropPointers), sizeof(Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::ScoreComponent_eventGetPerfectTimingPercentage_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::Function_MetaDataParams), Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::ScoreComponent_eventGetPerfectTimingPercentage_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UScoreComponent_GetRankProgress_Statics
 	{
 		struct ScoreComponent_eventGetRankProgress_Parms
@@ -321,6 +452,22 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 #endif
 		static const UECodeGen_Private::FIntPropertyParams NewProp_TimeThresholdSGrade;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PerfectTimingThresholdBGrade_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_PerfectTimingThresholdBGrade;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PerfectTimingThresholdAGrade_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_PerfectTimingThresholdAGrade;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PerfectTimingThresholdSGrade_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_PerfectTimingThresholdSGrade;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PerfectTimingPercent_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_PerfectTimingPercent;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_OverallScore_MetaData[];
 #endif
 		static const UECodeGen_Private::FIntPropertyParams NewProp_OverallScore;
@@ -367,10 +514,13 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UScoreComponent_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UScoreComponent_CalculateGrade, "CalculateGrade" }, // 609094439
+		{ &Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingBonus, "CalculatePerfectTimingBonus" }, // 1281009352
+		{ &Z_Construct_UFunction_UScoreComponent_CalculatePerfectTimingGrade, "CalculatePerfectTimingGrade" }, // 93639576
 		{ &Z_Construct_UFunction_UScoreComponent_DepleteProgress, "DepleteProgress" }, // 1311843279
 		{ &Z_Construct_UFunction_UScoreComponent_EndEncounter, "EndEncounter" }, // 290903661
 		{ &Z_Construct_UFunction_UScoreComponent_GetCurrentRankIndex, "GetCurrentRankIndex" }, // 3102506199
 		{ &Z_Construct_UFunction_UScoreComponent_GetCurrentScore, "GetCurrentScore" }, // 1017296062
+		{ &Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage, "GetPerfectTimingPercentage" }, // 2063625543
 		{ &Z_Construct_UFunction_UScoreComponent_GetRankProgress, "GetRankProgress" }, // 807171787
 		{ &Z_Construct_UFunction_UScoreComponent_StartEncounter, "StartEncounter" }, // 1206630286
 	};
@@ -388,11 +538,11 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Score" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// JustTiming Score\n" },
+		{ "Comment", "// Perfect Timing Score\n" },
 #endif
 		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "JustTiming Score" },
+		{ "ToolTip", "Perfect Timing Score" },
 #endif
 	};
 #endif
@@ -469,6 +619,44 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 	};
 #endif
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_TimeThresholdSGrade = { "TimeThresholdSGrade", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, TimeThresholdSGrade), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_TimeThresholdSGrade_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_TimeThresholdSGrade_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdBGrade_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Pefect Timing thresholds\n" },
+#endif
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Pefect Timing thresholds" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdBGrade = { "PerfectTimingThresholdBGrade", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, PerfectTimingThresholdBGrade), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdBGrade_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdBGrade_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdAGrade_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdAGrade = { "PerfectTimingThresholdAGrade", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, PerfectTimingThresholdAGrade), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdAGrade_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdAGrade_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdSGrade_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdSGrade = { "PerfectTimingThresholdSGrade", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, PerfectTimingThresholdSGrade), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdSGrade_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdSGrade_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingPercent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingPercent = { "PerfectTimingPercent", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, PerfectTimingPercent), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingPercent_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingPercent_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_OverallScore_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -567,6 +755,10 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_TimeThresholdBGrade,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_TimeThresholdAGrade,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_TimeThresholdSGrade,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdBGrade,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdAGrade,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingThresholdSGrade,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectTimingPercent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_OverallScore,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_FinalRank,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_ThresholdBGrade,
@@ -615,9 +807,9 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UScoreComponent, UScoreComponent::StaticClass, TEXT("UScoreComponent"), &Z_Registration_Info_UClass_UScoreComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UScoreComponent), 3948180799U) },
+		{ Z_Construct_UClass_UScoreComponent, UScoreComponent::StaticClass, TEXT("UScoreComponent"), &Z_Registration_Info_UClass_UScoreComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UScoreComponent), 3911241176U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_526175776(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_254093079(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
