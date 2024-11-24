@@ -50,6 +50,8 @@ private:
 		int32 TimeThresholdAGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 TimeThresholdSGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float CurrentEncounterClearTime;
 
 	// Pefect Timing thresholds
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -127,7 +129,12 @@ public:
 	UFUNCTION(BlueprintPure)
 	int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const;
 
-	float CalculateTimeBonus() const;
+	UFUNCTION(BlueprintPure)
+	float CalculateClearTimeBonus();
+	UFUNCTION(BlueprintPure)
+	int32 CalculateClearTimingGrade();
+	UFUNCTION(BlueprintPure)
+	float GetClearTime();
 
 	void CalculateOverallScore();
 

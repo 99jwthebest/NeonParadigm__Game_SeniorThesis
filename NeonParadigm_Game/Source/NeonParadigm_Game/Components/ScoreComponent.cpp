@@ -170,20 +170,20 @@ int32 UScoreComponent::CalculatePerfectTimingGrade(float PerfectHitPercentageIn)
 }
 
 
-float UScoreComponent::CalculateTimeBonus() const
+float UScoreComponent::CalculateClearTimeBonus()
 {
-	float EncounterDuration = EncounterEndTime - EncounterStartTime;
+	CurrentEncounterClearTime = EncounterEndTime - EncounterStartTime;
 
 	// Determine rank based on time thresholds
-	if (EncounterDuration <= TimeThresholdSGrade)
+	if (CurrentEncounterClearTime <= TimeThresholdSGrade)
 	{
 		return 1500.0f; // S rank
 	}
-	else if (EncounterDuration <= TimeThresholdAGrade)
+	else if (CurrentEncounterClearTime <= TimeThresholdAGrade)
 	{
 		return 1000.0f; // A rank
 	}
-	else if (EncounterDuration <= TimeThresholdBGrade)
+	else if (CurrentEncounterClearTime <= TimeThresholdBGrade)
 	{
 		return 500.0f; // B rank
 	}
@@ -191,6 +191,34 @@ float UScoreComponent::CalculateTimeBonus() const
 	{
 		return 0.0f; // C rank
 	}
+}
+
+int32 UScoreComponent::CalculateClearTimingGrade()
+{
+	CurrentEncounterClearTime = EncounterEndTime - EncounterStartTime;
+
+	// Determine rank based on time thresholds
+	if (CurrentEncounterClearTime <= TimeThresholdSGrade)
+	{
+		return 3; // S rank
+	}
+	else if (CurrentEncounterClearTime <= TimeThresholdAGrade)
+	{
+		return 2; // A rank
+	}
+	else if (CurrentEncounterClearTime <= TimeThresholdBGrade)
+	{
+		return 1; // B rank
+	}
+	else
+	{
+		return 0; // C rank
+	}
+}
+
+float UScoreComponent::GetClearTime()
+{
+	return CurrentEncounterClearTime;
 }
 
 int32 UScoreComponent::CalculateGrade() const
