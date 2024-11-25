@@ -1,16 +1,16 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudioeditor\\private\\sequencer\\fmodchanneleditors.cpp",
+        "Source": "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudioeditor\\private\\sequencer\\fmodchanneleditors.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudioeditor\\pch.fmodstudioeditor.h.pch",
+        "PCH": "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudioeditor\\pch.fmodstudioeditor.h.pch",
         "Includes": [
-            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudioeditor\\private\\sequencer\\fmodchanneleditors.h",
+            "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudioeditor\\private\\sequencer\\fmodchanneleditors.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\editor\\sequencercore\\public\\mvvm\\views\\keydrawparams.h",
-            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\sequencer\\fmodeventcontrolsection.h",
+            "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\sequencer\\fmodeventcontrolsection.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\moviescene\\public\\channels\\moviescenebytechannel.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\moviescene\\uht\\moviescenebytechannel.generated.h",
-            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodeventcontrolsection.generated.h",
+            "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodeventcontrolsection.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\editor\\sequencer\\public\\isequencerchannelinterface.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\slatecore\\public\\widgets\\declarativesyntaxsupport.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\slatecore\\public\\widgets\\scompoundwidget.h",
