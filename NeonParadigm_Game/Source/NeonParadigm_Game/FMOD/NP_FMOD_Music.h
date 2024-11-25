@@ -81,4 +81,5 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "State")
 	void SetWallBlockActors(const TArray<AActor*>& WallBlockActors);
 
+
 };

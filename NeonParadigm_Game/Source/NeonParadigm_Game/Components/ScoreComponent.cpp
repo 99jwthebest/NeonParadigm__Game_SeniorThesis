@@ -103,10 +103,12 @@ void UScoreComponent::DepleteProgress()
 	}
 }
 
-void UScoreComponent::StartEncounter()
+// Called In BP_Spawner
+void UScoreComponent::StartEncounter() 
 {
 	// Set the starting time to the current game time
 	EncounterStartTime = GetWorld()->GetTimeSeconds();
+
 }
 
 void UScoreComponent::EndEncounter()

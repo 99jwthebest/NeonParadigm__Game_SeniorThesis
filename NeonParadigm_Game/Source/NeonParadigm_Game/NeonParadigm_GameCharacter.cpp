@@ -103,7 +103,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	BPM_OrbMesh->SetupAttachment(BPM_OrbSpringArm, USpringArmComponent::SocketName);
 
 	MaxRage = 100.0f;
-
+	DefaultCameraBoomLength = 500.0f;
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -1606,12 +1606,18 @@ void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 	UpdateHealthBarEvent();  // this might need to be changed   ************
 }
 
-
+// Called in BP_Spawner
+void ANeonParadigm_GameCharacter::StartEnemyEncounter()
+{
+	ScoreComp->StartEncounter();
+	TimerCameraDistance(700.0f);
+}
 
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
 	ToggleEncounterResults();
+	TimerCameraDistance(DefaultCameraBoomLength);
 }
 
 void ANeonParadigm_GameCharacter::ProjectileWeapon()
@@ -1719,4 +1725,23 @@ void ANeonParadigm_GameCharacter::SaveShoot()
 	{
 		return;
 	}
+}
+
+void ANeonParadigm_GameCharacter::TimerCameraDistance(float CameraBoomLengthF)
+{
+	CameraBoomLength = CameraBoomLengthF;
+	GetWorld()->GetTimerManager().SetTimer(TimerForCameraDistanceChange, this, &ANeonParadigm_GameCharacter::ChangeCameraDistance, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+}
+
+void ANeonParadigm_GameCharacter::ChangeCameraDistance()
+{
+	// Smoothly interpolate the arm length
+	float CurrentArmLength = CameraBoom->TargetArmLength;
+	CameraBoom->TargetArmLength = FMath::FInterpTo(
+		CurrentArmLength,
+		CameraBoomLength,
+		GetWorld()->GetDeltaSeconds(),
+		1.0f
+	);
+
 }

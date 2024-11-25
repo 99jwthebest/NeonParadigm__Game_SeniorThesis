@@ -408,6 +408,8 @@ public:
 	/** Returns ScoreComp SubObject **/
 	FORCEINLINE class UScoreComponent* GetScoreComponent() const { return ScoreComp; }
 
+	UFUNCTION(BlueprintCallable)
+	void StartEnemyEncounter();
 	void EndEnemyEncounter();
 
 
@@ -426,6 +428,22 @@ public:
 	void SetIsShootSaved(bool bSetIsShootSaved);
 
 	void SaveShoot();
+
+
+private:
+
+	FTimerHandle TimerForCameraDistanceChange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraBoomLength;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float CameraBoomLength;
+
+public:
+
+
+	void TimerCameraDistance(float CameraBoomLengthF);
+	
+	void ChangeCameraDistance();
 
 };
 
