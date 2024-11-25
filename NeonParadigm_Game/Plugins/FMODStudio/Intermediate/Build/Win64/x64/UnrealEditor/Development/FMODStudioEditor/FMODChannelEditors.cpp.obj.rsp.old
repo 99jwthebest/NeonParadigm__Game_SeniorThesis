@@ -1,11 +1,11 @@
-"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Private\Sequencer\FMODChannelEditors.cpp"
-/FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h"
-/FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\Definitions.h"
-/Yu"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h"
-/Fp"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h.pch"
-/Fo"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\FMODChannelEditors.cpp.obj"
-/sourceDependencies "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\FMODChannelEditors.cpp.dep.json"
-@"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\FMODStudioEditor.Shared.rsp"
+"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Private\Sequencer\FMODChannelEditors.cpp"
+/FI"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h"
+/FI"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\Definitions.h"
+/Yu"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h"
+/Fp"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\PCH.FMODStudioEditor.h.pch"
+/Fo"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\FMODChannelEditors.cpp.obj"
+/sourceDependencies "C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\FMODChannelEditors.cpp.dep.json"
+@"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudioEditor\FMODStudioEditor.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

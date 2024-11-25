@@ -1,15 +1,15 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\fmodassetlookup.cpp",
+        "Source": "d:\\profile redirect\\riosorra\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\fmodassetlookup.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
+        "PCH": "d:\\profile redirect\\riosorra\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
         "Includes": [
-            "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\fmodassetlookup.h",
+            "d:\\profile redirect\\riosorra\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\private\\fmodassetlookup.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\engine\\datatable.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\public\\datatableutils.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\datatable.generated.h",
-            "c:\\users\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodassetlookup.generated.h"
+            "d:\\profile redirect\\riosorra\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodassetlookup.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
