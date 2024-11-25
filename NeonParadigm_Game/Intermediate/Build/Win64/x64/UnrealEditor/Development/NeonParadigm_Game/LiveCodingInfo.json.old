@@ -50,13 +50,13 @@
 			"NP_BaseEnemy.cpp.obj",
 			"NP_EnemySpawner.cpp.obj",
 			"CharacterStateComponent.cpp.obj",
-			"NP_FMOD_Music.cpp.obj",
 			"NeonParadigm_Game.cpp.obj",
 			"NeonParadigm_GameGameMode.cpp.obj",
 			"TestActor.cpp.obj",
 			"NeonParadigm_Game.init.gen.cpp.obj",
 			"NeonParadigm_GameCharacter.gen.cpp.obj",
 			"ScoreComponent.cpp.obj",
+			"NP_FMOD_Music.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj"
 		]
 	}
