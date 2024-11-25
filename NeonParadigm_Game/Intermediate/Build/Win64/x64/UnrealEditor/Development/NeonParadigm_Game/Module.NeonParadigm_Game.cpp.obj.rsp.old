@@ -1,11 +1,11 @@
-"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp"
-/FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/FI"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Definitions.NeonParadigm_Game.h"
-/Yu"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/Fp"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
-/Fo"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp.obj"
-/sourceDependencies "C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp.dep.json"
-@"C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\NeonParadigm_Game.Shared.rsp"
+"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp"
+/FI"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/FI"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Definitions.NeonParadigm_Game.h"
+/Yu"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/Fp"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\NeonParadigm_GameEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
+/Fo"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp.obj"
+/sourceDependencies "C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\Module.NeonParadigm_Game.cpp.dep.json"
+@"C:\Users\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Intermediate\Build\Win64\x64\UnrealEditor\Development\NeonParadigm_Game\NeonParadigm_Game.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi
