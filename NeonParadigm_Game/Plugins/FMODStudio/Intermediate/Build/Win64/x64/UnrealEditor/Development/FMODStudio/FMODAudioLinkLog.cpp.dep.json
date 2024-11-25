@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "g:\\git\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolink\\private\\fmodaudiolinklog.cpp",
+        "Source": "d:\\profile redirect\\reross1\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolink\\private\\fmodaudiolinklog.cpp",
         "ProvidedModule": "",
-        "PCH": "g:\\git\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
+        "PCH": "d:\\profile redirect\\reross1\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
         "Includes": [
-            "g:\\git\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolink\\public\\fmodaudiolinklog.h"
+            "d:\\profile redirect\\reross1\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolink\\public\\fmodaudiolinklog.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
