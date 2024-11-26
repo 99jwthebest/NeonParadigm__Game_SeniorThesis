@@ -16,10 +16,17 @@
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BT_Boss_Euphony.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasks_Boss/BTTask_BossStrafe.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/AIController/BP_Boss_AI.uasset",
-				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTask_PerformAttack.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasks_Boss/BTTask_PerformAttack.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestScenes/Test_BossScene.umap",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/NP_BP_Boss_Euphony.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/AM_Dash.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasks_Boss/BTTask_GroundSlamAttack.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasks_Boss/BTTask_RotateBoss.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/TempAssets/Drone_Proxy.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Enemies/TempAssets/Drone_Proxy1.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTServices/BTService_UpdateBehavior.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTasks_Boss/BTTask_BossRotateMoveToPlayer.uasset",
+				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/BehaviorTree/BTTasks/BTTask_PerformAttack.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/AI/AninNotify/Ranged/ANS_RotatingFlyingAIToTarget.uasset"
 			]
 		}
