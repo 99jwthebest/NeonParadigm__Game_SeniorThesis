@@ -74,6 +74,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Rage Mode Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* RageAction;
+
+	/** Projectile Weapon Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ProjectileWeaponAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -393,6 +397,8 @@ public:
 	void BeginBPM_Bar();
 	UFUNCTION(BlueprintImplementableEvent)
 	void TogglePerfectHitTextBox();
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleEncounterResults();
 
 
 public:
@@ -402,7 +408,42 @@ public:
 	/** Returns ScoreComp SubObject **/
 	FORCEINLINE class UScoreComponent* GetScoreComponent() const { return ScoreComp; }
 
+	UFUNCTION(BlueprintCallable)
+	void StartEnemyEncounter();
 	void EndEnemyEncounter();
+
+
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ProjectileWeaponMontage;
+	bool bIsShootSaved;
+
+public:
+
+	void ProjectileWeapon();
+	void ProjectileWeaponEvent();
+	bool CanShoot();
+
+	void SetIsShootSaved(bool bSetIsShootSaved);
+
+	void SaveShoot();
+
+
+private:
+
+	FTimerHandle TimerForCameraDistanceChange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraBoomLength;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float CameraBoomLength;
+
+public:
+
+
+	void TimerCameraDistance(float CameraBoomLengthF);
+	
+	void ChangeCameraDistance();
 
 };
 
