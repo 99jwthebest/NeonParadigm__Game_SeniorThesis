@@ -6,6 +6,15 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/Cube.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/cube_rev_normal.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/NEO_SM_Cables_horizontal_01.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/SM_Cell.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_TestElevator.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/test_assets/NEO_SM_Stairs_Railing.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Props/NEO_SM_HeartRecord_low.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Props/NEO_SM_RoundRecord_low.uasset",
+				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Props/NEO_Proxy_FrontDeskChair.uasset",
 				"D:/profile redirect/riosorra/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/FrontDeskChair/standardSurface1.uasset",
 				"D:/profile redirect/riosorra/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"D:/profile redirect/riosorra/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/FrontDeskChair/NEO_Proxy_FrontDeskChair.uasset",
@@ -27,12 +36,6 @@
 				"D:/profile redirect/riosorra/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/FrontDeskChair/M_Neutral_Mat.uasset",
 				"C:/Users/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
-				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
-				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/cube_rev_normal.uasset",
-				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/NEO_SM_Cables_horizontal_01.uasset",
-				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/SM_Cell.uasset",
-				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_TestElevator.uasset",
-				"D:/Profile Redirect/anmart28/Documents/GitHub/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/test_assets/NEO_SM_Stairs_Railing.uasset",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/LevelDesign.umap",
 				"C:/Users/josep/Documents/Unreal Projects/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_TriggerWallBlocks.uasset"
 			]
