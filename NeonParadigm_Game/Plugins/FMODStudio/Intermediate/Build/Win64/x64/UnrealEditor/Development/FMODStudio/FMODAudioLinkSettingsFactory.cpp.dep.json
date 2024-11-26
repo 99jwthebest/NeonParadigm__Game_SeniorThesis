@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolinkeditor\\private\\fmodaudiolinksettingsfactory.cpp",
+        "Source": "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolinkeditor\\private\\fmodaudiolinksettingsfactory.cpp",
         "ProvidedModule": "",
-        "PCH": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
+        "PCH": "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\pch.fmodstudio.h.pch",
         "Includes": [
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolinkeditor\\private\\fmodaudiolinksettingsfactory.h",
+            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolinkeditor\\private\\fmodaudiolinksettingsfactory.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\editor\\unrealed\\classes\\factories\\factory.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealed\\uht\\factory.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\developer\\assettools\\public\\assettypeactions_base.h",
@@ -514,13 +514,13 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\editor\\unrealed\\public\\mrufavoriteslist.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\editor\\unrealed\\public\\mrulist.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealed\\uht\\asseteditorsubsystem.generated.h",
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodaudiolinksettingsfactory.generated.h",
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolink\\public\\fmodaudiolinksettings.h",
+            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodaudiolinksettingsfactory.generated.h",
+            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodaudiolink\\public\\fmodaudiolinksettings.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\audiolink\\audiolinkcore\\public\\audiolinksettingsabstract.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\audiolinkcore\\uht\\audiolinksettingsabstract.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\engine\\streamablemanager.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\misc\\packageaccesstracking.h",
-            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodaudiolinksettings.generated.h"
+            "c:\\angie\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodaudiolinksettings.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
