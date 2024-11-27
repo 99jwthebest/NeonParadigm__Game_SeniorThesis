@@ -415,11 +415,17 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 			PerfectDodgeCount++;
 			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
 			DamageComp->PerfectHitOperations();
+
+			// Debug PerfectDodgeCount and DodgePushMultiplier when a perfect beat is hit
+			UE_LOG(LogTemp, Log, TEXT("Perfect Beat Hit! PerfectDodgeCount: %d, DodgePushMultiplier: %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
 		else
 		{
 			PerfectDodgeCount = 0;
 			DodgePushMultiplier = 1.0f;
+
+			// Debug when a perfect beat is missed
+			UE_LOG(LogTemp, Log, TEXT("Perfect Beat Missed. Resetting PerfectDodgeCount to %d, DodgePushMultiplier to %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
 
 		PlayAnimMontage(DodgeMontage);
@@ -429,11 +435,17 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 
 		if (PerfectDodgeCount >= MaxPerfectDodges)
 		{
-			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDodgeDuration;
+
+			// Debug DodgeCooldownEndTime when max perfect dodges are reached
+			UE_LOG(LogTemp, Log, TEXT("PerfectDodgeCount: Max Perfect Dodges Reached. DodgeCooldownEndTime set to: %f"), DodgeCooldownEndTime);
+
 			PerfectDodgeCount = 0;
 			DodgePushMultiplier = 1.0f;
-		}
 
+			// Debug PerfectDodgeCount reset and DodgePushMultiplier reset
+			UE_LOG(LogTemp, Log, TEXT("PerfectDodgeCount reset to %d, DodgePushMultiplier reset to %f"), PerfectDodgeCount, DodgePushMultiplier);
+		}
 	}
 }
 
@@ -463,6 +475,12 @@ FRotator ANeonParadigm_GameCharacter::GetDesiredRotation() const
 	}
 
 	return FRotator(0.0f, 0.0f, 0.0f);
+}
+
+void ANeonParadigm_GameCharacter::ResetDodgeCountAndMultiplier()
+{
+	PerfectDodgeCount = 0;
+	DodgePushMultiplier = 1.0f;
 }
 
 void ANeonParadigm_GameCharacter::SetIsDodgeSaved(bool bSetIsDodgeSaved)
@@ -1643,7 +1661,7 @@ void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
 		AttackComp->ResetLightAttack();
 		AttackComp->ResetHeavyAttack();
 
-
+        // Trigger the projectile attack animation
 		if (IsValid(ProjectileWeaponMontage))
 		{
 			AttackComp->FindNotifyTriggerTime(ProjectileWeaponMontage, FName("NP_AN_TestRhythmPunch"));
@@ -1654,30 +1672,67 @@ void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
 			PlayAnimMontage(ProjectileWeaponMontage, GetCurrentAnimPlayRate());
 		}
 
+		ProjectileShot++;
+
+		UE_LOG(LogTemp, Log, TEXT("Projectile Shot!! %d"), ProjectileShot);
 
 
-		//if (bPerfectBeatHit)
-		//{
-		//	PerfectDodgeCount++;
-		//	DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
-		//	DamageComp->PerfectHitOperations();
-		//}
-		//else
-		//{
-		//	PerfectDodgeCount = 0;
-		//	DodgePushMultiplier = 1.0f;
-		//}
+
+		//// Apply movement or effects with the multiplier
+		//AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
+
+		// Reset logic when max perfect projectiles are reached
+		if (ProjectileShot >= MaxProjectiles)
+		{
+
+			//ProjectileCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownProjectileDuration;
+
+			ProjectileShot = 0;
+			UE_LOG(LogTemp, Log, TEXT("Projectile Shot Reset!! %d"), ProjectileShot);
+
+		}
+
+		/*
+
+		// Perfect beat handling for the projectile system
+        if (bPerfectBeatHit)
+        {
+            PerfectProjectileCount++;
+            PerfectProjectileMultiplier = FMath::Min(1.0f + (PerfectProjectileCount * 0.5f), 2.5f); // Max multiplier is 2.5
+            DamageComp->PerfectHitOperations();
+
+            // Debug PerfectProjectileCount and PerfectProjectileMultiplier when a perfect beat is hit
+            UE_LOG(LogTemp, Log, TEXT("Perfect Beat Hit! PerfectProjectileCount: %d, PerfectProjectileMultiplier: %f"), PerfectProjectileCount, PerfectProjectileMultiplier);
+        }
+        else
+        {
+            PerfectProjectileCount = 0;
+            PerfectProjectileMultiplier = 1.0f;
+
+            // Debug when a perfect beat is missed
+            UE_LOG(LogTemp, Log, TEXT("Perfect Beat Missed. Resetting PerfectProjectileCount to %d, PerfectProjectileMultiplier to %f"), PerfectProjectileCount, PerfectProjectileMultiplier);
+        }
 
 
-		// Apply movement with multiplier
-		//AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+        //// Apply movement or effects with the multiplier
+        //AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
 
-		//if (PerfectDodgeCount >= MaxPerfectDodges)
-		//{
-		//	DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
-		//	PerfectDodgeCount = 0;
-		//	DodgePushMultiplier = 1.0f;
-		//}
+        // Reset logic when max perfect projectiles are reached
+        if (PerfectProjectileCount >= MaxPerfectProjectiles)
+        {
+            PerfectProjectileCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownPerfectProjectileDuration;
+
+            // Debug ProjectileCooldownEndTime when max perfect projectiles are reached
+            UE_LOG(LogTemp, Log, TEXT("PerfectProjectileCount: Max Perfect Projectiles Reached. ProjectileCooldownEndTime set to: %f"), PerfectProjectileCooldownEndTime);
+
+            PerfectProjectileCount = 0;
+            PerfectProjectileMultiplier = 1.0f;
+
+            // Debug PerfectProjectileCount and PerfectProjectileMultiplier reset
+            UE_LOG(LogTemp, Log, TEXT("PerfectProjectileCount reset to %d, PerfectProjectileMultiplier reset to %f"), PerfectProjectileCount, PerfectProjectileMultiplier);
+        }
+
+		*/
 
 	}
 }

@@ -110,7 +110,7 @@ private:
 	float DodgePushMultiplier = 1.0f; // Increases push distance
 	float DodgeCooldownEndTime = 0.0f; // Time when dodging becomes available again
 	const int32 MaxPerfectDodges = 3; // Maximum consecutive dodges
-	const float CooldownDuration = 1.0f; // Beat delay (in seconds) before dodge resets
+	const float CooldownDodgeDuration = 1.0f; // Beat delay (in seconds) before dodge resets
 
 
 	bool DoubleJumped;
@@ -192,6 +192,10 @@ protected:
 	void DodgeEvent();
 	bool CanDodge();
 	FRotator GetDesiredRotation() const;
+
+public:
+	void ResetDodgeCountAndMultiplier();
+
 
 
 protected:
@@ -444,6 +448,23 @@ public:
 	void TimerCameraDistance(float CameraBoomLengthF);
 	
 	void ChangeCameraDistance();
+
+
+private:
+
+	int32 ProjectileShot = 0; // Tracks consecutive 
+	//float PerfectProjectileMultiplier = 1.0f; // Increases push distance
+	float ProjectileCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxProjectiles = 3; // Maximum consecutive 
+	const float CooldownProjectileDuration = 2.0f; // Beat delay (in seconds) before dodge resets
+
+
+	int32 PerfectProjectileCount = 0; // Tracks consecutive perfect dodges
+	float PerfectProjectileMultiplier = 1.0f; // Increases push distance
+	float PerfectProjectileCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxPerfectProjectiles = 3; // Maximum consecutive dodges
+	const float CooldownPerfectProjectileDuration = 1.0f; // Beat delay (in seconds) before dodge resets
+
 
 };
 

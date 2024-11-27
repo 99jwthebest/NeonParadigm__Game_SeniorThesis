@@ -92,6 +92,7 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->ResetParry();
 			AttackComp->ResetLaunched();  // this might cause glitches, resetting the Launched Variable ****************
 			MyCharacter->SetIsShootSaved(false);
+			MyCharacter->ResetDodgeCountAndMultiplier();
 		}
 	}
 
