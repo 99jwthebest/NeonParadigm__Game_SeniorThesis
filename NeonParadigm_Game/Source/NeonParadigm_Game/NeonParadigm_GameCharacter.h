@@ -403,7 +403,8 @@ public:
 	void TogglePerfectHitTextBox();
 	UFUNCTION(BlueprintImplementableEvent)
 	void ToggleEncounterResults();
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateProjectileWeaponBarEvent();
 
 public:
 
@@ -456,7 +457,11 @@ private:
 	//float PerfectProjectileMultiplier = 1.0f; // Increases push distance
 	float ProjectileCooldownEndTime = 0.0f; // Time when dodging becomes available again
 	const int32 MaxProjectiles = 3; // Maximum consecutive 
-	const float CooldownProjectileDuration = 2.0f; // Beat delay (in seconds) before dodge resets
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+		float CooldownProjectileDuration = 2.0f; // Beat delay (in seconds) before dodge resets
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+		float ProjectileCooldownProgress;
+	FTimerHandle TimerForProjectileCooldown;
 
 
 	int32 PerfectProjectileCount = 0; // Tracks consecutive perfect dodges
@@ -465,6 +470,13 @@ private:
 	const int32 MaxPerfectProjectiles = 3; // Maximum consecutive dodges
 	const float CooldownPerfectProjectileDuration = 1.0f; // Beat delay (in seconds) before dodge resets
 
+
+public:
+
+	float GetProjectileCooldownEndTime();
+	float GetProjectileCooldownDuration();
+	void StartTimerForProjectileCooldown();
+	void CalculateTimeForProjectileWeaponCooldown();
 
 };
 

@@ -1676,7 +1676,9 @@ void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
 
 		UE_LOG(LogTemp, Log, TEXT("Projectile Shot!! %d"), ProjectileShot);
 
-
+		// Calculate progress (0.0 = full ammo, 1.0 = all shots used)
+		ProjectileCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(ProjectileShot) / static_cast<float>(MaxProjectiles), 0.0f, 1.0f);
+		UpdateProjectileWeaponBarEvent();
 
 		//// Apply movement or effects with the multiplier
 		//AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
@@ -1685,10 +1687,12 @@ void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
 		if (ProjectileShot >= MaxProjectiles)
 		{
 
-			//ProjectileCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownProjectileDuration;
+			ProjectileCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownProjectileDuration;
 
 			ProjectileShot = 0;
 			UE_LOG(LogTemp, Log, TEXT("Projectile Shot Reset!! %d"), ProjectileShot);
+
+			StartTimerForProjectileCooldown();
 
 		}
 
@@ -1748,10 +1752,10 @@ bool ANeonParadigm_GameCharacter::CanShoot()
 	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
 
 	// Check if cooldown has ended
-	//const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
+	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= ProjectileCooldownEndTime;
 	//return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
 }
 
 
@@ -1798,5 +1802,45 @@ void ANeonParadigm_GameCharacter::ChangeCameraDistance()
 		GetWorld()->GetDeltaSeconds(),
 		1.0f
 	);
+
+	UE_LOG(LogTemp, Log, TEXT("What is goind ON!!@!!!:DJLSDKF:SLK CHANGE CAMERA DISTANCE"));
+
+
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileCooldownEndTime()
+{
+	return ProjectileCooldownEndTime;
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileCooldownDuration()
+{
+	return CooldownProjectileDuration;
+}
+
+void ANeonParadigm_GameCharacter::StartTimerForProjectileCooldown()
+{
+	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileCooldown, this, &ANeonParadigm_GameCharacter::CalculateTimeForProjectileWeaponCooldown, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::CalculateTimeForProjectileWeaponCooldown()
+{
+
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float RemainingTime = ProjectileCooldownEndTime - CurrentTime;
+
+	// Calculate progress (0.0 = no cooldown, 1.0 = cooldown complete)
+	ProjectileCooldownProgress = FMath::Clamp(1.0f - (RemainingTime / CooldownProjectileDuration), 0.0f, 1.0f);
+
+	//CooldownWidgetInstance->SetCooldownProgress(CooldownProgress);
+	UpdateProjectileWeaponBarEvent();
+
+	// Stop the timer when the cooldown is complete
+	if (ProjectileCooldownProgress >= 1.0f)
+	{
+		GetWorldTimerManager().ClearTimer(TimerForProjectileCooldown);
+	}
+
 
 }
