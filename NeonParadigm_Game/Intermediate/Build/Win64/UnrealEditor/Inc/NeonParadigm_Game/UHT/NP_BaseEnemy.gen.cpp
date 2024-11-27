@@ -103,6 +103,11 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		P_THIS->AttackMovement(Z_Param_Distance);
 		P_NATIVE_END;
 	}
+	static FName NAME_ANP_BaseEnemy_EnemyStunned = FName(TEXT("EnemyStunned"));
+	void ANP_BaseEnemy::EnemyStunned()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ANP_BaseEnemy_EnemyStunned),NULL);
+	}
 	static FName NAME_ANP_BaseEnemy_PerformThingsAfterDeath = FName(TEXT("PerformThingsAfterDeath"));
 	void ANP_BaseEnemy::PerformThingsAfterDeath()
 	{
@@ -236,6 +241,28 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANP_BaseEnemy, nullptr, "EnemyStunned", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -610,6 +637,10 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Launch;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Stun_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Stun;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_HR_Air_Knockback_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_HR_Air_Knockback;
@@ -672,6 +703,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_AttackMovement, "AttackMovement" }, // 2493292664
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_CheckToWaitForBeat, "CheckToWaitForBeat" }, // 1671672958
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_EnemFindNotifyTriggerTime, "EnemFindNotifyTriggerTime" }, // 566104182
+		{ &Z_Construct_UFunction_ANP_BaseEnemy_EnemyStunned, "EnemyStunned" }, // 484434888
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_GetCurrentAnimPlayRate, "GetCurrentAnimPlayRate" }, // 1714036484
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_GetNotifyTriggerTime, "GetNotifyTriggerTime" }, // 3270409843
 		{ &Z_Construct_UFunction_ANP_BaseEnemy_HandleTakeAnyDamage, "HandleTakeAnyDamage" }, // 3611324083
@@ -754,6 +786,14 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch = { "HR_Launch", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Launch), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Stun_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "HitReaction" },
+		{ "ModuleRelativePath", "Enemies/NP_BaseEnemy.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Stun = { "HR_Stun", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANP_BaseEnemy, HR_Stun), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Stun_MetaData), Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Stun_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -877,6 +917,7 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockdown,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Knockback,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Launch,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Stun,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Air_Knockback_OnLanded,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANP_BaseEnemy_Statics::NewProp_HR_Getup,
@@ -929,9 +970,9 @@ void EmptyLinkFunctionForGeneratedCodeNP_BaseEnemy() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 2041217066U) },
+		{ Z_Construct_UClass_ANP_BaseEnemy, ANP_BaseEnemy::StaticClass, TEXT("ANP_BaseEnemy"), &Z_Registration_Info_UClass_ANP_BaseEnemy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANP_BaseEnemy), 1642098813U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_892072165(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_181596038(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Enemies_NP_BaseEnemy_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

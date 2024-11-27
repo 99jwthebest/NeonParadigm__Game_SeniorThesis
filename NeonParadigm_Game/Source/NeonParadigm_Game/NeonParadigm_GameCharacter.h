@@ -177,6 +177,7 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	FVector2D LookAxisVector;
 
 	void LightAttack();
 
@@ -217,6 +218,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	FVector2D GetMoveInputValue();
+	FVector2D GetLookInputValue();
+
 
 private:
 
@@ -443,12 +446,23 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		float CameraBoomLength;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraFOV;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float TargetCameraFOV;
+		FTimerHandle TimerForFOVChange;
+
 public:
 
 
 	void TimerCameraDistance(float CameraBoomLengthF);
 	
 	void ChangeCameraDistance();
+
+	void TimerCameraFOV(float TargetFOVValue);
+
+	void ChangeCameraFOV();
+	float GetDefaultCameraFOV();
 
 
 private:
@@ -478,6 +492,14 @@ public:
 	float GetProjectileCooldownDuration();
 	void StartTimerForProjectileCooldown();
 	void CalculateTimeForProjectileWeaponCooldown();
+
+	void EnableCameraAutoRotate();
+
+private:
+
+	AActor* CameraTargetActor;
+	FTimerHandle CameraDelayTimerHandle;
+	bool bCanRotateBack = true; // Starts true, becomes false during input
 
 };
 

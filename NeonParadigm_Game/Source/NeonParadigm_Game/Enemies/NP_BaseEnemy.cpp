@@ -230,6 +230,9 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 			case EDamageTypes::Launch:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch AERIAL"));
 				return HR_Launch;
+			case EDamageTypes::Stun:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Stun AERIAL"));
+				return HR_Stun;
 		}
 	}
 	else
@@ -264,6 +267,10 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Launch"));
 				LaunchEnemyIntoAir();
 				return HR_Launch;
+			case EDamageTypes::Stun:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Stun"));
+				EnemyStunned();
+				return HR_Stun;
 		}
 	}
 

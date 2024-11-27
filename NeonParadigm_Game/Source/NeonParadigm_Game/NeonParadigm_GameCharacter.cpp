@@ -104,6 +104,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 
 	MaxRage = 100.0f;
 	DefaultCameraBoomLength = 500.0f;
+	DefaultCameraFOV = 90.0f;
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -146,30 +147,123 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 	if (bIsTargeting)
 		return;
 
-	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
+	// Define a threshold for input to be considered significant
+	const float InputThreshold = 0.25f;  // Adjust this threshold to ignore small mouse movements
+	const float Deadzone = 0.1f;  // Values below this will be ignored (adjust for sensitivity)
+	static float InputHoldTime = 0.0f;  // Track how long input is above the threshold
+	const float InputHoldTimeThreshold = 0.1f;  // 0.1 seconds of continuous input before disabling rotation
+	
+	// Check for significant camera input above the threshold
+	if (FMath::Abs(LookAxisVector.X) > InputThreshold || FMath::Abs(LookAxisVector.Y) > InputThreshold)
 	{
-		// Attempt to cast TargetActor to NP_BaseEnemy
-		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
-		if(Enemy)
+		// Player is moving the camera; disable auto-rotation
+		bCanRotateBack = false;
+		LookAxisVector.X = 0.0f;  // Ignore small horizontal movements
+
+		LookAxisVector.Y = 0.0f;  // Ignore small vertical movements
+
+		UE_LOG(LogTemp, Log, TEXT("LookAxisVector.X: %f, LookAxisVector.Y: %f"), LookAxisVector.X, LookAxisVector.Y);
+		UE_LOG(LogTemp, Log, TEXT("Abs(LookAxisVector.X): %f, Abs(LookAxisVector.Y): %f"), FMath::Abs(LookAxisVector.X), FMath::Abs(LookAxisVector.Y));
+
+		// Reset the timer and start the delay for camera auto-rotation
+		GetWorld()->GetTimerManager().ClearTimer(CameraDelayTimerHandle);
+		GetWorld()->GetTimerManager().SetTimer(
+			CameraDelayTimerHandle,
+			this,
+			&ANeonParadigm_GameCharacter::EnableCameraAutoRotate,
+			0.5f, // Delay duration
+			false // Only run once
+		);
+
+		UE_LOG(LogTemp, Log, TEXT("Camera input detected. Disabling auto-rotation."));
+	}
+	else
+	{
+		// Reset input hold time if no significant input
+		UE_LOG(LogTemp, Log, TEXT("No camera input. Waiting to enable auto-rotation."));
+	}
+
+	if (!bCanRotateBack)
+		return;
+
+
+	if (CameraTargetActor && CameraTargetActor->IsValidLowLevel()) // check if targeting
+	{
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(CameraTargetActor);
+		if (Enemy)
 		{
 			if (Enemy->GetState() != ECharacterStates::Death)
 			{
-				// If The Distance Between the player and Enemy is greater than MaxTargetingDistance Then Stop Targeting.
-				if (GetDistanceTo(SoftTargetActor) < MaxTargetingDistance)
+				// Check the distance between the player and the enemy
+				if (GetDistanceTo(CameraTargetActor) < MaxTargetingDistance)
 				{
-					FRotator currentRotation = GetController()->GetControlRotation();
+					FVector PlayerLocation = GetActorLocation();
+					FVector TargetLocation = CameraTargetActor->GetActorLocation() - TargetingOffset;
 
-					FVector TargetVector = SoftTargetActor->GetActorLocation() - TargetingOffset;
+					// Project the target's location onto the screen
+					FVector2D ScreenPosition;
+					bool bIsOnScreen = UGameplayStatics::ProjectWorldToScreen(
+						GetWorld()->GetFirstPlayerController(),
+						TargetLocation,
+						ScreenPosition
+					);
 
-					FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetVector));
+					FVector2D ViewportSize;
+					GEngine->GameViewport->GetViewportSize(ViewportSize);
+					FVector2D ScreenCenter = ViewportSize * 0.5f;
 
-					float RDeltaTime = GetWorld()->GetDeltaSeconds();
+					// Scale the threshold distance based on screen resolution
+					float Diagonal = FMath::Sqrt(FMath::Square(ViewportSize.X) + FMath::Square(ViewportSize.Y));
+					const float ThresholdDistance = Diagonal * 0.25f; // e.g., 40% of the screen diagonal
 
-					FRotator NewRotation = FMath::RInterpTo(currentRotation, TargetRot, RDeltaTime, CameraRotationSpeed);
+					// Calculate the distance from the center of the screen
+					float DistanceFromCenter = bIsOnScreen
+						? FVector2D::Distance(ScreenCenter, ScreenPosition)
+						: FLT_MAX;
 
-					GetController()->SetControlRotation(NewRotation);
-					UE_LOG(LogTemp, Warning, TEXT("rotating Camera"));
+					float MaxSpeed = 4.0f;
+					float MinSpeed = .3f;
+					float DistanceFromThreshold = FMath::Max(0.0f, DistanceFromCenter - ThresholdDistance);
+					float MaxDistance = Diagonal * 0.5f;
 
+					// Smooth the rotation speed using a static variable
+					static float SmoothedRotationSpeed = MinSpeed;
+
+					// Calculate desired speed based on distance from center
+					float DesiredRotationSpeed = FMath::Clamp(
+						FMath::Lerp(MinSpeed, MaxSpeed, DistanceFromThreshold / MaxDistance),
+						MinSpeed,
+						MaxSpeed
+					);
+
+					// Interpolate the rotation speed for smoother transitions
+					float SpeedSmoothFactor = 5.0f; // Adjust this to control how quickly the speed stabilizes
+					SmoothedRotationSpeed = FMath::FInterpTo(SmoothedRotationSpeed, DesiredRotationSpeed, GetWorld()->GetDeltaSeconds(), SpeedSmoothFactor);
+
+					// Use the smoothed rotation speed
+					float RotationSpeed = SmoothedRotationSpeed;
+
+					// Debug to verify smooth changes
+					UE_LOG(LogTemp, Log, TEXT("DesiredRotationSpeed: %f, SmoothedRotationSpeed: %f"), DesiredRotationSpeed, SmoothedRotationSpeed);
+
+
+					// If target is far from center or off-screen, rotate the camera
+					if (DistanceFromCenter > ThresholdDistance || !bIsOnScreen)
+					{
+						UE_LOG(LogTemp, Warning, TEXT("No camera input. Is it Past this!!!!!!! Threshhold!!!"));
+
+
+						FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(PlayerLocation, TargetLocation);
+						float DeltaTime = GetWorld()->GetDeltaSeconds();
+						FRotator NewRotation = FMath::RInterpTo(GetController()->GetControlRotation(), TargetRotation, DeltaTime, RotationSpeed);
+
+						GetController()->SetControlRotation(NewRotation);
+						UE_LOG(LogTemp, Warning, TEXT("Rotating camera towards target. Distance from center: %f"), DistanceFromCenter);
+					}
+					else
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Target within screen center threshold. Distance: %f"), DistanceFromCenter);
+					}
 				}
 				else
 				{
@@ -181,13 +275,12 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 				EndTarget();
 			}
 		}
-		//else
-		//{
-		//	// The cast failed, handle accordingly
-		//	UE_LOG(LogTemp, Warning, TEXT("Failed to cast TargetActor to NP_BaseEnemy."));
-		//}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Failed to cast TargetActor to NP_BaseEnemy."));
+		}
 	}
-	else if(bIsTargeting) // this might be the fix of constant null object message
+	else if (bIsTargeting) // fix for constant null object messages
 	{
 		EndTarget();
 	}
@@ -273,10 +366,15 @@ FVector2D ANeonParadigm_GameCharacter::GetMoveInputValue()
 	return MovementVector;
 }
 
+FVector2D ANeonParadigm_GameCharacter::GetLookInputValue()
+{
+	return LookAxisVector;
+}
+
 void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	LookAxisVector = Value.Get<FVector2D>();
 	
 	if (Controller != nullptr)
 	{
@@ -429,6 +527,11 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 		}
 
 		PlayAnimMontage(DodgeMontage);
+		
+
+		// Calculate new FOV based on Perfect Dodge Count
+		float TargetFOV = 90.0f + PerfectDodgeCount * 5.0f; // Adjust FOV range as needed
+		TimerCameraFOV(TargetFOV);
 
 		// Apply movement with multiplier
 		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
@@ -813,6 +916,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					{
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = OutHit.GetActor();
+						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = Enemy;  
 					}
 				}
@@ -887,6 +991,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					{
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = OutHit2.GetActor();
+						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = Enemy2;
 					}
 				}
@@ -979,6 +1084,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					{
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = ClosestActor;
+						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = ClosestEnemy;
 
 						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
@@ -1352,7 +1458,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
-
+		TogglePerfectHitTextBox();
 	}
 	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
@@ -1367,6 +1473,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+		TogglePerfectHitTextBox();
 
 	}
 	else if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
@@ -1803,9 +1910,55 @@ void ANeonParadigm_GameCharacter::ChangeCameraDistance()
 		1.0f
 	);
 
-	UE_LOG(LogTemp, Log, TEXT("What is goind ON!!@!!!:DJLSDKF:SLK CHANGE CAMERA DISTANCE"));
+	// Define a small tolerance value
+	const float SmallNumberTolerance = 0.1f;
 
+	// Check if the current arm length is close enough to the target
+	if (FMath::Abs(CameraBoom->TargetArmLength - CameraBoomLength) <= SmallNumberTolerance)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForCameraDistanceChange);
+		UE_LOG(LogTemp, Log, TEXT("Camera distance change completed."));
+	}
 
+}
+
+void ANeonParadigm_GameCharacter::TimerCameraFOV(float TargetFOVValue)
+{
+	TargetCameraFOV = TargetFOVValue;
+	GetWorld()->GetTimerManager().SetTimer(
+		TimerForFOVChange,
+		this,
+		&ANeonParadigm_GameCharacter::ChangeCameraFOV,
+		GetWorld()->GetDeltaSeconds(),
+		true
+	);
+}
+
+void ANeonParadigm_GameCharacter::ChangeCameraFOV()
+{
+	// Smoothly interpolate the camera FOV
+	float CurrentFOV = FollowCamera->FieldOfView;
+	FollowCamera->FieldOfView = FMath::FInterpTo(
+		CurrentFOV,
+		TargetCameraFOV,
+		GetWorld()->GetDeltaSeconds(),
+		10.0f // Interpolation speed, adjust as needed
+	);
+
+	// Define a small tolerance value
+	const float SmallNumberTolerance = 0.2f;
+
+	// Check if the current FOV is close enough to the target
+	if (FMath::Abs(FollowCamera->FieldOfView - TargetCameraFOV) <= SmallNumberTolerance)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForFOVChange);
+		UE_LOG(LogTemp, Log, TEXT("Camera FOV change completed."));
+	}
+}
+
+float ANeonParadigm_GameCharacter::GetDefaultCameraFOV()
+{
+	return DefaultCameraFOV;
 }
 
 float ANeonParadigm_GameCharacter::GetProjectileCooldownEndTime()
@@ -1841,6 +1994,11 @@ void ANeonParadigm_GameCharacter::CalculateTimeForProjectileWeaponCooldown()
 	{
 		GetWorldTimerManager().ClearTimer(TimerForProjectileCooldown);
 	}
+}
 
 
+void ANeonParadigm_GameCharacter::EnableCameraAutoRotate()
+{
+	bCanRotateBack = true;
+	UE_LOG(LogTemp, Log, TEXT("No camera input detected. Auto-rotation re-enabled after delay."));
 }

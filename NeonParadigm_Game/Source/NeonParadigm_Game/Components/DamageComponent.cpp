@@ -108,7 +108,6 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{
-					MyCharacter->TogglePerfectHitTextBox();
 					SpawnRagePickups(Hit);
 
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
@@ -177,7 +176,6 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{
-					MyCharacter->TogglePerfectHitTextBox();
 					SpawnRagePickups(Hit);
 
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****

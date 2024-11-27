@@ -93,6 +93,7 @@ void UCharacterStateComponent::ResetState()
 			AttackComp->ResetLaunched();  // this might cause glitches, resetting the Launched Variable ****************
 			MyCharacter->SetIsShootSaved(false);
 			MyCharacter->ResetDodgeCountAndMultiplier();
+			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV());
 		}
 	}
 
