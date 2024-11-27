@@ -352,6 +352,7 @@
     <None Include="..\..\NeonParadigm_Game.uproject"/>
     <None Include="..\..\Source\NeonParadigm_Game.Target.cs"/>
     <None Include="..\..\Source\NeonParadigm_GameEditor.Target.cs"/>
+    <None Include="..\..\.vsconfig"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>
     <None Include="..\..\Config\DefaultEngine.ini"/>
