@@ -531,6 +531,12 @@
     <Filter Include="Source\NeonParadigm_Game\AnimNotify">
       <UniqueIdentifier>{1CB86CE4-9F20-3E02-9BF4-973DE02BBBF6}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\DrawProjectileWeaponCollision.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\DrawProjectileWeaponCollision.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_AllowRotationOnRootMotion.cpp">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClCompile>

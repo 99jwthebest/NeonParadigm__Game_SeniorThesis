@@ -35,7 +35,9 @@ public:
 	//void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
 	//void PerformDeath();
-	void DrawProjectileWeaponCollision(float End, float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
+	void DrawProjectileWeaponCollision();
+	void StartTimerProjectileWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
+
 
 	void PerfectHitOperations();
 	void SpawnRagePickups(FHitResult& HitResult);
@@ -49,6 +51,14 @@ private:
 
 	UCharacterStateComponent* CharacterState;
 	UScoreComponent* ScoreComp;
+
+	FTimerHandle TimerForProjectileWeaponCollision;
+
+	float RadiusForProjectileWeapon;
+	float AmountOfDamageForProjectileWeapon;
+	TSubclassOf<UNP_DamageType> DamageTypeClassForProjectileWeapon;
+
+	int ProjectileCollisionSpawned;
 
 	/*UPROPERTY(EditAnywhere, Category = "Damage")
 	TSubclassOf<class UNP_DamageType> DamageTypeClass;*/

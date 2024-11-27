@@ -471,6 +471,7 @@ private:
 	const float CooldownPerfectProjectileDuration = 1.0f; // Beat delay (in seconds) before dodge resets
 
 
+
 public:
 
 	float GetProjectileCooldownEndTime();
