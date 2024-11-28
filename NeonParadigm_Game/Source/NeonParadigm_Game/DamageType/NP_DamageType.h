@@ -21,6 +21,7 @@ enum class EDamageTypes : uint8
 	Knockback, //UMETA(DisplayName = "Option 5"),
 	Launch, //UMETA(DisplayName = "Option 5"),
 	Stun, //UMETA(DisplayName = "Option 5"),
+	Projectiles, //UMETA(DisplayName = "Option 5"),
 };
 
 UCLASS()

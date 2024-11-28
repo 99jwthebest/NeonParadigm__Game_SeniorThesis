@@ -210,6 +210,8 @@ public:
 	UAnimMontage* GetGetupAnimMontage();
 
 	UFUNCTION(BlueprintImplementableEvent)
+	void EnemyStunnedWithProjectiles();
+	UFUNCTION(BlueprintImplementableEvent)
 	void EnemyStunned();
 
 };

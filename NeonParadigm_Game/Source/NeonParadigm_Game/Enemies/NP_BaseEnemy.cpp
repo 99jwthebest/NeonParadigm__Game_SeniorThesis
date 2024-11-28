@@ -233,6 +233,9 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 			case EDamageTypes::Stun:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Stun AERIAL"));
 				return HR_Stun;
+			case EDamageTypes::Projectiles:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Projectiles AERIAL"));
+				return HR_Stun;
 		}
 	}
 	else
@@ -270,6 +273,10 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 			case EDamageTypes::Stun:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Stun"));
 				EnemyStunned();
+				return HR_Stun;
+			case EDamageTypes::Projectiles:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Projectiles"));
+				EnemyStunnedWithProjectiles();
 				return HR_Stun;
 		}
 	}

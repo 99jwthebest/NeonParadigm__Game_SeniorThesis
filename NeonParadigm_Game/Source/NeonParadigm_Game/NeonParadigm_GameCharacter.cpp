@@ -531,6 +531,10 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 
 		PlayAnimMontage(DodgeMontage);
 		
+		// Calculate progress (0.0 = full ammo, 1.0 = all shots used)
+		DodgeCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(PerfectDodgeCount) / static_cast<float>(MaxPerfectDodges), 0.0f, 1.0f);
+		UpdateDodgeBarEvent();
+		//StartTimerForDodgeCooldown();
 
 		// Calculate new FOV based on Perfect Dodge Count
 		float TargetFOV = 90.0f + PerfectDodgeCount * 5.0f; // Adjust FOV range as needed
@@ -548,6 +552,8 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 
 			PerfectDodgeCount = 0;
 			DodgePushMultiplier = 1.0f;
+
+			StartTimerForDodgeCooldown();
 
 			// Debug PerfectDodgeCount reset and DodgePushMultiplier reset
 			UE_LOG(LogTemp, Log, TEXT("PerfectDodgeCount reset to %d, DodgePushMultiplier reset to %f"), PerfectDodgeCount, DodgePushMultiplier);
@@ -587,6 +593,8 @@ void ANeonParadigm_GameCharacter::ResetDodgeCountAndMultiplier()
 {
 	PerfectDodgeCount = 0;
 	DodgePushMultiplier = 1.0f;
+	DodgeCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(PerfectDodgeCount) / static_cast<float>(MaxPerfectDodges), 0.0f, 1.0f);
+	UpdateDodgeBarEvent();
 }
 
 void ANeonParadigm_GameCharacter::SetIsDodgeSaved(bool bSetIsDodgeSaved)
@@ -2137,6 +2145,31 @@ void ANeonParadigm_GameCharacter::CalculateTimeForProjectileWeaponCooldown()
 	if (ProjectileCooldownProgress >= 1.0f)
 	{
 		GetWorldTimerManager().ClearTimer(TimerForProjectileCooldown);
+	}
+}
+
+void ANeonParadigm_GameCharacter::StartTimerForDodgeCooldown()
+{
+	GetWorld()->GetTimerManager().SetTimer(TimerDodgeCooldown, this, &ANeonParadigm_GameCharacter::CalculateTimeForDodgeCooldown, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::CalculateTimeForDodgeCooldown()
+{
+
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float RemainingTime = DodgeCooldownEndTime - CurrentTime;
+
+	// Calculate progress (0.0 = no cooldown, 1.0 = cooldown complete)
+	DodgeCooldownProgress = FMath::Clamp(1.0f - (RemainingTime / CooldownDodgeDuration), 0.0f, 1.0f);
+
+	//CooldownWidgetInstance->SetCooldownProgress(CooldownProgress);
+	UpdateDodgeBarEvent();
+
+	// Stop the timer when the cooldown is complete
+	if (DodgeCooldownProgress >= 1.0f)
+	{
+		GetWorldTimerManager().ClearTimer(TimerDodgeCooldown);
 	}
 }
 

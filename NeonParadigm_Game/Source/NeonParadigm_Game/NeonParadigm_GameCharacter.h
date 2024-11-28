@@ -198,9 +198,13 @@ protected:
 	bool CanDodge();
 	FRotator GetDesiredRotation() const;
 
-public:
-	void ResetDodgeCountAndMultiplier();
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	float DodgeCooldownProgress;
 
+public:
+
+	void ResetDodgeCountAndMultiplier();
 
 
 protected:
@@ -414,6 +418,8 @@ public:
 	void UpdateProjectileWeaponBarEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateProjectileWeaponStunBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateDodgeBarEvent();
 
 public:
 
@@ -456,9 +462,9 @@ private:
 	int32 ProjectileStunShot = 0; // Tracks consecutive 
 	//float PerfectProjectileMultiplier = 1.0f; // Increases push distance
 	float ProjectileStunCooldownEndTime = 0.0f; // Time when dodging becomes available again
-	const int32 MaxStunProjectiles = 2; // Maximum consecutive 
+	const int32 MaxStunProjectiles = 1; // Maximum consecutive 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
-	float CooldownProjectileStunDuration = 5.0f; // Beat delay (in seconds) before dodge resets
+	float CooldownProjectileStunDuration = 15.0f; // Beat delay (in seconds) before dodge resets
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	float ProjectileStunCooldownProgress;
 	FTimerHandle TimerForProjectileStunCooldown;
@@ -538,6 +544,10 @@ public:
 	void StartTimerForProjectileCooldown();
 	void CalculateTimeForProjectileWeaponCooldown();
 
+	void StartTimerForDodgeCooldown();
+
+	void CalculateTimeForDodgeCooldown();
+
 	void EnableCameraAutoRotate();
 
 private:
@@ -545,6 +555,9 @@ private:
 	AActor* CameraTargetActor;
 	FTimerHandle CameraDelayTimerHandle;
 	bool bCanRotateBack = true; // Starts true, becomes false during input
+
+	FTimerHandle TimerDodgeCooldown;
+
 
 };
 

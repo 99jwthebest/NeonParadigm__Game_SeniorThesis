@@ -573,6 +573,12 @@
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveParry.h">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_DrawProjectileWeaponStun.cpp">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_DrawProjectileWeaponStun.h">
+      <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.cpp">
       <Filter>Source\NeonParadigm_Game\AnimNotify</Filter>
     </ClCompile>

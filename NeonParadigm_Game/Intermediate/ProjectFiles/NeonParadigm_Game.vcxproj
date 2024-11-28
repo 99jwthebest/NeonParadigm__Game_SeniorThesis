@@ -747,6 +747,12 @@
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_ANS_SaveParry.h"/>
+    <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_DrawProjectileWeaponStun.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_3)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_3)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_DrawProjectileWeaponStun.h"/>
     <ClCompile Include="..\..\Source\NeonParadigm_Game\AnimNotify\NP_AN_EnemyResetState.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_3)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_3)</ForcedIncludeFiles>
