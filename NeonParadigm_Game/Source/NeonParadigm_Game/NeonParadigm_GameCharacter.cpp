@@ -325,6 +325,9 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 		// Projectile Weapon
 		EnhancedInputComponent->BindAction(ProjectileWeaponAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeapon);
+		
+		// Projectile Weapon Stun
+		EnhancedInputComponent->BindAction(ProjectileWeaponStunAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeaponStun);
 
 	}
 	else
@@ -1892,6 +1895,147 @@ void ANeonParadigm_GameCharacter::SaveShoot()
 		return;
 	}
 }
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponStun()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		bIsStunSaved = true;
+	}
+	else
+	{
+		ProjectileWeaponStunEvent();
+	}
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponStunEvent()
+{
+	if (CanStun())
+	{
+		AttackComp->ResetLightAttack();
+		AttackComp->ResetHeavyAttack();
+
+		// Trigger the projectile attack animation
+		if (IsValid(ProjectileWeaponStunMontage))
+		{
+			AttackComp->FindNotifyTriggerTime(ProjectileWeaponStunMontage, FName("NP_AN_TestRhythmPunch"));
+			SetCurrentAnimTimeDelay(AttackComp->GetNotifyTriggerTime());
+			TestRhythmDelayEvent();
+			CharacterState->SetState(ECharacterStates::Attack);
+
+			PlayAnimMontage(ProjectileWeaponStunMontage, GetCurrentAnimPlayRate());
+		}
+
+		ProjectileStunShot++;
+
+		UE_LOG(LogTemp, Log, TEXT("Projectile Stun Shot!! %d"), ProjectileStunShot);
+
+		// Calculate progress (0.0 = full ammo, 1.0 = all shots used)
+		ProjectileStunCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(ProjectileStunShot) / static_cast<float>(MaxStunProjectiles), 0.0f, 1.0f);
+		UpdateProjectileWeaponStunBarEvent();
+
+		//// Apply movement or effects with the multiplier
+		//AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
+
+		// Reset logic when max perfect projectiles are reached
+		if (ProjectileStunShot >= MaxStunProjectiles)
+		{
+
+			ProjectileStunCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownProjectileStunDuration;
+
+			ProjectileStunShot = 0;
+			UE_LOG(LogTemp, Log, TEXT("Projectile Stun Shot Reset!! %d"), ProjectileStunShot);
+
+			StartTimerForProjectileStunCooldown();
+
+		}
+
+	}
+}
+
+bool ANeonParadigm_GameCharacter::CanStun()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	// Check if cooldown has ended
+	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= ProjectileStunCooldownEndTime;
+	//return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+}
+
+void ANeonParadigm_GameCharacter::SetIsStunSaved(bool bSetIsStunSaved)
+{
+	bIsStunSaved = bSetIsStunSaved;
+}
+
+void ANeonParadigm_GameCharacter::SaveStun()
+{
+	if (bIsStunSaved)
+	{
+		bIsStunSaved = false;
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		{
+			CharacterState->SetState(ECharacterStates::None);
+		}
+
+		ProjectileWeaponStunEvent();
+	}
+	else
+	{
+		return;
+	}
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileStunCooldownEndTime()
+{
+	return ProjectileStunCooldownEndTime;
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileStunCooldownDuration()
+{
+	return CooldownProjectileStunDuration;
+}
+
+void ANeonParadigm_GameCharacter::StartTimerForProjectileStunCooldown()
+{
+	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileStunCooldown, this, &ANeonParadigm_GameCharacter::CalculateTimeForProjectileStunWeaponCooldown, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::CalculateTimeForProjectileStunWeaponCooldown()
+{
+
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float RemainingTime = ProjectileStunCooldownEndTime - CurrentTime;
+
+	// Calculate progress (0.0 = no cooldown, 1.0 = cooldown complete)
+	ProjectileStunCooldownProgress = FMath::Clamp(1.0f - (RemainingTime / CooldownProjectileStunDuration), 0.0f, 1.0f);
+
+	//CooldownWidgetInstance->SetCooldownProgress(CooldownProgress);
+	UpdateProjectileWeaponStunBarEvent();
+
+	// Stop the timer when the cooldown is complete
+	if (ProjectileStunCooldownProgress >= 1.0f)
+	{
+		GetWorldTimerManager().ClearTimer(TimerForProjectileStunCooldown);
+	}
+}
+
 
 void ANeonParadigm_GameCharacter::TimerCameraDistance(float CameraBoomLengthF)
 {

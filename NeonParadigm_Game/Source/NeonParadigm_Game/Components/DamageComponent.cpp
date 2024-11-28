@@ -208,6 +208,72 @@ void UDamageComponent::StartTimerProjectileWeaponCollision(float Radius, float A
 }
 
 
+void UDamageComponent::DrawProjectileWeaponStunCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass)
+{
+
+	HitActors.Empty();
+
+	// Actors to ignore
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(MyCharacter);
+	// Object types to trace for
+	/*TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
+	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_Pawn)); */
+	// Add more ObjectTypes if needed
+	// Array to hold the hit results
+	TArray<FHitResult> OutHits;
+
+	// Perform the multi-sphere trace by channel
+	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
+		GetWorld(),                        // World context
+		MyCharacter->GetActorLocation(),                          // Start of the trace
+		MyCharacter->GetActorLocation(),                            // End of the trace
+		Radius,                            // Radius of the sphere
+		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
+		false,                             // bTraceComplex - false unless you want complex collision
+		ActorsToIgnore,                    // Actors to ignore (MyCharacter)
+		EDrawDebugTrace::ForDuration,      // Draw the trace for debugging  // ForDuration *****************
+		OutHits,                           // Output array to store hit results
+		true,                              // Ignore the tracing actor (self)
+		FLinearColor::Red,               // Trace line color
+		FLinearColor::Green,                 // Hit color
+		2.0f                               // How long to draw the debug trace
+	);
+
+	if (bMultiSphereHit)
+	{
+		for (FHitResult& Hit : OutHits)
+		{
+			// Handle each hit result here
+			UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *Hit.GetActor()->GetName());
+			if (!HitActors.Contains(Hit.GetActor()) && Hit.GetActor()->IsValidLowLevel())
+			{
+				//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.
+				float Damage = UGameplayStatics::ApplyDamage(Hit.GetActor(), AmountOfDamage, MyCharacter->GetController(), MyCharacter, DamageTypeClass);
+				HitActors.AddUnique(Hit.GetActor());
+				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
+
+				ScoreComp->TrackHit(MyCharacter->IsPerfectBeatHit());
+
+				if (MyCharacter->IsPerfectBeatHit())
+				{
+					SpawnRagePickups(Hit);
+
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
+
+					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
+
+					PerfectHitOperations();
+					ScoreComp->IncrementScore(500);
+					MyCharacter->UpdateScoreEvent();
+					MyCharacter->SetPerfectBeatHit(false);
+				}
+			}
+		}
+	}
+}
+
+
 UAnimMontage* UDamageComponent::GetHitReactionMontage(EDamageTypes DamageType)
 {
 	switch (DamageType)

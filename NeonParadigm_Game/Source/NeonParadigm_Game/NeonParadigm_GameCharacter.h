@@ -78,6 +78,10 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Projectile Weapon Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ProjectileWeaponAction;
+
+	/** Projectile Weapon Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ProjectileWeaponStunAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -408,6 +412,8 @@ public:
 	void ToggleEncounterResults();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateProjectileWeaponBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateProjectileWeaponStunBarEvent();
 
 public:
 
@@ -427,6 +433,9 @@ private:
 	UAnimMontage* ProjectileWeaponMontage;
 	bool bIsShootSaved;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ProjectileWeaponStunMontage;
+
 public:
 
 	void ProjectileWeapon();
@@ -436,6 +445,42 @@ public:
 	void SetIsShootSaved(bool bSetIsShootSaved);
 
 	void SaveShoot();
+
+
+
+
+private:
+
+	bool bIsStunSaved;
+
+	int32 ProjectileStunShot = 0; // Tracks consecutive 
+	//float PerfectProjectileMultiplier = 1.0f; // Increases push distance
+	float ProjectileStunCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxStunProjectiles = 2; // Maximum consecutive 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	float CooldownProjectileStunDuration = 5.0f; // Beat delay (in seconds) before dodge resets
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	float ProjectileStunCooldownProgress;
+	FTimerHandle TimerForProjectileStunCooldown;
+
+public:
+
+
+	void ProjectileWeaponStun();
+	void ProjectileWeaponStunEvent();
+	bool CanStun();
+
+	void SetIsStunSaved(bool bSetIsStunSaved);
+
+	void SaveStun();
+
+	float GetProjectileStunCooldownEndTime();
+
+	float GetProjectileStunCooldownDuration();
+
+	void StartTimerForProjectileStunCooldown();
+
+	void CalculateTimeForProjectileStunWeaponCooldown();
 
 
 private:

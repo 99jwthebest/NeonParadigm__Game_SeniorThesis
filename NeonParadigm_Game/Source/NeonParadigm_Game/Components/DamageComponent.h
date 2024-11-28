@@ -38,6 +38,8 @@ public:
 	void DrawProjectileWeaponCollision();
 	void StartTimerProjectileWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
 
+	void DrawProjectileWeaponStunCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
+
 
 	void PerfectHitOperations();
 	void SpawnRagePickups(FHitResult& HitResult);

@@ -147,6 +147,11 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 	{
 		ProcessEvent(FindFunctionChecked(NAME_ANeonParadigm_GameCharacter_UpdateProjectileWeaponBarEvent),NULL);
 	}
+	static FName NAME_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent = FName(TEXT("UpdateProjectileWeaponStunBarEvent"));
+	void ANeonParadigm_GameCharacter::UpdateProjectileWeaponStunBarEvent()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent),NULL);
+	}
 	static FName NAME_ANeonParadigm_GameCharacter_UpdateRageBarEvent = FName(TEXT("UpdateRageBarEvent"));
 	void ANeonParadigm_GameCharacter::UpdateRageBarEvent()
 	{
@@ -677,6 +682,28 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANeonParadigm_GameCharacter, nullptr, "UpdateProjectileWeaponStunBarEvent", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateRageBarEvent_Statics
 	{
 #if WITH_METADATA
@@ -785,6 +812,10 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProjectileWeaponAction_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ProjectileWeaponAction;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProjectileWeaponStunAction_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ProjectileWeaponStunAction;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CharacterState_MetaData[];
 #endif
@@ -914,6 +945,18 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ProjectileWeaponMontage;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProjectileWeaponStunMontage_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ProjectileWeaponStunMontage;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CooldownProjectileStunDuration_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_CooldownProjectileStunDuration;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProjectileStunCooldownProgress_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ProjectileStunCooldownProgress;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultCameraBoomLength_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_DefaultCameraBoomLength;
@@ -964,6 +1007,7 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_TogglePerfectHitTextBox, "TogglePerfectHitTextBox" }, // 629264535
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateHealthBarEvent, "UpdateHealthBarEvent" }, // 733924716
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponBarEvent, "UpdateProjectileWeaponBarEvent" }, // 1061568246
+		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent, "UpdateProjectileWeaponStunBarEvent" }, // 47518148
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateRageBarEvent, "UpdateRageBarEvent" }, // 2654697491
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateScoreEvent, "UpdateScoreEvent" }, // 3055866101
 	};
@@ -1159,6 +1203,20 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponAction = { "ProjectileWeaponAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, ProjectileWeaponAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponAction_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponAction_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunAction_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Projectile Weapon Input Action */" },
+#endif
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Projectile Weapon Input Action" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunAction = { "ProjectileWeaponStunAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, ProjectileWeaponStunAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunAction_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunAction_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CharacterState_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -1440,6 +1498,42 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponMontage = { "ProjectileWeaponMontage", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, ProjectileWeaponMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponMontage_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponMontage_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunMontage_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Attack" },
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunMontage = { "ProjectileWeaponStunMontage", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, ProjectileWeaponStunMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunMontage_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunMontage_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CooldownProjectileStunDuration_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Projectile" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Maximum consecutive \n" },
+#endif
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Maximum consecutive" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CooldownProjectileStunDuration = { "CooldownProjectileStunDuration", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, CooldownProjectileStunDuration), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CooldownProjectileStunDuration_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CooldownProjectileStunDuration_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileStunCooldownProgress_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Projectile" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Beat delay (in seconds) before dodge resets\n" },
+#endif
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Beat delay (in seconds) before dodge resets" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileStunCooldownProgress = { "ProjectileStunCooldownProgress", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, ProjectileStunCooldownProgress), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileStunCooldownProgress_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileStunCooldownProgress_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_DefaultCameraBoomLength_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "Camera" },
@@ -1513,6 +1607,7 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ParryAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_RageAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CharacterState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_WeaponMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_AttackComp,
@@ -1545,6 +1640,9 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ScoreComp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_SoftTargetCurve,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponMontage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileWeaponStunMontage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CooldownProjectileStunDuration,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileStunCooldownProgress,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_DefaultCameraBoomLength,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CameraBoomLength,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_DefaultCameraFOV,
@@ -1590,9 +1688,9 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 3362339150U) },
+		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 1625464087U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_206766068(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_2412110198(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
