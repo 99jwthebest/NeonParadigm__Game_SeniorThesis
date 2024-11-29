@@ -549,6 +549,7 @@ public:
 	void CalculateTimeForDodgeCooldown();
 
 	void EnableCameraAutoRotate();
+	void CheckForTargetInCameraView();
 
 private:
 
@@ -558,6 +559,7 @@ private:
 
 	FTimerHandle TimerDodgeCooldown;
 
+	FTimerHandle CheckForTargetInCamViewTimerHandle;
 
 };
 

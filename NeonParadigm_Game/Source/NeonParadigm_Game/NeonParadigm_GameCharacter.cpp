@@ -164,6 +164,16 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 
 		UE_LOG(LogTemp, Log, TEXT("LookAxisVector.X: %f, LookAxisVector.Y: %f"), LookAxisVector.X, LookAxisVector.Y);
 		UE_LOG(LogTemp, Log, TEXT("Abs(LookAxisVector.X): %f, Abs(LookAxisVector.Y): %f"), FMath::Abs(LookAxisVector.X), FMath::Abs(LookAxisVector.Y));
+		
+		// Reset the timer and start the delay for camera auto-rotation
+		GetWorld()->GetTimerManager().ClearTimer(CheckForTargetInCamViewTimerHandle);
+		GetWorld()->GetTimerManager().SetTimer(
+			CheckForTargetInCamViewTimerHandle,
+			this,
+			&ANeonParadigm_GameCharacter::CheckForTargetInCameraView,
+			0.2f, // Delay duration
+			false // Only run once
+		);
 
 		// Reset the timer and start the delay for camera auto-rotation
 		GetWorld()->GetTimerManager().ClearTimer(CameraDelayTimerHandle);
@@ -2178,4 +2188,205 @@ void ANeonParadigm_GameCharacter::EnableCameraAutoRotate()
 {
 	bCanRotateBack = true;
 	UE_LOG(LogTemp, Log, TEXT("No camera input detected. Auto-rotation re-enabled after delay."));
+}
+
+void ANeonParadigm_GameCharacter::CheckForTargetInCameraView()
+{
+
+	// Get the player camera's location and forward vector
+	FVector CameraLocation = FollowCamera->GetComponentLocation();
+	FVector CameraForward = FollowCamera->GetForwardVector();
+
+	// Define the field of view angle (in degrees) for detection
+	float FieldOfView = 45.0f; // Half-angle of the camera's field of view
+	float CosFieldOfView = FMath::Cos(FMath::DegreesToRadians(FieldOfView));
+
+	// Get all potential enemies in the world
+	TArray<AActor*> AllEnemies;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), AllEnemies);
+
+	// Store the closest enemy and minimum distance
+	AActor* ClosestEnemy = nullptr;
+	float MinDistance = FLT_MAX;
+
+	UE_LOG(LogTemp, Log, TEXT("@Number of potential enemies: %d"), AllEnemies.Num());
+
+	for (AActor* EnemyActor : AllEnemies)
+	{
+		// Check if the enemy is valid
+		if (!IsValid(EnemyActor))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("@Invalid enemy actor."));
+			continue;
+		}
+
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(EnemyActor);
+		if (!Enemy || Enemy->GetState() == ECharacterStates::Death)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("@Enemy is invalid or dead: %s"), *EnemyActor->GetName());
+			continue;
+		}
+
+		// Calculate the vector to the enemy from the camera
+		FVector ToEnemy = Enemy->GetActorLocation() - CameraLocation;
+		float DistanceToEnemy = ToEnemy.Size(); // Calculate distance
+		ToEnemy.Normalize();
+
+		// Use the dot product to check if the enemy is within the field of view
+		float DotProduct = FVector::DotProduct(CameraForward, ToEnemy);
+
+		if (DotProduct >= CosFieldOfView)
+		{
+			UE_LOG(LogTemp, Log, TEXT("@Enemy within FOV: %s"), *EnemyActor->GetName());
+
+			// Perform a line trace to check if the enemy is visible
+			FHitResult HitResult;
+			bool bHit = GetWorld()->LineTraceSingleByChannel(
+				HitResult,
+				CameraLocation,
+				Enemy->GetActorLocation(),
+				ECC_Pawn
+			);
+
+			if (bHit)
+			{
+				UE_LOG(LogTemp, Log, TEXT("@Line trace hit: %s"), *HitResult.GetActor()->GetName());
+
+				// Ensure the trace hits the enemy
+				if (HitResult.GetActor() == EnemyActor)
+				{
+					UE_LOG(LogTemp, Log, TEXT("@Enemy is visible: %s"), *EnemyActor->GetName());
+
+					// Update the closest enemy if this one is closer
+					if (DistanceToEnemy < MinDistance)
+					{
+						MinDistance = DistanceToEnemy;
+						ClosestEnemy = EnemyActor;
+						UE_LOG(LogTemp, Log, TEXT("@Updated closest enemy: %s"), *ClosestEnemy->GetName());
+					}
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("@Line trace hit something else: %s"), *HitResult.GetActor()->GetName());
+				}
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("@Line trace did not hit any actor."));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("@Enemy outside FOV: %s"), *EnemyActor->GetName());
+		}
+	}
+
+	// Process the closest enemy in view
+	if (ClosestEnemy)
+	{
+		UE_LOG(LogTemp, Log, TEXT("@Closest Enemy in View: %s"), *ClosestEnemy->GetName());
+
+		// Update target references
+		LastSoftTargetActor = SoftTargetActor;
+		SoftTargetActor = ClosestEnemy;
+		CameraTargetActor = SoftTargetActor;
+		SoftTargetEnemy = Cast<ANP_BaseEnemy>(ClosestEnemy);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("@No enemies in view."));
+	}
+	/*
+	else
+	{
+		FVector StartVec2 = GetActorLocation();
+		FVector EndVec2 = StartVec2;
+
+		float Radius2 = 500.0f;
+		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
+		ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
+
+		bool bTraceComplex2 = false;
+		TArray<AActor*> ActorsToIgnore2;
+		ActorsToIgnore2.Add(this);
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+		TArray<FHitResult> OutHits2;
+
+		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
+			GetWorld(),
+			StartVec2,
+			EndVec2,
+			Radius2,
+			ObjectTypes2,
+			bTraceComplex2,
+			ActorsToIgnore2,
+			DrawDebugType2,
+			OutHits2,
+			true, // Ignore self
+			FLinearColor::Red,
+			FLinearColor::Green,
+			5.0f
+		);
+
+		if (bSphereTrace2)
+		{
+			float ClosestDistance = FLT_MAX;
+			AActor* ClosestActor = nullptr;
+
+			for (const FHitResult& Hit : OutHits2)
+			{
+				if (AActor* HitActor = Hit.GetActor())
+				{
+					// Calculate distance
+					float Distance = FVector::Dist(StartVec2, Hit.ImpactPoint);
+
+					// Debug log
+					UE_LOG(LogTemp, Warning, TEXT("Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
+
+					// Find the closest actor
+					if (Distance < ClosestDistance)
+					{
+						ClosestDistance = Distance;
+						ClosestActor = HitActor;
+					}
+				}
+			}
+
+			// Check if the current target is valid (alive and within range)
+			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
+			{
+				// Do nothing, keep the current target
+				UE_LOG(LogTemp, Warning, TEXT("Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
+			}
+			else
+			{
+				// Set the closest actor as the target
+				if (ClosestActor)
+				{
+					ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestActor);
+					if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
+					{
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = ClosestActor;
+						CameraTargetActor = SoftTargetActor;
+						SoftTargetEnemy = ClosestEnemy;
+
+						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
+					}
+					else
+					{
+						SoftTargetActor = nullptr;
+						SoftTargetEnemy = nullptr;
+					}
+				}
+			}
+		}
+		else
+		{
+			LastSoftTargetActor = nullptr;
+			SoftTargetActor = nullptr;
+			SoftTargetEnemy = nullptr;
+		}
+	}
+	*/
 }
