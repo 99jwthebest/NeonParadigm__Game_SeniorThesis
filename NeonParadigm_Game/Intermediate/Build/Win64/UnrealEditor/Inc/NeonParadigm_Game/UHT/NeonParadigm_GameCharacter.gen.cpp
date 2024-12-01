@@ -38,12 +38,28 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		P_THIS->StartEnemyEncounter();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(ANeonParadigm_GameCharacter::execIncreaseMaxHealth)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_AmountToAdd);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->IncreaseMaxHealth(Z_Param_AmountToAdd);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(ANeonParadigm_GameCharacter::execAddToCurrentHealth)
 	{
 		P_GET_PROPERTY(FFloatProperty,Z_Param_HealthToAdd);
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->AddToCurrentHealth(Z_Param_HealthToAdd);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ANeonParadigm_GameCharacter::execIncreaseMaxRage)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_AmountToAdd);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->IncreaseMaxRage(Z_Param_AmountToAdd);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(ANeonParadigm_GameCharacter::execAddToCurrentRage)
@@ -147,6 +163,16 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 	{
 		ProcessEvent(FindFunctionChecked(NAME_ANeonParadigm_GameCharacter_UpdateHealthBarEvent),NULL);
 	}
+	static FName NAME_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent = FName(TEXT("UpdateMaxHealthBarEvent"));
+	void ANeonParadigm_GameCharacter::UpdateMaxHealthBarEvent()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent),NULL);
+	}
+	static FName NAME_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent = FName(TEXT("UpdateMaxRageBarEvent"));
+	void ANeonParadigm_GameCharacter::UpdateMaxRageBarEvent()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent),NULL);
+	}
 	static FName NAME_ANeonParadigm_GameCharacter_UpdateProjectileWeaponBarEvent = FName(TEXT("UpdateProjectileWeaponBarEvent"));
 	void ANeonParadigm_GameCharacter::UpdateProjectileWeaponBarEvent()
 	{
@@ -175,6 +201,8 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 			{ "AddToCurrentRage", &ANeonParadigm_GameCharacter::execAddToCurrentRage },
 			{ "Counter", &ANeonParadigm_GameCharacter::execCounter },
 			{ "HandleTakeAnyDamage", &ANeonParadigm_GameCharacter::execHandleTakeAnyDamage },
+			{ "IncreaseMaxHealth", &ANeonParadigm_GameCharacter::execIncreaseMaxHealth },
+			{ "IncreaseMaxRage", &ANeonParadigm_GameCharacter::execIncreaseMaxRage },
 			{ "IsIFramesEnabled", &ANeonParadigm_GameCharacter::execIsIFramesEnabled },
 			{ "IsPerfectBeatHit", &ANeonParadigm_GameCharacter::execIsPerfectBeatHit },
 			{ "SoftTargetingTimelineUpdated", &ANeonParadigm_GameCharacter::execSoftTargetingTimelineUpdated },
@@ -366,6 +394,74 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_HandleTakeAnyDamage_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics
+	{
+		struct NeonParadigm_GameCharacter_eventIncreaseMaxHealth_Parms
+		{
+			float AmountToAdd;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_AmountToAdd;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::NewProp_AmountToAdd = { "AmountToAdd", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NeonParadigm_GameCharacter_eventIncreaseMaxHealth_Parms, AmountToAdd), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::NewProp_AmountToAdd,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANeonParadigm_GameCharacter, nullptr, "IncreaseMaxHealth", nullptr, nullptr, Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::NeonParadigm_GameCharacter_eventIncreaseMaxHealth_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::NeonParadigm_GameCharacter_eventIncreaseMaxHealth_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics
+	{
+		struct NeonParadigm_GameCharacter_eventIncreaseMaxRage_Parms
+		{
+			float AmountToAdd;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_AmountToAdd;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::NewProp_AmountToAdd = { "AmountToAdd", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NeonParadigm_GameCharacter_eventIncreaseMaxRage_Parms, AmountToAdd), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::NewProp_AmountToAdd,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANeonParadigm_GameCharacter, nullptr, "IncreaseMaxRage", nullptr, nullptr, Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::NeonParadigm_GameCharacter_eventIncreaseMaxRage_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::NeonParadigm_GameCharacter_eventIncreaseMaxRage_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -684,6 +780,50 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateHealthBarEvent_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANeonParadigm_GameCharacter, nullptr, "UpdateMaxHealthBarEvent", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANeonParadigm_GameCharacter, nullptr, "UpdateMaxRageBarEvent", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1026,6 +1166,8 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_BeginBPM_Bar, "BeginBPM_Bar" }, // 2382676977
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_Counter, "Counter" }, // 1905309954
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_HandleTakeAnyDamage, "HandleTakeAnyDamage" }, // 1697673734
+		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxHealth, "IncreaseMaxHealth" }, // 2295941456
+		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_IncreaseMaxRage, "IncreaseMaxRage" }, // 2576072361
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_IsIFramesEnabled, "IsIFramesEnabled" }, // 966977221
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_IsPerfectBeatHit, "IsPerfectBeatHit" }, // 888660779
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_ParryProjectile, "ParryProjectile" }, // 650497423
@@ -1038,6 +1180,8 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_TogglePerfectHitTextBox, "TogglePerfectHitTextBox" }, // 629264535
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateDodgeBarEvent, "UpdateDodgeBarEvent" }, // 2203321580
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateHealthBarEvent, "UpdateHealthBarEvent" }, // 733924716
+		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxHealthBarEvent, "UpdateMaxHealthBarEvent" }, // 761681618
+		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateMaxRageBarEvent, "UpdateMaxRageBarEvent" }, // 2716387833
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponBarEvent, "UpdateProjectileWeaponBarEvent" }, // 1061568246
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateProjectileWeaponStunBarEvent, "UpdateProjectileWeaponStunBarEvent" }, // 47518148
 		{ &Z_Construct_UFunction_ANeonParadigm_GameCharacter_UpdateRageBarEvent, "UpdateRageBarEvent" }, // 2654697491
@@ -1729,9 +1873,9 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 1180790925U) },
+		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 1973210675U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_16538755(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_2980696840(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

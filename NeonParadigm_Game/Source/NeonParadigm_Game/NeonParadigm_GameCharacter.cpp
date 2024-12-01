@@ -1730,11 +1730,18 @@ UStaticMeshComponent* ANeonParadigm_GameCharacter::GetBPM_OrbMesh()
 
 void ANeonParadigm_GameCharacter::AddToCurrentRage(float RageToAdd)
 {
-	if (CurrentRage >= 100)
+	if (CurrentRage >= MaxRage)
 		return;
 
 	CurrentRage += RageToAdd;
 	UpdateRageBarEvent();  // this might need to be changed   ************
+}
+
+void ANeonParadigm_GameCharacter::IncreaseMaxRage(float AmountToAdd)
+{
+	MaxRage += AmountToAdd;
+
+	UpdateMaxRageBarEvent();
 }
 
 float ANeonParadigm_GameCharacter::GetCurrentRage()
@@ -1744,12 +1751,20 @@ float ANeonParadigm_GameCharacter::GetCurrentRage()
 
 void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 {
-	if (CurrentHealth >= 1000)
+	if (CurrentHealth >= MaxHealth)
 		return;
 	UE_LOG(LogTemp, Warning, TEXT("ADD ING TO CURRENT HEALT !!!!!!!"));
 
 	CurrentHealth += HealthToAdd;
 	UpdateHealthBarEvent();  // this might need to be changed   ************
+}
+
+void ANeonParadigm_GameCharacter::IncreaseMaxHealth(float AmountToAdd)
+{
+
+	MaxHealth += AmountToAdd;
+
+	UpdateMaxHealthBarEvent();
 }
 
 // Called in BP_Spawner
@@ -2262,7 +2277,7 @@ void ANeonParadigm_GameCharacter::CheckForTargetInCameraView()
 					{
 						MinDistance = DistanceToEnemy;
 						ClosestEnemy = EnemyActor;
-						UE_LOG(LogTemp, Log, TEXT("@Updated closest enemy: %s"), *ClosestEnemy->GetName());
+						UE_LOG(LogTemp, Error, TEXT("@Updated closest enemy: %s"), *ClosestEnemy->GetName());
 					}
 				}
 				else

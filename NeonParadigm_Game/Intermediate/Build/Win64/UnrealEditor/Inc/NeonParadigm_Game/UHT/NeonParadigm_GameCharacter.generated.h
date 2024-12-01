@@ -23,7 +23,9 @@ class UDamageType;
 #define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execStartEnemyEncounter); \
+	DECLARE_FUNCTION(execIncreaseMaxHealth); \
 	DECLARE_FUNCTION(execAddToCurrentHealth); \
+	DECLARE_FUNCTION(execIncreaseMaxRage); \
 	DECLARE_FUNCTION(execAddToCurrentRage); \
 	DECLARE_FUNCTION(execSoftTargetingTimelineUpdated); \
 	DECLARE_FUNCTION(execIsPerfectBeatHit); \

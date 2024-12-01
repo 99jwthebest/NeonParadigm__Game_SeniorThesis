@@ -103,6 +103,16 @@ private:
 	FTimerHandle DepletionTimer;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 MaxHealthCollectiblesObtained;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 MaxHealthCollectiblesThreshold = 2;       // The initial threshold for increasing max health
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 MaxRageCollectiblesObtained;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 MaxRageCollectiblesThreshold = 2;       // The initial threshold for increasing max rage
+
 public:
 
 	void Testing();
@@ -150,4 +160,9 @@ public:
 	UFUNCTION(BlueprintPure)
 		int GetOverallScoreGrade();
 
+
+	UFUNCTION(BlueprintPure)
+		bool MaxHealthCollectiblePickup();
+	UFUNCTION(BlueprintPure)
+		bool MaxRageCollectiblePickup();
 };

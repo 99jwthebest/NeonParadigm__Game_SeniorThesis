@@ -14,6 +14,20 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 	NEONPARADIGM_GAME_API UClass* Z_Construct_UClass_UScoreComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_NeonParadigm_Game();
 // End Cross Module References
+	DEFINE_FUNCTION(UScoreComponent::execMaxRageCollectiblePickup)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->MaxRageCollectiblePickup();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UScoreComponent::execMaxHealthCollectiblePickup)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->MaxHealthCollectiblePickup();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UScoreComponent::execGetOverallScoreGrade)
 	{
 		P_FINISH;
@@ -146,6 +160,8 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 			{ "GetOverallScoreGrade", &UScoreComponent::execGetOverallScoreGrade },
 			{ "GetPerfectTimingPercentage", &UScoreComponent::execGetPerfectTimingPercentage },
 			{ "GetRankProgress", &UScoreComponent::execGetRankProgress },
+			{ "MaxHealthCollectiblePickup", &UScoreComponent::execMaxHealthCollectiblePickup },
+			{ "MaxRageCollectiblePickup", &UScoreComponent::execMaxRageCollectiblePickup },
 			{ "StartEncounter", &UScoreComponent::execStartEncounter },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -641,6 +657,84 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics
+	{
+		struct ScoreComponent_eventMaxHealthCollectiblePickup_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((ScoreComponent_eventMaxHealthCollectiblePickup_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ScoreComponent_eventMaxHealthCollectiblePickup_Parms), &Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UScoreComponent, nullptr, "MaxHealthCollectiblePickup", nullptr, nullptr, Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::PropPointers), sizeof(Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::ScoreComponent_eventMaxHealthCollectiblePickup_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::Function_MetaDataParams), Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::ScoreComponent_eventMaxHealthCollectiblePickup_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics
+	{
+		struct ScoreComponent_eventMaxRageCollectiblePickup_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((ScoreComponent_eventMaxRageCollectiblePickup_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ScoreComponent_eventMaxRageCollectiblePickup_Parms), &Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UScoreComponent, nullptr, "MaxRageCollectiblePickup", nullptr, nullptr, Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::PropPointers), sizeof(Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::ScoreComponent_eventMaxRageCollectiblePickup_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::Function_MetaDataParams), Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::ScoreComponent_eventMaxRageCollectiblePickup_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UScoreComponent_StartEncounter_Statics
 	{
 #if WITH_METADATA
@@ -775,6 +869,22 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProgressIncreaseRate_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_ProgressIncreaseRate;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxHealthCollectiblesObtained_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_MaxHealthCollectiblesObtained;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxHealthCollectiblesThreshold_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_MaxHealthCollectiblesThreshold;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxRageCollectiblesObtained_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_MaxRageCollectiblesObtained;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxRageCollectiblesThreshold_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_MaxRageCollectiblesThreshold;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -800,6 +910,8 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		{ &Z_Construct_UFunction_UScoreComponent_GetOverallScoreGrade, "GetOverallScoreGrade" }, // 1401658077
 		{ &Z_Construct_UFunction_UScoreComponent_GetPerfectTimingPercentage, "GetPerfectTimingPercentage" }, // 2063625543
 		{ &Z_Construct_UFunction_UScoreComponent_GetRankProgress, "GetRankProgress" }, // 807171787
+		{ &Z_Construct_UFunction_UScoreComponent_MaxHealthCollectiblePickup, "MaxHealthCollectiblePickup" }, // 1350857468
+		{ &Z_Construct_UFunction_UScoreComponent_MaxRageCollectiblePickup, "MaxRageCollectiblePickup" }, // 1928895579
 		{ &Z_Construct_UFunction_UScoreComponent_StartEncounter, "StartEncounter" }, // 1206630286
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::FuncInfo) < 2048);
@@ -1065,6 +1177,44 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_ProgressIncreaseRate = { "ProgressIncreaseRate", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, ProgressIncreaseRate), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_ProgressIncreaseRate_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_ProgressIncreaseRate_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesObtained_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesObtained = { "MaxHealthCollectiblesObtained", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, MaxHealthCollectiblesObtained), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesObtained_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesObtained_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesThreshold_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesThreshold = { "MaxHealthCollectiblesThreshold", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, MaxHealthCollectiblesThreshold), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesThreshold_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesThreshold_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesObtained_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// The initial threshold for increasing max health\n" },
+#endif
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "The initial threshold for increasing max health" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesObtained = { "MaxRageCollectiblesObtained", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, MaxRageCollectiblesObtained), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesObtained_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesObtained_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesThreshold_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Score" },
+		{ "ModuleRelativePath", "Components/ScoreComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesThreshold = { "MaxRageCollectiblesThreshold", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UScoreComponent, MaxRageCollectiblesThreshold), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesThreshold_MetaData), Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesThreshold_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UScoreComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_PerfectHits,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_TotalHits,
@@ -1091,6 +1241,10 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_RankProgress,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_DepletionRate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_ProgressIncreaseRate,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesObtained,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxHealthCollectiblesThreshold,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesObtained,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UScoreComponent_Statics::NewProp_MaxRageCollectiblesThreshold,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UScoreComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UScoreComponent>::IsAbstract,
@@ -1130,9 +1284,9 @@ void EmptyLinkFunctionForGeneratedCodeScoreComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UScoreComponent, UScoreComponent::StaticClass, TEXT("UScoreComponent"), &Z_Registration_Info_UClass_UScoreComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UScoreComponent), 4233997840U) },
+		{ Z_Construct_UClass_UScoreComponent, UScoreComponent::StaticClass, TEXT("UScoreComponent"), &Z_Registration_Info_UClass_UScoreComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UScoreComponent), 542817922U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_3005101874(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_4047840471(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_Components_ScoreComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

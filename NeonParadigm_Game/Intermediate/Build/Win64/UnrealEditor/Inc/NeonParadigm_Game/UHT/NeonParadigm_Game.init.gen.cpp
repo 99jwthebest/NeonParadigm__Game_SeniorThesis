@@ -17,7 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_Game_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xDCB65745,
+				0xEF5E471D,
 				0xBFD4854F,
 				METADATA_PARAMS(0, nullptr)
 			};
@@ -25,5 +25,5 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_Game_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_NeonParadigm_Game.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_NeonParadigm_Game(Z_Construct_UPackage__Script_NeonParadigm_Game, TEXT("/Script/NeonParadigm_Game"), Z_Registration_Info_UPackage__Script_NeonParadigm_Game, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xDCB65745, 0xBFD4854F));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_NeonParadigm_Game(Z_Construct_UPackage__Script_NeonParadigm_Game, TEXT("/Script/NeonParadigm_Game"), Z_Registration_Info_UPackage__Script_NeonParadigm_Game, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xEF5E471D, 0xBFD4854F));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

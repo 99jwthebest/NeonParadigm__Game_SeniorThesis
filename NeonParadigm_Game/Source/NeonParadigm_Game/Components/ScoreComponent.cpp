@@ -294,3 +294,43 @@ int UScoreComponent::GetOverallScoreGrade()
 	}
 }
 
+bool UScoreComponent::MaxHealthCollectiblePickup()
+{
+	// Increment the pickup count
+	MaxHealthCollectiblesObtained++;
+
+	// Check if the threshold is met
+	if (MaxHealthCollectiblesObtained >= MaxHealthCollectiblesThreshold)
+	{
+		// Reset pickup count
+		MaxHealthCollectiblesObtained = 0;
+
+		// Increase the threshold for the next level
+		MaxHealthCollectiblesThreshold += 2; // Adjust as needed (e.g., +2 for each level)
+
+		return true;
+	}
+
+	return false;
+}
+
+bool UScoreComponent::MaxRageCollectiblePickup()
+{
+	// Increment the pickup count
+	MaxRageCollectiblesObtained++;
+
+	// Check if the threshold is met
+	if (MaxRageCollectiblesObtained >= MaxRageCollectiblesThreshold)
+	{
+		// Reset pickup count
+		MaxRageCollectiblesObtained = 0;
+
+		// Increase the threshold for the next level
+		MaxRageCollectiblesThreshold += 2; // Adjust as needed (e.g., +2 for each level)
+
+		return true;
+	}
+
+	return false;
+}
+

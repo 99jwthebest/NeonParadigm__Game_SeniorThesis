@@ -394,14 +394,22 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void AddToCurrentRage(float RageToAdd);
+	UFUNCTION(BlueprintCallable)
+	void IncreaseMaxRage(float AmountToAdd);
 	float GetCurrentRage();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateRageBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateMaxRageBarEvent();
 
 	UFUNCTION(BlueprintCallable)
 	void AddToCurrentHealth(float HealthToAdd);
+	UFUNCTION(BlueprintCallable)
+	void IncreaseMaxHealth(float AmountToAdd);
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateHealthBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateMaxHealthBarEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateScoreEvent();
 	UFUNCTION(BlueprintImplementableEvent)
