@@ -336,17 +336,17 @@ bool UScoreComponent::MaxRageCollectiblePickup()
 
 int32 UScoreComponent::CalculateFinalScore(const TArray<int32>& Scores)
 {
-	int32 TotalScore = 0;
+	int32 TotalScoreLocal = 0;
 	for (int32 Score : Scores)
 	{
-		TotalScore += Score;
+		TotalScoreLocal += Score;
 	}
-	return TotalScore;
+	return TotalScoreLocal;
 }
 
-FString UScoreComponent::GetFinalRank(int32 FinalScore, int32 MaxPossibleScore)
+FString UScoreComponent::GetFinalRank(int32 FinalScore, int32 MaxPossibleScoreIn)
 {
-	float Percentage = (float)FinalScore / (float)MaxPossibleScore * 100.0f;
+	float Percentage = (float)FinalScore / (float)MaxPossibleScoreIn * 100.0f;
 
 	if (Percentage >= 90.0f) return TEXT("S");
 	else if (Percentage >= 75.0f) return TEXT("A");
@@ -359,13 +359,13 @@ void UScoreComponent::AddEncounterScore(int32 Score)
 	EncounterScores.Add(Score);
 }
 
-void UScoreComponent::FinalizeScore(int32 MaxPossibleScore)
+void UScoreComponent::FinalizeScore(int32 MaxPossibleScoreIn)
 {
 	int32 FinalScore = CalculateFinalScore(EncounterScores);
-	FString FinalRank = GetFinalRank(FinalScore, MaxPossibleScore);
+	FString FinalRankLocal = GetFinalRank(FinalScore, MaxPossibleScoreIn);
 
 	UE_LOG(LogTemp, Log, TEXT("Final Score: %d"), FinalScore);
-	UE_LOG(LogTemp, Log, TEXT("Final Rank: %s"), *FinalRank);
+	UE_LOG(LogTemp, Log, TEXT("Final Rank: %s"), *FinalRankLocal);
 
 	// Additional logic for displaying the rank to the player
 }

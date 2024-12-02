@@ -117,6 +117,8 @@ private:
 
 	int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
 
+	int32 TotalEncounters;
+
 public:
 
 	void Testing();
@@ -170,14 +172,14 @@ public:
 	UFUNCTION(BlueprintPure)
 		bool MaxRageCollectiblePickup();
 
-		int32 CalculateFinalScore(const TArray<int32>& Scores);
+	int32 CalculateFinalScore(const TArray<int32>& Scores);
 
-		FString GetFinalRank(int32 FinalScore, int32 MaxPossibleScore);
+	FString GetFinalRank(int32 FinalScore, int32 MaxPossibleScoreIn);
 
-		void AddEncounterScore(int32 Score);
+	void AddEncounterScore(int32 Score);
 
-		void FinalizeScore(int32 MaxPossibleScore);
+	void FinalizeScore(int32 MaxPossibleScoreIn);
 
-		void AddEncounterMaxScore(int32 MaxScore);
+	void AddEncounterMaxScore(int32 MaxScore);
 
 };
