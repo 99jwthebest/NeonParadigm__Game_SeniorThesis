@@ -526,7 +526,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 			PerfectDodgeCount++;
 			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
 			DamageComp->PerfectHitOperations();
-
+			TurnOnMagnetizedDodge();
 			// Debug PerfectDodgeCount and DodgePushMultiplier when a perfect beat is hit
 			UE_LOG(LogTemp, Log, TEXT("Perfect Beat Hit! PerfectDodgeCount: %d, DodgePushMultiplier: %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
@@ -2404,4 +2404,15 @@ void ANeonParadigm_GameCharacter::CheckForTargetInCameraView()
 		}
 	}
 	*/
+}
+
+void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()
+{
+	bIsMagnetizeDodgeActive = true;
+
+}
+
+void ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge()
+{
+
 }

@@ -28,6 +28,7 @@
 			"NP_DamageType.gen.cpp.obj",
 			"NP_EnemySpawner.gen.cpp.obj",
 			"NP_FMOD_Music.gen.cpp.obj",
+			"ScoreComponent.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
 			"DrawProjectileWeaponCollision.cpp.obj",
 			"NP_ANS_AllowRotationOnRootMotion.cpp.obj",
@@ -49,6 +50,7 @@
 			"NP_AN_WeaponCollision.cpp.obj",
 			"AttackComponent.cpp.obj",
 			"DamageComponent.cpp.obj",
+			"ScoreComponent.cpp.obj",
 			"NP_DamageType.cpp.obj",
 			"NP_BaseEnemy.cpp.obj",
 			"NP_EnemySpawner.cpp.obj",
@@ -59,8 +61,6 @@
 			"TestActor.cpp.obj",
 			"NeonParadigm_Game.init.gen.cpp.obj",
 			"NeonParadigm_GameCharacter.gen.cpp.obj",
-			"ScoreComponent.gen.cpp.obj",
-			"ScoreComponent.cpp.obj",
 			"NeonParadigm_GameCharacter.cpp.obj"
 		]
 	}

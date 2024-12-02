@@ -569,5 +569,17 @@ private:
 
 	FTimerHandle CheckForTargetInCamViewTimerHandle;
 
+
+public:
+
+	void TurnOnMagnetizedDodge();
+	void TurnOffMagnetizedDodge();
+
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	bool bIsMagnetizeDodgeActive;
+	float MagnetizationRadius = 500.0f;  // Magnetization effect radius
+
 };
 

@@ -1151,6 +1151,11 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProjectileCooldownProgress_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_ProjectileCooldownProgress;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsMagnetizeDodgeActive_MetaData[];
+#endif
+		static void NewProp_bIsMagnetizeDodgeActive_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsMagnetizeDodgeActive;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -1777,6 +1782,18 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileCooldownProgress = { "ProjectileCooldownProgress", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANeonParadigm_GameCharacter, ProjectileCooldownProgress), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileCooldownProgress_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileCooldownProgress_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "NeonParadigm_GameCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive_SetBit(void* Obj)
+	{
+		((ANeonParadigm_GameCharacter*)Obj)->bIsMagnetizeDodgeActive = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive = { "bIsMagnetizeDodgeActive", nullptr, (EPropertyFlags)0x0040000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ANeonParadigm_GameCharacter), &Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive_MetaData), Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CameraBoom,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_FollowCamera,
@@ -1834,6 +1851,7 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_TargetCameraFOV,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_CooldownProjectileDuration,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_ProjectileCooldownProgress,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::NewProp_bIsMagnetizeDodgeActive,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANeonParadigm_GameCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ANeonParadigm_GameCharacter>::IsAbstract,
@@ -1873,9 +1891,9 @@ void EmptyLinkFunctionForGeneratedCodeNeonParadigm_GameCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 1973210675U) },
+		{ Z_Construct_UClass_ANeonParadigm_GameCharacter, ANeonParadigm_GameCharacter::StaticClass, TEXT("ANeonParadigm_GameCharacter"), &Z_Registration_Info_UClass_ANeonParadigm_GameCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANeonParadigm_GameCharacter), 3212021278U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_2980696840(TEXT("/Script/NeonParadigm_Game"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_3102724074(TEXT("/Script/NeonParadigm_Game"),
 		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Source_NeonParadigm_Game_NeonParadigm_GameCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
