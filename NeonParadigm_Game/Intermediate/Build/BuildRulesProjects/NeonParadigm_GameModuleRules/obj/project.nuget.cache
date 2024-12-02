@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RPxfmyaVy1E=",
+  "dgSpecHash": "F5mb5K2udNQ=",
   "success": true,
-  "projectFilePath": "D:\\profile redirect\\reross1\\Documents\\GitHub\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
+  "projectFilePath": "D:\\profile redirect\\reross1\\Documents\\GitHub_Repo\\NeonParadigm__Game_SeniorThesis\\NeonParadigm_Game\\Intermediate\\Build\\BuildRulesProjects\\NeonParadigm_GameModuleRules\\NeonParadigm_GameModuleRules.csproj",
   "expectedPackageFiles": [
     "D:\\profile redirect\\reross1\\.nuget\\packages\\blake3\\0.5.1\\blake3.0.5.1.nupkg.sha512",
     "D:\\profile redirect\\reross1\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
