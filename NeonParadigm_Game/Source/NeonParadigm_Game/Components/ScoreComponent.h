@@ -113,6 +113,10 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 MaxRageCollectiblesThreshold = 2;       // The initial threshold for increasing max rage
 
+	TArray<int32> EncounterScores; // Store scores for each encounter
+
+	int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
+
 public:
 
 	void Testing();
@@ -165,4 +169,15 @@ public:
 		bool MaxHealthCollectiblePickup();
 	UFUNCTION(BlueprintPure)
 		bool MaxRageCollectiblePickup();
+
+		int32 CalculateFinalScore(const TArray<int32>& Scores);
+
+		FString GetFinalRank(int32 FinalScore, int32 MaxPossibleScore);
+
+		void AddEncounterScore(int32 Score);
+
+		void FinalizeScore(int32 MaxPossibleScore);
+
+		void AddEncounterMaxScore(int32 MaxScore);
+
 };

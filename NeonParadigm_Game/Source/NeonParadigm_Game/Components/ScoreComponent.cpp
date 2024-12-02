@@ -334,3 +334,44 @@ bool UScoreComponent::MaxRageCollectiblePickup()
 	return false;
 }
 
+int32 UScoreComponent::CalculateFinalScore(const TArray<int32>& Scores)
+{
+	int32 TotalScore = 0;
+	for (int32 Score : Scores)
+	{
+		TotalScore += Score;
+	}
+	return TotalScore;
+}
+
+FString UScoreComponent::GetFinalRank(int32 FinalScore, int32 MaxPossibleScore)
+{
+	float Percentage = (float)FinalScore / (float)MaxPossibleScore * 100.0f;
+
+	if (Percentage >= 90.0f) return TEXT("S");
+	else if (Percentage >= 75.0f) return TEXT("A");
+	else if (Percentage >= 50.0f) return TEXT("B");
+	else return TEXT("C");
+}
+
+void UScoreComponent::AddEncounterScore(int32 Score)
+{
+	EncounterScores.Add(Score);
+}
+
+void UScoreComponent::FinalizeScore(int32 MaxPossibleScore)
+{
+	int32 FinalScore = CalculateFinalScore(EncounterScores);
+	FString FinalRank = GetFinalRank(FinalScore, MaxPossibleScore);
+
+	UE_LOG(LogTemp, Log, TEXT("Final Score: %d"), FinalScore);
+	UE_LOG(LogTemp, Log, TEXT("Final Rank: %s"), *FinalRank);
+
+	// Additional logic for displaying the rank to the player
+}
+
+void UScoreComponent::AddEncounterMaxScore(int32 MaxScore)
+{
+	MaxPossibleScore += MaxScore;
+}
+
