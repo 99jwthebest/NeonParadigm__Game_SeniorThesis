@@ -488,26 +488,35 @@ float ANP_BaseEnemy::CheckToWaitForBeat()
 void ANP_BaseEnemy::EnemFindNotifyTriggerTime(UAnimMontage* Montage, FString NotifyName)
 {
 	if (!Montage)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Montage is null."));
-		return;
-	}
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Montage is null."));
+        return;
+    }
 
-	TArray<FAnimNotifyEvent>& NotifyEvents = Montage->Notifies; // gets ref instead copy, & from notifies array "Montage->Notifies"
+    TArray<FAnimNotifyEvent>& NotifyEvents = Montage->Notifies; // Gets ref instead of copy
 
-	for (const FAnimNotifyEvent& NotifyEvent : NotifyEvents)
-	{
-		UE_LOG(LogTemp, Log, TEXT("I'm checking Notify: %s"), *NotifyEvent.Notify->GetNotifyName());
-		FString ActualNotifyName = NotifyEvent.Notify->GetNotifyName();
-		UE_LOG(LogTemp, Log, TEXT("I'm checking Actual Notify Name: %s"), *ActualNotifyName);
+    for (const FAnimNotifyEvent& NotifyEvent : NotifyEvents)
+    {
+        // Skip if Notify is null or if it is a Notify State
+        if (!NotifyEvent.Notify || NotifyEvent.NotifyStateClass)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("Skipping NotifyEvent: It is either null or a Notify State."));
+            continue;
+        }
 
-		if (NotifyEvent.Notify && ActualNotifyName.StartsWith(NotifyName))
-		{
-			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
-			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName, NotifyTriggerTime);
-			return;
-		}
-	}
+        // Process valid Notify
+        UE_LOG(LogTemp, Log, TEXT("I'm checking Notify: %s"), *NotifyEvent.Notify->GetNotifyName());
+        FString ActualNotifyName = NotifyEvent.Notify->GetNotifyName();
+        UE_LOG(LogTemp, Log, TEXT("I'm checking Actual Notify Name: %s"), *ActualNotifyName);
+
+        if (ActualNotifyName.StartsWith(NotifyName))
+        {
+            NotifyTriggerTime = NotifyEvent.GetTriggerTime();
+            UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName, NotifyTriggerTime);
+            return;
+        }
+    }
+
 
 	UE_LOG(LogTemp, Warning, TEXT("Notify with name %s not found in montage."), *NotifyName);
 }

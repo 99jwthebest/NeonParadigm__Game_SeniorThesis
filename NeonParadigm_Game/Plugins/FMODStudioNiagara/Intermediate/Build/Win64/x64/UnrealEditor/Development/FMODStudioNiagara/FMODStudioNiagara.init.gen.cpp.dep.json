@@ -1,11 +1,19 @@
 {
     "Version": "1.2",
     "Data": {
+<<<<<<< HEAD
+        "Source": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodstudioniagara.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "Includes": [
+            "d:\\profile redirect\\anmart28\\documents\\github\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudioniagara\\definitions.fmodstudioniagara.h"
+=======
         "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodstudioniagara.init.gen.cpp",
         "ProvidedModule": "",
         "PCH": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
         "Includes": [
             "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudioniagara\\definitions.fmodstudioniagara.h"
+>>>>>>> ScoreComp_TestingMergge
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

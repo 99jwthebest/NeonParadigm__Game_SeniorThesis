@@ -35,6 +35,7 @@ public:
 	//void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
 	//void PerformDeath();
+	void DrawProjectileWeaponCollision(float End, float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
 
 	void PerfectHitOperations();
 	void SpawnRagePickups(FHitResult& HitResult);

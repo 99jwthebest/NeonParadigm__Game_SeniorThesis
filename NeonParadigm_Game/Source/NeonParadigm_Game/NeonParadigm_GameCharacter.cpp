@@ -103,7 +103,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	BPM_OrbMesh->SetupAttachment(BPM_OrbSpringArm, USpringArmComponent::SocketName);
 
 	MaxRage = 100.0f;
-
+	DefaultCameraBoomLength = 500.0f;
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -143,10 +143,10 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	/*if (!bIsTargeting)
-		return;*/
+	if (bIsTargeting)
+		return;
 
-	if (bIsTargeting && SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
+	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
 	{
 		// Attempt to cast TargetActor to NP_BaseEnemy
 		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
@@ -229,6 +229,9 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		
 		// Rage
 		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
+
+		// Projectile Weapon
+		EnhancedInputComponent->BindAction(ProjectileWeaponAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeapon);
 
 	}
 	else
@@ -402,18 +405,35 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 		if (GetDesiredRotation() != FRotator(0.0f, 0.0f, 0.0f))
 		{
 			SetActorRotation(GetDesiredRotation());
-			/*CharacterState->SetState(ECharacterStates::Dodge);
-			PlayAnimMontage(DodgeMontage);*/
 		}
 
 		CharacterState->SetState(ECharacterStates::Dodge);
 		TestRhythmDelayEvent();
+
 		if (bPerfectBeatHit)
 		{
+			PerfectDodgeCount++;
+			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
 			DamageComp->PerfectHitOperations();
 		}
+		else
+		{
+			PerfectDodgeCount = 0;
+			DodgePushMultiplier = 1.0f;
+		}
+
 		PlayAnimMontage(DodgeMontage);
-		AttackComp->AttackMovement(15.0f); // maybe increase to 20 max
+
+		// Apply movement with multiplier
+		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+
+		if (PerfectDodgeCount >= MaxPerfectDodges)
+		{
+			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+			PerfectDodgeCount = 0;
+			DodgePushMultiplier = 1.0f;
+		}
+
 	}
 }
 
@@ -430,7 +450,7 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 	// Check if cooldown has ended
 	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
 
-	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
 }
 
 FRotator ANeonParadigm_GameCharacter::GetDesiredRotation() const
@@ -1586,9 +1606,142 @@ void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 	UpdateHealthBarEvent();  // this might need to be changed   ************
 }
 
-
+// Called in BP_Spawner
+void ANeonParadigm_GameCharacter::StartEnemyEncounter()
+{
+	ScoreComp->StartEncounter();
+	TimerCameraDistance(700.0f);
+}
 
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
+	ToggleEncounterResults();
+	TimerCameraDistance(DefaultCameraBoomLength);
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeapon()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		bIsShootSaved = true;
+	}
+	else
+	{
+		ProjectileWeaponEvent();
+	}
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
+{
+	if (CanShoot())
+	{
+		AttackComp->ResetLightAttack();
+		AttackComp->ResetHeavyAttack();
+
+
+		if (IsValid(ProjectileWeaponMontage))
+		{
+			AttackComp->FindNotifyTriggerTime(ProjectileWeaponMontage, FName("NP_AN_TestRhythmPunch"));
+			SetCurrentAnimTimeDelay(AttackComp->GetNotifyTriggerTime());
+			TestRhythmDelayEvent();
+			CharacterState->SetState(ECharacterStates::Attack);
+			
+			PlayAnimMontage(ProjectileWeaponMontage, GetCurrentAnimPlayRate());
+		}
+
+
+
+		//if (bPerfectBeatHit)
+		//{
+		//	PerfectDodgeCount++;
+		//	DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
+		//	DamageComp->PerfectHitOperations();
+		//}
+		//else
+		//{
+		//	PerfectDodgeCount = 0;
+		//	DodgePushMultiplier = 1.0f;
+		//}
+
+
+		// Apply movement with multiplier
+		//AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+
+		//if (PerfectDodgeCount >= MaxPerfectDodges)
+		//{
+		//	DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+		//	PerfectDodgeCount = 0;
+		//	DodgePushMultiplier = 1.0f;
+		//}
+
+	}
+}
+
+bool ANeonParadigm_GameCharacter::CanShoot()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	// Check if cooldown has ended
+	//const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
+	//return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+}
+
+
+void ANeonParadigm_GameCharacter::SetIsShootSaved(bool bSetIsShootSaved)
+{
+	bIsShootSaved = bSetIsShootSaved;
+}
+
+void ANeonParadigm_GameCharacter::SaveShoot()
+{
+	if (bIsShootSaved)
+	{
+		bIsShootSaved = false;
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		{
+			CharacterState->SetState(ECharacterStates::None);
+		}
+
+		ProjectileWeaponEvent();
+	}
+	else
+	{
+		return;
+	}
+}
+
+void ANeonParadigm_GameCharacter::TimerCameraDistance(float CameraBoomLengthF)
+{
+	CameraBoomLength = CameraBoomLengthF;
+	GetWorld()->GetTimerManager().SetTimer(TimerForCameraDistanceChange, this, &ANeonParadigm_GameCharacter::ChangeCameraDistance, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+}
+
+void ANeonParadigm_GameCharacter::ChangeCameraDistance()
+{
+	// Smoothly interpolate the arm length
+	float CurrentArmLength = CameraBoom->TargetArmLength;
+	CameraBoom->TargetArmLength = FMath::FInterpTo(
+		CurrentArmLength,
+		CameraBoomLength,
+		GetWorld()->GetDeltaSeconds(),
+		1.0f
+	);
+
 }

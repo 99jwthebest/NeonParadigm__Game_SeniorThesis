@@ -91,6 +91,7 @@ void UCharacterStateComponent::ResetState()
 			AttackComp->ResetLightAerialAttack();
 			MyCharacter->ResetParry();
 			AttackComp->ResetLaunched();  // this might cause glitches, resetting the Launched Variable ****************
+			MyCharacter->SetIsShootSaved(false);
 		}
 	}
 

@@ -352,6 +352,8 @@ bool UAttackComponent::DetermineDesiredAttack()
 	MyCharacter->GetMoveInputValue().Y;
 	MyCharacter->GetMoveInputValue().X;
 
+	UE_LOG(LogTemp, Log, TEXT("Is IsFlying False??: %s"), MyCharacter->GetCharacterMovement()->IsFlying() ? TEXT("true") : TEXT("false"));
+
 	// he is only allowing it when targeting but i need it to work when it is also not targetting. *******
 
 	if (MyCharacter->GetMoveInputValue().Y <= -0.5f) // For Air Begin Attack
@@ -428,7 +430,7 @@ void UAttackComponent::StopLaunchMovement()
 
 bool UAttackComponent::CanAerialAttack()
 {
-	return bCanAerialAttack && bLaunched;
+	return bCanAerialAttack; //&& bLaunched;
 }
 
 void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
