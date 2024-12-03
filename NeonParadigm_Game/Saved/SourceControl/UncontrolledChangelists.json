@@ -5,6 +5,12 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"G:/Git/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/RyanVFX/Mats/M_SmokeTrail.uasset",
+				"G:/Git/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/RyanVFX/NS/NS_HomingParticles.uasset",
+				"G:/Git/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/RyanVFX/Tex/UpdatedSmoke.uasset",
+				"G:/Git/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Levels/TestScenes/Test_RyanScene.umap",
+				"G:/Git/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Animation/Assets/Attacks/Ranged/AM_ProjectileWeapon.uasset",
+				"G:/Git/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/Characters/Mannequin_UE4/Meshes/SK_Mannequin_Skeleton.uasset",
 				"D:/profile redirect/reross1/Documents/GitHub_Repo/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/RyanVFX/NS/NS_Dash.uasset",
 				"D:/profile redirect/reross1/Documents/GitHub_Repo/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Sound_Tiles/BPM_Wall/Bars_Bar_01.uasset",
 				"D:/profile redirect/reross1/Documents/GitHub_Repo/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Sound_Tiles/BPM_Wall/Bars_Bar_02.uasset",
