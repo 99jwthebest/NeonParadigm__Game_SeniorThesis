@@ -311,6 +311,10 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
             UE_LOG(LogTemp, Warning, TEXT("Blocking Actor %s added to FMOD Music"), *BlockingActor->GetName());
         }
     }
+    /*if (Channel)
+    {
+        Channel->getSpectrum(SpectrumData, 512, 0, FMOD_DSP_FFT_WINDOW_HANNING);
+    }*/
 }
 
 

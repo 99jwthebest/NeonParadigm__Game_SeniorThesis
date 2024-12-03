@@ -117,7 +117,9 @@ private:
 
 	int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
 
-	int32 TotalEncounters;
+	int32 CurrentCombatEnounters;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	int32 TotalCombatEncounters;
 
 public:
 
@@ -181,5 +183,7 @@ public:
 	void FinalizeScore(int32 MaxPossibleScoreIn);
 
 	void AddEncounterMaxScore(int32 MaxScore);
+
+	bool GetWinEncounterCondition();
 
 };

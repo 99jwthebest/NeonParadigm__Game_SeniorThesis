@@ -35,7 +35,7 @@ public:
 	// FMOD Audio Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Audio")
 	UFMODAudioComponent* FMODAudioComponent;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio")
 	UFMODEvent* MusicFMODEvent;
 
@@ -69,6 +69,12 @@ private:
 	// Array of blocking actors
 	UPROPERTY()
 	TArray<AActor*> BlockingActors;
+
+	/*
+	FMOD::System* System = nullptr; // Initialize this with your FMOD system
+	FMOD::Channel* Channel = nullptr; // The channel playing your music
+	float SpectrumData[512]; // Array to hold the FFT data
+	*/
 
 public:
 	void FindAllEnemies();

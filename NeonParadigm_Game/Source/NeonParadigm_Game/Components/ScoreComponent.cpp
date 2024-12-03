@@ -108,7 +108,7 @@ void UScoreComponent::StartEncounter()
 {
 	// Set the starting time to the current game time
 	EncounterStartTime = GetWorld()->GetTimeSeconds();
-
+	CurrentCombatEnounters++;
 }
 
 void UScoreComponent::EndEncounter()
@@ -373,5 +373,15 @@ void UScoreComponent::FinalizeScore(int32 MaxPossibleScoreIn)
 void UScoreComponent::AddEncounterMaxScore(int32 MaxScore)
 {
 	MaxPossibleScore += MaxScore;
+}
+
+bool UScoreComponent::GetWinEncounterCondition()
+{
+	if (CurrentCombatEnounters >= TotalCombatEncounters)
+	{
+		return true;
+	}
+	
+	return false;
 }
 

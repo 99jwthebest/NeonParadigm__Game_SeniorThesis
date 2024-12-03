@@ -527,6 +527,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
 			DamageComp->PerfectHitOperations();
 			TurnOnMagnetizedDodge();
+			ToggleEmissivityEmergenLights();
 			// Debug PerfectDodgeCount and DodgePushMultiplier when a perfect beat is hit
 			UE_LOG(LogTemp, Log, TEXT("Perfect Beat Hit! PerfectDodgeCount: %d, DodgePushMultiplier: %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
@@ -1777,6 +1778,10 @@ void ANeonParadigm_GameCharacter::StartEnemyEncounter()
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
+	if (ScoreComp->GetWinEncounterCondition())
+	{
+		SpawnWinMenuEvent();
+	}
 	ToggleEncounterResults();
 	TimerCameraDistance(DefaultCameraBoomLength);
 }
@@ -2415,4 +2420,50 @@ void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()
 void ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge()
 {
 
+}
+
+void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLights()
+{
+
+	// Array to store found actors
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PerfectDodgeMesh"), FoundActors);
+
+	for (AActor* Actor : FoundActors)
+	{
+		UStaticMeshComponent* MeshComponent = Actor->FindComponentByClass<UStaticMeshComponent>();
+		if (MeshComponent)
+		{
+			// Create or retrieve the dynamic material instance
+			UMaterialInstanceDynamic* MID = MeshComponent->CreateAndSetMaterialInstanceDynamic(0);
+			if (MID)
+			{
+				MID->SetScalarParameterValue(FName("EmissiveStrength"), 1.0f); // Adjust value as needed
+			}
+		}
+	}
+	GetWorld()->GetTimerManager().SetTimer(TimerForEmissiveEmergenLights, this, &ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff, 0.2f, true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff()
+{
+	// Array to store found actors
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PerfectDodgeMesh"), FoundActors);
+
+	for (AActor* Actor : FoundActors)
+	{
+		UStaticMeshComponent* MeshComponent = Actor->FindComponentByClass<UStaticMeshComponent>();
+		if (MeshComponent)
+		{
+			// Create or retrieve the dynamic material instance
+			UMaterialInstanceDynamic* MID = MeshComponent->CreateAndSetMaterialInstanceDynamic(0);
+			if (MID)
+			{
+				// Set emissive value
+				MID->SetScalarParameterValue(FName("EmissiveStrength"), 0.0f);
+			}
+		}
+	}
 }
