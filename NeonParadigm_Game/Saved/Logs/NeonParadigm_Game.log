@@ -7985,3 +7985,9 @@ LogConfig: CVar [[con.DebugLateCheat:1]] deferred - dummy variable created
 [2024.12.04-16.11.19:798][420]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=4
 [2024.12.04-16.11.19:803][420]LogUObjectHash: Compacting FUObjectHashTables data took   0.85ms
 [2024.12.04-16.11.19:839][421]LogPlayLevel: Display: Destroying online subsystem :Context_11
+[2024.12.04-16.11.51:133][718]LogSlate: Window 'NS_HomingParticles' being destroyed
+[2024.12.04-16.11.51:433][718]LogWorld: UWorld::CleanupWorld for World_3, bSessionEnded=true, bCleanupResources=true
+[2024.12.04-16.11.51:438][718]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2024.12.04-16.11.51:456][718]LogWorld: UWorld::CleanupWorld for World_4, bSessionEnded=true, bCleanupResources=true
+[2024.12.04-16.11.51:457][718]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2024.12.04-16.11.51:504][718]LogUObjectHash: Compacting FUObjectHashTables data took   1.54ms
