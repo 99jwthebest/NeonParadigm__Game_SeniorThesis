@@ -180,7 +180,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>7.3850000000000051</value>
+			<value>7.3806607712490697</value>
 		</property>
 		<property name="name">
 			<value>FirstLoop</value>
@@ -290,7 +290,7 @@
 	</object>
 	<object class="TransitionMarker" id="{45e93778-2df6-4136-bc0f-5c967d1e03ba}">
 		<property name="position">
-			<value>7.3850000000000051</value>
+			<value>7.4239300020182997</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{5b52071e-8763-425f-b0ba-e9db70794d47}</destination>
