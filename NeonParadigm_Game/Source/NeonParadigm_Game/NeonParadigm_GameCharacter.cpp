@@ -549,7 +549,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 
 		// Calculate new FOV based on Perfect Dodge Count
 		float TargetFOV = 90.0f + PerfectDodgeCount * 5.0f; // Adjust FOV range as needed
-		TimerCameraFOV(TargetFOV);
+		TimerCameraFOV(TargetFOV, 10.0f);
 
 		// Apply movement with multiplier
 		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
@@ -2104,9 +2104,10 @@ void ANeonParadigm_GameCharacter::ChangeCameraDistance()
 
 }
 
-void ANeonParadigm_GameCharacter::TimerCameraFOV(float TargetFOVValue)
+void ANeonParadigm_GameCharacter::TimerCameraFOV(float TargetFOVValue, float TargetFOVSpeedChangeValue)
 {
 	TargetCameraFOV = TargetFOVValue;
+	TargetCameraFOVSpeedChange = TargetFOVSpeedChangeValue;
 	GetWorld()->GetTimerManager().SetTimer(
 		TimerForFOVChange,
 		this,
@@ -2124,7 +2125,7 @@ void ANeonParadigm_GameCharacter::ChangeCameraFOV()
 		CurrentFOV,
 		TargetCameraFOV,
 		GetWorld()->GetDeltaSeconds(),
-		10.0f // Interpolation speed, adjust as needed
+		TargetCameraFOVSpeedChange // Interpolation speed, adjust as needed
 	);
 
 	// Define a small tolerance value
@@ -2141,6 +2142,11 @@ void ANeonParadigm_GameCharacter::ChangeCameraFOV()
 float ANeonParadigm_GameCharacter::GetDefaultCameraFOV()
 {
 	return DefaultCameraFOV;
+}
+
+float ANeonParadigm_GameCharacter::GetDefaultCameraFOVSpeedChange()
+{
+	return DefaultCameraFOVSpeedChange;
 }
 
 float ANeonParadigm_GameCharacter::GetProjectileCooldownEndTime()
