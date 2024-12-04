@@ -51,6 +51,8 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Launch;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* HR_Stun;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Air_Knockback;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* HR_Air_Knockback_OnLanded;
@@ -206,5 +208,10 @@ public:
 	virtual void Landed(const FHitResult& Hit) override;
 
 	UAnimMontage* GetGetupAnimMontage();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void EnemyStunnedWithProjectiles();
+	UFUNCTION(BlueprintImplementableEvent)
+	void EnemyStunned();
 
 };

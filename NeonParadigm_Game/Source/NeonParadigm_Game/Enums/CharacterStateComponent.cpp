@@ -91,10 +91,12 @@ void UCharacterStateComponent::ResetState()
 			AttackComp->ResetLightAerialAttack();
 			MyCharacter->ResetParry();
 			AttackComp->ResetLaunched();  // this might cause glitches, resetting the Launched Variable ****************
+			MyCharacter->SetIsShootSaved(false);
+			MyCharacter->SetIsStunSaved(false);
+			MyCharacter->ResetDodgeCountAndMultiplier();
+			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 		}
 	}
-
-
 }
 
 bool UCharacterStateComponent::GetOnLandReset()

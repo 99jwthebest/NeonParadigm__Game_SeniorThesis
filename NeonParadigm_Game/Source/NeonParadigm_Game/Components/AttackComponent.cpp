@@ -116,7 +116,7 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 		FindNotifyTriggerTime(Montage, FName("NP_AN_TestRhythmPunch"));
 		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
 		MyCharacter->TestRhythmDelayEvent();
-
+		
 		if (IsValid(Montage))
 		{
 			UAnimMontage* LightAttackMontage = Montage;

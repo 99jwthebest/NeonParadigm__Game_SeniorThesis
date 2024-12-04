@@ -74,6 +74,14 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Rage Mode Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* RageAction;
+
+	/** Projectile Weapon Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ProjectileWeaponAction;
+
+	/** Projectile Weapon Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ProjectileWeaponStunAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
@@ -106,7 +114,7 @@ private:
 	float DodgePushMultiplier = 1.0f; // Increases push distance
 	float DodgeCooldownEndTime = 0.0f; // Time when dodging becomes available again
 	const int32 MaxPerfectDodges = 3; // Maximum consecutive dodges
-	const float CooldownDuration = 1.0f; // Beat delay (in seconds) before dodge resets
+	const float CooldownDodgeDuration = 1.0f; // Beat delay (in seconds) before dodge resets
 
 
 	bool DoubleJumped;
@@ -173,6 +181,7 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	FVector2D LookAxisVector;
 
 	void LightAttack();
 
@@ -188,6 +197,14 @@ protected:
 	void DodgeEvent();
 	bool CanDodge();
 	FRotator GetDesiredRotation() const;
+
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	float DodgeCooldownProgress;
+
+public:
+
+	void ResetDodgeCountAndMultiplier();
 
 
 protected:
@@ -209,6 +226,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	FVector2D GetMoveInputValue();
+	FVector2D GetLookInputValue();
+
 
 private:
 
@@ -292,6 +311,7 @@ private:
 public:
 
 	void SetCurrentTempoDelay(float CurTempoDelay);
+	UFUNCTION(BlueprintPure)
 	float GetCurrentTempoDelay();
 
 	void SetCurrentAnimTimeDelay(float CurAnimTimeDelay);
@@ -375,14 +395,22 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void AddToCurrentRage(float RageToAdd);
+	UFUNCTION(BlueprintCallable)
+	void IncreaseMaxRage(float AmountToAdd);
 	float GetCurrentRage();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateRageBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateMaxRageBarEvent();
 
 	UFUNCTION(BlueprintCallable)
 	void AddToCurrentHealth(float HealthToAdd);
+	UFUNCTION(BlueprintCallable)
+	void IncreaseMaxHealth(float AmountToAdd);
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateHealthBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateMaxHealthBarEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateScoreEvent();
 	UFUNCTION(BlueprintImplementableEvent)
@@ -393,7 +421,16 @@ public:
 	void BeginBPM_Bar();
 	UFUNCTION(BlueprintImplementableEvent)
 	void TogglePerfectHitTextBox();
-
+	UFUNCTION(BlueprintImplementableEvent)
+	void ToggleEncounterResults();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateProjectileWeaponBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateProjectileWeaponStunBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateDodgeBarEvent();
+	UFUNCTION(BlueprintImplementableEvent)
+	void SpawnWinMenuEvent();
 
 public:
 
@@ -402,7 +439,160 @@ public:
 	/** Returns ScoreComp SubObject **/
 	FORCEINLINE class UScoreComponent* GetScoreComponent() const { return ScoreComp; }
 
+	UFUNCTION(BlueprintCallable)
+	void StartEnemyEncounter();
 	void EndEnemyEncounter();
 
+
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ProjectileWeaponMontage;
+	bool bIsShootSaved;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* ProjectileWeaponStunMontage;
+
+public:
+
+	void ProjectileWeapon();
+	void ProjectileWeaponEvent();
+	bool CanShoot();
+
+	void SetIsShootSaved(bool bSetIsShootSaved);
+
+	void SaveShoot();
+
+
+
+
+private:
+
+	bool bIsStunSaved;
+
+	int32 ProjectileStunShot = 0; // Tracks consecutive 
+	//float PerfectProjectileMultiplier = 1.0f; // Increases push distance
+	float ProjectileStunCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxStunProjectiles = 1; // Maximum consecutive 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	float CooldownProjectileStunDuration = 15.0f; // Beat delay (in seconds) before dodge resets
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	float ProjectileStunCooldownProgress;
+	FTimerHandle TimerForProjectileStunCooldown;
+
+public:
+
+
+	void ProjectileWeaponStun();
+	void ProjectileWeaponStunEvent();
+	bool CanStun();
+
+	void SetIsStunSaved(bool bSetIsStunSaved);
+
+	void SaveStun();
+
+	float GetProjectileStunCooldownEndTime();
+
+	float GetProjectileStunCooldownDuration();
+
+	void StartTimerForProjectileStunCooldown();
+
+	void CalculateTimeForProjectileStunWeaponCooldown();
+
+
+private:
+
+	FTimerHandle TimerForCameraDistanceChange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraBoomLength;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float CameraBoomLength;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraFOV;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float TargetCameraFOV;
+		FTimerHandle TimerForFOVChange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraFOVSpeedChange;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float TargetCameraFOVSpeedChange;
+
+public:
+
+
+	void TimerCameraDistance(float CameraBoomLengthF);
+	
+	void ChangeCameraDistance();
+
+	void TimerCameraFOV(float TargetFOVValue, float TargetFOVSpeedChangeValue);
+
+	void ChangeCameraFOV();
+	float GetDefaultCameraFOV();
+
+	float GetDefaultCameraFOVSpeedChange();
+
+
+private:
+
+	int32 ProjectileShot = 0; // Tracks consecutive 
+	//float PerfectProjectileMultiplier = 1.0f; // Increases push distance
+	float ProjectileCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxProjectiles = 3; // Maximum consecutive 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+		float CooldownProjectileDuration = 2.0f; // Beat delay (in seconds) before dodge resets
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+		float ProjectileCooldownProgress;
+	FTimerHandle TimerForProjectileCooldown;
+
+
+	int32 PerfectProjectileCount = 0; // Tracks consecutive perfect dodges
+	float PerfectProjectileMultiplier = 1.0f; // Increases push distance
+	float PerfectProjectileCooldownEndTime = 0.0f; // Time when dodging becomes available again
+	const int32 MaxPerfectProjectiles = 3; // Maximum consecutive dodges
+	const float CooldownPerfectProjectileDuration = 1.0f; // Beat delay (in seconds) before dodge resets
+
+
+
+public:
+
+	float GetProjectileCooldownEndTime();
+	float GetProjectileCooldownDuration();
+	void StartTimerForProjectileCooldown();
+	void CalculateTimeForProjectileWeaponCooldown();
+
+	void StartTimerForDodgeCooldown();
+
+	void CalculateTimeForDodgeCooldown();
+
+	void EnableCameraAutoRotate();
+	void CheckForTargetInCameraView();
+
+private:
+
+	AActor* CameraTargetActor;
+	FTimerHandle CameraDelayTimerHandle;
+	bool bCanRotateBack = true; // Starts true, becomes false during input
+
+	FTimerHandle TimerDodgeCooldown;
+
+	FTimerHandle CheckForTargetInCamViewTimerHandle;
+
+
+public:
+
+	void TurnOnMagnetizedDodge();
+	void TurnOffMagnetizedDodge();
+
+	void ToggleEmissivityEmergenLights();
+	void ToggleEmissivityEmergenLightsOff();
+
+
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
+	bool bIsMagnetizeDodgeActive;
+	float MagnetizationRadius = 500.0f;  // Magnetization effect radius
+	FTimerHandle TimerForEmissiveEmergenLights;
 };
 

@@ -81,8 +81,12 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 {
     UE_LOG(LogTemp, Error, TEXT("Timeline Beat Event Triggered: Bar %d, Beat %d, Tempo %f"), Bar, Beat, Tempo);
 
+    GlobalTempo = Tempo;
+
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
+    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS!!!!"));
+    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!! Checkers BEATERS!!!!"));
 
     // Turn on the emission when the beat hits
     PlayerCharacter->ToggleOrbEmission();
@@ -117,6 +121,20 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     // BPM UI
     //PlayerCharacter->PlayBPM_HalfCirle(Tempo);
+
+    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: %f"), PlayerCharacter->GetCurrentTempoDelay());
+
+    if (!BPM_Started)
+    {
+        PlayerCharacter->BeginBPM_Bar();
+        UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in AMBEaters %f"), PlayerCharacter->GetCurrentTempoDelay());
+        UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in Y AMBEaters %f"), PlayerCharacter->GetCurrentTempoDelay());
+
+
+        UE_LOG(LogTemp, Warning, TEXT("Timeline MARKER Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
+        BPM_Started = true;
+    }
+
 }
 
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
@@ -183,12 +201,7 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
     {
         if (FMODAudioComponent)
         {
-            if (!BPM_Started)
-            {
-                PlayerCharacter->BeginBPM_Bar();
-                UE_LOG(LogTemp, Warning, TEXT("Timeline MARKER Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
-                BPM_Started = true;
-            }
+           
         }
 
         UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
@@ -311,6 +324,15 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
             UE_LOG(LogTemp, Warning, TEXT("Blocking Actor %s added to FMOD Music"), *BlockingActor->GetName());
         }
     }
+    /*if (Channel)
+    {
+        Channel->getSpectrum(SpectrumData, 512, 0, FMOD_DSP_FFT_WINDOW_HANNING);
+    }*/
+}
+
+float ANP_FMOD_Music::GetGlobalTempo()
+{
+    return GlobalTempo;
 }
 
 

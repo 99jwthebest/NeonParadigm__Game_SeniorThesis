@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\singlefile\\fmod_dsp_effects.h",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudio\\definitions.h",
+            "c:\\users\\josep\\documents\\unreal projects\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\public\\fmod\\fmod_dsp_effects.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

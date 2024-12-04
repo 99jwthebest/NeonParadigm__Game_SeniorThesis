@@ -32,7 +32,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-		
+	
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -103,7 +103,8 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	BPM_OrbMesh->SetupAttachment(BPM_OrbSpringArm, USpringArmComponent::SocketName);
 
 	MaxRage = 100.0f;
-
+	DefaultCameraBoomLength = 500.0f;
+	DefaultCameraFOV = 90.0f;
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -146,30 +147,133 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 	if (bIsTargeting)
 		return;
 
-	if (SoftTargetActor->IsValidLowLevel()) // check if targetting!!! bool ***********
+	// Define a threshold for input to be considered significant
+	const float InputThreshold = 0.25f;  // Adjust this threshold to ignore small mouse movements
+	const float Deadzone = 0.1f;  // Values below this will be ignored (adjust for sensitivity)
+	static float InputHoldTime = 0.0f;  // Track how long input is above the threshold
+	const float InputHoldTimeThreshold = 0.1f;  // 0.1 seconds of continuous input before disabling rotation
+	
+	// Check for significant camera input above the threshold
+	if (FMath::Abs(LookAxisVector.X) > InputThreshold || FMath::Abs(LookAxisVector.Y) > InputThreshold)
 	{
-		// Attempt to cast TargetActor to NP_BaseEnemy
-		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
-		if(Enemy)
+		// Player is moving the camera; disable auto-rotation
+		bCanRotateBack = false;
+		LookAxisVector.X = 0.0f;  // Ignore small horizontal movements
+
+		LookAxisVector.Y = 0.0f;  // Ignore small vertical movements
+
+		UE_LOG(LogTemp, Log, TEXT("LookAxisVector.X: %f, LookAxisVector.Y: %f"), LookAxisVector.X, LookAxisVector.Y);
+		UE_LOG(LogTemp, Log, TEXT("Abs(LookAxisVector.X): %f, Abs(LookAxisVector.Y): %f"), FMath::Abs(LookAxisVector.X), FMath::Abs(LookAxisVector.Y));
+		
+		// Reset the timer and start the delay for camera auto-rotation
+		GetWorld()->GetTimerManager().ClearTimer(CheckForTargetInCamViewTimerHandle);
+		GetWorld()->GetTimerManager().SetTimer(
+			CheckForTargetInCamViewTimerHandle,
+			this,
+			&ANeonParadigm_GameCharacter::CheckForTargetInCameraView,
+			0.2f, // Delay duration
+			false // Only run once
+		);
+
+		// Reset the timer and start the delay for camera auto-rotation
+		GetWorld()->GetTimerManager().ClearTimer(CameraDelayTimerHandle);
+		GetWorld()->GetTimerManager().SetTimer(
+			CameraDelayTimerHandle,
+			this,
+			&ANeonParadigm_GameCharacter::EnableCameraAutoRotate,
+			0.5f, // Delay duration
+			false // Only run once
+		);
+
+		UE_LOG(LogTemp, Log, TEXT("Camera input detected. Disabling auto-rotation."));
+	}
+	else
+	{
+		// Reset input hold time if no significant input
+		UE_LOG(LogTemp, Log, TEXT("No camera input. Waiting to enable auto-rotation."));
+	}
+
+	if (!bCanRotateBack)
+		return;
+
+
+	if (CameraTargetActor && CameraTargetActor->IsValidLowLevel()) // check if targeting
+	{
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(CameraTargetActor);
+		if (Enemy)
 		{
 			if (Enemy->GetState() != ECharacterStates::Death)
 			{
-				// If The Distance Between the player and Enemy is greater than MaxTargetingDistance Then Stop Targeting.
-				if (GetDistanceTo(SoftTargetActor) < MaxTargetingDistance)
+				// Check the distance between the player and the enemy
+				if (GetDistanceTo(CameraTargetActor) < MaxTargetingDistance)
 				{
-					FRotator currentRotation = GetController()->GetControlRotation();
+					FVector PlayerLocation = GetActorLocation();
+					FVector TargetLocation = CameraTargetActor->GetActorLocation() - TargetingOffset;
 
-					FVector TargetVector = SoftTargetActor->GetActorLocation() - TargetingOffset;
+					// Project the target's location onto the screen
+					FVector2D ScreenPosition;
+					bool bIsOnScreen = UGameplayStatics::ProjectWorldToScreen(
+						GetWorld()->GetFirstPlayerController(),
+						TargetLocation,
+						ScreenPosition
+					);
 
-					FRotator TargetRot(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetVector));
+					FVector2D ViewportSize;
+					GEngine->GameViewport->GetViewportSize(ViewportSize);
+					FVector2D ScreenCenter = ViewportSize * 0.5f;
 
-					float RDeltaTime = GetWorld()->GetDeltaSeconds();
+					// Scale the threshold distance based on screen resolution
+					float Diagonal = FMath::Sqrt(FMath::Square(ViewportSize.X) + FMath::Square(ViewportSize.Y));
+					const float ThresholdDistance = Diagonal * 0.25f; // e.g., 40% of the screen diagonal
 
-					FRotator NewRotation = FMath::RInterpTo(currentRotation, TargetRot, RDeltaTime, CameraRotationSpeed);
+					// Calculate the distance from the center of the screen
+					float DistanceFromCenter = bIsOnScreen
+						? FVector2D::Distance(ScreenCenter, ScreenPosition)
+						: FLT_MAX;
 
-					GetController()->SetControlRotation(NewRotation);
-					UE_LOG(LogTemp, Warning, TEXT("rotating Camera"));
+					float MaxSpeed = 4.0f;
+					float MinSpeed = .3f;
+					float DistanceFromThreshold = FMath::Max(0.0f, DistanceFromCenter - ThresholdDistance);
+					float MaxDistance = Diagonal * 0.5f;
 
+					// Smooth the rotation speed using a static variable
+					static float SmoothedRotationSpeed = MinSpeed;
+
+					// Calculate desired speed based on distance from center
+					float DesiredRotationSpeed = FMath::Clamp(
+						FMath::Lerp(MinSpeed, MaxSpeed, DistanceFromThreshold / MaxDistance),
+						MinSpeed,
+						MaxSpeed
+					);
+
+					// Interpolate the rotation speed for smoother transitions
+					float SpeedSmoothFactor = 5.0f; // Adjust this to control how quickly the speed stabilizes
+					SmoothedRotationSpeed = FMath::FInterpTo(SmoothedRotationSpeed, DesiredRotationSpeed, GetWorld()->GetDeltaSeconds(), SpeedSmoothFactor);
+
+					// Use the smoothed rotation speed
+					float RotationSpeed = SmoothedRotationSpeed;
+
+					// Debug to verify smooth changes
+					UE_LOG(LogTemp, Log, TEXT("DesiredRotationSpeed: %f, SmoothedRotationSpeed: %f"), DesiredRotationSpeed, SmoothedRotationSpeed);
+
+
+					// If target is far from center or off-screen, rotate the camera
+					if (DistanceFromCenter > ThresholdDistance || !bIsOnScreen)
+					{
+						UE_LOG(LogTemp, Warning, TEXT("No camera input. Is it Past this!!!!!!! Threshhold!!!"));
+
+
+						FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(PlayerLocation, TargetLocation);
+						float DeltaTime = GetWorld()->GetDeltaSeconds();
+						FRotator NewRotation = FMath::RInterpTo(GetController()->GetControlRotation(), TargetRotation, DeltaTime, RotationSpeed);
+
+						GetController()->SetControlRotation(NewRotation);
+						UE_LOG(LogTemp, Warning, TEXT("Rotating camera towards target. Distance from center: %f"), DistanceFromCenter);
+					}
+					else
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Target within screen center threshold. Distance: %f"), DistanceFromCenter);
+					}
 				}
 				else
 				{
@@ -181,13 +285,12 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 				EndTarget();
 			}
 		}
-		//else
-		//{
-		//	// The cast failed, handle accordingly
-		//	UE_LOG(LogTemp, Warning, TEXT("Failed to cast TargetActor to NP_BaseEnemy."));
-		//}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Failed to cast TargetActor to NP_BaseEnemy."));
+		}
 	}
-	else if(bIsTargeting) // this might be the fix of constant null object message
+	else if (bIsTargeting) // fix for constant null object messages
 	{
 		EndTarget();
 	}
@@ -230,6 +333,12 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		// Rage
 		EnhancedInputComponent->BindAction(RageAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Rage);
 
+		// Projectile Weapon
+		EnhancedInputComponent->BindAction(ProjectileWeaponAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeapon);
+		
+		// Projectile Weapon Stun
+		EnhancedInputComponent->BindAction(ProjectileWeaponStunAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeaponStun);
+
 	}
 	else
 	{
@@ -270,10 +379,15 @@ FVector2D ANeonParadigm_GameCharacter::GetMoveInputValue()
 	return MovementVector;
 }
 
+FVector2D ANeonParadigm_GameCharacter::GetLookInputValue()
+{
+	return LookAxisVector;
+}
+
 void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	LookAxisVector = Value.Get<FVector2D>();
 	
 	if (Controller != nullptr)
 	{
@@ -412,25 +526,49 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 			PerfectDodgeCount++;
 			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
 			DamageComp->PerfectHitOperations();
+			TurnOnMagnetizedDodge();
+			ToggleEmissivityEmergenLights();
+			// Debug PerfectDodgeCount and DodgePushMultiplier when a perfect beat is hit
+			UE_LOG(LogTemp, Log, TEXT("Perfect Beat Hit! PerfectDodgeCount: %d, DodgePushMultiplier: %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
 		else
 		{
 			PerfectDodgeCount = 0;
 			DodgePushMultiplier = 1.0f;
+
+			// Debug when a perfect beat is missed
+			UE_LOG(LogTemp, Log, TEXT("Perfect Beat Missed. Resetting PerfectDodgeCount to %d, DodgePushMultiplier to %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
 
 		PlayAnimMontage(DodgeMontage);
+		
+		// Calculate progress (0.0 = full ammo, 1.0 = all shots used)
+		DodgeCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(PerfectDodgeCount) / static_cast<float>(MaxPerfectDodges), 0.0f, 1.0f);
+		UpdateDodgeBarEvent();
+		//StartTimerForDodgeCooldown();
+
+		// Calculate new FOV based on Perfect Dodge Count
+		float TargetFOV = 90.0f + PerfectDodgeCount * 5.0f; // Adjust FOV range as needed
+		TimerCameraFOV(TargetFOV, 10.0f);
 
 		// Apply movement with multiplier
 		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
 
 		if (PerfectDodgeCount >= MaxPerfectDodges)
 		{
-			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDuration;
+			DodgeCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownDodgeDuration;
+
+			// Debug DodgeCooldownEndTime when max perfect dodges are reached
+			UE_LOG(LogTemp, Log, TEXT("PerfectDodgeCount: Max Perfect Dodges Reached. DodgeCooldownEndTime set to: %f"), DodgeCooldownEndTime);
+
 			PerfectDodgeCount = 0;
 			DodgePushMultiplier = 1.0f;
-		}
 
+			StartTimerForDodgeCooldown();
+
+			// Debug PerfectDodgeCount reset and DodgePushMultiplier reset
+			UE_LOG(LogTemp, Log, TEXT("PerfectDodgeCount reset to %d, DodgePushMultiplier reset to %f"), PerfectDodgeCount, DodgePushMultiplier);
+		}
 	}
 }
 
@@ -460,6 +598,14 @@ FRotator ANeonParadigm_GameCharacter::GetDesiredRotation() const
 	}
 
 	return FRotator(0.0f, 0.0f, 0.0f);
+}
+
+void ANeonParadigm_GameCharacter::ResetDodgeCountAndMultiplier()
+{
+	PerfectDodgeCount = 0;
+	DodgePushMultiplier = 1.0f;
+	DodgeCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(PerfectDodgeCount) / static_cast<float>(MaxPerfectDodges), 0.0f, 1.0f);
+	UpdateDodgeBarEvent();
 }
 
 void ANeonParadigm_GameCharacter::SetIsDodgeSaved(bool bSetIsDodgeSaved)
@@ -792,6 +938,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					{
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = OutHit.GetActor();
+						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = Enemy;  
 					}
 				}
@@ -866,6 +1013,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					{
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = OutHit2.GetActor();
+						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = Enemy2;
 					}
 				}
@@ -958,6 +1106,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					{
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = ClosestActor;
+						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = ClosestEnemy;
 
 						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
@@ -1331,7 +1480,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
-
+		TogglePerfectHitTextBox();
 	}
 	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
@@ -1346,6 +1495,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+		TogglePerfectHitTextBox();
 
 	}
 	else if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
@@ -1581,11 +1731,18 @@ UStaticMeshComponent* ANeonParadigm_GameCharacter::GetBPM_OrbMesh()
 
 void ANeonParadigm_GameCharacter::AddToCurrentRage(float RageToAdd)
 {
-	if (CurrentRage >= 100)
+	if (CurrentRage >= MaxRage)
 		return;
 
 	CurrentRage += RageToAdd;
 	UpdateRageBarEvent();  // this might need to be changed   ************
+}
+
+void ANeonParadigm_GameCharacter::IncreaseMaxRage(float AmountToAdd)
+{
+	MaxRage += AmountToAdd;
+
+	UpdateMaxRageBarEvent();
 }
 
 float ANeonParadigm_GameCharacter::GetCurrentRage()
@@ -1595,7 +1752,7 @@ float ANeonParadigm_GameCharacter::GetCurrentRage()
 
 void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 {
-	if (CurrentHealth >= 1000)
+	if (CurrentHealth >= MaxHealth)
 		return;
 	UE_LOG(LogTemp, Warning, TEXT("ADD ING TO CURRENT HEALT !!!!!!!"));
 
@@ -1603,9 +1760,716 @@ void ANeonParadigm_GameCharacter::AddToCurrentHealth(float HealthToAdd)
 	UpdateHealthBarEvent();  // this might need to be changed   ************
 }
 
+void ANeonParadigm_GameCharacter::IncreaseMaxHealth(float AmountToAdd)
+{
 
+	MaxHealth += AmountToAdd;
+
+	UpdateMaxHealthBarEvent();
+}
+
+// Called in BP_Spawner
+void ANeonParadigm_GameCharacter::StartEnemyEncounter()
+{
+	ScoreComp->StartEncounter();
+	TimerCameraDistance(700.0f);
+}
 
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
+	if (ScoreComp->GetWinEncounterCondition())
+	{
+		SpawnWinMenuEvent();
+	}
+	ToggleEncounterResults();
+	TimerCameraDistance(DefaultCameraBoomLength);
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeapon()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		bIsShootSaved = true;
+	}
+	else
+	{
+		ProjectileWeaponEvent();
+	}
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponEvent()
+{
+	if (CanShoot())
+	{
+		AttackComp->ResetLightAttack();
+		AttackComp->ResetHeavyAttack();
+
+        // Trigger the projectile attack animation
+		if (IsValid(ProjectileWeaponMontage))
+		{
+			AttackComp->FindNotifyTriggerTime(ProjectileWeaponMontage, FName("NP_AN_TestRhythmPunch"));
+			SetCurrentAnimTimeDelay(AttackComp->GetNotifyTriggerTime());
+			TestRhythmDelayEvent();
+			CharacterState->SetState(ECharacterStates::Attack);
+			
+			PlayAnimMontage(ProjectileWeaponMontage, GetCurrentAnimPlayRate());
+		}
+
+		ProjectileShot++;
+
+		UE_LOG(LogTemp, Log, TEXT("Projectile Shot!! %d"), ProjectileShot);
+
+		// Calculate progress (0.0 = full ammo, 1.0 = all shots used)
+		ProjectileCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(ProjectileShot) / static_cast<float>(MaxProjectiles), 0.0f, 1.0f);
+		UpdateProjectileWeaponBarEvent();
+
+		//// Apply movement or effects with the multiplier
+		//AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
+
+		// Reset logic when max perfect projectiles are reached
+		if (ProjectileShot >= MaxProjectiles)
+		{
+
+			ProjectileCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownProjectileDuration;
+
+			ProjectileShot = 0;
+			UE_LOG(LogTemp, Log, TEXT("Projectile Shot Reset!! %d"), ProjectileShot);
+
+			StartTimerForProjectileCooldown();
+
+		}
+
+		/*
+
+		// Perfect beat handling for the projectile system
+        if (bPerfectBeatHit)
+        {
+            PerfectProjectileCount++;
+            PerfectProjectileMultiplier = FMath::Min(1.0f + (PerfectProjectileCount * 0.5f), 2.5f); // Max multiplier is 2.5
+            DamageComp->PerfectHitOperations();
+
+            // Debug PerfectProjectileCount and PerfectProjectileMultiplier when a perfect beat is hit
+            UE_LOG(LogTemp, Log, TEXT("Perfect Beat Hit! PerfectProjectileCount: %d, PerfectProjectileMultiplier: %f"), PerfectProjectileCount, PerfectProjectileMultiplier);
+        }
+        else
+        {
+            PerfectProjectileCount = 0;
+            PerfectProjectileMultiplier = 1.0f;
+
+            // Debug when a perfect beat is missed
+            UE_LOG(LogTemp, Log, TEXT("Perfect Beat Missed. Resetting PerfectProjectileCount to %d, PerfectProjectileMultiplier to %f"), PerfectProjectileCount, PerfectProjectileMultiplier);
+        }
+
+
+        //// Apply movement or effects with the multiplier
+        //AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
+
+        // Reset logic when max perfect projectiles are reached
+        if (PerfectProjectileCount >= MaxPerfectProjectiles)
+        {
+            PerfectProjectileCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownPerfectProjectileDuration;
+
+            // Debug ProjectileCooldownEndTime when max perfect projectiles are reached
+            UE_LOG(LogTemp, Log, TEXT("PerfectProjectileCount: Max Perfect Projectiles Reached. ProjectileCooldownEndTime set to: %f"), PerfectProjectileCooldownEndTime);
+
+            PerfectProjectileCount = 0;
+            PerfectProjectileMultiplier = 1.0f;
+
+            // Debug PerfectProjectileCount and PerfectProjectileMultiplier reset
+            UE_LOG(LogTemp, Log, TEXT("PerfectProjectileCount reset to %d, PerfectProjectileMultiplier reset to %f"), PerfectProjectileCount, PerfectProjectileMultiplier);
+        }
+
+		*/
+
+	}
+}
+
+bool ANeonParadigm_GameCharacter::CanShoot()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	// Check if cooldown has ended
+	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= ProjectileCooldownEndTime;
+	//return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+}
+
+
+void ANeonParadigm_GameCharacter::SetIsShootSaved(bool bSetIsShootSaved)
+{
+	bIsShootSaved = bSetIsShootSaved;
+}
+
+void ANeonParadigm_GameCharacter::SaveShoot()
+{
+	if (bIsShootSaved)
+	{
+		bIsShootSaved = false;
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		{
+			CharacterState->SetState(ECharacterStates::None);
+		}
+
+		ProjectileWeaponEvent();
+	}
+	else
+	{
+		return;
+	}
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponStun()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		bIsStunSaved = true;
+	}
+	else
+	{
+		ProjectileWeaponStunEvent();
+	}
+}
+
+void ANeonParadigm_GameCharacter::ProjectileWeaponStunEvent()
+{
+	if (CanStun())
+	{
+		AttackComp->ResetLightAttack();
+		AttackComp->ResetHeavyAttack();
+
+		// Trigger the projectile attack animation
+		if (IsValid(ProjectileWeaponStunMontage))
+		{
+			AttackComp->FindNotifyTriggerTime(ProjectileWeaponStunMontage, FName("NP_AN_TestRhythmPunch"));
+			SetCurrentAnimTimeDelay(AttackComp->GetNotifyTriggerTime());
+			TestRhythmDelayEvent();
+			CharacterState->SetState(ECharacterStates::Attack);
+
+			PlayAnimMontage(ProjectileWeaponStunMontage, GetCurrentAnimPlayRate());
+		}
+
+		ProjectileStunShot++;
+
+		UE_LOG(LogTemp, Log, TEXT("Projectile Stun Shot!! %d"), ProjectileStunShot);
+
+		// Calculate progress (0.0 = full ammo, 1.0 = all shots used)
+		ProjectileStunCooldownProgress = 1.0f - FMath::Clamp(static_cast<float>(ProjectileStunShot) / static_cast<float>(MaxStunProjectiles), 0.0f, 1.0f);
+		UpdateProjectileWeaponStunBarEvent();
+
+		//// Apply movement or effects with the multiplier
+		//AttackComp->AttackMovement(15.0f * PerfectProjectileMultiplier); // Adjust value as needed for the projectile system
+
+		// Reset logic when max perfect projectiles are reached
+		if (ProjectileStunShot >= MaxStunProjectiles)
+		{
+
+			ProjectileStunCooldownEndTime = GetWorld()->GetTimeSeconds() + CooldownProjectileStunDuration;
+
+			ProjectileStunShot = 0;
+			UE_LOG(LogTemp, Log, TEXT("Projectile Stun Shot Reset!! %d"), ProjectileStunShot);
+
+			StartTimerForProjectileStunCooldown();
+
+		}
+
+	}
+}
+
+bool ANeonParadigm_GameCharacter::CanStun()
+{
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	// Check if cooldown has ended
+	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= ProjectileStunCooldownEndTime;
+	//return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
+
+	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && !GetCharacterMovement()->IsFalling();
+}
+
+void ANeonParadigm_GameCharacter::SetIsStunSaved(bool bSetIsStunSaved)
+{
+	bIsStunSaved = bSetIsStunSaved;
+}
+
+void ANeonParadigm_GameCharacter::SaveStun()
+{
+	if (bIsStunSaved)
+	{
+		bIsStunSaved = false;
+		TArray<ECharacterStates> CurrentCharacterState;
+		CurrentCharacterState.Add(ECharacterStates::Attack);
+		CurrentCharacterState.Add(ECharacterStates::Dodge);
+
+		if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+		{
+			CharacterState->SetState(ECharacterStates::None);
+		}
+
+		ProjectileWeaponStunEvent();
+	}
+	else
+	{
+		return;
+	}
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileStunCooldownEndTime()
+{
+	return ProjectileStunCooldownEndTime;
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileStunCooldownDuration()
+{
+	return CooldownProjectileStunDuration;
+}
+
+void ANeonParadigm_GameCharacter::StartTimerForProjectileStunCooldown()
+{
+	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileStunCooldown, this, &ANeonParadigm_GameCharacter::CalculateTimeForProjectileStunWeaponCooldown, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::CalculateTimeForProjectileStunWeaponCooldown()
+{
+
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float RemainingTime = ProjectileStunCooldownEndTime - CurrentTime;
+
+	// Calculate progress (0.0 = no cooldown, 1.0 = cooldown complete)
+	ProjectileStunCooldownProgress = FMath::Clamp(1.0f - (RemainingTime / CooldownProjectileStunDuration), 0.0f, 1.0f);
+
+	//CooldownWidgetInstance->SetCooldownProgress(CooldownProgress);
+	UpdateProjectileWeaponStunBarEvent();
+
+	// Stop the timer when the cooldown is complete
+	if (ProjectileStunCooldownProgress >= 1.0f)
+	{
+		GetWorldTimerManager().ClearTimer(TimerForProjectileStunCooldown);
+	}
+}
+
+
+void ANeonParadigm_GameCharacter::TimerCameraDistance(float CameraBoomLengthF)
+{
+	CameraBoomLength = CameraBoomLengthF;
+	GetWorld()->GetTimerManager().SetTimer(TimerForCameraDistanceChange, this, &ANeonParadigm_GameCharacter::ChangeCameraDistance, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+}
+
+void ANeonParadigm_GameCharacter::ChangeCameraDistance()
+{
+	// Smoothly interpolate the arm length
+	float CurrentArmLength = CameraBoom->TargetArmLength;
+	CameraBoom->TargetArmLength = FMath::FInterpTo(
+		CurrentArmLength,
+		CameraBoomLength,
+		GetWorld()->GetDeltaSeconds(),
+		1.0f
+	);
+
+	// Define a small tolerance value
+	const float SmallNumberTolerance = 0.1f;
+
+	// Check if the current arm length is close enough to the target
+	if (FMath::Abs(CameraBoom->TargetArmLength - CameraBoomLength) <= SmallNumberTolerance)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForCameraDistanceChange);
+		UE_LOG(LogTemp, Log, TEXT("Camera distance change completed."));
+	}
+
+}
+
+void ANeonParadigm_GameCharacter::TimerCameraFOV(float TargetFOVValue, float TargetFOVSpeedChangeValue)
+{
+	TargetCameraFOV = TargetFOVValue;
+	TargetCameraFOVSpeedChange = TargetFOVSpeedChangeValue;
+	GetWorld()->GetTimerManager().SetTimer(
+		TimerForFOVChange,
+		this,
+		&ANeonParadigm_GameCharacter::ChangeCameraFOV,
+		GetWorld()->GetDeltaSeconds(),
+		true
+	);
+}
+
+void ANeonParadigm_GameCharacter::ChangeCameraFOV()
+{
+	// Smoothly interpolate the camera FOV
+	float CurrentFOV = FollowCamera->FieldOfView;
+	FollowCamera->FieldOfView = FMath::FInterpTo(
+		CurrentFOV,
+		TargetCameraFOV,
+		GetWorld()->GetDeltaSeconds(),
+		TargetCameraFOVSpeedChange // Interpolation speed, adjust as needed
+	);
+
+	// Define a small tolerance value
+	const float SmallNumberTolerance = 0.2f;
+
+	// Check if the current FOV is close enough to the target
+	if (FMath::Abs(FollowCamera->FieldOfView - TargetCameraFOV) <= SmallNumberTolerance)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForFOVChange);
+		UE_LOG(LogTemp, Log, TEXT("Camera FOV change completed."));
+	}
+}
+
+float ANeonParadigm_GameCharacter::GetDefaultCameraFOV()
+{
+	return DefaultCameraFOV;
+}
+
+float ANeonParadigm_GameCharacter::GetDefaultCameraFOVSpeedChange()
+{
+	return DefaultCameraFOVSpeedChange;
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileCooldownEndTime()
+{
+	return ProjectileCooldownEndTime;
+}
+
+float ANeonParadigm_GameCharacter::GetProjectileCooldownDuration()
+{
+	return CooldownProjectileDuration;
+}
+
+void ANeonParadigm_GameCharacter::StartTimerForProjectileCooldown()
+{
+	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileCooldown, this, &ANeonParadigm_GameCharacter::CalculateTimeForProjectileWeaponCooldown, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::CalculateTimeForProjectileWeaponCooldown()
+{
+
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float RemainingTime = ProjectileCooldownEndTime - CurrentTime;
+
+	// Calculate progress (0.0 = no cooldown, 1.0 = cooldown complete)
+	ProjectileCooldownProgress = FMath::Clamp(1.0f - (RemainingTime / CooldownProjectileDuration), 0.0f, 1.0f);
+
+	//CooldownWidgetInstance->SetCooldownProgress(CooldownProgress);
+	UpdateProjectileWeaponBarEvent();
+
+	// Stop the timer when the cooldown is complete
+	if (ProjectileCooldownProgress >= 1.0f)
+	{
+		GetWorldTimerManager().ClearTimer(TimerForProjectileCooldown);
+	}
+}
+
+void ANeonParadigm_GameCharacter::StartTimerForDodgeCooldown()
+{
+	GetWorld()->GetTimerManager().SetTimer(TimerDodgeCooldown, this, &ANeonParadigm_GameCharacter::CalculateTimeForDodgeCooldown, GetWorld()->GetDeltaSeconds(), true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::CalculateTimeForDodgeCooldown()
+{
+
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float RemainingTime = DodgeCooldownEndTime - CurrentTime;
+
+	// Calculate progress (0.0 = no cooldown, 1.0 = cooldown complete)
+	DodgeCooldownProgress = FMath::Clamp(1.0f - (RemainingTime / CooldownDodgeDuration), 0.0f, 1.0f);
+
+	//CooldownWidgetInstance->SetCooldownProgress(CooldownProgress);
+	UpdateDodgeBarEvent();
+
+	// Stop the timer when the cooldown is complete
+	if (DodgeCooldownProgress >= 1.0f)
+	{
+		GetWorldTimerManager().ClearTimer(TimerDodgeCooldown);
+	}
+}
+
+
+void ANeonParadigm_GameCharacter::EnableCameraAutoRotate()
+{
+	bCanRotateBack = true;
+	UE_LOG(LogTemp, Log, TEXT("No camera input detected. Auto-rotation re-enabled after delay."));
+}
+
+void ANeonParadigm_GameCharacter::CheckForTargetInCameraView()
+{
+
+	// Get the player camera's location and forward vector
+	FVector CameraLocation = FollowCamera->GetComponentLocation();
+	FVector CameraForward = FollowCamera->GetForwardVector();
+
+	// Define the field of view angle (in degrees) for detection
+	float FieldOfView = 45.0f; // Half-angle of the camera's field of view
+	float CosFieldOfView = FMath::Cos(FMath::DegreesToRadians(FieldOfView));
+
+	// Get all potential enemies in the world
+	TArray<AActor*> AllEnemies;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), AllEnemies);
+
+	// Store the closest enemy and minimum distance
+	AActor* ClosestEnemy = nullptr;
+	float MinDistance = FLT_MAX;
+
+	UE_LOG(LogTemp, Log, TEXT("@Number of potential enemies: %d"), AllEnemies.Num());
+
+	for (AActor* EnemyActor : AllEnemies)
+	{
+		// Check if the enemy is valid
+		if (!IsValid(EnemyActor))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("@Invalid enemy actor."));
+			continue;
+		}
+
+		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(EnemyActor);
+		if (!Enemy || Enemy->GetState() == ECharacterStates::Death)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("@Enemy is invalid or dead: %s"), *EnemyActor->GetName());
+			continue;
+		}
+
+		// Calculate the vector to the enemy from the camera
+		FVector ToEnemy = Enemy->GetActorLocation() - CameraLocation;
+		float DistanceToEnemy = ToEnemy.Size(); // Calculate distance
+		ToEnemy.Normalize();
+
+		// Use the dot product to check if the enemy is within the field of view
+		float DotProduct = FVector::DotProduct(CameraForward, ToEnemy);
+
+		if (DotProduct >= CosFieldOfView)
+		{
+			UE_LOG(LogTemp, Log, TEXT("@Enemy within FOV: %s"), *EnemyActor->GetName());
+
+			// Perform a line trace to check if the enemy is visible
+			FHitResult HitResult;
+			bool bHit = GetWorld()->LineTraceSingleByChannel(
+				HitResult,
+				CameraLocation,
+				Enemy->GetActorLocation(),
+				ECC_Pawn
+			);
+
+			if (bHit)
+			{
+				UE_LOG(LogTemp, Log, TEXT("@Line trace hit: %s"), *HitResult.GetActor()->GetName());
+
+				// Ensure the trace hits the enemy
+				if (HitResult.GetActor() == EnemyActor)
+				{
+					UE_LOG(LogTemp, Log, TEXT("@Enemy is visible: %s"), *EnemyActor->GetName());
+
+					// Update the closest enemy if this one is closer
+					if (DistanceToEnemy < MinDistance)
+					{
+						MinDistance = DistanceToEnemy;
+						ClosestEnemy = EnemyActor;
+						UE_LOG(LogTemp, Error, TEXT("@Updated closest enemy: %s"), *ClosestEnemy->GetName());
+					}
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("@Line trace hit something else: %s"), *HitResult.GetActor()->GetName());
+				}
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("@Line trace did not hit any actor."));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("@Enemy outside FOV: %s"), *EnemyActor->GetName());
+		}
+	}
+
+	// Process the closest enemy in view
+	if (ClosestEnemy)
+	{
+		UE_LOG(LogTemp, Log, TEXT("@Closest Enemy in View: %s"), *ClosestEnemy->GetName());
+
+		// Update target references
+		LastSoftTargetActor = SoftTargetActor;
+		SoftTargetActor = ClosestEnemy;
+		CameraTargetActor = SoftTargetActor;
+		SoftTargetEnemy = Cast<ANP_BaseEnemy>(ClosestEnemy);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("@No enemies in view."));
+	}
+	/*
+	else
+	{
+		FVector StartVec2 = GetActorLocation();
+		FVector EndVec2 = StartVec2;
+
+		float Radius2 = 500.0f;
+		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
+		ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
+
+		bool bTraceComplex2 = false;
+		TArray<AActor*> ActorsToIgnore2;
+		ActorsToIgnore2.Add(this);
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+		TArray<FHitResult> OutHits2;
+
+		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
+			GetWorld(),
+			StartVec2,
+			EndVec2,
+			Radius2,
+			ObjectTypes2,
+			bTraceComplex2,
+			ActorsToIgnore2,
+			DrawDebugType2,
+			OutHits2,
+			true, // Ignore self
+			FLinearColor::Red,
+			FLinearColor::Green,
+			5.0f
+		);
+
+		if (bSphereTrace2)
+		{
+			float ClosestDistance = FLT_MAX;
+			AActor* ClosestActor = nullptr;
+
+			for (const FHitResult& Hit : OutHits2)
+			{
+				if (AActor* HitActor = Hit.GetActor())
+				{
+					// Calculate distance
+					float Distance = FVector::Dist(StartVec2, Hit.ImpactPoint);
+
+					// Debug log
+					UE_LOG(LogTemp, Warning, TEXT("Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
+
+					// Find the closest actor
+					if (Distance < ClosestDistance)
+					{
+						ClosestDistance = Distance;
+						ClosestActor = HitActor;
+					}
+				}
+			}
+
+			// Check if the current target is valid (alive and within range)
+			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
+			{
+				// Do nothing, keep the current target
+				UE_LOG(LogTemp, Warning, TEXT("Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
+			}
+			else
+			{
+				// Set the closest actor as the target
+				if (ClosestActor)
+				{
+					ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestActor);
+					if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
+					{
+						LastSoftTargetActor = SoftTargetActor;
+						SoftTargetActor = ClosestActor;
+						CameraTargetActor = SoftTargetActor;
+						SoftTargetEnemy = ClosestEnemy;
+
+						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
+					}
+					else
+					{
+						SoftTargetActor = nullptr;
+						SoftTargetEnemy = nullptr;
+					}
+				}
+			}
+		}
+		else
+		{
+			LastSoftTargetActor = nullptr;
+			SoftTargetActor = nullptr;
+			SoftTargetEnemy = nullptr;
+		}
+	}
+	*/
+}
+
+void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()
+{
+	bIsMagnetizeDodgeActive = true;
+
+}
+
+void ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge()
+{
+
+}
+
+void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLights()
+{
+
+	// Array to store found actors
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PerfectDodgeMesh"), FoundActors);
+
+	for (AActor* Actor : FoundActors)
+	{
+		UStaticMeshComponent* MeshComponent = Actor->FindComponentByClass<UStaticMeshComponent>();
+		if (MeshComponent)
+		{
+			// Create or retrieve the dynamic material instance
+			UMaterialInstanceDynamic* MID = MeshComponent->CreateAndSetMaterialInstanceDynamic(0);
+			if (MID)
+			{
+				MID->SetScalarParameterValue(FName("EmissiveStrength"), 1.0f); // Adjust value as needed
+			}
+		}
+	}
+	GetWorld()->GetTimerManager().SetTimer(TimerForEmissiveEmergenLights, this, &ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff, 0.2f, true); // 0.0167f
+
+}
+
+void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff()
+{
+	// Array to store found actors
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("PerfectDodgeMesh"), FoundActors);
+
+	for (AActor* Actor : FoundActors)
+	{
+		UStaticMeshComponent* MeshComponent = Actor->FindComponentByClass<UStaticMeshComponent>();
+		if (MeshComponent)
+		{
+			// Create or retrieve the dynamic material instance
+			UMaterialInstanceDynamic* MID = MeshComponent->CreateAndSetMaterialInstanceDynamic(0);
+			if (MID)
+			{
+				// Set emissive value
+				MID->SetScalarParameterValue(FName("EmissiveStrength"), 0.0f);
+			}
+		}
+	}
 }
