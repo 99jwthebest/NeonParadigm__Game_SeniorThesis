@@ -76,6 +76,8 @@ private:
 	float SpectrumData[512]; // Array to hold the FFT data
 	*/
 
+	float GlobalTempo;
+
 public:
 	void FindAllEnemies();
 	void SendMusicInfoToEnemies(float TempoOfCurrentSong);
@@ -87,5 +89,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "State")
 	void SetWallBlockActors(const TArray<AActor*>& WallBlockActors);
 
+	UFUNCTION(BlueprintPure)
+	float GetGlobalTempo();
 
 };
