@@ -311,6 +311,7 @@ private:
 public:
 
 	void SetCurrentTempoDelay(float CurTempoDelay);
+	UFUNCTION(BlueprintPure)
 	float GetCurrentTempoDelay();
 
 	void SetCurrentAnimTimeDelay(float CurAnimTimeDelay);
