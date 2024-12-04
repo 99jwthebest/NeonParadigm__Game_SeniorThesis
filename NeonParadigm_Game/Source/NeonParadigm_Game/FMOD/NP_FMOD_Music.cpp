@@ -81,6 +81,8 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 {
     UE_LOG(LogTemp, Error, TEXT("Timeline Beat Event Triggered: Bar %d, Beat %d, Tempo %f"), Bar, Beat, Tempo);
 
+    GlobalTempo = Tempo;
+
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
 
@@ -315,6 +317,11 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
     {
         Channel->getSpectrum(SpectrumData, 512, 0, FMOD_DSP_FFT_WINDOW_HANNING);
     }*/
+}
+
+float ANP_FMOD_Music::GetTempo()
+{
+    return GlobalTempo;
 }
 
 

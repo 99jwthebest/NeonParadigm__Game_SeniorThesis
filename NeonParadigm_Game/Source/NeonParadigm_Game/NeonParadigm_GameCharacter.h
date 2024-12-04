@@ -512,6 +512,10 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		float TargetCameraFOV;
 		FTimerHandle TimerForFOVChange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float CameraFOVSpeedChange;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		float DefaultCameraFOVSpeedChange;
 
 public:
 
@@ -520,10 +524,12 @@ public:
 	
 	void ChangeCameraDistance();
 
-	void TimerCameraFOV(float TargetFOVValue);
+	void TimerCameraFOV(float TargetFOVValue, float CameraFovSpeedChangeF);
 
 	void ChangeCameraFOV();
 	float GetDefaultCameraFOV();
+
+	float GetDefaultCameraFOVSpeedChange();
 
 
 private:

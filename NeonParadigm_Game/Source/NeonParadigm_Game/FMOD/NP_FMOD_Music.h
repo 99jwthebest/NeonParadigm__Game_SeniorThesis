@@ -75,6 +75,8 @@ private:
 	FMOD::Channel* Channel = nullptr; // The channel playing your music
 	float SpectrumData[512]; // Array to hold the FFT data
 	*/
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
+	float GlobalTempo;
 
 public:
 	void FindAllEnemies();
@@ -86,6 +88,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "State")
 	void SetWallBlockActors(const TArray<AActor*>& WallBlockActors);
-
-
+	UFUNCTION(BlueprintPure, Category = "State")
+	float GetTempo();
 };

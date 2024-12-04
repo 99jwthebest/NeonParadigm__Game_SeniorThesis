@@ -94,11 +94,9 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->SetIsShootSaved(false);
 			MyCharacter->SetIsStunSaved(false);
 			MyCharacter->ResetDodgeCountAndMultiplier();
-			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV());
+			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 		}
 	}
-
-
 }
 
 bool UCharacterStateComponent::GetOnLandReset()
