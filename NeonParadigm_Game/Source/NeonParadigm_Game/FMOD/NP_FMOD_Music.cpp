@@ -81,6 +81,11 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 {
     UE_LOG(LogTemp, Error, TEXT("Timeline Beat Event Triggered: Bar %d, Beat %d, Tempo %f"), Bar, Beat, Tempo);
 
+    if (Tempo != GlobalTempo && BPM_Started)
+    {
+
+    }
+
     GlobalTempo = Tempo;
 
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
@@ -137,6 +142,14 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     PlayerCharacter->PlayBPM_BallAnim();
     UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE Crucke!!! YEAH YEAH %f"), PlayerCharacter->GetCurrentTempoDelay());
 
+    if (Beat == 4)
+    {
+
+    }
+    if (Beat == 1)
+    {
+
+    }
 
 }
 

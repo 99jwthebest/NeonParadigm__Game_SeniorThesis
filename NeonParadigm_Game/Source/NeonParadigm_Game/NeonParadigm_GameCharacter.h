@@ -426,6 +426,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void BeginBPM_Bar();
 	UFUNCTION(BlueprintImplementableEvent)
+	void SetBPM_SoundBarsHeight();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateBPM_Visuals();
+	UFUNCTION(BlueprintImplementableEvent)
 	void TogglePerfectHitTextBox();
 	UFUNCTION(BlueprintImplementableEvent)
 	void ToggleEncounterResults();
