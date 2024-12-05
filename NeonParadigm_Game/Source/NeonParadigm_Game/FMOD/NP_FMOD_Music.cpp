@@ -144,7 +144,8 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     if (Beat == 4)
     {
-
+        UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS  44444!!!!"));
+        PlayerCharacter->SetBPM_SoundBarsHeight();
     }
     if (Beat == 1)
     {
