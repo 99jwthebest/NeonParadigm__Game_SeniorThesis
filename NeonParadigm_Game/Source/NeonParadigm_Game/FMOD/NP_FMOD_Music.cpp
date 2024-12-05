@@ -126,18 +126,16 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     if (!BPM_Started)
     {
-       // PlayerCharacter->BeginBPM_Bar();
-        UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in AMBEaters %f"), PlayerCharacter->GetCurrentTempoDelay());
-        UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in Y AMBEaters %f"), PlayerCharacter->GetCurrentTempoDelay());
-        UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE FUCKE!!! %f"), PlayerCharacter->GetCurrentTempoDelay());
+       PlayerCharacter->BeginBPM_Bar();
+        UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE Crucke!!! %f"), PlayerCharacter->GetCurrentTempoDelay());
 
 
 
         UE_LOG(LogTemp, Warning, TEXT("Timeline MARKER Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
         BPM_Started = true;
     }
-    //PlayerCharacter->PlayBPM_BallAnim();
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE FUCKE!!! YEAH YEAH %f"), PlayerCharacter->GetCurrentTempoDelay());
+    PlayerCharacter->PlayBPM_BallAnim();
+    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE Crucke!!! YEAH YEAH %f"), PlayerCharacter->GetCurrentTempoDelay());
 
 
 }
