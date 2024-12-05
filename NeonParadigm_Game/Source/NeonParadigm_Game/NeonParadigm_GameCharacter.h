@@ -303,6 +303,7 @@ private:
 	float DelayFromThirdBeat;
 	float TotalTimeDelayToThirdBeat;
 	float PlayRateForAnimMontages;
+	float PlayRateUIBallAnim;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* TestRhythmMontage;
@@ -323,6 +324,9 @@ public:
 	float GetNextBeatTime();
 	void SetThirdBeatTime(float fThirdBeatTime);
 	float GetThirdBeatTime();
+
+	UFUNCTION(BlueprintPure)
+	float GetCurrentUIBallAnimPlayRate();
 
 	float GetCurrentAnimPlayRate();
 
@@ -415,6 +419,8 @@ public:
 	void UpdateScoreEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void ToggleCombatStyleGrade();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayBPM_BallAnim();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayBPM_HalfCirle(float CurrentTempo);
 	UFUNCTION(BlueprintImplementableEvent)
