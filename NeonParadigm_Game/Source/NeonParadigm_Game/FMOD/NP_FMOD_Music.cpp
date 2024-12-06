@@ -83,7 +83,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     if (Tempo != GlobalTempo && BPM_Started)
     {
-
+        UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  TEMPO CHANGERS!!!!"));
+        GlobalTempo = Tempo;
+        PlayerCharacter->UpdateBPM_Visuals();
     }
 
     GlobalTempo = Tempo;
@@ -149,7 +151,8 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     }
     if (Beat == 1)
     {
-
+        UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS  111111!!!!"));
+        PlayerCharacter->SetBPM_SoundBarsHeight();
     }
 
 }
