@@ -1453,6 +1453,16 @@ float ANeonParadigm_GameCharacter::GetThirdBeatTime()
 	return ThirdBeatTime;
 }
 
+float ANeonParadigm_GameCharacter::GetCurrentUIBallAnimPlayRate()
+{
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	PlayRateUIBallAnim = 1 / DelayFromNextBeat;
+
+	return PlayRateUIBallAnim;
+}
+
 float ANeonParadigm_GameCharacter::GetCurrentAnimPlayRate()
 {
 	return PlayRateForAnimMontages;
