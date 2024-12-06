@@ -106,6 +106,10 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				ScoreComp->TrackHit(MyCharacter->IsPerfectBeatHit());
 
+				// Play attack sound
+				if (AttackSound)
+					UGameplayStatics::PlaySoundAtLocation(this, AttackSound, MyCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.0f, .05f);
+
 				if (MyCharacter->IsPerfectBeatHit())
 				{
 					SpawnRagePickups(Hit);
