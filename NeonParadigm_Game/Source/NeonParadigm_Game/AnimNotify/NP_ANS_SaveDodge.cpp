@@ -10,7 +10,13 @@ void UNP_ANS_SaveDodge::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSeque
 {
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 
-	const AActor* OwnerActor = MeshComp->GetOwner();
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+        return;
+
+    const AActor* OwnerActor = MeshComp->GetOwner();
+
+    if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
+        return;
 
 	if (OwnerActor)
 		CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());

@@ -11,10 +11,13 @@ void UDrawProjectileWeaponCollision::Notify(USkeletalMeshComponent* MeshComp, UA
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
-	if (MeshComp == nullptr)
-		return;
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+        return;
 
-	const AActor* OwnerActor = MeshComp->GetOwner();
+    const AActor* OwnerActor = MeshComp->GetOwner();
+
+    if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
+        return;
 
 	if (OwnerActor)
 		CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());

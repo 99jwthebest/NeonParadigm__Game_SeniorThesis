@@ -9,11 +9,12 @@ void UNP_ANS_SaveHeavyAttack::NotifyBegin(USkeletalMeshComponent* MeshComp, UAni
 {
 	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 
-	if (MeshComp == nullptr)
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
 		return;
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
-	if (!OwnerActor)
+
+	if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
 		return;
 	
 	UAttackComponent* AttackComp = OwnerActor->GetComponentByClass<UAttackComponent>();
