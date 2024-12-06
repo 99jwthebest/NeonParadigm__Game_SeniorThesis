@@ -340,9 +340,9 @@ void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
 
 	if (GetWorld())
 	{
-		int32 NumPickupsToSpawn = 5; // Number of pickups to spawn
+		int32 NumPickupsToSpawn = 9; // Number of pickups to spawn
 		float RandomRange = 100.0f; // Range for random spawn offset
-		float ExplosionForce = 1000.0f; // Force magnitude for impulse
+		float ExplosionForce = 700.0f; // Force magnitude for impulse
 		float UpwardForce = 300.0f; // Additional upward force
 
 		for (int32 i = 0; i < NumPickupsToSpawn; ++i)
@@ -362,7 +362,7 @@ void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
 			FVector SpawnLocation = HitResult.GetActor()->GetActorLocation() + FVector(0.0f, 0.0f, HeightSpawnOffset) + RandomOffset;
 
 			// Debug visualization of spawn location
-			DrawDebugSphere(GetWorld(), SpawnLocation, 10.0f, 12, FColor::Green, false, 2.0f);
+			//DrawDebugSphere(GetWorld(), SpawnLocation, 10.0f, 12, FColor::Green, false, 2.0f);
 
 			// Spawn the actor
 			AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(RagePickup, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
