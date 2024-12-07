@@ -29,7 +29,13 @@ void UNP_AN_WeaponCollision::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
         return;
         
     if (!CharacterMoveComp->IsRaging())
+    {
+        UE_LOG(LogTemp, Error, TEXT("A_TimelineBeat TIME Triggered: RhythmAttack In WC Notify Beat Tick: %f"), OwnerActor->GetWorld()->GetTimeSeconds());
         DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage, DamageTypeClass);
+    }
     else
+    {
+        UE_LOG(LogTemp, Error, TEXT("A_TimelineBeat TIME Triggered: RhythmAttack Beat Tick: %f"), OwnerActor->GetWorld()->GetTimeSeconds());
         DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage * 10, DamageTypeClass); // Rage mode damage
+    }
 }

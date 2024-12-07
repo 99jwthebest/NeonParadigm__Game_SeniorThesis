@@ -1473,13 +1473,13 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	UE_LOG(LogTemp, Error, TEXT("Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
 
 	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
-	UE_LOG(LogTemp, Error, TEXT("Delay From Last Beat: %f"), DelayFromLastBeat);
+	UE_LOG(LogTemp, Error, TEXT("Delay From RDE Last Beat: %f"), DelayFromLastBeat);
 
 	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("Delay From Next Beat: %f"), DelayFromNextBeat);
+	UE_LOG(LogTemp, Error, TEXT("Delay From RDE Next Beat: %f"), DelayFromNextBeat);
 
 	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("Delay From Third Beat: %f"), DelayFromThirdBeat);
+	UE_LOG(LogTemp, Error, TEXT("Delay From RDE Third Beat: %f"), DelayFromThirdBeat);
 
 	if (DelayFromLastBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
@@ -1538,6 +1538,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromThirdBeat;
+		UE_LOG(LogTemp, Error, TEXT("A_TimelineBeat TIME Triggered: RhythmAttack In Heavy Attack Range Beat Tick: %f"), GetWorld()->GetTimeSeconds());
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}

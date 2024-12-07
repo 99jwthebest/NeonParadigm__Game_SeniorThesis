@@ -110,6 +110,9 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				if (AttackSound)
 					UGameplayStatics::PlaySoundAtLocation(this, AttackSound, MyCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, .05f);
 
+				UE_LOG(LogTemp, Error, TEXT("A_TimelineBeat TIME Triggered: RhythmAttack Beat Tick: %f"), GetWorld()->GetTimeSeconds());
+
+
 				if (MyCharacter->IsPerfectBeatHit())
 				{
 					SpawnRagePickups(Hit);

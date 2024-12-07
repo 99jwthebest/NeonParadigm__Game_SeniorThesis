@@ -92,7 +92,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
-    UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  ju aasdf df  ggg d ftgyrdt TEMPO CHANGERS!!!!"));
+    //UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  ju aasdf df  ggg d ftgyrdt TEMPO CHANGERS!!!!"));
 
     // Turn on the emission when the beat hits
     PlayerCharacter->ToggleOrbEmission();
@@ -103,20 +103,20 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     M_CurrentTempoDelay = 60 / Tempo;
     PlayerCharacter->SetCurrentTempoDelay(M_CurrentTempoDelay);
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay %f"), M_CurrentTempoDelay);
+    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat TIME Triggered: CurrentTempoDelay %f"), M_CurrentTempoDelay);
 
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Beat Tick: %f"), GetWorld()->GetTimeSeconds());
+    UE_LOG(LogTemp, Error, TEXT("A_TimelineBeat TIME Triggered: Beat Tick: %f"), GetWorld()->GetTimeSeconds());
 
     PlayerCharacter->SetLastBeatTime(GetWorld()->GetTimeSeconds());
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
+    UE_LOG(LogTemp, Warning, TEXT("A_TimelineBeat TIME Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
 
     M_NextBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay;
     PlayerCharacter->SetNextBeatTime(M_NextBeatTime);
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
+    UE_LOG(LogTemp, Warning, TEXT("A_TimelineBeat TIME Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
 
     M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
     PlayerCharacter->SetThirdBeatTime(M_ThirdBeatTime);
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
+    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat TIME Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
 
 
     if (SpawnedEnemies.Num() > 0)
@@ -128,7 +128,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     // BPM UI
     //PlayerCharacter->PlayBPM_HalfCirle(Tempo);
 
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: %f"), PlayerCharacter->GetCurrentTempoDelay());
+    UE_LOG(LogTemp, Error, TEXT("Timeline Beat TIME Triggered: CurrentTempoDelay: Player Character: %f"), PlayerCharacter->GetCurrentTempoDelay());
 
     if (!BPM_Started)
     {
@@ -153,7 +153,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS  111111!!!!"));
         PlayerCharacter->SetBPM_SoundBarsHeight();
     }
-
+    // Play attack sound
+    if (AttackSound)
+        UGameplayStatics::PlaySoundAtLocation(this, AttackSound, PlayerCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, .05f);
 }
 
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)

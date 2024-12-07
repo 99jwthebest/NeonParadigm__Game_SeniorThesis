@@ -43,6 +43,7 @@ public:
 
 	void PerfectHitOperations();
 	void SpawnRagePickups(FHitResult& HitResult);
+	void 
 
 private:
 	

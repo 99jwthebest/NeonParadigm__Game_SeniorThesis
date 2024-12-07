@@ -333,7 +333,7 @@ void UAttackComponent::FindNotifyTriggerTime(UAnimMontage* Montage, FName Notify
 		if (NotifyEvent.Notify && NotifyEvent.Notify->GetNotifyName() == NotifyName)
 		{
 			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
-			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
+			UE_LOG(LogTemp, Log, TEXT("Notify name %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
 			return;
 		}
 	}
