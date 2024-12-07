@@ -113,7 +113,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 MaxRageCollectiblesThreshold = 2;       // The initial threshold for increasing max rage
 
-	TArray<int32> EncounterScores; // Store scores for each encounter
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	//TArray<int32> SetScoreEncounters; // Set ScoreThreshold For Encounter scores for each encounter
+	TArray<int32> StoreEncounterScores; // Store scores for each encounter
 
 	int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
 

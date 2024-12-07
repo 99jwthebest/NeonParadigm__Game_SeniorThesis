@@ -115,6 +115,7 @@ void UScoreComponent::EndEncounter()
 {
 	// Set the ending time to the current game time
 	EncounterEndTime = GetWorld()->GetTimeSeconds();
+	AddEncounterScore(OverallScore);
 }
 
 void UScoreComponent::TrackHit(bool bIsPerfectHit)
@@ -356,12 +357,12 @@ FString UScoreComponent::GetFinalRank(int32 FinalScore, int32 MaxPossibleScoreIn
 
 void UScoreComponent::AddEncounterScore(int32 Score)
 {
-	EncounterScores.Add(Score);
+	StoreEncounterScores.Add(Score);
 }
 
 void UScoreComponent::FinalizeScore(int32 MaxPossibleScoreIn)
 {
-	int32 FinalScore = CalculateFinalScore(EncounterScores);
+	int32 FinalScore = CalculateFinalScore(StoreEncounterScores);
 	FString FinalRankLocal = GetFinalRank(FinalScore, MaxPossibleScoreIn);
 
 	UE_LOG(LogTemp, Log, TEXT("Final Score: %d"), FinalScore);

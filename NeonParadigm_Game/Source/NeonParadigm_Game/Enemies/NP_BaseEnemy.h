@@ -213,5 +213,7 @@ public:
 	void EnemyStunnedWithProjectiles();
 	UFUNCTION(BlueprintImplementableEvent)
 	void EnemyStunned();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayCameraShake();
 
 };
