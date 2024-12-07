@@ -108,7 +108,8 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				// Play attack sound
 				if (AttackSound)
-					UGameplayStatics::PlaySoundAtLocation(this, AttackSound, MyCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, .05f);
+					UGameplayStatics::PlaySoundAtLocation(this, AttackSound, MyCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, AttackSoundDelay);
+				UE_LOG(LogTemp, Warning, TEXT("A_Freaking World Time In IMpactPoint is:  %f"), GetWorld()->GetTimeSeconds());
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{

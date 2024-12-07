@@ -78,6 +78,13 @@ private:
 
 	float GlobalTempo;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound", meta = (AllowPrivateAccess = "true"))
+	USoundBase* AttackSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound", meta = (AllowPrivateAccess = "true"))
+	float AttackSoundVolumeMultiplier;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound", meta = (AllowPrivateAccess = "true"))
+	float AttackSoundDelay;
+
 public:
 	void FindAllEnemies();
 	void SendMusicInfoToEnemies(float TempoOfCurrentSong);
