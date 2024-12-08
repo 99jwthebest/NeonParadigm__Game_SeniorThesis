@@ -28,14 +28,16 @@ public:
 private:
 
 	// Base score tracking
-	int TotalScore;
 	int CurrentScore;
+	//int TotalScore;
 
 	// Perfect Timing Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 PerfectHits; // Tracks the number of perfect hits
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		int32 TotalHits; // Tracks the total number of hits
+		int32 TotalEncounterHits; // Tracks the total number of hits
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 TotalLevelHits; // Tracks the total number of hits
 
 	// Time Efficiency
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -66,15 +68,23 @@ private:
 		float PerfectTimingPercent;
 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallLevelScore;
 	// Final Rank and Overall Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		int32 OverallScore;
+		int32 OverallEncounterScore;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		int32 OverallScoreBThreshold;
+		int32 OverallEncounterScoreBThreshold;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		int32 OverallScoreAThreshold;
+		int32 OverallEncounterScoreAThreshold;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		int32 OverallScoreSThreshold;
+		int32 OverallEncounterScoreSThreshold;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallLevelScoreBThreshold;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallLevelScoreAThreshold;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallLevelScoreSThreshold;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 FinalRank; // 0 = C, 1 = B, 2 = A, 3 = S
 
@@ -115,13 +125,13 @@ private:
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 	//TArray<int32> SetScoreEncounters; // Set ScoreThreshold For Encounter scores for each encounter
-	TArray<int32> StoreEncounterScores; // Store scores for each encounter
-
-	int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
+	//TArray<int32> StoreEncounterScores; // Store scores for each encounter
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
 
 	int32 CurrentCombatEnounters;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-	int32 TotalCombatEncounters;
+		int32 TotalCombatEncounters;
 
 public:
 
@@ -166,9 +176,9 @@ public:
 	UFUNCTION(BlueprintPure)
 		float GetClearTime();
 	UFUNCTION(BlueprintPure)
-		float CalculateOverallScore();
+		float CalculateOverallEncounterScore();
 	UFUNCTION(BlueprintPure)
-		int GetOverallScoreGrade();
+		int GetOverallScoreGrade(int32 OverallScoreType, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold);
 
 
 	UFUNCTION(BlueprintPure)
@@ -178,14 +188,16 @@ public:
 
 	int32 CalculateFinalScore(const TArray<int32>& Scores);
 
-	FString GetFinalRank(int32 FinalScore, int32 MaxPossibleScoreIn);
+	FString GetFinalRank();
 
-	void AddEncounterScore(int32 Score);
+	void AddToOverallLevelScore(int32 Score);
 
 	void FinalizeScore(int32 MaxPossibleScoreIn);
 
 	void AddEncounterMaxScore(int32 MaxScore);
 
 	bool GetWinEncounterCondition();
+
+	void ResetAllEncounterScores();
 
 };

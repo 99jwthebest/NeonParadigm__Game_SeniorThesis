@@ -1791,12 +1791,24 @@ void ANeonParadigm_GameCharacter::StartEnemyEncounter()
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
+	ScoreComp->AddToOverallLevelScore(ScoreComp->CalculateOverallEncounterScore());
+
 	if (ScoreComp->GetWinEncounterCondition())
 	{
 		SpawnWinMenuEvent();
 	}
-	ToggleEncounterResults();
+	else
+	{
+		ToggleEncounterResults();
+	}
 	TimerCameraDistance(DefaultCameraBoomLength);
+	
+	
+
+	ScoreComp->ResetAllEncounterScores();
+	
+	UE_LOG(LogTemp, Warning, TEXT("Is End Encounter Happening Twice!!!!!!!"));
+
 }
 
 void ANeonParadigm_GameCharacter::ProjectileWeapon()
