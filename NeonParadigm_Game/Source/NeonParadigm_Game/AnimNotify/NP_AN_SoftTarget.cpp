@@ -9,11 +9,14 @@ void UNP_AN_SoftTarget::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
-	const AActor* OwnerActor = MeshComp->GetOwner();
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+        return;
 
-	if (!OwnerActor)
-		return;
-	
+    const AActor* OwnerActor = MeshComp->GetOwner();
+
+    if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
+        return;
+
 	ANeonParadigm_GameCharacter* CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
 
 	if (CharacterMoveComp)

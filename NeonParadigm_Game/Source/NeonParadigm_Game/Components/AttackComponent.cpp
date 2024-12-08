@@ -266,8 +266,6 @@ void UAttackComponent::PerformHeavyAttack(int AttackIndex)
 			if (HeavyAttackIndex >= HeavyAttackMontages.Num())
 			{
 				//Reset Heavy Attack Index If Index Becomes Equal Or Greater Than Light Attack Sequence
-				UE_LOG(LogTemp, Error, TEXT("Is it RESETTING HEavy Index Too early: %d"), HeavyAttackIndex);
-
 				HeavyAttackIndex = 0;
 				return;
 			}
@@ -333,7 +331,7 @@ void UAttackComponent::FindNotifyTriggerTime(UAnimMontage* Montage, FName Notify
 		if (NotifyEvent.Notify && NotifyEvent.Notify->GetNotifyName() == NotifyName)
 		{
 			NotifyTriggerTime = NotifyEvent.GetTriggerTime();
-			UE_LOG(LogTemp, Log, TEXT("Notify %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
+			UE_LOG(LogTemp, Log, TEXT("A_Notify %s triggers at time: %f seconds"), *NotifyName.ToString(), NotifyTriggerTime);
 			return;
 		}
 	}

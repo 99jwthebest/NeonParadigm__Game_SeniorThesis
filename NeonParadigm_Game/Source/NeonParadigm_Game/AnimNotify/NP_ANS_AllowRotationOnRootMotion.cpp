@@ -9,43 +9,54 @@
 
 void UNP_ANS_AllowRotationOnRootMotion::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
-	Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
+    Super::NotifyBegin(MeshComp, Animation, TotalDuration, EventReference);
 
-	if (MeshComp == nullptr)
-		return;
+    if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+        return;
 
-	const AActor* OwnerActor = MeshComp->GetOwner();
+    const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (OwnerActor)
-		CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
+    if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
+        return;
 
-	if (CharacterMoveComp)
-	{
-		if (!CharacterMoveComp->GetIsTargeting() && !IsValid(CharacterMoveComp->GetSoftTargetActor()))
-		{
-			CharacterMoveComp->GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = true;
-			UE_LOG(LogTemp, Error, TEXT("DO WE KNOW MOTHER FUKCERJDLSKFJSDLKFJ AllowRotation COMP In NOFITY!!!!!!!!"));
-		}
-	}
-	else
-		UE_LOG(LogTemp, Warning, TEXT("Cant FIND AllowRotation COMP In NOFITY!!!!!!!!"));
+    CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
+
+    if (CharacterMoveComp)
+    {
+        if (!CharacterMoveComp->GetIsTargeting() && !IsValid(CharacterMoveComp->GetSoftTargetActor()))
+        {
+            CharacterMoveComp->GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = true;
+            UE_LOG(LogTemp, Error, TEXT("AllowRotation COMP enabled in NOTIFY Begin!"));
+        }
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Cannot find CharacterMoveComp in NOTIFY Begin!"));
+    }
 
 }
 
 void UNP_ANS_AllowRotationOnRootMotion::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
 {
-	Super::NotifyEnd(MeshComp, Animation, EventReference);
+    Super::NotifyEnd(MeshComp, Animation, EventReference);
 
-	if (MeshComp == nullptr)
-		return;
+    if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+        return;
 
-	const AActor* OwnerActor = MeshComp->GetOwner();
+    const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (OwnerActor)
-		CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
+    if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
+        return;
 
-	if (CharacterMoveComp)
-		CharacterMoveComp->GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = false;
-	else
-		UE_LOG(LogTemp, Warning, TEXT("Cant FIND AllowRotation COMP In NOFITY!!!!!!!!"));
+    CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
+
+    if (CharacterMoveComp)
+    {
+        CharacterMoveComp->GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = false;
+        UE_LOG(LogTemp, Error, TEXT("AllowRotation COMP disabled in NOTIFY End!"));
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Cannot find CharacterMoveComp in NOTIFY End!"));
+    }
 }

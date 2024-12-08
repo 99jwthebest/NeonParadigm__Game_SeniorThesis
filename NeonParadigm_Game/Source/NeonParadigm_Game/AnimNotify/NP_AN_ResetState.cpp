@@ -14,10 +14,14 @@ void UNP_AN_ResetState::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+		return;
+
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (!OwnerActor)
+	if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
 		return;
+
 	UCharacterStateComponent* CharacterStateComp = OwnerActor->GetComponentByClass<UCharacterStateComponent>();
 
 	if(CharacterStateComp)

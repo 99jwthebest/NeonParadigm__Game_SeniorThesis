@@ -9,9 +9,12 @@ void UNP_AN_PlayGetupAM::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 {
 	Super::Notify(MeshComp, Animation, EventReference);
 
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+		return;
+
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (!OwnerActor)
+	if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
 		return;
 
 	ANP_BaseEnemy* EnemyCharacter = Cast<ANP_BaseEnemy>(MeshComp->GetOwner());

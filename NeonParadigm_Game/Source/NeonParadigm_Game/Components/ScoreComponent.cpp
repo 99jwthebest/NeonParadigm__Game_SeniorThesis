@@ -47,14 +47,14 @@ void UScoreComponent::Testing()
 
 void UScoreComponent::IncrementScore(int ScoreToAdd)
 {
-	TotalScore += ScoreToAdd;
-	UE_LOG(LogTemp, Warning, TEXT("SCORE COMP, %d Points!!!!!!!!!!!"), TotalScore);
+	CurrentScore += ScoreToAdd;
+	UE_LOG(LogTemp, Warning, TEXT("SCORE COMP, %d Points!!!!!!!!!!!"), CurrentScore);
 	AddProgress(ProgressIncreaseRate);
 }
 
 float UScoreComponent::GetCurrentScore()
 {
-	return TotalScore;
+	return CurrentScore;
 }
 
 int32 UScoreComponent::GetCurrentRankIndex() const
@@ -115,11 +115,12 @@ void UScoreComponent::EndEncounter()
 {
 	// Set the ending time to the current game time
 	EncounterEndTime = GetWorld()->GetTimeSeconds();
+
 }
 
 void UScoreComponent::TrackHit(bool bIsPerfectHit)
 {
-	TotalHits++;
+	TotalEncounterHits++;
 
 	if (bIsPerfectHit)
 	{
@@ -129,9 +130,9 @@ void UScoreComponent::TrackHit(bool bIsPerfectHit)
 
 float UScoreComponent::CalculatePerfectTimingBonus()
 {
-	if (TotalHits == 0) return 0.0f;
+	if (TotalEncounterHits == 0) return 0.0f;
 
-	PerfectHitPercentage = (float)PerfectHits / (float)TotalHits;
+	PerfectHitPercentage = (float)PerfectHits / (float)TotalEncounterHits;
 
 	CalculatePerfectTimingGrade(PerfectHitPercentage);
 	SetPerfectTimingPercentage(PerfectHitPercentage);
@@ -225,15 +226,15 @@ float UScoreComponent::GetClearTime()
 
 int32 UScoreComponent::CalculateGrade() const
 {
-	if (TotalScore >= ThresholdSGrade)
+	if (CurrentScore >= ThresholdSGrade)
 	{
 		return 3; // S rank
 	}
-	else if (TotalScore >= ThresholdAGrade)
+	else if (CurrentScore >= ThresholdAGrade)
 	{
 		return 2; // A rank
 	}
-	else if (TotalScore >= ThresholdBGrade)
+	else if (CurrentScore >= ThresholdBGrade)
 	{
 		return 1; // B rank
 	}
@@ -245,15 +246,15 @@ int32 UScoreComponent::CalculateGrade() const
 
 float UScoreComponent::CalculateGradeBonus()
 {
-	if (TotalScore >= ThresholdSGrade)
+	if (CurrentScore >= ThresholdSGrade)
 	{
 		return 2000.0f; // S rank
 	}
-	else if (TotalScore >= ThresholdAGrade)
+	else if (CurrentScore >= ThresholdAGrade)
 	{
 		return 1500.0f; // A rank
 	}
-	else if (TotalScore >= ThresholdBGrade)
+	else if (CurrentScore >= ThresholdBGrade)
 	{
 		return 1000.0f; // B rank
 	}
@@ -263,28 +264,28 @@ float UScoreComponent::CalculateGradeBonus()
 	}
 }
 
-float UScoreComponent::CalculateOverallScore()
+float UScoreComponent::CalculateOverallEncounterScore()
 {
 	// Combine all scores
 	float BaseScoreGradeBonus = CalculateGradeBonus();
 	float JustTimingBonus = CalculatePerfectTimingBonus();
 	float TimeBonus = CalculateClearTimeBonus();
 	
-	return OverallScore = TotalScore + BaseScoreGradeBonus + JustTimingBonus + TimeBonus;
+	return OverallEncounterScore = CurrentScore + BaseScoreGradeBonus + JustTimingBonus + TimeBonus;
 }
 
-int UScoreComponent::GetOverallScoreGrade()
+int UScoreComponent::GetOverallScoreGrade(int32 OverallScoreType,int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold)
 {
 	// Determine final rank based on OverallScore thresholds
-	if (OverallScore >= OverallScoreSThreshold)
+	if (OverallScoreType >= SGradeThreshold)
 	{
 		return 3; // S rank
 	}
-	else if (OverallScore >= OverallScoreAThreshold)
+	else if (OverallScoreType >= AGradeThreshold)
 	{
 		return 2; // A rank
 	}
-	else if (OverallScore >= OverallScoreBThreshold)
+	else if (OverallScoreType >= BGradeThreshold)
 	{
 		return 1; // B rank
 	}
@@ -344,9 +345,9 @@ int32 UScoreComponent::CalculateFinalScore(const TArray<int32>& Scores)
 	return TotalScoreLocal;
 }
 
-FString UScoreComponent::GetFinalRank(int32 FinalScore, int32 MaxPossibleScoreIn)
+FString UScoreComponent::GetFinalRank()
 {
-	float Percentage = (float)FinalScore / (float)MaxPossibleScoreIn * 100.0f;
+	float Percentage = (float)OverallLevelScore / (float)MaxPossibleScore * 100.0f;
 
 	if (Percentage >= 90.0f) return TEXT("S");
 	else if (Percentage >= 75.0f) return TEXT("A");
@@ -354,18 +355,18 @@ FString UScoreComponent::GetFinalRank(int32 FinalScore, int32 MaxPossibleScoreIn
 	else return TEXT("C");
 }
 
-void UScoreComponent::AddEncounterScore(int32 Score)
+void UScoreComponent::AddToOverallLevelScore(int32 Score)
 {
-	EncounterScores.Add(Score);
+	OverallLevelScore += Score;
 }
 
 void UScoreComponent::FinalizeScore(int32 MaxPossibleScoreIn)
 {
-	int32 FinalScore = CalculateFinalScore(EncounterScores);
-	FString FinalRankLocal = GetFinalRank(FinalScore, MaxPossibleScoreIn);
+	//int32 FinalScore = CalculateFinalScore(StoreEncounterScores);
+	//FString FinalRankLocal = GetFinalRank(FinalScore, MaxPossibleScoreIn);
 
-	UE_LOG(LogTemp, Log, TEXT("Final Score: %d"), FinalScore);
-	UE_LOG(LogTemp, Log, TEXT("Final Rank: %s"), *FinalRankLocal);
+	//UE_LOG(LogTemp, Log, TEXT("Final Score: %d"), FinalScore);
+	//UE_LOG(LogTemp, Log, TEXT("Final Rank: %s"), *FinalRankLocal);
 
 	// Additional logic for displaying the rank to the player
 }
@@ -383,5 +384,14 @@ bool UScoreComponent::GetWinEncounterCondition()
 	}
 	
 	return false;
+}
+
+void UScoreComponent::ResetAllEncounterScores()
+{
+	CurrentScore = 0;
+	PerfectHits = 0;
+	TotalEncounterHits = 0;
+	CurrentEncounterClearTime = 0;
+
 }
 

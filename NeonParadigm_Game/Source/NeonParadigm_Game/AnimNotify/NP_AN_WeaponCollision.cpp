@@ -10,21 +10,26 @@
 
 void UNP_AN_WeaponCollision::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
 {
-	Super::Notify(MeshComp, Animation, EventReference);
+    Super::Notify(MeshComp, Animation, EventReference);
 
-	if (MeshComp == nullptr)
-		return;
+    if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
+        return;
 
-	const AActor* OwnerActor = MeshComp->GetOwner();
+    const AActor* OwnerActor = MeshComp->GetOwner();
 
-	if (OwnerActor)
-		CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
+    if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
+        return;
 
-	if (CharacterMoveComp)
-		DamageComp = OwnerActor->GetComponentByClass<UDamageComponent>();
+    CharacterMoveComp = Cast<ANeonParadigm_GameCharacter>(MeshComp->GetOwner());
 
-	if (DamageComp && CharacterMoveComp->IsRaging() == false)
-		DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage, DamageTypeClass);
-	else if(DamageComp && CharacterMoveComp->IsRaging())
-		DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage * 10, DamageTypeClass); // **** rage mode damage!!!
+    if (CharacterMoveComp)
+        DamageComp = OwnerActor->FindComponentByClass<UDamageComponent>();
+
+    if (!DamageComp)
+        return;
+        
+    if (!CharacterMoveComp->IsRaging())
+        DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage, DamageTypeClass);
+    else
+        DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage * 10, DamageTypeClass); // Rage mode damage
 }

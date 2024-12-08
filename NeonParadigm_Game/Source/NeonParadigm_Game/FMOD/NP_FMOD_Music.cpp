@@ -92,8 +92,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
-    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS!!!!"));
-    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!! Checkers BEATERS!!!!"));
+    UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  ju aasdf df  ggg d ftgyrdt TEMPO CHANGERS!!!!"));
 
     // Turn on the emission when the beat hits
     PlayerCharacter->ToggleOrbEmission();
@@ -109,15 +108,15 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Beat Tick: %f"), GetWorld()->GetTimeSeconds());
 
     PlayerCharacter->SetLastBeatTime(GetWorld()->GetTimeSeconds());
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
+    UE_LOG(LogTemp, Warning, TEXT("A_Timeline Beat Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
 
     M_NextBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay;
     PlayerCharacter->SetNextBeatTime(M_NextBeatTime);
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
+    UE_LOG(LogTemp, Warning, TEXT("A_Timeline Beat Event Triggered: Next Beat Time: %f"), PlayerCharacter->GetNextBeatTime());
 
     M_ThirdBeatTime = GetWorld()->GetTimeSeconds() + M_CurrentTempoDelay * 2;
     PlayerCharacter->SetThirdBeatTime(M_ThirdBeatTime);
-    UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
+    UE_LOG(LogTemp, Warning, TEXT("A_Timeline Beat Event Triggered: Third Beat Time: %f"), PlayerCharacter->GetThirdBeatTime());
 
 
     if (SpawnedEnemies.Num() > 0)
@@ -154,6 +153,10 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS  111111!!!!"));
         PlayerCharacter->SetBPM_SoundBarsHeight();
     }
+
+    // Play attack sound
+    if (AttackSound)
+        UGameplayStatics::PlaySoundAtLocation(this, AttackSound, PlayerCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, AttackSoundDelay);
 
 }
 
@@ -261,6 +264,7 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
         {
             SpawnedEnemies.RemoveAt(i);
             UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+
             continue;
         }
 
@@ -270,6 +274,9 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
             UE_LOG(LogTemp, Warning, TEXT("Enemy %s is dead and removed from the array"), *SpawnedEnemies[i]->GetName());
             SpawnedEnemies.RemoveAt(i);
             UE_LOG(LogTemp, Error, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+            if (SpawnedEnemies.Num() <= 2)
+                PlayerCharacter->TimerCameraDistance(500.0f);
+
             if (SpawnedEnemies.Num() <= 0)
             {
                 for (AActor* BlockingActor : BlockingActors)  // **** this code is obviously ugly!!!!!
@@ -322,7 +329,7 @@ void ANP_FMOD_Music::AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy)
         UE_LOG(LogTemp, Warning, TEXT("Enemy %s added to FMOD Music"), *SpawnedEnemy->GetName());
 
         UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
-
+     
     }
 }
 
@@ -353,6 +360,11 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
 float ANP_FMOD_Music::GetGlobalTempo()
 {
     return GlobalTempo;
+}
+
+int32 ANP_FMOD_Music::GetNumOfSpawnedEnemies()
+{
+    return SpawnedEnemies.Num();
 }
 
 

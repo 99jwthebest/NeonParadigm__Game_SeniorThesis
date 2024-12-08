@@ -15,13 +15,12 @@ void UNP_ANS_SaveLightAttack::NotifyTick(USkeletalMeshComponent* MeshComp, UAnim
 {
 	Super::NotifyTick(MeshComp, Animation, FrameDeltaTime, EventReference);
 
-	if (MeshComp == nullptr)
+	if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
 		return;
 
 	const AActor* OwnerActor = MeshComp->GetOwner();
 
-
-	if (!IsValid(OwnerActor))
+	if (!OwnerActor || !OwnerActor->GetWorld()->IsGameWorld()) // Ensure it's a valid actor in a game world
 		return;
 		
 	UAttackComponent* AttackComp = OwnerActor->GetComponentByClass<UAttackComponent>();

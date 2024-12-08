@@ -236,6 +236,9 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 			case EDamageTypes::Projectiles:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Projectiles AERIAL"));
 				return HR_Stun;
+			case EDamageTypes::Explosion:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Explosion AERIAL"));
+				return HR_Stun;
 		}
 	}
 	else
@@ -277,6 +280,13 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 			case EDamageTypes::Projectiles:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Projectiles"));
 				EnemyStunnedWithProjectiles();
+				AttackMovement(15.0f); //15.0f  should maybe be the value
+				return HR_Stun;
+			case EDamageTypes::Explosion:
+				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Explosion"));
+				EnemyStunnedWithProjectiles();
+				AttackMovement(25.0f); //15.0f  should maybe be the value
+				PlayCameraShake();
 				return HR_Stun;
 		}
 	}

@@ -106,6 +106,11 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 				ScoreComp->TrackHit(MyCharacter->IsPerfectBeatHit());
 
+				// Play attack sound
+				if (AttackSound)
+					UGameplayStatics::PlaySoundAtLocation(this, AttackSound, MyCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, AttackSoundDelay);
+				UE_LOG(LogTemp, Warning, TEXT("A_Freaking World Time In IMpactPoint is:  %f"), GetWorld()->GetTimeSeconds());
+
 				if (MyCharacter->IsPerfectBeatHit())
 				{
 					SpawnRagePickups(Hit);
@@ -127,8 +132,11 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 void UDamageComponent::DrawProjectileWeaponCollision()
 {
-	if (MyCharacter->GetSoftTargetActor() == nullptr)
+	if (MyCharacter->GetCameraTargetActor() == nullptr)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
 		return;
+	}
 
 	HitActors.Empty();
 
@@ -145,8 +153,8 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 	// Perform the multi-sphere trace by channel
 	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
 		GetWorld(),                        // World context
-		MyCharacter->GetSoftTargetActor()->GetActorLocation(),                          // Start of the trace
-		MyCharacter->GetSoftTargetActor()->GetActorLocation(),                            // End of the trace
+		MyCharacter->GetCameraTargetActor()->GetActorLocation(),                          // Start of the trace
+		MyCharacter->GetCameraTargetActor()->GetActorLocation(),                            // End of the trace
 		RadiusForProjectileWeapon,                            // Radius of the sphere
 		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
 		false,                             // bTraceComplex - false unless you want complex collision
@@ -203,6 +211,9 @@ void UDamageComponent::StartTimerProjectileWeaponCollision(float Radius, float A
 	RadiusForProjectileWeapon = Radius;
 	AmountOfDamageForProjectileWeapon = AmountOfDamage;
 	DamageTypeClassForProjectileWeapon = DamageTypeClass;
+
+    //GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+	UE_LOG(LogTemp, Error, TEXT("B_ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
 	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileWeaponCollision, this, &UDamageComponent::DrawProjectileWeaponCollision, MyCharacter->GetCurrentTempoDelay(), true); // 0.0167f
 }
@@ -340,9 +351,9 @@ void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
 
 	if (GetWorld())
 	{
-		int32 NumPickupsToSpawn = 5; // Number of pickups to spawn
+		int32 NumPickupsToSpawn = 9; // Number of pickups to spawn
 		float RandomRange = 100.0f; // Range for random spawn offset
-		float ExplosionForce = 1000.0f; // Force magnitude for impulse
+		float ExplosionForce = 700.0f; // Force magnitude for impulse
 		float UpwardForce = 300.0f; // Additional upward force
 
 		for (int32 i = 0; i < NumPickupsToSpawn; ++i)
@@ -362,7 +373,7 @@ void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
 			FVector SpawnLocation = HitResult.GetActor()->GetActorLocation() + FVector(0.0f, 0.0f, HeightSpawnOffset) + RandomOffset;
 
 			// Debug visualization of spawn location
-			DrawDebugSphere(GetWorld(), SpawnLocation, 10.0f, 12, FColor::Green, false, 2.0f);
+			//DrawDebugSphere(GetWorld(), SpawnLocation, 10.0f, 12, FColor::Green, false, 2.0f);
 
 			// Spawn the actor
 			AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(RagePickup, SpawnLocation, FRotator::ZeroRotator, SpawnParams);

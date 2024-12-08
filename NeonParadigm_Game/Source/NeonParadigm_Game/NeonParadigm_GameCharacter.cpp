@@ -1476,10 +1476,10 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	UE_LOG(LogTemp, Error, TEXT("Delay From Last Beat: %f"), DelayFromLastBeat);
 
 	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("Delay From Next Beat: %f"), DelayFromNextBeat);
+	UE_LOG(LogTemp, Error, TEXT("A_Delay From Next Beat: %f"), DelayFromNextBeat);
 
 	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("Delay From Third Beat: %f"), DelayFromThirdBeat);
+	UE_LOG(LogTemp, Error, TEXT("A_Delay 1 From Third Beat: %f"), DelayFromThirdBeat);
 
 	if (DelayFromLastBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
 	{
@@ -1531,13 +1531,13 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	}
 	else
 	{
-		//TotalTimeDelayToThirdBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
-		//UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+		
+		UE_LOG(LogTemp, Warning, TEXT("A_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
-		//PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
-
-		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromThirdBeat;
+		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
@@ -1548,6 +1548,9 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	float MontageLength = PlayAnimMontage(TestRhythmMontage, ClampedValueForPlayRate);
 
 	UE_LOG(LogTemp, Display, TEXT("Montage Length: %f"), MontageLength);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("A_Delay 2 From Next Beat: %f"), DelayFromNextBeat);
 
 }
 
@@ -1782,18 +1785,29 @@ void ANeonParadigm_GameCharacter::IncreaseMaxHealth(float AmountToAdd)
 void ANeonParadigm_GameCharacter::StartEnemyEncounter()
 {
 	ScoreComp->StartEncounter();
-	TimerCameraDistance(700.0f);
 }
 
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
+	ScoreComp->AddToOverallLevelScore(ScoreComp->CalculateOverallEncounterScore());
+
 	if (ScoreComp->GetWinEncounterCondition())
 	{
 		SpawnWinMenuEvent();
 	}
-	ToggleEncounterResults();
+	else
+	{
+		ToggleEncounterResults();
+	}
 	TimerCameraDistance(DefaultCameraBoomLength);
+	
+	
+
+	ScoreComp->ResetAllEncounterScores();
+	
+	UE_LOG(LogTemp, Warning, TEXT("Is End Encounter Happening Twice!!!!!!!"));
+
 }
 
 void ANeonParadigm_GameCharacter::ProjectileWeapon()
@@ -2425,6 +2439,11 @@ void ANeonParadigm_GameCharacter::CheckForTargetInCameraView()
 		}
 	}
 	*/
+}
+
+AActor* ANeonParadigm_GameCharacter::GetCameraTargetActor()
+{
+	return CameraTargetActor;
 }
 
 void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()
