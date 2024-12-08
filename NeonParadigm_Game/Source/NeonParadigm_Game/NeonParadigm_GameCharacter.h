@@ -577,6 +577,7 @@ public:
 
 	void EnableCameraAutoRotate();
 	void CheckForTargetInCameraView();
+	UFUNCTION(BlueprintPure)
 	AActor* GetCameraTargetActor();
 
 
