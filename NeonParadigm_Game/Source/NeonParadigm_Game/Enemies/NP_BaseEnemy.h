@@ -199,6 +199,7 @@ private:
 	bool bAirKnockback;
 	int TotalEnemiesAlive;
 
+
 public:
 	
 	void LaunchEnemyIntoAir();
@@ -215,5 +216,8 @@ public:
 	void EnemyStunned();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayCameraShake();
+
+
+
 
 };
