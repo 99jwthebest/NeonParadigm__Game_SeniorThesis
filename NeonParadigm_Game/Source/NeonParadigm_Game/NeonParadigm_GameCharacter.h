@@ -530,7 +530,7 @@ private:
 
 public:
 
-
+	UFUNCTION(BlueprintCallable)
 	void TimerCameraDistance(float CameraBoomLengthF);
 	
 	void ChangeCameraDistance();
@@ -577,6 +577,8 @@ public:
 
 	void EnableCameraAutoRotate();
 	void CheckForTargetInCameraView();
+	AActor* GetCameraTargetActor();
+
 
 private:
 

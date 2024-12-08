@@ -264,6 +264,7 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
         {
             SpawnedEnemies.RemoveAt(i);
             UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+
             continue;
         }
 
@@ -273,6 +274,9 @@ void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
             UE_LOG(LogTemp, Warning, TEXT("Enemy %s is dead and removed from the array"), *SpawnedEnemies[i]->GetName());
             SpawnedEnemies.RemoveAt(i);
             UE_LOG(LogTemp, Error, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
+            if (SpawnedEnemies.Num() <= 2)
+                PlayerCharacter->TimerCameraDistance(500.0f);
+
             if (SpawnedEnemies.Num() <= 0)
             {
                 for (AActor* BlockingActor : BlockingActors)  // **** this code is obviously ugly!!!!!
@@ -325,7 +329,7 @@ void ANP_FMOD_Music::AddSpawnedEnemy(ANP_BaseEnemy* SpawnedEnemy)
         UE_LOG(LogTemp, Warning, TEXT("Enemy %s added to FMOD Music"), *SpawnedEnemy->GetName());
 
         UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), SpawnedEnemies.Num());
-
+     
     }
 }
 
@@ -356,6 +360,11 @@ void ANP_FMOD_Music::SetWallBlockActors(const TArray<AActor*>& WallBlockActors)
 float ANP_FMOD_Music::GetGlobalTempo()
 {
     return GlobalTempo;
+}
+
+int32 ANP_FMOD_Music::GetNumOfSpawnedEnemies()
+{
+    return SpawnedEnemies.Num();
 }
 
 

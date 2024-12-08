@@ -1785,7 +1785,6 @@ void ANeonParadigm_GameCharacter::IncreaseMaxHealth(float AmountToAdd)
 void ANeonParadigm_GameCharacter::StartEnemyEncounter()
 {
 	ScoreComp->StartEncounter();
-	TimerCameraDistance(700.0f);
 }
 
 void ANeonParadigm_GameCharacter::EndEnemyEncounter()
@@ -2440,6 +2439,11 @@ void ANeonParadigm_GameCharacter::CheckForTargetInCameraView()
 		}
 	}
 	*/
+}
+
+AActor* ANeonParadigm_GameCharacter::GetCameraTargetActor()
+{
+	return CameraTargetActor;
 }
 
 void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()

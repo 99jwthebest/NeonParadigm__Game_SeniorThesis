@@ -99,4 +99,7 @@ public:
 	UFUNCTION(BlueprintPure)
 	float GetGlobalTempo();
 
+	UFUNCTION(BlueprintPure)
+	int32 GetNumOfSpawnedEnemies();
+
 };

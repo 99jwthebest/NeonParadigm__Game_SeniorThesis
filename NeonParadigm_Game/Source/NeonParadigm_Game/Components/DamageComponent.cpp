@@ -132,8 +132,11 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 void UDamageComponent::DrawProjectileWeaponCollision()
 {
-	if (MyCharacter->GetSoftTargetActor() == nullptr)
+	if (MyCharacter->GetCameraTargetActor() == nullptr)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
 		return;
+	}
 
 	HitActors.Empty();
 
@@ -150,8 +153,8 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 	// Perform the multi-sphere trace by channel
 	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
 		GetWorld(),                        // World context
-		MyCharacter->GetSoftTargetActor()->GetActorLocation(),                          // Start of the trace
-		MyCharacter->GetSoftTargetActor()->GetActorLocation(),                            // End of the trace
+		MyCharacter->GetCameraTargetActor()->GetActorLocation(),                          // Start of the trace
+		MyCharacter->GetCameraTargetActor()->GetActorLocation(),                            // End of the trace
 		RadiusForProjectileWeapon,                            // Radius of the sphere
 		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
 		false,                             // bTraceComplex - false unless you want complex collision
@@ -208,6 +211,9 @@ void UDamageComponent::StartTimerProjectileWeaponCollision(float Radius, float A
 	RadiusForProjectileWeapon = Radius;
 	AmountOfDamageForProjectileWeapon = AmountOfDamage;
 	DamageTypeClassForProjectileWeapon = DamageTypeClass;
+
+    //GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+	UE_LOG(LogTemp, Error, TEXT("B_ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
 	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileWeaponCollision, this, &UDamageComponent::DrawProjectileWeaponCollision, MyCharacter->GetCurrentTempoDelay(), true); // 0.0167f
 }
