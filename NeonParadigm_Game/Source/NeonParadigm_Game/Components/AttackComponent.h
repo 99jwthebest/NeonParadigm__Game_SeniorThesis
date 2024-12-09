@@ -32,6 +32,7 @@ public:
 	bool CanAttack();
 	void PerformLightAttack(int AttackIndex);
 	void CheckingMontage(const int AttackMontageIndex);
+	UFUNCTION(BlueprintCallable)
 	void AttackMovement(float Distance);
 	void StopAttackMovement();
 	void UpdateCharacterLocation();
