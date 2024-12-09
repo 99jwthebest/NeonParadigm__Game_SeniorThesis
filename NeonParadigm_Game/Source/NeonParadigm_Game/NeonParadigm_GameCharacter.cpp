@@ -1274,7 +1274,7 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 				// Step 2: Ensure the instance is valid
 				if (IsValid(NP_DamageType))
 				{
-					UE_LOG(LogTemp, Warning, TEXT("vALID !!"));
+					UE_LOG(LogTemp, Warning, TEXT("DC_vALID Is IT valid!!"));
 
 					if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
 					{
@@ -1470,76 +1470,79 @@ float ANeonParadigm_GameCharacter::GetCurrentAnimPlayRate()
 
 void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 {
-	UE_LOG(LogTemp, Error, TEXT("Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
+	UE_LOG(LogTemp, Error, TEXT("CD_Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
 
 	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
-	UE_LOG(LogTemp, Error, TEXT("Delay From Last Beat: %f"), DelayFromLastBeat);
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay From Last Beat: %f"), DelayFromLastBeat);
 
 	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("A_Delay From Next Beat: %f"), DelayFromNextBeat);
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay From Next Beat: %f"), DelayFromNextBeat);
 
 	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("A_Delay 1 From Third Beat: %f"), DelayFromThirdBeat);
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay 1 From Third Beat: %f"), DelayFromThirdBeat);
 
-	if (DelayFromLastBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay Tempo Delay Threshold From Third Beat: %f"), GetCurrentTempoDelay() / 2);
+
+
+	if (DelayFromLastBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Input Was PERFECT to LAST Beat: %f"), DelayFromLastBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was PERFECT to LAST Beat: %f"), DelayFromLastBeat);
 
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
 
-		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 		TogglePerfectHitTextBox();
 	}
-	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 0.9f)
+	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Input Was PERFECT to NEXT Beat: %f"), DelayFromNextBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was PERFECT to NEXT Beat: %f"), DelayFromNextBeat);
 
 		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
 
-		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
-		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 		TogglePerfectHitTextBox();
 
 	}
-	else if (DelayFromLastBeat <= 0.33f && GetCurrentAnimTimeDelay() <= 0.9f)
+	else if (DelayFromLastBeat <= GetCurrentTempoDelay() / 2 && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
 
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
 
-		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 
 	}
-	else if(GetCurrentAnimTimeDelay() <= 0.9f)
+	else if(GetCurrentAnimTimeDelay() <= 1.1f)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
 		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
 		
-		UE_LOG(LogTemp, Warning, TEXT("Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
-		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
 		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
 		
-		UE_LOG(LogTemp, Warning, TEXT("A_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
-		UE_LOG(LogTemp, Error, TEXT("Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
 	}
 
 
@@ -1549,8 +1552,8 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 	UE_LOG(LogTemp, Display, TEXT("Montage Length: %f"), MontageLength);
 
-	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Error, TEXT("A_Delay 2 From Next Beat: %f"), DelayFromNextBeat);
+	//DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	//UE_LOG(LogTemp, Error, TEXT("A_Delay 2 From Next Beat: %f"), DelayFromNextBeat);
 
 }
 
