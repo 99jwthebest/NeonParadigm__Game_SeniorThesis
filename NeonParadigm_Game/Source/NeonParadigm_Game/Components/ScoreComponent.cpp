@@ -141,6 +141,28 @@ float UScoreComponent::CalculatePerfectTimingBonus()
 	return PerfectHitPercentage * 1000.0f; //
 }
 
+
+int32 UScoreComponent::CalculateOverallPerfectTimingBonus()
+{
+	// Determine rank based on time thresholds
+	if (GetOverallPerfectTimingPercentage() >= OverallPerfectTimingThresholdSGrade)
+	{
+		return 2000.0f; // S rank
+	}
+	else if (GetOverallPerfectTimingPercentage() >= OverallPerfectTimingThresholdAGrade)
+	{
+		return 1500.0f; // A rank
+	}
+	else if (GetOverallPerfectTimingPercentage() >= OverallPerfectTimingThresholdBGrade)
+	{
+		return 1000.0f; // B rank
+	}
+	else
+	{
+		return 0; // C rank
+	}
+}
+
 void UScoreComponent::SetPerfectTimingPercentage(float PerfectTimingPercentF)
 {
 	PerfectTimingPercentEncounter = PerfectTimingPercentF;
@@ -224,17 +246,39 @@ float UScoreComponent::GetClearTime()
 	return CurrentEncounterClearTime;
 }
 
-int32 UScoreComponent::CalculateGrade() const
+float UScoreComponent::CalculateOverallClearTimeBonus()
 {
-	if (CurrentScore >= ThresholdSGrade)
+	// Determine rank based on time thresholds
+	if (OverallClearTime <= OverallTimeThresholdSGrade)
+	{
+		return 1500.0f; // S rank
+	}
+	else if (OverallClearTime <= OverallTimeThresholdAGrade)
+	{
+		return 1000.0f; // A rank
+	}
+	else if (OverallClearTime <= OverallTimeThresholdBGrade)
+	{
+		return 500.0f; // B rank
+	}
+	else
+	{
+		return 0.0f; // C rank
+	}
+}
+
+int32 UScoreComponent::CalculateOverallClearTimingGrade()
+{
+	// Determine rank based on time thresholds
+	if (OverallClearTime <= OverallTimeThresholdSGrade)
 	{
 		return 3; // S rank
 	}
-	else if (CurrentScore >= ThresholdAGrade)
+	else if (OverallClearTime <= OverallTimeThresholdAGrade)
 	{
 		return 2; // A rank
 	}
-	else if (CurrentScore >= ThresholdBGrade)
+	else if (OverallClearTime <= OverallTimeThresholdBGrade)
 	{
 		return 1; // B rank
 	}
@@ -244,32 +288,51 @@ int32 UScoreComponent::CalculateGrade() const
 	}
 }
 
-float UScoreComponent::CalculateGradeBonus()
+int32 UScoreComponent::CalculateGrade(float BaseScore, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold) const
 {
-	if (CurrentScore >= ThresholdSGrade)
+	if (BaseScore >= SGradeThreshold)
 	{
-		return 2000.0f; // S rank
+		return 3; // S rank
 	}
-	else if (CurrentScore >= ThresholdAGrade)
+	else if (BaseScore >= AGradeThreshold)
 	{
-		return 1500.0f; // A rank
+		return 2; // A rank
 	}
-	else if (CurrentScore >= ThresholdBGrade)
+	else if (BaseScore >= BGradeThreshold)
 	{
-		return 1000.0f; // B rank
+		return 1; // B rank
 	}
 	else
 	{
-		return 0.0f; // C rank
+		return 0; // C rank
+	}
+}
+
+float UScoreComponent::CalculateGradeBonus(float BaseScore, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold)
+{
+	if (BaseScore >= SGradeThreshold)
+	{
+		return BaseScoreGradeBonus = 2000.0f; // S rank
+	}
+	else if (BaseScore >= AGradeThreshold)
+	{
+		return BaseScoreGradeBonus = 1500.0f; // A rank
+	}
+	else if (BaseScore >= BGradeThreshold)
+	{
+		return BaseScoreGradeBonus = 1000.0f; // B rank
+	}
+	else
+	{
+		return BaseScoreGradeBonus = 0.0f; // C rank
 	}
 }
 
 float UScoreComponent::CalculateOverallEncounterScore()
 {
 	// Combine all scores
-	float BaseScoreGradeBonus = CalculateGradeBonus();
-	float JustTimingBonus = CalculatePerfectTimingBonus();
-	float TimeBonus = CalculateClearTimeBonus();
+	JustTimingBonus = CalculatePerfectTimingBonus();
+	TimeBonus = CalculateClearTimeBonus();
 	
 	return OverallEncounterScore = CurrentScore + BaseScoreGradeBonus + JustTimingBonus + TimeBonus;
 }
@@ -368,6 +431,11 @@ void UScoreComponent::AddToOverallBaseScore(int32 Score)
 void UScoreComponent::AddToOverallPerfectTimingPercentage(float Percentage)
 {
 	PerfectTimingPercentOverall += Percentage;
+}
+
+float UScoreComponent::GetOverallPerfectTimingPercentage()
+{
+	return PerfectTimingPercentOverall / TotalCombatEncounters;
 }
 
 void UScoreComponent::AddToOverallClearTime(float ClearTime)
