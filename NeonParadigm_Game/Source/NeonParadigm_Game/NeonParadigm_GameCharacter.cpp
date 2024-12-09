@@ -1794,6 +1794,9 @@ void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 {
 	ScoreComp->EndEncounter();
 	ScoreComp->AddToOverallLevelScore(ScoreComp->CalculateOverallEncounterScore());
+	ScoreComp->AddToOverallBaseScore(ScoreComp->GetCurrentScore());
+	ScoreComp->AddToOverallPerfectTimingPercentage(ScoreComp->GetPerfectTimingPercentage());
+	ScoreComp->AddToOverallClearTime(ScoreComp->GetClearTime());
 
 	if (ScoreComp->GetWinEncounterCondition())
 	{

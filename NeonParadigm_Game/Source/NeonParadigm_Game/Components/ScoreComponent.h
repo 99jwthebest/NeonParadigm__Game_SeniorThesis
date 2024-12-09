@@ -30,6 +30,8 @@ private:
 	// Base score tracking
 	int CurrentScore;
 	//int TotalScore;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	int32 OverallBaseScore;
 
 	// Perfect Timing Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -54,6 +56,8 @@ private:
 		int32 TimeThresholdSGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		float CurrentEncounterClearTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float OverallClearTime;
 
 	// Pefect Timing thresholds
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -65,7 +69,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		float PerfectHitPercentage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		float PerfectTimingPercent;
+		float PerfectTimingPercentEncounter;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float PerfectTimingPercentOverall;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -167,7 +173,7 @@ public:
 	UFUNCTION(BlueprintPure)
 		float GetPerfectTimingPercentage();
 	UFUNCTION(BlueprintPure)
-		int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const;
+		int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold) const;
 
 	UFUNCTION(BlueprintPure)
 		float CalculateClearTimeBonus();
@@ -191,6 +197,12 @@ public:
 	FString GetFinalRank();
 
 	void AddToOverallLevelScore(int32 Score);
+
+	void AddToOverallBaseScore(int32 Score);
+
+	void AddToOverallPerfectTimingPercentage(float Percentage);
+
+	void AddToOverallClearTime(float ClearTime);
 
 	void FinalizeScore(int32 MaxPossibleScoreIn);
 

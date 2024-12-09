@@ -14,7 +14,7 @@ UScoreComponent::UScoreComponent()
 	RankProgress = 0.0f;
 	DepletionRate = 0.01f;
 	ProgressIncreaseRate = 0.10f; // Points to progress bar when scoring
-	PerfectTimingPercent = 0.0f;
+	PerfectTimingPercentEncounter = 0.0f;
 
 	// ...
 }
@@ -134,7 +134,7 @@ float UScoreComponent::CalculatePerfectTimingBonus()
 
 	PerfectHitPercentage = (float)PerfectHits / (float)TotalEncounterHits;
 
-	CalculatePerfectTimingGrade(PerfectHitPercentage);
+	//CalculatePerfectTimingGrade(PerfectHitPercentage);
 	SetPerfectTimingPercentage(PerfectHitPercentage);
 
 	// Example: Bonus = 1000 points for 100% average
@@ -143,26 +143,26 @@ float UScoreComponent::CalculatePerfectTimingBonus()
 
 void UScoreComponent::SetPerfectTimingPercentage(float PerfectTimingPercentF)
 {
-	PerfectTimingPercent = PerfectTimingPercentF;
+	PerfectTimingPercentEncounter = PerfectTimingPercentF;
 }
 
 float UScoreComponent::GetPerfectTimingPercentage()
 {
-	return PerfectTimingPercent * 100.0f;
+	return PerfectTimingPercentEncounter * 100.0f;
 }
 
-int32 UScoreComponent::CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const
+int32 UScoreComponent::CalculatePerfectTimingGrade(float PerfectHitPercentageIn, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold) const
 {
 	// Determine rank based on time thresholds
-	if (PerfectHitPercentageIn >= PerfectTimingThresholdSGrade)
+	if (PerfectHitPercentageIn >= SGradeThreshold)
 	{
 		return 3; // S rank
 	}
-	else if (PerfectHitPercentageIn >= PerfectTimingThresholdAGrade)
+	else if (PerfectHitPercentageIn >= AGradeThreshold)
 	{
 		return 2; // A rank
 	}
-	else if (PerfectHitPercentageIn >= PerfectTimingThresholdBGrade)
+	else if (PerfectHitPercentageIn >= BGradeThreshold)
 	{
 		return 1; // B rank
 	}
@@ -359,6 +359,22 @@ void UScoreComponent::AddToOverallLevelScore(int32 Score)
 {
 	OverallLevelScore += Score;
 }
+
+void UScoreComponent::AddToOverallBaseScore(int32 Score)
+{
+	OverallBaseScore += Score;
+}
+
+void UScoreComponent::AddToOverallPerfectTimingPercentage(float Percentage)
+{
+	PerfectTimingPercentOverall += Percentage;
+}
+
+void UScoreComponent::AddToOverallClearTime(float ClearTime)
+{
+	OverallClearTime += ClearTime;
+}
+
 
 void UScoreComponent::FinalizeScore(int32 MaxPossibleScoreIn)
 {
