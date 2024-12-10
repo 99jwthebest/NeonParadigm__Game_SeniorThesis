@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAmbientSound.h
 C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAnimNotifyPlay.h
 C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAudioComponent.h
@@ -21,3 +22,28 @@ C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\So
 C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventParameterSectionTemplate.h
 C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Private\FMODAudioLinkSettingsFactory.h
 C:\Angie\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventParameterTrack.h
+=======
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAmbientSound.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAnimNotifyPlay.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAsset.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODAudioComponent.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODBus.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODBlueprintStatics.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODPort.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODSettings.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODSnapshot.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODVCA.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODBank.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODEvent.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes\FMODSnapshotReverb.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public\FMODAudioLinkComponent.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public\FMODAudioLinkSettings.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\FMODAssetLookup.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\FMODBankLookup.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventControlSection.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventControlSectionTemplate.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventControlTrack.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventParameterSectionTemplate.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private\Sequencer\FMODEventParameterTrack.h
+C:\Users\josep\Documents\Unreal Projects\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Private\FMODAudioLinkSettingsFactory.h
+>>>>>>> Huhhhh

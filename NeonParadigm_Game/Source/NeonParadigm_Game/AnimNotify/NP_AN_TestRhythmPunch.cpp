@@ -29,6 +29,6 @@ void UNP_AN_TestRhythmPunch::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
             // If you're working with animation sequences, this would need custom handling
         }
 
-        UE_LOG(LogTemp, Error, TEXT("Total Animation Length: %f, Current Time: %f"), TotalAnimationTime, CurrentTime);
+        UE_LOG(LogTemp, Error, TEXT("CD_Total Animation Play Rate:  %f"), MeshComp->GetAnimInstance()->Montage_GetPlayRate(MeshComp->GetAnimInstance()->GetCurrentActiveMontage()));
     }
 }

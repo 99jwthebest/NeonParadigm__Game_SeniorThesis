@@ -1,9 +1,13 @@
 /I "."
 <<<<<<< HEAD
+<<<<<<< HEAD
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
 =======
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
 >>>>>>> CorrruptedAgain_FMOD_WTF
+=======
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Private"
+>>>>>>> Huhhhh
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\UHT"
 /I "Runtime\CoreUObject\Public"
 /I "Runtime\CoreUObject\Internal"
@@ -262,6 +266,7 @@
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\WidgetRegistration\UHT"
 /I "Developer\WidgetRegistration\Public"
 <<<<<<< HEAD
+<<<<<<< HEAD
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
@@ -278,6 +283,15 @@
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
 >>>>>>> CorrruptedAgain_FMOD_WTF
+=======
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
+>>>>>>> Huhhhh
 /I "Runtime\Media\Public"
 /I "Runtime\ColorManagement\Public"
 /I "..\Plugins\FX\Niagara\Intermediate\Build\Win64\UnrealEditor\Inc\Niagara\UHT"
@@ -292,6 +306,7 @@
 /I "..\Plugins\FX\Niagara\Source\NiagaraShader\Public"
 /I "..\Plugins\FX\Niagara\Source\NiagaraVertexFactories\Public"
 <<<<<<< HEAD
+<<<<<<< HEAD
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
@@ -300,6 +315,11 @@
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
 >>>>>>> CorrruptedAgain_FMOD_WTF
+=======
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioNiagara\UHT"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudioNiagara\Source\FMODStudioNiagara\Public"
+>>>>>>> Huhhhh
 /external:W0
 /external:I "ThirdParty\mimalloc\include"
 /external:I "ThirdParty\LibTiff\Source\Win64"

@@ -30,6 +30,8 @@ private:
 	// Base score tracking
 	int CurrentScore;
 	//int TotalScore;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	int32 OverallBaseScore;
 
 	// Perfect Timing Score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -52,8 +54,17 @@ private:
 		int32 TimeThresholdAGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 TimeThresholdSGrade;
+		// Time thresholds
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallTimeThresholdBGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallTimeThresholdAGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallTimeThresholdSGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		float CurrentEncounterClearTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float OverallClearTime;
 
 	// Pefect Timing thresholds
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -62,10 +73,19 @@ private:
 		int32 PerfectTimingThresholdAGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 PerfectTimingThresholdSGrade;
+		// Pefect Timing thresholds
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallPerfectTimingThresholdBGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallPerfectTimingThresholdAGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallPerfectTimingThresholdSGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		float PerfectHitPercentage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
-		float PerfectTimingPercent;
+		float PerfectTimingPercentEncounter;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		float PerfectTimingPercentOverall;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -95,7 +115,13 @@ private:
 		int32 ThresholdAGrade;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 ThresholdSGrade;
-
+		// Grade thresholds
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallBaseScoreThresholdBGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallBaseScoreThresholdAGrade;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 OverallBaseScoreThresholdSGrade;
 
 	// below for Style Letter Progress Bar
 	UPROPERTY(BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
@@ -133,16 +159,21 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 TotalCombatEncounters;
 
+
+	float BaseScoreGradeBonus;
+	float JustTimingBonus;
+	float TimeBonus;
+
 public:
 
 	void Testing();
 	void IncrementScore(int ScoreToAdd);
 	UFUNCTION(BlueprintPure)
 		float GetCurrentScore();
-	UFUNCTION(BlueprintCallable, Category = "Score")
-	int32 CalculateGrade() const;
+	UFUNCTION(BlueprintPure, Category = "Score")
+		int32 CalculateGrade(float BaseScore, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold) const;
 	UFUNCTION(BlueprintPure)
-		float CalculateGradeBonus();
+		float CalculateGradeBonus(float BaseScore, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold);
 
 	UFUNCTION(BlueprintPure)
 		int32 GetCurrentRankIndex() const;
@@ -163,11 +194,14 @@ public:
 
 	UFUNCTION(BlueprintPure)
 		float CalculatePerfectTimingBonus();
-	void SetPerfectTimingPercentage(float PerfectHitPercentageF);
+	UFUNCTION(BlueprintPure)
+		int32 CalculateOverallPerfectTimingBonus();
+
+		void SetPerfectTimingPercentage(float PerfectHitPercentageF);
 	UFUNCTION(BlueprintPure)
 		float GetPerfectTimingPercentage();
 	UFUNCTION(BlueprintPure)
-		int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn) const;
+		int32 CalculatePerfectTimingGrade(float PerfectHitPercentageIn, int32 SGradeThreshold, int32 AGradeThreshold, int32 BGradeThreshold) const;
 
 	UFUNCTION(BlueprintPure)
 		float CalculateClearTimeBonus();
@@ -175,6 +209,10 @@ public:
 		int32 CalculateClearTimingGrade();
 	UFUNCTION(BlueprintPure)
 		float GetClearTime();
+	UFUNCTION(BlueprintPure)
+		float CalculateOverallClearTimeBonus();
+	UFUNCTION(BlueprintPure)
+		int32 CalculateOverallClearTimingGrade();
 	UFUNCTION(BlueprintPure)
 		float CalculateOverallEncounterScore();
 	UFUNCTION(BlueprintPure)
@@ -191,6 +229,15 @@ public:
 	FString GetFinalRank();
 
 	void AddToOverallLevelScore(int32 Score);
+
+	void AddToOverallBaseScore(int32 Score);
+
+	void AddToOverallPerfectTimingPercentage(float Percentage);
+
+	UFUNCTION(BlueprintPure)
+	float GetOverallPerfectTimingPercentage();
+
+	void AddToOverallClearTime(float ClearTime);
 
 	void FinalizeScore(int32 MaxPossibleScoreIn);
 

@@ -1,5 +1,6 @@
 /I "."
 <<<<<<< HEAD
+<<<<<<< HEAD
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Classes"
@@ -10,6 +11,12 @@
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Classes"
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Private"
 >>>>>>> CorrruptedAgain_FMOD_WTF
+=======
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Private"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public\FMOD"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Classes"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Private"
+>>>>>>> Huhhhh
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\AssetRegistry\UHT"
 /I "Runtime\AssetRegistry\Public"
 /I "Runtime\AssetRegistry\Internal"
@@ -285,6 +292,7 @@
 /I "Editor\EditorWidgets\Public"
 /I "Editor\WorkspaceMenuStructure\Public"
 <<<<<<< HEAD
+<<<<<<< HEAD
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioEditor\UHT"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
 /I "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Public"
@@ -303,6 +311,16 @@
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
 /I "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
 >>>>>>> CorrruptedAgain_FMOD_WTF
+=======
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudioEditor\UHT"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudioEditor\Public"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Inc\FMODStudio\UHT"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLink\Public"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Classes"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODStudio\Public"
+/I "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Source\FMODAudioLinkEditor\Public"
+>>>>>>> Huhhhh
 /I "Runtime\Media\Public"
 /I "Runtime\ColorManagement\Public"
 /external:W0

@@ -153,6 +153,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS  111111!!!!"));
         PlayerCharacter->SetBPM_SoundBarsHeight();
     }
+    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS 10 15 15 eyc dhfds8fe8d sd98fd8fd !!!!"));
 
     // Play attack sound
     if (AttackSound)

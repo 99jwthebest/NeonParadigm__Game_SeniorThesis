@@ -76,8 +76,12 @@
 /DPROJECT_PRODUCT_NAME="Third Person Game Template"
 /DPROJECT_PRODUCT_IDENTIFIER=NeonParadigm_Game
 <<<<<<< HEAD
+<<<<<<< HEAD
 /fo "D:\Profile Redirect\anmart28\Documents\GitHub\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Default.rc2.res"
 =======
 /fo "C:\_Jhernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Default.rc2.res"
 >>>>>>> CorrruptedAgain_FMOD_WTF
+=======
+/fo "C:\_J_Hernandez\NeonParadigm__Game_SeniorThesis\NeonParadigm_Game\Plugins\FMODStudio\Intermediate\Build\Win64\x64\UnrealEditor\Development\FMODStudio\Default.rc2.res"
+>>>>>>> Huhhhh
 "..\Build\Windows\Resources\Default.rc2"
