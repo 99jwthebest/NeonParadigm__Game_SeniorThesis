@@ -68,7 +68,16 @@
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/Second_Floor_texs/M_Second_Floor_Inst.uasset",
 				"C:/Program Files/Epic Games/UE_5.3/Engine/Content/BasicShapes/BasicShapeMaterial.uasset",
 				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/Second_Window_texs/T_Second_Window_ORM.uasset",
-				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/Second_Window_texs/M_Second_Window.uasset"
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/Second_Area/Second_Window_texs/M_Second_Window.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Props/SM_Emergency_Lights.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_EmergenLights.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/First_Area_Props/light_pole_texs/M_Light_Pole_Inst1.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/FMOD/Mat_EmissionsFOR_BPM.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Blueprints/Test_Elevator/BP_TestElevator_ARTVERSION.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/condensed/Wall_5_dark_texs/M_Wall_5_Dark.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/condensed/Wall_5_dark_texs/T_Wall_5_A.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/condensed/Wall_5_dark_texs/T_Wall_5_N.uasset",
+				"C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Content/_MyFiles/Environment_TestAssets/First_Area/condensed/Wall_5_dark_texs/T_Wall_5_ORM.uasset"
 			]
 		}
 	]
