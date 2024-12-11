@@ -159,7 +159,7 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
 		false,                             // bTraceComplex - false unless you want complex collision
 		ActorsToIgnore,                    // Actors to ignore (MyCharacter)
-		EDrawDebugTrace::ForDuration,      // Draw the trace for debugging  // ForDuration *****************
+		EDrawDebugTrace::None,      // Draw the trace for debugging  // ForDuration *****************
 		OutHits,                           // Output array to store hit results
 		true,                              // Ignore the tracing actor (self)
 		FLinearColor::Red,               // Trace line color
