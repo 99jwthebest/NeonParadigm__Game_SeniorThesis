@@ -1536,7 +1536,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
-		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay() * 2; // need to get time delay from tempo in music component
 		
 		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
