@@ -186,7 +186,7 @@ void UAttackComponent::UpdateCharacterLocation()
 	FVector TargetLocation = MyCharacter->GetActorLocation();
 	TargetLocation += MyCharacter->GetActorForwardVector() * gDistance;
 	FVector AttackMovementLocation = FMath::VInterpTo(MyCharacter->GetActorLocation(), TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
-	MyCharacter->SetActorLocation(AttackMovementLocation);
+	MyCharacter->SetActorLocation(AttackMovementLocation, true);
 }
 
 void UAttackComponent::SaveLightAttack()

@@ -110,7 +110,7 @@ void ANP_BaseEnemy::UpdateCharacterLocation()
 	FVector ReversedForwardVec = GetActorForwardVector() * -1.0f;
 	TargetLocation += ReversedForwardVec * gDistance;
 	FVector AttackMovementLocation = FMath::VInterpTo(GetActorLocation(), TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
-	SetActorLocation(AttackMovementLocation);
+	SetActorLocation(AttackMovementLocation, true);
 }
 
 void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
