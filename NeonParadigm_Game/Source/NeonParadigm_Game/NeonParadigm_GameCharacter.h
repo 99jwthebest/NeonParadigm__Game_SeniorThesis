@@ -606,6 +606,10 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	bool bIsMagnetizeDodgeActive;
 	float MagnetizationRadius = 500.0f;  // Magnetization effect radius
+	FTimerHandle TimerForMagnetizedDodge;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dodge", meta = (AllowPrivateAccess = "true"))
+	float MagnetizationDuration = 3.0f;  
+
 	FTimerHandle TimerForEmissiveEmergenLights;
 };
 

@@ -2455,12 +2455,12 @@ AActor* ANeonParadigm_GameCharacter::GetCameraTargetActor()
 void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()
 {
 	bIsMagnetizeDodgeActive = true;
-
+	GetWorld()->GetTimerManager().SetTimer(TimerForMagnetizedDodge, this, &ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge, MagnetizationDuration, false); // 0.0167f
 }
 
 void ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge()
 {
-
+	bIsMagnetizeDodgeActive = false;
 }
 
 void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLights()
@@ -2483,7 +2483,7 @@ void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLights()
 			}
 		}
 	}
-	GetWorld()->GetTimerManager().SetTimer(TimerForEmissiveEmergenLights, this, &ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff, 0.2f, true); // 0.0167f
+	GetWorld()->GetTimerManager().SetTimer(TimerForEmissiveEmergenLights, this, &ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff, 0.2f, false); // 0.0167f
 
 }
 
