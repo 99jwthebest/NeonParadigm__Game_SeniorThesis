@@ -82,6 +82,10 @@ void ANP_BaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void ANP_BaseEnemy::AttackMovement(float Distance)
 {
+
+	if (!bCanBePushed)
+		return;
+
 	gDistance = Distance;
 	StopAttackMovement();
 	if (Distance != 0.0f)
@@ -116,10 +120,12 @@ void ANP_BaseEnemy::UpdateCharacterLocation()
 void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	// Handle the damage taken event here
-	UE_LOG(LogTemp, Warning, TEXT("Actor %s took %f damage"), *DamagedActor->GetName(), Damage);
 
+	float FinalDamage = Damage * DamageMultiplier;
 
-	CurrentHealth -= Damage;
+	CurrentHealth -= FinalDamage;
+
+	UE_LOG(LogTemp, Warning, TEXT("Actor %s took %f damage (Multiplied: %f)"), *DamagedActor->GetName(), Damage, FinalDamage);
 
 
 	if (CurrentHealth > 0.0f)

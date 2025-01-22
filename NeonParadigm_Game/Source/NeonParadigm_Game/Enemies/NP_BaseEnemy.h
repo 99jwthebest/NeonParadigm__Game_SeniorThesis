@@ -218,6 +218,13 @@ public:
 	void PlayCameraShake();
 
 
+private:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
+	bool bCanBePushed = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
+	float DamageMultiplier = 1.0f;
+
 
 
 };
