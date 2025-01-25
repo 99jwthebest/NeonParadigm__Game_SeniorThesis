@@ -92,7 +92,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
-    UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  ju aasdf df  ggg d ftgyrdt TEMPO CHANGERS!!!!"));
+    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!  BEATERS  ju aasdf df  ggg d ftgyrdt TEMPO CHANGERS!!!!"));
 
     // Turn on the emission when the beat hits
     PlayerCharacter->ToggleOrbEmission();
