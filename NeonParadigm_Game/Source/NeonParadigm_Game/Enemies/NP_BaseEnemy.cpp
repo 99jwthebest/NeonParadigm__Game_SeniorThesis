@@ -162,7 +162,7 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 					NP_DamageType->DamageType != EDamageTypes::Knockback &&
 					NP_DamageType->DamageType != EDamageTypes::Knockdown) // this might need to be an or statement or something.
 				{
-					AttackMovement(10.0f); //15.0f  should maybe be the value
+					AttackMovement(5.0f); //15.0f  should maybe be the value
 				}
 				else
 				{

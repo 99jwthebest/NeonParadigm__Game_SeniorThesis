@@ -121,7 +121,7 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 		{
 			UAnimMontage* LightAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
-			AttackMovement(5.0f);
+			//AttackMovement(5.0f);
 			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
 			// Log the impact time for debugging
 			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
@@ -257,7 +257,7 @@ void UAttackComponent::PerformHeavyAttack(int AttackIndex)
 		{
 			UAnimMontage* HeavyAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
-			AttackMovement(5.0f); // ****** could mess with these values depending on Attack Animation, might be really different for heavy attack.
+			//AttackMovement(5.0f); // ****** could mess with these values depending on Attack Animation, might be really different for heavy attack.
 			MyCharacter->PlayAnimMontage(HeavyAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
 			// Log the impact time for debugging
 			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), HeavyAttackIndex, GetNotifyTriggerTime());
