@@ -58,6 +58,7 @@ public:
 	void PerformAerialLightAttack(int AttackIndex);
 	void ResetLightAerialAttack();
 	void ResetLaunched();
+	UFUNCTION(BlueprintPure)
 	bool GetLaunched();
 
 	UPROPERTY(VisibleAnywhere)

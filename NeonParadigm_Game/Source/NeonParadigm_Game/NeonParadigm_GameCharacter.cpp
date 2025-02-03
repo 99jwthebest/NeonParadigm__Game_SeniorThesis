@@ -521,7 +521,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 		CharacterState->SetState(ECharacterStates::Dodge);
 		TestRhythmDelayEvent();
 
-		if (bPerfectBeatHit || bPerfectBeatForTutorial)
+		if (bPerfectBeatHit)
 		{
 			PerfectDodgeCount++;
 			DodgePushMultiplier = FMath::Min(1.0f + (PerfectDodgeCount * 0.5f), 2.5f); // Max push multiplier is 2.0
@@ -1495,7 +1495,6 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 		TogglePerfectHitTextBox();
 
-		bPerfectBeatForTutorial = true;
 	}
 	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
@@ -1511,7 +1510,6 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 		TogglePerfectHitTextBox();
-		bPerfectBeatForTutorial = true;
 
 	}
 	else if (DelayFromLastBeat <= GetCurrentTempoDelay() / 2 && GetCurrentAnimTimeDelay() <= 1.1f)
