@@ -109,7 +109,7 @@ private:
 	UAnimMontage* DodgeMontage;
 	bool bEnabledIFrames;
 	
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Dodge", meta = (AllowPrivateAccess = "true"))
 	int32 PerfectDodgeCount = 0; // Tracks consecutive perfect dodges
 	float DodgePushMultiplier = 1.0f; // Increases push distance
 	float DodgeCooldownEndTime = 0.0f; // Time when dodging becomes available again
@@ -366,13 +366,15 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UScoreComponent* ScoreComp;
 	bool bPerfectBeatHit;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	bool bPerfectBeatForTutorial;
 
 public:
 
 	void SetPerfectBeatHit(bool bPerfectHit);
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
 	bool IsPerfectBeatHit();
+	void SetPerfectBeatForTutorial(bool bPerfectBeatForTut);
 
 private:
 	float SoftTargetLerpAmt = 0.f;
