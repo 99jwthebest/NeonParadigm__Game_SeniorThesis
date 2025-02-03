@@ -329,7 +329,7 @@ public:
 	float GetCurrentUIBallAnimPlayRate();
 
 	float GetCurrentAnimPlayRate();
-
+	UFUNCTION(BlueprintCallable)
 	void TestRhythmDelayEvent();
 
 

@@ -97,6 +97,8 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 			MyCharacter->SetPerfectBeatHit(false);
 			MyCharacter->SetPerfectBeatForTutorial(false);
+			UE_LOG(LogTemp, Error, TEXT("CD_PReset State Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
 		}
 	}
 }
