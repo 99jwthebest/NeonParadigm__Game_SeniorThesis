@@ -6,7 +6,7 @@
         "PCH": "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\intermediate\\build\\win64\\x64\\neonparadigm_gameeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
         "Includes": [
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\fmodstudioniagara\\definitions.fmodstudioniagara.h",
-            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\private\\fmodniagaraeventplayer.cpp",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodniagaraeventplayer.gen.cpp",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\public\\fmodniagaraeventplayer.h",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodevent.h",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodasset.h",
@@ -128,6 +128,8 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\plugins\\fx\\niagara\\intermediate\\build\\win64\\unrealeditor\\inc\\niagara\\uht\\niagarasystem.generated.h",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\public\\fmodstudioniagara.h",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodniagaraeventplayer.generated.h",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudioniagara\\uht\\fmodstudioniagara.init.gen.cpp",
+            "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudioniagara\\source\\fmodstudioniagara\\private\\fmodniagaraeventplayer.cpp",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodblueprintstatics.h",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\intermediate\\build\\win64\\unrealeditor\\inc\\fmodstudio\\uht\\fmodblueprintstatics.generated.h",
             "c:\\_j_hernandez\\neonparadigm__game_seniorthesis\\neonparadigm_game\\plugins\\fmodstudio\\source\\fmodstudio\\classes\\fmodsettings.h",

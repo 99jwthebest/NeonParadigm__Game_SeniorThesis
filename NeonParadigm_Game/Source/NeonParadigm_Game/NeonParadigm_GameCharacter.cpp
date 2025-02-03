@@ -264,7 +264,6 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 
 
 						FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(PlayerLocation, TargetLocation);
-						float DeltaTime = GetWorld()->GetDeltaSeconds();
 						FRotator NewRotation = FMath::RInterpTo(GetController()->GetControlRotation(), TargetRotation, DeltaTime, RotationSpeed);
 
 						GetController()->SetControlRotation(NewRotation);
