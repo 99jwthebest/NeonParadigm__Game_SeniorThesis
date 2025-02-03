@@ -1674,10 +1674,6 @@ bool ANeonParadigm_GameCharacter::IsPerfectBeatHit()
 	return bPerfectBeatHit;
 }
 
-void ANeonParadigm_GameCharacter::SetPerfectBeatForTutorial(bool bPerfectBeatForTut)
-{
-	bPerfectBeatForTutorial = bPerfectBeatForTut;
-}
 
 void ANeonParadigm_GameCharacter::SoftTargetingTimelineUpdated(float Alpha)
 {

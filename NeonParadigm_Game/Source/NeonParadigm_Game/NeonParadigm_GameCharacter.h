@@ -366,15 +366,12 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UScoreComponent* ScoreComp;
 	bool bPerfectBeatHit;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
-	bool bPerfectBeatForTutorial;
 
 public:
 
 	void SetPerfectBeatHit(bool bPerfectHit);
 	UFUNCTION(BlueprintPure)
 	bool IsPerfectBeatHit();
-	void SetPerfectBeatForTutorial(bool bPerfectBeatForTut);
 
 private:
 	float SoftTargetLerpAmt = 0.f;
