@@ -29,6 +29,7 @@ public:
 
 	void SetSaveLightAttack(bool bSetSaveLightAttack);
 	void LightAttackEvent();
+	UFUNCTION(BlueprintPure)
 	bool CanAttack();
 	void PerformLightAttack(int AttackIndex);
 	void CheckingMontage(const int AttackMontageIndex);

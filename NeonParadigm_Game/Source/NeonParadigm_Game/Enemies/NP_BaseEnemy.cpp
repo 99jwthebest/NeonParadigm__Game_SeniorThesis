@@ -636,3 +636,8 @@ UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
 	return HR_Getup;
 }
 
+bool ANP_BaseEnemy::GetCanBeTargeted()
+{
+	return bCanBeTargeted;
+}
+

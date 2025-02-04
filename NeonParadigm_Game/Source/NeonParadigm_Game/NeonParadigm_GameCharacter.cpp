@@ -202,6 +202,9 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(CameraTargetActor);
 		if (Enemy)
 		{
+			if (!Enemy->GetCanBeTargeted())
+				return;
+
 			if (Enemy->GetState() != ECharacterStates::Death)
 			{
 				// Check the distance between the player and the enemy

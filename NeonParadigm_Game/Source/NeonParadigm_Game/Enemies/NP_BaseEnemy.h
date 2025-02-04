@@ -225,6 +225,11 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
 	float DamageMultiplier = 1.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
+	bool bCanBeTargeted = true;
 
+public:
+
+	bool GetCanBeTargeted();
 
 };
