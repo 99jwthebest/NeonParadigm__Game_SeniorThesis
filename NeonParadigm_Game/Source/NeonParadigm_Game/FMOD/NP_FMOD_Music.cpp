@@ -63,6 +63,14 @@ void ANP_FMOD_Music::BeginPlay()
 
             UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
 
+            UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
+
+
+
         }
     }
 
