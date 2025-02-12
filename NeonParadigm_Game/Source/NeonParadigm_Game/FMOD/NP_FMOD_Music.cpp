@@ -60,7 +60,11 @@ void ANP_FMOD_Music::BeginPlay()
 
             // Start playing the FMOD event
             //FMODAudioComponent->Play();
-            GetWorld()->GetTimerManager().SetTimer(TimerForBPM, FMODAudioComponent, &UFMODAudioComponent::Play, 2.0f, false); // 0.0167f
+            
+            GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay); // 0.0167f
+   /*         FTimerDelegate TimerDelegate;
+            TimerDelegate.BindUObject(FMODAudioComponent, &UFMODAudioComponent::Activate, false);
+            GetWorld()->GetTimerManager().SetTimerForNextTick(TimerDelegate);*/ // 0.0167f
 
             UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
 
@@ -242,6 +246,13 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
         UE_LOG(LogTemp, Log, TEXT("Marker %s at position %d triggered."), *Name, Position);
     }
+}
+
+void ANP_FMOD_Music::TryPlay()
+{
+    FMODAudioComponent->Play();
+    if(!FMODAudioComponent->IsPlaying())
+        GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay);
 }
 
 //void ANP_FMOD_Music::FindAllEnemies()

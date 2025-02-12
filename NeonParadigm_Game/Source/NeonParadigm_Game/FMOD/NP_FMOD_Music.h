@@ -46,6 +46,7 @@ public:
 	void OnTimelineMarker(FString Name, int32 Position);
 
 private:
+	void TryPlay();
 	ANeonParadigm_GameCharacter* PlayerCharacter;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* TempBPMParticle;
