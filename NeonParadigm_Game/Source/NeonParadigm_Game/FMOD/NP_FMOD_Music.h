@@ -47,6 +47,7 @@ public:
 
 private:
 	void TryPlay();
+	FTimerHandle TimerForFMODtoPlay;
 	ANeonParadigm_GameCharacter* PlayerCharacter;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* TempBPMParticle;
