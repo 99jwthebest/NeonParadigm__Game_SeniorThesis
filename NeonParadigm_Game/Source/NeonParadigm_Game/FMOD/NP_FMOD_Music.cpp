@@ -60,9 +60,10 @@ void ANP_FMOD_Music::BeginPlay()
 
             // Start playing the FMOD event
             //FMODAudioComponent->Play();
-            
-            //GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay); // 0.0167f
-            GetWorld()->GetTimerManager().SetTimer(TimerForFMODtoPlay, this, &ANP_FMOD_Music::TryPlay, .01f, false);
+            FMODAudioComponent->Play();
+
+            GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay); // 0.0167f
+            //GetWorld()->GetTimerManager().SetTimer(TimerForFMODtoPlay, this, &ANP_FMOD_Music::TryPlay, .01f, false);
             /*         FTimerDelegate TimerDelegate;
             TimerDelegate.BindUObject(FMODAudioComponent, &UFMODAudioComponent::Activate, false);
             GetWorld()->GetTimerManager().SetTimerForNextTick(TimerDelegate);*/ // 0.0167f
@@ -251,20 +252,24 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
 void ANP_FMOD_Music::TryPlay()
 {
+    FMODAudioComponent->Stop();
+
     FMODAudioComponent->Play();
+    /*
     if (!FMODAudioComponent->IsPlaying())
     {
         GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay);
     }
     else
     {
+    */
         UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
         UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
         UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
         UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
         UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
 
-    }
+    //}
 }
 
 //void ANP_FMOD_Music::FindAllEnemies()
