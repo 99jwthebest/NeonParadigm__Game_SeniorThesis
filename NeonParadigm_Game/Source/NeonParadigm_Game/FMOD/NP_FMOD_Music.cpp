@@ -253,6 +253,20 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 void ANP_FMOD_Music::TryPlay()
 {
     //FMODAudioComponent->Stop();
+    /*
+    FMOD_STUDIO_PLAYBACK_STATE* PlayBackState = nullptr;
+    FMOD_RESULT Result = FMODAudioComponent->StudioInstance->getPlaybackState(PlayBackState);
+   
+    if (*PlayBackState == FMOD_STUDIO_PLAYBACK_STATE::FMOD_STUDIO_PLAYBACK_PLAYING)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("State is Playing"));
+    }
+
+    if (Result == FMOD_RESULT::FMOD_OK)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Get State is OK"));
+    }
+    */
 
     FMODAudioComponent->Play();
     /*
