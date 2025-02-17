@@ -286,25 +286,6 @@ void ANP_FMOD_Music::TryPlay()
     //}
 }
 
-//void ANP_FMOD_Music::FindAllEnemies()
-//{
-//    TArray<AActor*> FoundEnemies;
-//    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), FoundEnemies);
-//
-//    // Log the total number of enemies found
-//    UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), FoundEnemies.Num());
-//
-//    // You can now iterate over FoundEnemies or cast them to ANP_BaseEnemy if needed
-//    for (AActor* Actor : FoundEnemies)
-//    {
-//        ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(Actor);
-//        if (Enemy)
-//        {
-//            //Enemy->TestRhythmDelayEvent();
-//            //Enemy->SendMusicInfoToEnemies(,Enemy);
-//        }
-//    }
-//}
 
 void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
 {
