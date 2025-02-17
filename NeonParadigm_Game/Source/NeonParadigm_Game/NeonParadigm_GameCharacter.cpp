@@ -210,6 +210,7 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 				// Check the distance between the player and the enemy
 				if (GetDistanceTo(CameraTargetActor) < MaxTargetingDistance)
 				{
+					UE_LOG(LogTemp, Log, TEXT("TargetingOffset: %s"), *TargetingOffset.ToString());
 					FVector PlayerLocation = GetActorLocation();
 					FVector TargetLocation = CameraTargetActor->GetActorLocation() - TargetingOffset;
 
