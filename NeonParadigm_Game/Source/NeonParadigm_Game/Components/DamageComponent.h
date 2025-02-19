@@ -94,5 +94,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound", meta = (AllowPrivateAccess = "true"))
 	float AttackSoundDelay;
 
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
+	FHitResult LastHitResult;
 };

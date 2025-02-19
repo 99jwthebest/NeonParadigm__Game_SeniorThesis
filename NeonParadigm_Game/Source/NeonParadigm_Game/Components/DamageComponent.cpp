@@ -95,6 +95,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 	{
 		for (FHitResult& Hit : OutHits)
 		{
+			LastHitResult = Hit;
 			// Handle each hit result here
 			UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *Hit.GetActor()->GetName());
 			if (!HitActors.Contains(Hit.GetActor()) && Hit.GetActor()->IsValidLowLevel())
