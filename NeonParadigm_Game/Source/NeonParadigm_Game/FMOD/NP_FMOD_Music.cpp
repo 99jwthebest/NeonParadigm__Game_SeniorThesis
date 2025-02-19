@@ -253,26 +253,25 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 void ANP_FMOD_Music::TryPlay()
 {
     //FMODAudioComponent->Stop();
-    /*
-    FMOD_STUDIO_PLAYBACK_STATE* PlayBackState = nullptr;
-    FMOD_RESULT Result = FMODAudioComponent->StudioInstance->getPlaybackState(PlayBackState);
-   
-    if (*PlayBackState == FMOD_STUDIO_PLAYBACK_STATE::FMOD_STUDIO_PLAYBACK_PLAYING)
+    FMOD_STUDIO_PLAYBACK_STATE PlayBackState = FMOD_STUDIO_PLAYBACK_STOPPED;
+    if (!FMODAudioComponent->StudioInstance)
     {
-        UE_LOG(LogTemp, Warning, TEXT("State is Playing"));
+        FMOD::Studio::EventDescription* EventDesc = IFMODStudioModule::Get().GetEventDescription(FMODAudioComponent->Event);
+        EventDesc->createInstance(&FMODAudioComponent->StudioInstance);
     }
-
-    if (Result == FMOD_RESULT::FMOD_OK)
+    
+    FMOD_RESULT Result = FMODAudioComponent->StudioInstance->getPlaybackState(&PlayBackState);
+    if (Result == FMOD_RESULT::FMOD_ERR_INVALID_HANDLE)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Get State is OK"));
+        GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay);
+        return;
     }
-    */
 
     FMODAudioComponent->Play();
     /*
     if (!FMODAudioComponent->IsPlaying())
     {
-        GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay);
+       
     }
     else
     {
