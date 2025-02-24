@@ -11,7 +11,8 @@
 #include "NeonParadigm_Game/Components/ScoreComponent.h"
 #include "TimerManager.h"
 #include "Kismet/KismetSystemLibrary.h"
-
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 
 // Sets default values for this component's properties
 UDamageComponent::UDamageComponent()
@@ -116,8 +117,9 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				{
 					SpawnRagePickups(Hit);
 
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
-
+					//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
+					FVector NiagaraPSpawnLocation = Hit.ImpactPoint + FVector(0, 0, 50.0f); // Raises effect by 20 units
+					UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), WeaponHitEffect, NiagaraPSpawnLocation, Hit.ImpactNormal.Rotation());
 					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
 					PerfectHitOperations();

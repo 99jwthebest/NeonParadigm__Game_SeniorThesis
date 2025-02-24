@@ -8,6 +8,6 @@ public class NeonParadigm_Game : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","Slate", "SlateCore" ,"UMG", "AIModule", "FMODStudio" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","Slate", "SlateCore" ,"UMG", "AIModule", "Niagara", "FMODStudio" });
 	}
 }
