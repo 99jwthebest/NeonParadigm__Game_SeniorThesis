@@ -21,6 +21,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "NeonParadigm_Game/Components/ScoreComponent.h"
+#include "GameInstance/NP_GameInstance.h"
+
 
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -112,6 +114,9 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	UNP_GameInstance* GameInstance = Cast<UNP_GameInstance>(GetGameInstance());
+	bAutoTargetCamera = GameInstance->bAutoTargetCam;
+
 	DynOrbMaterial = BPM_OrbMesh->CreateAndSetMaterialInstanceDynamic(0);
 
 	if (SoftTargetCurve)
@@ -138,15 +143,19 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 
 	OnTakeAnyDamage.AddDynamic(this, &ANeonParadigm_GameCharacter::HandleTakeAnyDamage);
 
+
 }
 
 void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (bIsTargeting)
+	if (!bAutoTargetCamera)
 		return;
 
+	if (bIsTargeting)
+		return;
+	
 	// Define a threshold for input to be considered significant
 	const float InputThreshold = 0.25f;  // Adjust this threshold to ignore small mouse movements
 	const float Deadzone = 0.1f;  // Values below this will be ignored (adjust for sensitivity)

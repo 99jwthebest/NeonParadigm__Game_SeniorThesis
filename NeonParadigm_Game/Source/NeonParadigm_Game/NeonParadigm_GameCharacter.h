@@ -610,5 +610,13 @@ private:
 	float MagnetizationDuration = 3.0f;  
 
 	FTimerHandle TimerForEmissiveEmergenLights;
+
+
+public:
+
+private:
+
+	bool bAutoTargetCamera;
+
 };
 

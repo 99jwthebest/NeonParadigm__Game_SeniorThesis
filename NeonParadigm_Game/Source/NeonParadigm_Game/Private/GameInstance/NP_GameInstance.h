@@ -25,6 +25,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 Score;
 
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    bool bAutoTargetCam = true;
+
     // Functions to update values
     UFUNCTION(BlueprintCallable)
     void SetPlayerReady(bool bReady);
@@ -34,4 +37,6 @@ public:
 
     UFUNCTION(BlueprintCallable)
     void SetScore(int32 NewScore);
+
+    
 };
