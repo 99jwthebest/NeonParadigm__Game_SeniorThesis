@@ -27,7 +27,8 @@ enum class EDifficultySetting : uint8
     Hard UMETA(DisplayName = "Hard")
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSettingsChangedSignature);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSettingsChangedSignatureDynamic);
+DECLARE_MULTICAST_DELEGATE(FOnSettingsChangedSignature);
 //DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE(FOnSettingsChangedSignature, UNP_GameInstance, OnSettingsChanged);
 
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE()
@@ -55,7 +56,7 @@ public:
     int32 GetCurrentDifficultyMode();
 
 
-    UPROPERTY(BlueprintAssignable, Category = "Settings")
+    //UPROPERTY(BlueprintAssignable, Category = "Settings")
     FOnSettingsChangedSignature OnSettingsChanged;
 
 private:

@@ -614,7 +614,7 @@ private:
 
 
 public:
-	UFUNCTION()
+	//UFUNCTION()
 	void OnSettingsChanged();
 
 private:

@@ -142,7 +142,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	CurrentHealth = MaxHealth;
 
 	OnTakeAnyDamage.AddDynamic(this, &ANeonParadigm_GameCharacter::HandleTakeAnyDamage);
-	GameInstance->OnSettingsChanged.AddDynamic(this, &ANeonParadigm_GameCharacter::OnSettingsChanged);
+	GameInstance->OnSettingsChanged.AddUObject(this, &ANeonParadigm_GameCharacter::OnSettingsChanged);
 
 }
 
@@ -2562,5 +2562,4 @@ void ANeonParadigm_GameCharacter::OnSettingsChanged()
 {
 	bAutoTargetCamera = GameInstance->GetOptionBooleanValue(EGameSetting::AutoTargetCamera);
 	UE_LOG(LogTemp, Warning, TEXT("DUE, BT Work Delegate Because I'm ancy grancy"));
-
 }
