@@ -19,8 +19,18 @@ enum class EGameSetting : uint8
     DifficultyMode UMETA(DisplayName = "Difficulty Mode")
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSettingsChanged);
+UENUM(BlueprintType)
+enum class EDifficultySetting : uint8
+{
+    Easy UMETA(DisplayName = "Easy"),
+    Medium UMETA(DisplayName = "Medium"),
+    Hard UMETA(DisplayName = "Hard")
+};
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSettingsChangedSignature);
+//DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE(FOnSettingsChangedSignature, UNP_GameInstance, OnSettingsChanged);
+
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE()
 
 UCLASS()
 class UNP_GameInstance : public UGameInstance
@@ -36,12 +46,22 @@ public:
     UFUNCTION(BlueprintPure)
     bool GetOptionBooleanValue(EGameSetting Setting);
 
+    UFUNCTION(BlueprintCallable)
+    void SetOptionEnumValue(int32 Value, EDifficultySetting Setting);
+    UFUNCTION(BlueprintPure)
+    EDifficultySetting GetOptionEnumValue(int32 Value);
+
+    UFUNCTION(BlueprintPure)
+    int32 GetCurrentDifficultyMode();
+
+
     UPROPERTY(BlueprintAssignable, Category = "Settings")
-    FOnSettingsChanged OnSettingsChanged;
+    FOnSettingsChangedSignature OnSettingsChanged;
 
 private:
 
     TMap<EGameSetting, bool> BooleanSettings;
+    TMap<int32, EDifficultySetting> IntSettings;
 
-    
+    int CurrentDifficultyMode;
 };

@@ -1274,7 +1274,32 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-			CurrentHealth -= Damage;
+			
+			// Get difficulty from GameInstance
+			float DamageMultiplier = 1.0f;
+
+			switch (GameInstance->GetCurrentDifficultyMode())
+			{
+			case 0:
+				DamageMultiplier = 1.0f; // Reduce damage
+				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Boring"));
+				break;
+			case 1:
+				DamageMultiplier = 6.0f;  // Normal damage
+				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's MID"));
+				break;
+			case 2:
+				DamageMultiplier = 16.0f;  // Increase damage
+				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Hard"));
+				break;
+			}
+
+			// Apply difficulty scaling
+			float FinalDamage = Damage * DamageMultiplier;
+			CurrentHealth -= FinalDamage;
+
+
+			//CurrentHealth -= Damage;
 
 			if (CurrentHealth > 0.0f)
 			{
