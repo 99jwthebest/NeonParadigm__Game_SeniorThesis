@@ -9,34 +9,39 @@
 /**
  * 
  */
+
+UENUM(BlueprintType)
+enum class EGameSetting : uint8
+{
+    AutoTargetCamera UMETA(DisplayName = "Auto Target Camera"),
+    InvertedXAxis UMETA(DisplayName = "Inverted X Axis"),
+    InvertedYAxis UMETA(DisplayName = "Inverted Y Axis"),
+    DifficultyMode UMETA(DisplayName = "Difficulty Mode")
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSettingsChanged);
+
+
 UCLASS()
 class UNP_GameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
 public:
-    // Variables to store across level transitions
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    bool bIsPlayerReady;
 
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    float PlayerHealth;
-
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    int32 Score;
-
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    bool bAutoTargetCam = true;
-
-    // Functions to update values
-    UFUNCTION(BlueprintCallable)
-    void SetPlayerReady(bool bReady);
+    virtual void Init() override;
 
     UFUNCTION(BlueprintCallable)
-    void SetPlayerHealth(float Health);
+    void SetOptionBooleanValue(EGameSetting Setting, bool Value);
+    UFUNCTION(BlueprintPure)
+    bool GetOptionBooleanValue(EGameSetting Setting);
 
-    UFUNCTION(BlueprintCallable)
-    void SetScore(int32 NewScore);
+    UPROPERTY(BlueprintAssignable, Category = "Settings")
+    FOnSettingsChanged OnSettingsChanged;
+
+private:
+
+    TMap<EGameSetting, bool> BooleanSettings;
 
     
 };

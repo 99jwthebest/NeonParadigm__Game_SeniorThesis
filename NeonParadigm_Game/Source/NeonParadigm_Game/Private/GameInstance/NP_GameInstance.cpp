@@ -3,17 +3,29 @@
 
 #include "GameInstance/NP_GameInstance.h"
 
-void UNP_GameInstance::SetPlayerReady(bool bReady)
+
+void UNP_GameInstance::Init()
 {
-	bIsPlayerReady = bReady;
+    BooleanSettings.Add(EGameSetting::AutoTargetCamera, true);
+    BooleanSettings.Add(EGameSetting::InvertedXAxis, false);
+    BooleanSettings.Add(EGameSetting::InvertedYAxis, false);
+    BooleanSettings.Add(EGameSetting::DifficultyMode, false);
 }
 
-void UNP_GameInstance::SetPlayerHealth(float Health)
+void UNP_GameInstance::SetOptionBooleanValue(EGameSetting Setting, bool Value)
 {
-	PlayerHealth = Health;
+    BooleanSettings.Add(Setting, Value);
+    OnSettingsChanged.Broadcast(); // Notify listeners
+    UE_LOG(LogTemp, Warning, TEXT("DUE, BT Work Delegate Because I'm ancy grancy in GAME INSTANCE!!!!"));
+
 }
 
-void UNP_GameInstance::SetScore(int32 NewScore)
+bool UNP_GameInstance::GetOptionBooleanValue(EGameSetting Setting)
 {
-	Score = NewScore;
+    if (BooleanSettings.Contains(Setting))
+    {
+        return BooleanSettings[Setting];
+    }
+    return false; // Default value if key is not found
 }
+

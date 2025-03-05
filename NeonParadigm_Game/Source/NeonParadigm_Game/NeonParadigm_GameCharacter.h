@@ -18,6 +18,7 @@ class UInputMappingContext;
 class UInputAction;
 class ANP_BaseEnemy;
 class UScoreComponent;
+class UNP_GameInstance;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -614,7 +615,10 @@ private:
 
 public:
 
+	void OnSettingsChanged();
+
 private:
+	UNP_GameInstance* GameInstance;
 
 	bool bAutoTargetCamera;
 

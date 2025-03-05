@@ -114,8 +114,8 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
-	UNP_GameInstance* GameInstance = Cast<UNP_GameInstance>(GetGameInstance());
-	bAutoTargetCamera = GameInstance->bAutoTargetCam;
+	GameInstance = Cast<UNP_GameInstance>(GetGameInstance());
+	bAutoTargetCamera = GameInstance->GetOptionBooleanValue(EGameSetting::AutoTargetCamera);
 
 	DynOrbMaterial = BPM_OrbMesh->CreateAndSetMaterialInstanceDynamic(0);
 
@@ -142,7 +142,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	CurrentHealth = MaxHealth;
 
 	OnTakeAnyDamage.AddDynamic(this, &ANeonParadigm_GameCharacter::HandleTakeAnyDamage);
-
+	GameInstance->OnSettingsChanged.AddDynamic(this, &ANeonParadigm_GameCharacter::OnSettingsChanged);
 
 }
 
@@ -405,9 +405,19 @@ void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 	{
 		if (!bIsTargeting)
 		{
+			if (!GameInstance)
+				return;
+
+			// Invert X-axis if the setting is enabled
+			float InvertedX = GameInstance->GetOptionBooleanValue(EGameSetting::InvertedXAxis) ? -LookAxisVector.X : LookAxisVector.X;
+
+			// Invert Y-axis if the setting is enabled
+			float InvertedY = GameInstance->GetOptionBooleanValue(EGameSetting::InvertedYAxis) ? -LookAxisVector.Y : LookAxisVector.Y;
+
+
 			// add yaw and pitch inphealut to controller
-			AddControllerYawInput(LookAxisVector.X);
-			AddControllerPitchInput(LookAxisVector.Y);
+			AddControllerYawInput(InvertedX);
+			AddControllerPitchInput(InvertedY);
 		}
 	}
 }
@@ -2521,4 +2531,11 @@ void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff()
 			}
 		}
 	}
+}
+
+void ANeonParadigm_GameCharacter::OnSettingsChanged()
+{
+	bAutoTargetCamera = GameInstance->GetOptionBooleanValue(EGameSetting::AutoTargetCamera);
+	UE_LOG(LogTemp, Warning, TEXT("DUE, BT Work Delegate Because I'm ancy grancy"));
+
 }
