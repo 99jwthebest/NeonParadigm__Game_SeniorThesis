@@ -183,10 +183,47 @@ void UAttackComponent::UpdateCharacterLocation()
 		DurationOfMovement = 0;
 		UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement Reset: %d"), DurationOfMovement);
 	}
-	FVector TargetLocation = MyCharacter->GetActorLocation();
-	TargetLocation += MyCharacter->GetActorForwardVector() * gDistance;
-	FVector AttackMovementLocation = FMath::VInterpTo(MyCharacter->GetActorLocation(), TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
-	MyCharacter->SetActorLocation(AttackMovementLocation, true);
+
+	FVector CurrentLocation = MyCharacter->GetActorLocation();
+	FVector ForwardMovement = MyCharacter->GetActorForwardVector() * gDistance;
+
+	// Trace forward to check for slope or small object
+	FHitResult HitResult;
+	FVector TraceStart = CurrentLocation + FVector(0, 0, 50); // Start a little above the character
+	FVector TraceEnd = TraceStart + MyCharacter->GetActorForwardVector() * gDistance;
+
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(MyCharacter);
+
+	// Perform the forward trace
+	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
+
+	bool bEnableSweep = false; // Default to no sweep
+	if (bHit)
+	{
+		// Check if the hit surface is too steep
+		FVector HitNormal = HitResult.Normal;
+		float SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(HitNormal, FVector(0, 0, 1))));
+
+		if (SlopeAngle > 70.f)
+		{
+			// If the slope is too steep, we enable sweep to avoid climbing it
+			bEnableSweep = true;
+			UE_LOG(LogTemp, Warning, TEXT("Slope too steep. Sweep enabled."));
+		}
+		else if (HitResult.Distance <= 30.0f)
+		{
+			// If the object is small, disable sweep to pass through it
+			bEnableSweep = false;
+			UE_LOG(LogTemp, Warning, TEXT("Small object detected. Sweep disabled."));
+		}
+	}
+
+	// Move the character based on the decision above
+	FVector TargetLocation = CurrentLocation + ForwardMovement;
+	FVector AttackMovementLocation = FMath::VInterpTo(CurrentLocation, TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
+
+	MyCharacter->SetActorLocation(AttackMovementLocation, bEnableSweep);
 }
 
 void UAttackComponent::SaveLightAttack()

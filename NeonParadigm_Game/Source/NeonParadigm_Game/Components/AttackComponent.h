@@ -37,6 +37,7 @@ public:
 	void AttackMovement(float Distance);
 	void StopAttackMovement();
 	void UpdateCharacterLocation();
+	FVector AdjustLocationToFloor(FVector TargetLocation);
 	void SaveLightAttack();
 	void ResetLightAttack();
 
