@@ -211,7 +211,7 @@ void UAttackComponent::UpdateCharacterLocation()
 			bEnableSweep = true;
 			UE_LOG(LogTemp, Warning, TEXT("Slope too steep. Sweep enabled."));
 		}
-		else if (HitResult.Distance <= 30.0f)
+		else if (HitResult.Distance <= 10.0f)
 		{
 			// If the object is small, disable sweep to pass through it
 			bEnableSweep = false;
