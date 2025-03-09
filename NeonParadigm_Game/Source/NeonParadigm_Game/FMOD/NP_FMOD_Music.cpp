@@ -59,9 +59,27 @@ void ANP_FMOD_Music::BeginPlay()
             FMODAudioComponent->OnTimelineMarker.AddDynamic(this, &ANP_FMOD_Music::OnTimelineMarker);
 
             // Start playing the FMOD event
+            //FMODAudioComponent->Play();
             FMODAudioComponent->Play();
 
+            //GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay); // 0.0167f
+            GetWorld()->GetTimerManager().SetTimer(TimerForFMODtoPlay, this, &ANP_FMOD_Music::TryPlay, .01f, false);
+            /*         FTimerDelegate TimerDelegate;
+            TimerDelegate.BindUObject(FMODAudioComponent, &UFMODAudioComponent::Activate, false);
+            GetWorld()->GetTimerManager().SetTimerForNextTick(TimerDelegate);*/ // 0.0167f
+
             UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
+
+            UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
+            UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
+
+
+            //FMODAudioComponent->Play();
+
+
 
         }
     }
@@ -92,12 +110,12 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 
     FVector SpawnPoint = PlayerCharacter->GetActorLocation() - FVector(150.0f, 0.0f, 0.0f);
     // Spawn the actor at the beat's location
-    UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  ju aasdf df  ggg d ftgyrdt TEMPO CHANGERS!!!!"));
+    UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  YAY AHHHHHH TEMPO CHANGERS!!!!"));
 
     // Turn on the emission when the beat hits
     PlayerCharacter->ToggleOrbEmission();
 
-    GetWorld()->GetTimerManager().SetTimer(TimerForBPM, PlayerCharacter, &ANeonParadigm_GameCharacter::ToggleOrbEmissionOff, 0.2f, true); // 0.0167f
+    GetWorld()->GetTimerManager().SetTimer(TimerForBPM, PlayerCharacter, &ANeonParadigm_GameCharacter::ToggleOrbEmissionOff, 0.2f, false); // 0.0167f
 
     //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 
@@ -232,25 +250,41 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
     }
 }
 
-//void ANP_FMOD_Music::FindAllEnemies()
-//{
-//    TArray<AActor*> FoundEnemies;
-//    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ANP_BaseEnemy::StaticClass(), FoundEnemies);
-//
-//    // Log the total number of enemies found
-//    UE_LOG(LogTemp, Warning, TEXT("Total Enemies Found: %d"), FoundEnemies.Num());
-//
-//    // You can now iterate over FoundEnemies or cast them to ANP_BaseEnemy if needed
-//    for (AActor* Actor : FoundEnemies)
-//    {
-//        ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(Actor);
-//        if (Enemy)
-//        {
-//            //Enemy->TestRhythmDelayEvent();
-//            //Enemy->SendMusicInfoToEnemies(,Enemy);
-//        }
-//    }
-//}
+void ANP_FMOD_Music::TryPlay()
+{
+    //FMODAudioComponent->Stop();
+    FMOD_STUDIO_PLAYBACK_STATE PlayBackState = FMOD_STUDIO_PLAYBACK_STOPPED;
+    if (!FMODAudioComponent->StudioInstance)
+    {
+        FMOD::Studio::EventDescription* EventDesc = IFMODStudioModule::Get().GetEventDescription(FMODAudioComponent->Event);
+        EventDesc->createInstance(&FMODAudioComponent->StudioInstance);
+    }
+    
+    FMOD_RESULT Result = FMODAudioComponent->StudioInstance->getPlaybackState(&PlayBackState);
+    if (Result == FMOD_RESULT::FMOD_ERR_INVALID_HANDLE)
+    {
+        GetWorld()->GetTimerManager().SetTimerForNextTick(this, &ANP_FMOD_Music::TryPlay);
+        return;
+    }
+
+    FMODAudioComponent->Play();
+    /*
+    if (!FMODAudioComponent->IsPlaying())
+    {
+       
+    }
+    else
+    {
+    */
+        UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
+        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
+        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
+        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
+        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
+
+    //}
+}
+
 
 void ANP_FMOD_Music::SendMusicInfoToEnemies(float TempoOfCurrentSong)
 {

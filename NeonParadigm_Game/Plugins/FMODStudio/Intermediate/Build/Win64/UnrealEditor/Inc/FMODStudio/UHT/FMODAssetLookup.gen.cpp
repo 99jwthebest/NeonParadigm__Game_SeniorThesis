@@ -95,6 +95,7 @@ template<> FMODSTUDIO_API UScriptStruct* StaticStruct<FFMODAssetLookupRow>()
 		}
 		return Z_Registration_Info_UScriptStruct_FMODAssetLookupRow.InnerSingleton;
 	}
+<<<<<<< HEAD
 	struct Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics
 	{
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
@@ -105,5 +106,17 @@ template<> FMODSTUDIO_API UScriptStruct* StaticStruct<FFMODAssetLookupRow>()
 	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_370166532(TEXT("/Script/FMODStudio"),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics::ScriptStructInfo),
+=======
+	struct Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics
+	{
+		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
+	};
+	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics::ScriptStructInfo[] = {
+		{ FFMODAssetLookupRow::StaticStruct, Z_Construct_UScriptStruct_FFMODAssetLookupRow_Statics::NewStructOps, TEXT("FMODAssetLookupRow"), &Z_Registration_Info_UScriptStruct_FMODAssetLookupRow, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FFMODAssetLookupRow), 1162001652U) },
+	};
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_370166532(TEXT("/Script/FMODStudio"),
+		nullptr, 0,
+		Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_Statics::ScriptStructInfo),
+>>>>>>> ForMergingIntoMain
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

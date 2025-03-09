@@ -14,7 +14,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define FMODSTUDIO_FMODEventControlSectionTemplate_generated_h
 
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_Sequencer_FMODEventControlSectionTemplate_h_14_GENERATED_BODY \
+=======
+#define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_Sequencer_FMODEventControlSectionTemplate_h_14_GENERATED_BODY \
+>>>>>>> ForMergingIntoMain
 	friend struct Z_Construct_UScriptStruct_FFMODEventControlSectionTemplate_Statics; \
 	FMODSTUDIO_API static class UScriptStruct* StaticStruct(); \
 	typedef FMovieSceneEvalTemplate Super;
@@ -23,7 +27,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODEventControlSectionTemplate>();
 
 #undef CURRENT_FILE_ID
+<<<<<<< HEAD
 #define CURRENT_FILE_ID FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_Sequencer_FMODEventControlSectionTemplate_h
+=======
+#define CURRENT_FILE_ID FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_Sequencer_FMODEventControlSectionTemplate_h
+>>>>>>> ForMergingIntoMain
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

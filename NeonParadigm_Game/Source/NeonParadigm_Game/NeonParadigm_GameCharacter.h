@@ -18,6 +18,7 @@ class UInputMappingContext;
 class UInputAction;
 class ANP_BaseEnemy;
 class UScoreComponent;
+class UNP_GameInstance;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -109,7 +110,7 @@ private:
 	UAnimMontage* DodgeMontage;
 	bool bEnabledIFrames;
 	
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Dodge", meta = (AllowPrivateAccess = "true"))
 	int32 PerfectDodgeCount = 0; // Tracks consecutive perfect dodges
 	float DodgePushMultiplier = 1.0f; // Increases push distance
 	float DodgeCooldownEndTime = 0.0f; // Time when dodging becomes available again
@@ -329,7 +330,7 @@ public:
 	float GetCurrentUIBallAnimPlayRate();
 
 	float GetCurrentAnimPlayRate();
-
+	UFUNCTION(BlueprintCallable)
 	void TestRhythmDelayEvent();
 
 
@@ -367,11 +368,10 @@ private:
 	UScoreComponent* ScoreComp;
 	bool bPerfectBeatHit;
 
-
 public:
 
 	void SetPerfectBeatHit(bool bPerfectHit);
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
 	bool IsPerfectBeatHit();
 
 private:
@@ -606,6 +606,21 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile, meta = (AllowPrivateAccess = "true"))
 	bool bIsMagnetizeDodgeActive;
 	float MagnetizationRadius = 500.0f;  // Magnetization effect radius
+	FTimerHandle TimerForMagnetizedDodge;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dodge", meta = (AllowPrivateAccess = "true"))
+	float MagnetizationDuration = 3.0f;  
+
 	FTimerHandle TimerForEmissiveEmergenLights;
+
+
+public:
+	//UFUNCTION()
+	void OnSettingsChanged();
+
+private:
+	UNP_GameInstance* GameInstance;
+
+	bool bAutoTargetCamera;
+
 };
 

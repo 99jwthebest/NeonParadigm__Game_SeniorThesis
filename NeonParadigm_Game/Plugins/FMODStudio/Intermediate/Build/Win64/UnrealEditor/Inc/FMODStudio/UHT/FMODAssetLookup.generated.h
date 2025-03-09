@@ -14,7 +14,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define FMODSTUDIO_FMODAssetLookup_generated_h
 
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_12_GENERATED_BODY \
+=======
+#define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h_12_GENERATED_BODY \
+>>>>>>> ForMergingIntoMain
 	friend struct Z_Construct_UScriptStruct_FFMODAssetLookupRow_Statics; \
 	static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -23,7 +27,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODAssetLookupRow>();
 
 #undef CURRENT_FILE_ID
+<<<<<<< HEAD
 #define CURRENT_FILE_ID FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h
+=======
+#define CURRENT_FILE_ID FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODAssetLookup_h
+>>>>>>> ForMergingIntoMain
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

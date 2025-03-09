@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "C:/Angie/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/UnrealEd/SharedDefinitions.UnrealEd.Cpp20.h"
+=======
+#include "C:/_J_Hernandez/NeonParadigm__Game_SeniorThesis/NeonParadigm_Game/Intermediate/Build/Win64/x64/NeonParadigm_GameEditor/Development/UnrealEd/SharedDefinitions.UnrealEd.Cpp20.h"
+>>>>>>> ForMergingIntoMain
 #undef UE_IS_ENGINE_MODULE
 #undef DEPRECATED_FORGAME
 #define DEPRECATED_FORGAME DEPRECATED

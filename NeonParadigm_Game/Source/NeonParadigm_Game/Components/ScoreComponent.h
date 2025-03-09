@@ -154,8 +154,8 @@ private:
 	//TArray<int32> StoreEncounterScores; // Store scores for each encounter
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 MaxPossibleScore = 0; // Sum of all maximum scores for encounters
-
-	int32 CurrentCombatEnounters;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Score", meta = (AllowPrivateAccess = "true"))
+		int32 CurrentCombatEnounters;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score", meta = (AllowPrivateAccess = "true"))
 		int32 TotalCombatEncounters;
 

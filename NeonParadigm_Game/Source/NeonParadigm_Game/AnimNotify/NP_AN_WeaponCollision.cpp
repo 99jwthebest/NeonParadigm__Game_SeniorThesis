@@ -11,7 +11,7 @@
 void UNP_AN_WeaponCollision::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
 {
     Super::Notify(MeshComp, Animation, EventReference);
-
+    UE_LOG(LogTemp, Warning, TEXT("triggering notify"))
     if (!MeshComp || !MeshComp->GetWorld()) // Ensure MeshComp and World are valid
         return;
 

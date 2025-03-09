@@ -21,6 +21,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "NeonParadigm_Game/Components/ScoreComponent.h"
+#include "GameInstance/NP_GameInstance.h"
+
 
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -112,6 +114,9 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	GameInstance = Cast<UNP_GameInstance>(GetGameInstance());
+	bAutoTargetCamera = GameInstance->GetOptionBooleanValue(EGameSetting::AutoTargetCamera);
+
 	DynOrbMaterial = BPM_OrbMesh->CreateAndSetMaterialInstanceDynamic(0);
 
 	if (SoftTargetCurve)
@@ -137,6 +142,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 	CurrentHealth = MaxHealth;
 
 	OnTakeAnyDamage.AddDynamic(this, &ANeonParadigm_GameCharacter::HandleTakeAnyDamage);
+	GameInstance->OnSettingsChanged.AddUObject(this, &ANeonParadigm_GameCharacter::OnSettingsChanged);
 
 }
 
@@ -144,9 +150,12 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (bIsTargeting)
+	if (!bAutoTargetCamera)
 		return;
 
+	if (bIsTargeting)
+		return;
+	
 	// Define a threshold for input to be considered significant
 	const float InputThreshold = 0.25f;  // Adjust this threshold to ignore small mouse movements
 	const float Deadzone = 0.1f;  // Values below this will be ignored (adjust for sensitivity)
@@ -202,11 +211,15 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 		ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(CameraTargetActor);
 		if (Enemy)
 		{
+			if (!Enemy->GetCanBeTargeted())
+				return;
+
 			if (Enemy->GetState() != ECharacterStates::Death)
 			{
 				// Check the distance between the player and the enemy
 				if (GetDistanceTo(CameraTargetActor) < MaxTargetingDistance)
 				{
+					UE_LOG(LogTemp, Log, TEXT("TargetingOffset: %s"), *TargetingOffset.ToString());
 					FVector PlayerLocation = GetActorLocation();
 					FVector TargetLocation = CameraTargetActor->GetActorLocation() - TargetingOffset;
 
@@ -264,7 +277,6 @@ void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 
 
 						FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(PlayerLocation, TargetLocation);
-						float DeltaTime = GetWorld()->GetDeltaSeconds();
 						FRotator NewRotation = FMath::RInterpTo(GetController()->GetControlRotation(), TargetRotation, DeltaTime, RotationSpeed);
 
 						GetController()->SetControlRotation(NewRotation);
@@ -393,9 +405,19 @@ void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 	{
 		if (!bIsTargeting)
 		{
+			if (!GameInstance)
+				return;
+
+			// Invert X-axis if the setting is enabled
+			float InvertedX = GameInstance->GetOptionBooleanValue(EGameSetting::InvertedXAxis) ? -LookAxisVector.X : LookAxisVector.X;
+
+			// Invert Y-axis if the setting is enabled
+			float InvertedY = GameInstance->GetOptionBooleanValue(EGameSetting::InvertedYAxis) ? -LookAxisVector.Y : LookAxisVector.Y;
+
+
 			// add yaw and pitch inphealut to controller
-			AddControllerYawInput(LookAxisVector.X);
-			AddControllerPitchInput(LookAxisVector.Y);
+			AddControllerYawInput(InvertedX);
+			AddControllerPitchInput(InvertedY);
 		}
 	}
 }
@@ -1252,7 +1274,32 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Actor took damage"));
 
-			CurrentHealth -= Damage;
+			
+			// Get difficulty from GameInstance
+			float DamageMultiplier = 1.0f;
+
+			switch (GameInstance->GetCurrentDifficultyMode())
+			{
+			case 0:
+				DamageMultiplier = 1.0f; // Reduce damage
+				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Boring"));
+				break;
+			case 1:
+				DamageMultiplier = 6.0f;  // Normal damage
+				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's MID"));
+				break;
+			case 2:
+				DamageMultiplier = 16.0f;  // Increase damage
+				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Hard"));
+				break;
+			}
+
+			// Apply difficulty scaling
+			float FinalDamage = Damage * DamageMultiplier;
+			CurrentHealth -= FinalDamage;
+
+
+			//CurrentHealth -= Damage;
 
 			if (CurrentHealth > 0.0f)
 			{
@@ -1494,6 +1541,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
 		TogglePerfectHitTextBox();
+
 	}
 	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
@@ -1536,7 +1584,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
 
-		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay() * 2; // need to get time delay from tempo in music component
 		
 		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
 
@@ -1670,6 +1718,7 @@ bool ANeonParadigm_GameCharacter::IsPerfectBeatHit()
 {
 	return bPerfectBeatHit;
 }
+
 
 void ANeonParadigm_GameCharacter::SoftTargetingTimelineUpdated(float Alpha)
 {
@@ -2455,12 +2504,12 @@ AActor* ANeonParadigm_GameCharacter::GetCameraTargetActor()
 void ANeonParadigm_GameCharacter::TurnOnMagnetizedDodge()
 {
 	bIsMagnetizeDodgeActive = true;
-
+	GetWorld()->GetTimerManager().SetTimer(TimerForMagnetizedDodge, this, &ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge, MagnetizationDuration, false); // 0.0167f
 }
 
 void ANeonParadigm_GameCharacter::TurnOffMagnetizedDodge()
 {
-
+	bIsMagnetizeDodgeActive = false;
 }
 
 void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLights()
@@ -2483,7 +2532,7 @@ void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLights()
 			}
 		}
 	}
-	GetWorld()->GetTimerManager().SetTimer(TimerForEmissiveEmergenLights, this, &ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff, 0.2f, true); // 0.0167f
+	GetWorld()->GetTimerManager().SetTimer(TimerForEmissiveEmergenLights, this, &ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff, 0.2f, false); // 0.0167f
 
 }
 
@@ -2507,4 +2556,10 @@ void ANeonParadigm_GameCharacter::ToggleEmissivityEmergenLightsOff()
 			}
 		}
 	}
+}
+
+void ANeonParadigm_GameCharacter::OnSettingsChanged()
+{
+	bAutoTargetCamera = GameInstance->GetOptionBooleanValue(EGameSetting::AutoTargetCamera);
+	UE_LOG(LogTemp, Warning, TEXT("DUE, BT Work Delegate Because I'm ancy grancy"));
 }

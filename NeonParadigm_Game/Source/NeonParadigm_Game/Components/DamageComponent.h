@@ -12,6 +12,7 @@ class UNP_DamageType;
 class ANeonParadigm_GameCharacter;
 class UAnimMontage;
 class UScoreComponent;
+class UNiagaraSystem;
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -81,6 +82,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Effects, meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* PerfectParticle;
 
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	UNiagaraSystem* WeaponHitEffect;
+
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HitReaction, meta = (AllowPrivateAccess = "true"))
 	//UAnimMontage* DeathMontage;
 
@@ -94,5 +98,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound", meta = (AllowPrivateAccess = "true"))
 	float AttackSoundDelay;
 
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
+	FHitResult LastHitResult;
 };

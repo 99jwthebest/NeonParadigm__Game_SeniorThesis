@@ -29,6 +29,7 @@ public:
 
 	void SetSaveLightAttack(bool bSetSaveLightAttack);
 	void LightAttackEvent();
+	UFUNCTION(BlueprintPure)
 	bool CanAttack();
 	void PerformLightAttack(int AttackIndex);
 	void CheckingMontage(const int AttackMontageIndex);
@@ -36,6 +37,7 @@ public:
 	void AttackMovement(float Distance);
 	void StopAttackMovement();
 	void UpdateCharacterLocation();
+	FVector AdjustLocationToFloor(FVector TargetLocation);
 	void SaveLightAttack();
 	void ResetLightAttack();
 
@@ -58,6 +60,7 @@ public:
 	void PerformAerialLightAttack(int AttackIndex);
 	void ResetLightAerialAttack();
 	void ResetLaunched();
+	UFUNCTION(BlueprintPure)
 	bool GetLaunched();
 
 	UPROPERTY(VisibleAnywhere)

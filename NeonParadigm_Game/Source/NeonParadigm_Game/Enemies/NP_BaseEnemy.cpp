@@ -82,6 +82,10 @@ void ANP_BaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 void ANP_BaseEnemy::AttackMovement(float Distance)
 {
+
+	if (!bCanBePushed)
+		return;
+
 	gDistance = Distance;
 	StopAttackMovement();
 	if (Distance != 0.0f)
@@ -110,16 +114,18 @@ void ANP_BaseEnemy::UpdateCharacterLocation()
 	FVector ReversedForwardVec = GetActorForwardVector() * -1.0f;
 	TargetLocation += ReversedForwardVec * gDistance;
 	FVector AttackMovementLocation = FMath::VInterpTo(GetActorLocation(), TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
-	SetActorLocation(AttackMovementLocation);
+	SetActorLocation(AttackMovementLocation, true);
 }
 
 void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	// Handle the damage taken event here
-	UE_LOG(LogTemp, Warning, TEXT("Actor %s took %f damage"), *DamagedActor->GetName(), Damage);
 
+	float FinalDamage = Damage * DamageMultiplier;
 
-	CurrentHealth -= Damage;
+	CurrentHealth -= FinalDamage;
+
+	UE_LOG(LogTemp, Warning, TEXT("Actor %s took %f damage (Multiplied: %f)"), *DamagedActor->GetName(), Damage, FinalDamage);
 
 
 	if (CurrentHealth > 0.0f)
@@ -156,7 +162,7 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 					NP_DamageType->DamageType != EDamageTypes::Knockback &&
 					NP_DamageType->DamageType != EDamageTypes::Knockdown) // this might need to be an or statement or something.
 				{
-					AttackMovement(10.0f); //15.0f  should maybe be the value
+					AttackMovement(5.0f); //15.0f  should maybe be the value
 				}
 				else
 				{
@@ -628,5 +634,10 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
 {
 	return HR_Getup;
+}
+
+bool ANP_BaseEnemy::GetCanBeTargeted()
+{
+	return bCanBeTargeted;
 }
 

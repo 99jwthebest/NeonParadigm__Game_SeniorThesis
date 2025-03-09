@@ -17,7 +17,11 @@ void EmptyLinkFunctionForGeneratedCodeFMODStudioEditor_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000040,
+<<<<<<< HEAD
 				0xF2CCB6C7,
+=======
+				0xD3E00C14,
+>>>>>>> ForMergingIntoMain
 				0x903E4F69,
 				METADATA_PARAMS(0, nullptr)
 			};
@@ -25,5 +29,9 @@ void EmptyLinkFunctionForGeneratedCodeFMODStudioEditor_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_FMODStudioEditor.OuterSingleton;
 	}
+<<<<<<< HEAD
 	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMODStudioEditor(Z_Construct_UPackage__Script_FMODStudioEditor, TEXT("/Script/FMODStudioEditor"), Z_Registration_Info_UPackage__Script_FMODStudioEditor, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xF2CCB6C7, 0x903E4F69));
+=======
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMODStudioEditor(Z_Construct_UPackage__Script_FMODStudioEditor, TEXT("/Script/FMODStudioEditor"), Z_Registration_Info_UPackage__Script_FMODStudioEditor, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xD3E00C14, 0x903E4F69));
+>>>>>>> ForMergingIntoMain
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

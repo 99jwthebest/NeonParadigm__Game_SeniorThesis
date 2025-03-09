@@ -11,7 +11,8 @@
 #include "NeonParadigm_Game/Components/ScoreComponent.h"
 #include "TimerManager.h"
 #include "Kismet/KismetSystemLibrary.h"
-
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 
 // Sets default values for this component's properties
 UDamageComponent::UDamageComponent()
@@ -95,6 +96,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 	{
 		for (FHitResult& Hit : OutHits)
 		{
+			LastHitResult = Hit;
 			// Handle each hit result here
 			UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *Hit.GetActor()->GetName());
 			if (!HitActors.Contains(Hit.GetActor()) && Hit.GetActor()->IsValidLowLevel())
@@ -115,8 +117,9 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				{
 					SpawnRagePickups(Hit);
 
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
-
+					//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
+					FVector NiagaraPSpawnLocation = Hit.ImpactPoint + FVector(0, 0, 50.0f); // Raises effect by 20 units
+					UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), WeaponHitEffect, NiagaraPSpawnLocation, Hit.ImpactNormal.Rotation());
 					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
 					PerfectHitOperations();
@@ -159,7 +162,7 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
 		false,                             // bTraceComplex - false unless you want complex collision
 		ActorsToIgnore,                    // Actors to ignore (MyCharacter)
-		EDrawDebugTrace::ForDuration,      // Draw the trace for debugging  // ForDuration *****************
+		EDrawDebugTrace::None,      // Draw the trace for debugging  // ForDuration *****************
 		OutHits,                           // Output array to store hit results
 		true,                              // Ignore the tracing actor (self)
 		FLinearColor::Red,               // Trace line color
