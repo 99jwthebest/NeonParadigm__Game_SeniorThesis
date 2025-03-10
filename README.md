@@ -1,47 +1,15 @@
 # Neon Paradigm
 
-A short description of your project and its purpose.
+A hack-and-slash rhythm game where players must press inputs and land attacks on the beat to progress, using dynamic audio and custom shaders to enhance the experience.
 
 ## Table of Contents
 - [Project Description](#project-description)
-- [Installation Instructions](#installation-instructions)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Project Description
-Describe your project here. What does it do? Why did you create it? What are the key features or goals of the project?
+This project is a senior thesis developed for the University of the Incarnate Word (UIW), where I created an engaging hack-and-slash rhythm game using Unreal Engine C++/Blueprint. In the game, the player must press inputs on the beat, and the player's attacks must land on the beat to maximize effectiveness. This creates a dynamic and immersive gameplay experience, where timing and rhythm are essential for success.
 
-## Installation Instructions
-To get started with this project, follow these steps:
+The game integrates FMOD for dynamic audio handling, syncing music with in-game events to enhance the overall experience. Players will feel immersed in the game world as their actions, from attacks to movement, are in sync with the soundtrack.
 
-### Prerequisites
-List any software or tools needed (e.g., Node.js, Unreal Engine, Python, etc.).
+Additionally, I designed and implemented custom shaders to enhance visual effects, creating stunning visuals that complement the fast-paced, rhythmic gameplay. The combination of rhythm-based mechanics, responsive audio, and striking visual effects creates a unique and engaging experience for players.
 
-### Steps
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/username/project-name.git
-    ```
-2. Install dependencies (if applicable):
-    ```bash
-    npm install  # or the command relevant to your project
-    ```
-3. Setup any environment variables or configuration files if necessary.
-
-4. Run the project:
-    ```bash
-    npm start  # or the command relevant to your project
-    ```
-
-## Usage
-Provide examples of how to use your project. This could include:
-
-- Code examples
-- Command-line inputs/outputs
-- Screenshots or GIFs showing the project in action
-
-Example:
-```bash
-./run_project --example-option
+This project demonstrates a strong blend of technical and creative skills, including advanced gameplay programming, audio integration, and visual design within Unreal Engine.
