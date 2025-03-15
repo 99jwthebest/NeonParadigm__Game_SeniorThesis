@@ -252,7 +252,6 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
 void ANP_FMOD_Music::TryPlay()
 {
-    //FMODAudioComponent->Stop();
     FMOD_STUDIO_PLAYBACK_STATE PlayBackState = FMOD_STUDIO_PLAYBACK_STOPPED;
     if (!FMODAudioComponent->StudioInstance)
     {
@@ -268,21 +267,13 @@ void ANP_FMOD_Music::TryPlay()
     }
 
     FMODAudioComponent->Play();
-    /*
-    if (!FMODAudioComponent->IsPlaying())
-    {
-       
-    }
-    else
-    {
-    */
-        UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
 
-    //}
+    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
+
 }
 
 

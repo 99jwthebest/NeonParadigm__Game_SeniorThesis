@@ -186,6 +186,42 @@ void UAttackComponent::UpdateCharacterLocation()
 
 	FVector CurrentLocation = MyCharacter->GetActorLocation();
 	FVector ForwardMovement = MyCharacter->GetActorForwardVector() * gDistance;
+	// Move the character based on the decision above
+	FVector TargetLocation = CurrentLocation + ForwardMovement;
+	FVector AttackMovementLocation = FMath::VInterpTo(CurrentLocation, TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
+
+	MyCharacter->SetActorLocation(AttackMovementLocation, true);
+}
+
+void UAttackComponent::DodgeMovement(float Distance)
+{
+	gDistance = Distance;
+	StopAttackMovement();
+	if (Distance != 0.0f)
+	{
+		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocation, 0.01f, true); // 0.0167f
+	}
+}
+
+void UAttackComponent::StopDodgeMovement()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerForAttackMovement); // this might not work
+}
+
+void UAttackComponent::UpdateCharacterLocationDodge()
+{
+	DurationOfMovement++;
+	UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement: %d"), DurationOfMovement);
+
+	if (DurationOfMovement >= 25)
+	{
+		StopAttackMovement();
+		DurationOfMovement = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement Reset: %d"), DurationOfMovement);
+	}
+
+	FVector CurrentLocation = MyCharacter->GetActorLocation();
+	FVector ForwardMovement = MyCharacter->GetActorForwardVector() * gDistance;
 
 	// Trace forward to check for slope or small object
 	FHitResult HitResult;
