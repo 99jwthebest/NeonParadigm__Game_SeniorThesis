@@ -586,8 +586,8 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 			PerfectDodgeCount = 0;
 			DodgePushMultiplier = 1.0f;
 
+			CharacterState->SetState(ECharacterStates::None);
 			StartTimerForDodgeCooldown();
-
 			// Debug PerfectDodgeCount reset and DodgePushMultiplier reset
 			UE_LOG(LogTemp, Log, TEXT("PerfectDodgeCount reset to %d, DodgePushMultiplier reset to %f"), PerfectDodgeCount, DodgePushMultiplier);
 		}
