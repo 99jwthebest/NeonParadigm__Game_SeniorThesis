@@ -199,7 +199,7 @@ void UAttackComponent::DodgeMovement(float Distance)
 	StopAttackMovement();
 	if (Distance != 0.0f)
 	{
-		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocation, 0.01f, true); // 0.0167f
+		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocationDodge, 0.01f, true); // 0.0167f
 	}
 }
 
@@ -210,6 +210,9 @@ void UAttackComponent::StopDodgeMovement()
 
 void UAttackComponent::UpdateCharacterLocationDodge()
 {
+	//** swtich to this design!!!! ******
+	//GetCharacterMovement()->AddInputVector(GetActorForwardVector());
+
 	DurationOfMovement++;
 	UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement: %d"), DurationOfMovement);
 

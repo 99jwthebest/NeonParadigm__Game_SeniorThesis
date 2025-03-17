@@ -107,6 +107,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	MaxRage = 100.0f;
 	DefaultCameraBoomLength = 500.0f;
 	DefaultCameraFOV = 90.0f;
+
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
