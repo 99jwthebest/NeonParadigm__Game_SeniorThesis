@@ -622,5 +622,10 @@ private:
 
 	bool bAutoTargetCamera;
 
+
+public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayDamageCameraShake();
+
 };
 

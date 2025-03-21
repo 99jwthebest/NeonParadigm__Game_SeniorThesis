@@ -1301,6 +1301,7 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 
 
 			//CurrentHealth -= Damage;
+			PlayDamageCameraShake();
 
 			if (CurrentHealth > 0.0f)
 			{
