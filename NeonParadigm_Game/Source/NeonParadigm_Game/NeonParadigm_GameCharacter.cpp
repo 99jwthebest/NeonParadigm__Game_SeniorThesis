@@ -837,6 +837,9 @@ void ANeonParadigm_GameCharacter::RotateToTarget()
 		ANP_BaseEnemy* TempSoftTargetEnemy = Cast<ANP_BaseEnemy>(SoftTargetActor);
 		if (TempSoftTargetEnemy)
 		{
+			if (TempSoftTargetEnemy->GetbIsBoss())
+				return;
+
 			if (TempSoftTargetEnemy->GetState() != ECharacterStates::Death)
 			{
 				SoftTargetEnemy = TempSoftTargetEnemy;
@@ -955,6 +958,9 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(OutHit.GetActor());
 			if (Enemy)
 			{
+				if (Enemy->GetbIsBoss())
+					return;
+
 				if (Enemy->GetState() != ECharacterStates::Death)
 				{
 					if (OutHit.GetActor() != SoftTargetActor || !SoftTargetActor->IsValidLowLevel())

@@ -227,9 +227,12 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
 	bool bCanBeTargeted = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
+	bool bIsBoss = false;
 
 public:
 
 	bool GetCanBeTargeted();
+	bool GetbIsBoss();
 
 };

@@ -642,3 +642,8 @@ bool ANP_BaseEnemy::GetCanBeTargeted()
 	return bCanBeTargeted;
 }
 
+bool ANP_BaseEnemy::GetbIsBoss()
+{
+	return bIsBoss;
+}
+
