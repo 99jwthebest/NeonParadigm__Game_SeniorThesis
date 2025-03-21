@@ -231,6 +231,7 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 				GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling); // set to flying maybe
 				AttackMovement(40.0f); //15.0f  should maybe be the value
 				bAirKnockback = true;
+				EnemyStunnedWithProjectiles();
 				return HR_Air_Knockback;
 
 			case EDamageTypes::Launch:
