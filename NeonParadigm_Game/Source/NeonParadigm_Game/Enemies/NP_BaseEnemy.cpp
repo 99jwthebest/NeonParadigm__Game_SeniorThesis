@@ -600,7 +600,7 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 	if (bAirKnockback)
 	{
 		bAirKnockback = false;
-		PlayAnimMontage(HR_Air_Knockback_OnLanded);
+		//PlayAnimMontage(HR_Air_Knockback_OnLanded);
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
 
