@@ -600,6 +600,8 @@ private:
 
 	FTimerHandle CheckForTargetInCamViewTimerHandle;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dodge, meta = (AllowPrivateAccess = "true"))
+	float DodgeBaseForce;
 
 public:
 

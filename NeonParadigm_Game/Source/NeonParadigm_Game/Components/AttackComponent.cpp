@@ -163,7 +163,7 @@ void UAttackComponent::AttackMovement(float Distance)
 	StopAttackMovement();
 	if (Distance != 0.0f)
 	{
-		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocationDodge, 0.01f, true); // 0.0167f
+		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocationAttack, 0.01f, true); // 0.0167f
 	}
 }
 
@@ -172,7 +172,7 @@ void UAttackComponent::StopAttackMovement()
 	GetWorld()->GetTimerManager().ClearTimer(TimerForAttackMovement); // this might not work
 }
 
-void UAttackComponent::UpdateCharacterLocation()
+void UAttackComponent::UpdateCharacterLocationAttack()
 {
 	DurationOfMovement++;
 	UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement: %d"), DurationOfMovement);
@@ -236,20 +236,19 @@ void UAttackComponent::UpdateCharacterLocationDodge()
 	// Disable movement input during dodge (optional)
 	//if (DurationOfMovement == 1)
 	//{
-		if (APlayerController* PlayerController = Cast<APlayerController>(MyCharacter->GetController()))
+		/*if (APlayerController* PlayerController = Cast<APlayerController>(MyCharacter->GetController()))
 		{
 			PlayerController->DisableInput(PlayerController);
-		}
+		}*/
 
 		// Apply dodge movement by launching character in the forward direction
 		FVector DodgeDirection = MyCharacter->GetActorForwardVector();
-		FVector DodgeForce = DodgeDirection * 2000.0f; // You can tweak the force here
+		FVector DodgeForce = DodgeDirection * gDistance; // You can tweak the force here
 
 		// Apply launch force to the character (gives immediate, fast movement)
 		MyCharacter->LaunchCharacter(DodgeForce, true, true);
 	//}
 
-	// Optionally, adjust the movement speed for the dodge if needed
 	//MyCharacter->GetCharacterMovement()->MaxWalkSpeed = 10000.0f; // Extremely high speed during dodge
 }
 

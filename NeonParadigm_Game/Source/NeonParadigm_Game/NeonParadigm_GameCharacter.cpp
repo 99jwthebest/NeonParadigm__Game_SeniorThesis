@@ -108,6 +108,7 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	DefaultCameraBoomLength = 500.0f;
 	DefaultCameraFOV = 90.0f;
 
+	DodgeBaseForce = 1500.0f;
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -575,7 +576,7 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 		TimerCameraFOV(TargetFOV, 10.0f);
 
 		// Apply movement with multiplier
-		AttackComp->AttackMovement(15.0f * DodgePushMultiplier); // maybe increase to 20
+		AttackComp->DodgeMovement(DodgeBaseForce * DodgePushMultiplier);
 
 		if (PerfectDodgeCount >= MaxPerfectDodges)
 		{
