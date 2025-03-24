@@ -446,6 +446,11 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void SpawnWinMenuEvent();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayLightAttackShake();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayHeavyAttackShake();
+
 public:
 
 

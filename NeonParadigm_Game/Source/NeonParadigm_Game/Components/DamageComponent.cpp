@@ -113,6 +113,23 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 					UGameplayStatics::PlaySoundAtLocation(this, AttackSound, MyCharacter->GetActorLocation(), AttackSoundVolumeMultiplier, 1.1f, AttackSoundDelay);
 				UE_LOG(LogTemp, Warning, TEXT("A_Freaking World Time In IMpactPoint is:  %f"), GetWorld()->GetTimeSeconds());
 
+				const UNP_DamageType* YNP_DamageType = DamageTypeClass->GetDefaultObject<UNP_DamageType>();
+
+				if (!DamageTypeClass)
+				{
+					UE_LOG(LogTemp, Error, TEXT("DamageTypeClass is nullptr!"));
+					return;
+				}
+
+				if (YNP_DamageType->DamageType == EDamageTypes::Left) // light atttack
+				{
+					MyCharacter->PlayLightAttackShake();
+				}
+				else if(YNP_DamageType->DamageType == EDamageTypes::Right) // heavy attack
+				{
+					MyCharacter->PlayHeavyAttackShake();
+				}
+
 				if (MyCharacter->IsPerfectBeatHit())
 				{
 					SpawnRagePickups(Hit);
