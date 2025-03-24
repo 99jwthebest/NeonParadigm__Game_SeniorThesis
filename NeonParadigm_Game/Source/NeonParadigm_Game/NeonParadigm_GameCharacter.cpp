@@ -1787,7 +1787,6 @@ void ANeonParadigm_GameCharacter::ToggleOrbEmission()
 
 void ANeonParadigm_GameCharacter::ToggleOrbEmissionOff()
 {
-
 	if (DynOrbMaterial)
 	{
 		float EmissiveValue = 0.0f;  // Turn on or off the emission
@@ -1800,6 +1799,13 @@ void ANeonParadigm_GameCharacter::ToggleOrbEmissionOff()
 UStaticMeshComponent* ANeonParadigm_GameCharacter::GetBPM_OrbMesh()
 {
 	return BPM_OrbMesh;
+}
+
+float ANeonParadigm_GameCharacter::UpdateFlipBookPlayRate()
+{
+	float FB_PlayRate = 1 / GetCurrentTempoDelay();
+
+	return FB_PlayRate;
 }
 
 void ANeonParadigm_GameCharacter::AddToCurrentRage(float RageToAdd)

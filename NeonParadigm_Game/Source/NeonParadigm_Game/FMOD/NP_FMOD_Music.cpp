@@ -104,6 +104,10 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  TEMPO CHANGERS!!!!"));
         GlobalTempo = Tempo;
         PlayerCharacter->UpdateBPM_Visuals();
+        M_CurrentTempoDelay = 60 / Tempo;
+        PlayerCharacter->SetCurrentTempoDelay(M_CurrentTempoDelay);
+        PlayerCharacter->PlayBPM_FlipBook();
+
     }
 
     GlobalTempo = Tempo;
@@ -153,7 +157,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
        PlayerCharacter->BeginBPM_Bar();
         UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE Crucke!!! %f"), PlayerCharacter->GetCurrentTempoDelay());
 
-
+        PlayerCharacter->PlayBPM_FlipBook();
 
         UE_LOG(LogTemp, Warning, TEXT("Timeline MARKER Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
         BPM_Started = true;

@@ -389,6 +389,10 @@ public:
 	void ToggleOrbEmission();
 	void ToggleOrbEmissionOff();
 	UStaticMeshComponent* GetBPM_OrbMesh();
+	UFUNCTION(BlueprintCallable)
+	float UpdateFlipBookPlayRate();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayBPM_FlipBook();
 
 private:
 	UMaterialInterface* CurrentOrbMaterial;

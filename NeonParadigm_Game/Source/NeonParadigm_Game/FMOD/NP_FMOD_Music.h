@@ -104,4 +104,5 @@ public:
 	UFUNCTION(BlueprintPure)
 	int32 GetNumOfSpawnedEnemies();
 
+
 };
