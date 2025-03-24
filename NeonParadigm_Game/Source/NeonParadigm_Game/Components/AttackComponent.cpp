@@ -163,7 +163,7 @@ void UAttackComponent::AttackMovement(float Distance)
 	StopAttackMovement();
 	if (Distance != 0.0f)
 	{
-		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocation, 0.01f, true); // 0.0167f
+		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocationDodge, 0.01f, true); // 0.0167f
 	}
 }
 
@@ -210,59 +210,47 @@ void UAttackComponent::StopDodgeMovement()
 
 void UAttackComponent::UpdateCharacterLocationDodge()
 {
-	//** swtich to this design!!!! ******
-	//GetCharacterMovement()->AddInputVector(GetActorForwardVector());
-
+	// Increment the dodge duration
 	DurationOfMovement++;
 	UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement: %d"), DurationOfMovement);
 
+	// Check if the dodge duration has passed and stop the movement
 	if (DurationOfMovement >= 25)
 	{
+		// Reset MaxWalkSpeed to normal after dodge ends
+		MyCharacter->GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+
+		// Stop the dodge movement logic
 		StopAttackMovement();
 		DurationOfMovement = 0;
+
+		// Re-enable movement input after dodge
+		if (APlayerController* PlayerController = Cast<APlayerController>(MyCharacter->GetController()))
+		{
+			PlayerController->EnableInput(PlayerController);
+		}
 		UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement Reset: %d"), DurationOfMovement);
+		return;
 	}
 
-	FVector CurrentLocation = MyCharacter->GetActorLocation();
-	FVector ForwardMovement = MyCharacter->GetActorForwardVector() * gDistance;
-
-	// Trace forward to check for slope or small object
-	FHitResult HitResult;
-	FVector TraceStart = CurrentLocation + FVector(0, 0, 50); // Start a little above the character
-	FVector TraceEnd = TraceStart + MyCharacter->GetActorForwardVector() * gDistance;
-
-	FCollisionQueryParams QueryParams;
-	QueryParams.AddIgnoredActor(MyCharacter);
-
-	// Perform the forward trace
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
-
-	bool bEnableSweep = false; // Default to no sweep
-	if (bHit)
-	{
-		// Check if the hit surface is too steep
-		FVector HitNormal = HitResult.Normal;
-		float SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(HitNormal, FVector(0, 0, 1))));
-
-		if (SlopeAngle > 70.f)
+	// Disable movement input during dodge (optional)
+	//if (DurationOfMovement == 1)
+	//{
+		if (APlayerController* PlayerController = Cast<APlayerController>(MyCharacter->GetController()))
 		{
-			// If the slope is too steep, we enable sweep to avoid climbing it
-			bEnableSweep = true;
-			UE_LOG(LogTemp, Warning, TEXT("Slope too steep. Sweep enabled."));
+			PlayerController->DisableInput(PlayerController);
 		}
-		else if (HitResult.Distance <= 10.0f)
-		{
-			// If the object is small, disable sweep to pass through it
-			bEnableSweep = false;
-			UE_LOG(LogTemp, Warning, TEXT("Small object detected. Sweep disabled."));
-		}
-	}
 
-	// Move the character based on the decision above
-	FVector TargetLocation = CurrentLocation + ForwardMovement;
-	FVector AttackMovementLocation = FMath::VInterpTo(CurrentLocation, TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
+		// Apply dodge movement by launching character in the forward direction
+		FVector DodgeDirection = MyCharacter->GetActorForwardVector();
+		FVector DodgeForce = DodgeDirection * 2000.0f; // You can tweak the force here
 
-	MyCharacter->SetActorLocation(AttackMovementLocation, bEnableSweep);
+		// Apply launch force to the character (gives immediate, fast movement)
+		MyCharacter->LaunchCharacter(DodgeForce, true, true);
+	//}
+
+	// Optionally, adjust the movement speed for the dodge if needed
+	//MyCharacter->GetCharacterMovement()->MaxWalkSpeed = 10000.0f; // Extremely high speed during dodge
 }
 
 void UAttackComponent::SaveLightAttack()
