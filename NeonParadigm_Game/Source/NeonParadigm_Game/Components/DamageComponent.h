@@ -13,6 +13,7 @@ class ANeonParadigm_GameCharacter;
 class UAnimMontage;
 class UScoreComponent;
 class UNiagaraSystem;
+class UNP_GameInstance;
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -44,6 +45,7 @@ public:
 
 	void PerfectHitOperations();
 	void SpawnRagePickups(FHitResult& HitResult);
+	float DifficultyModeDamageModifier();
 
 private:
 	
@@ -100,4 +102,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
 	FHitResult LastHitResult;
+
+	UNP_GameInstance* GameInstance;
+
 };

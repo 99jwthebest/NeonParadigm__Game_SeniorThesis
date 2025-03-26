@@ -13,6 +13,8 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "GameInstance/NP_GameInstance.h"
+
 
 // Sets default values for this component's properties
 UDamageComponent::UDamageComponent()
@@ -44,7 +46,7 @@ void UDamageComponent::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found SCORE Compo!!!!!"))
 	}
-
+	GameInstance = Cast<UNP_GameInstance>(MyCharacter->GetGameInstance());
 
 }
 
@@ -102,7 +104,7 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 			if (!HitActors.Contains(Hit.GetActor()) && Hit.GetActor()->IsValidLowLevel())
 			{
 				//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.
-				float Damage = UGameplayStatics::ApplyDamage(Hit.GetActor(), AmountOfDamage, MyCharacter->GetController(), MyCharacter, DamageTypeClass);
+				float Damage = UGameplayStatics::ApplyDamage(Hit.GetActor(), AmountOfDamage * DifficultyModeDamageModifier(), MyCharacter->GetController(), MyCharacter, DamageTypeClass);
 				HitActors.AddUnique(Hit.GetActor());
 				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
 
@@ -413,6 +415,30 @@ void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
 			}
 		}
 	}
+}
+
+float UDamageComponent::DifficultyModeDamageModifier()
+{
+	// Get difficulty from GameInstance
+	float DamageMultiplier = 1.0f;
+
+	switch (GameInstance->GetCurrentDifficultyMode())
+	{
+	case 0:
+		UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Boring"));
+		DamageMultiplier = 16.0f;  // Increase damage
+		break;
+	case 1:
+		UE_LOG(LogTemp, Error, TEXT("DOOOOM It's MID"));
+		DamageMultiplier = 6.0f;  // Normal damage
+		break;
+	case 2:
+		UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Hard"));
+		DamageMultiplier = 1.0f; // Reduce damage
+		break;
+	}
+
+	return DamageMultiplier;
 }
 
 //void UDamageComponent::PerformDeath()
