@@ -925,7 +925,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		ActorsToIgnore.Add(this); // Ignore self
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; // ForDuration
 
 		// Output hit result
 		FHitResult OutHit;
@@ -954,7 +954,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit.GetActor()->GetName());
 
-			UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *OutHit.GetActor()->GetName());
+			UE_LOG(LogTemp, Log, TEXT("PR1_Hit actor: %s"), *OutHit.GetActor()->GetName());
 
 			ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(OutHit.GetActor());
 			if (Enemy)
@@ -1007,7 +1007,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			ActorsToIgnore2.Add(this); // Ignore self
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
 
 			// Output hit result
 			FHitResult OutHit2;
@@ -1034,7 +1034,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 
 			if (bSphereTrace2)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *OutHit2.GetActor()->GetName());
+				UE_LOG(LogTemp, Warning, TEXT("PR2_Hit Actor: %s"), *OutHit2.GetActor()->GetName());
 
 				ANP_BaseEnemy* Enemy2 = Cast<ANP_BaseEnemy>(OutHit2.GetActor());
 				if (Enemy2 && Enemy2->GetState() != ECharacterStates::Death)
@@ -1077,7 +1077,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		bool bTraceComplex2 = false;
 		TArray<AActor*> ActorsToIgnore2;
 		ActorsToIgnore2.Add(this); 
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
 		TArray<FHitResult> OutHits2;
 
 		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
@@ -1098,7 +1098,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 
 		if (bSphereTrace2)
 		{
-			float ClosestDistance = FLT_MAX;
+			float ClosestDistance = FLT_MAX; // Adjust To be small
 			AActor* ClosestActor = nullptr;
 
 			for (const FHitResult& Hit : OutHits2)
@@ -1106,10 +1106,10 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 				if (AActor* HitActor = Hit.GetActor())
 				{
 					// Calculate distance
-					float Distance = FVector::Dist(StartVec2, Hit.ImpactPoint);
+					float Distance = FVector::Dist(StartVec2, Hit.GetActor()->GetActorLocation());
 
 					// Debug log
-					UE_LOG(LogTemp, Warning, TEXT("Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
+					UE_LOG(LogTemp, Warning, TEXT("PR3_Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
 
 					// Find the closest actor
 					if (Distance < ClosestDistance)
@@ -1124,7 +1124,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
 			{
 				// Do nothing, keep the current target
-				UE_LOG(LogTemp, Warning, TEXT("Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
+				UE_LOG(LogTemp, Warning, TEXT("PR4_Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
 			}
 			else
 			{
@@ -1134,12 +1134,17 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestActor);
 					if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
 					{
+						UE_LOG(LogTemp, Warning, TEXT("PR5_Previous SoftTargetActor: %s"),
+							SoftTargetActor ? *SoftTargetActor->GetName() : TEXT("None"));
+						UE_LOG(LogTemp, Warning, TEXT("PR5_New SoftTargetActor Candidate: %s"),
+							ClosestActor ? *ClosestActor->GetName() : TEXT("None"));
+
 						LastSoftTargetActor = SoftTargetActor;
 						SoftTargetActor = ClosestActor;
 						CameraTargetActor = SoftTargetActor;
 						SoftTargetEnemy = ClosestEnemy;
 
-						UE_LOG(LogTemp, Warning, TEXT("Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
+						UE_LOG(LogTemp, Warning, TEXT("PR6_Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
 					}
 					else
 					{
