@@ -311,6 +311,10 @@ void ANP_BaseEnemy::PerformDeath()
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
+	
+	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &ANP_BaseEnemy::EndTarget, .25f, false); // 0.0167f
+
+	//EndTarget();
 
 	PerformThingsAfterDeath();
 }
@@ -372,6 +376,9 @@ void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adju
 
 void ANP_BaseEnemy::OnTargeted()
 {
+	if (bIsBoss || !bCanBeParried)
+		return;
+
 	HealthBarWidget->SetVisibility(true);
 	LockOnWidget->SetVisibility(true);
 }

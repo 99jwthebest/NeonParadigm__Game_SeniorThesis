@@ -14,7 +14,7 @@
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "GameInstance/NP_GameInstance.h"
-
+#include "NeonParadigm_Game/Enemies/NP_BaseEnemy.h"
 
 // Sets default values for this component's properties
 UDamageComponent::UDamageComponent()
@@ -131,6 +131,17 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 				{
 					MyCharacter->PlayHeavyAttackShake();
 				}
+
+
+				// Call OnTargeted if the actor is valid and can be targeted
+				if (AActor* HitActor = Hit.GetActor())
+				{
+					if (ANP_BaseEnemy* Enemy = Cast<ANP_BaseEnemy>(HitActor))
+					{
+						Enemy->OnTargeted();  // Call the OnTargeted function if the hit actor is of type ANP_BaseEnemy
+					}
+				}
+
 
 				if (MyCharacter->IsPerfectBeatHit())
 				{

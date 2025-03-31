@@ -14,6 +14,7 @@ class UAnimMontage;
 class UScoreComponent;
 class UNiagaraSystem;
 class UNP_GameInstance;
+class ANP_BaseEnemy;
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
