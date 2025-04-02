@@ -365,8 +365,13 @@ void ANeonParadigm_GameCharacter::Move(const FInputActionValue& Value)
 	// input is a Vector2D
 	MovementVector = Value.Get<FVector2D>();
 	
-	if (GetCharacterMovement()->IsFlying())  // this is causing trace for softtarget to not work!!! ***********
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+
+	if (GetCharacterMovement()->IsFlying() || 
+		CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))  // this is causing trace for softtarget to not work!!! ***********
 		return;
+
 
 	if (Controller != nullptr)
 	{

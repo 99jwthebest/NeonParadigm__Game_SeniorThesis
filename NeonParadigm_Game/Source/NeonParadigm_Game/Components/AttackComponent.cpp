@@ -190,7 +190,7 @@ void UAttackComponent::UpdateCharacterLocationAttack()
 	FVector TargetLocation = CurrentLocation + ForwardMovement;
 	FVector AttackMovementLocation = FMath::VInterpTo(CurrentLocation, TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
 
-	MyCharacter->SetActorLocation(AttackMovementLocation, true);
+	MyCharacter->SetActorLocation(AttackMovementLocation, false);
 }
 
 void UAttackComponent::DodgeMovement(float Distance)
