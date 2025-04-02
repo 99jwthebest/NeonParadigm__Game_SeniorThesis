@@ -105,4 +105,8 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	TArray<UAnimMontage*> LightAerialAttackMontages;
+
+	FOnMontageBlendingOutStarted OnMontageBlendoutStarted;
+
+	void LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted);
 };
