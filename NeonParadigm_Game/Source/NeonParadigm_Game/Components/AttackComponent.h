@@ -38,6 +38,7 @@ public:
 	void StopAttackMovement();
 	void UpdateCharacterLocationAttack();
 	// High float values for Effectiveness, e.g. 1000.0f
+	UFUNCTION(BlueprintCallable)
 	void DodgeMovement(float Distance);
 	void StopDodgeMovement();
 	void UpdateCharacterLocationDodge();

@@ -110,6 +110,7 @@ public:
 	void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
+	UFUNCTION(BlueprintCallable, Category = "State")
 	void PerformDeath();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PerformThingsAfterDeath();

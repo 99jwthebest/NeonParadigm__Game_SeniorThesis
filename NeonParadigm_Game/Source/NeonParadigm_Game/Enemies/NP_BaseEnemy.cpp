@@ -119,6 +119,9 @@ void ANP_BaseEnemy::UpdateCharacterLocation()
 
 void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
+	if (bIsBoss)
+		return;
+
 	// Handle the damage taken event here
 
 	float FinalDamage = Damage * DamageMultiplier;
