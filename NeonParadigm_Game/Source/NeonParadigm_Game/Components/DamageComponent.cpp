@@ -359,19 +359,6 @@ void UDamageComponent::PerfectHitOperations()
 {
 	UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
-	UGameplayStatics::SpawnEmitterAttached(
-		PerfectParticle,
-		MyCharacter->GetMesh(),
-		FName("VFX_Trail"),
-		FVector(0.0f, 0.0f, 0.0f),
-		FRotator(0.0f, 0.0f, 0.0f),
-		FVector(1.0f, 1.0f, 1.0f),
-		EAttachLocation::KeepRelativeOffset,
-		true,
-		EPSCPoolMethod::None,
-		true
-	);
-
 	MyCharacter->SetPerfectBeatHit(false);
 }
 
