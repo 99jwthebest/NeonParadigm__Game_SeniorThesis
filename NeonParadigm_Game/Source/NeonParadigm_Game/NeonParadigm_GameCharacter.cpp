@@ -368,10 +368,14 @@ void ANeonParadigm_GameCharacter::Move(const FInputActionValue& Value)
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 
-	if (GetCharacterMovement()->IsFlying() || 
-		CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))  // this is causing trace for softtarget to not work!!! ***********
-		return;
+	if (GetCharacterMovement()->IsFlying() ||
+		CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
+	{
+		// this is causing trace for softtarget to not work!!! ***********
+		UE_LOG(LogTemp, Warning, TEXT("JK_This Should Be ON When AttackingG!!!!!!!!"));
 
+		return;
+	}
 
 	if (Controller != nullptr)
 	{

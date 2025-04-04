@@ -563,9 +563,9 @@ bool UAttackComponent::GetLaunched()
 
 void UAttackComponent::LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Light attack blended out"))
+	UE_LOG(LogTemp, Warning, TEXT("JK_Light attack blended out"))
 
-		CharacterState->ResetState();
+	CharacterState->ResetState();
 	//if AttackState not reset
 		//then resetState
 }
