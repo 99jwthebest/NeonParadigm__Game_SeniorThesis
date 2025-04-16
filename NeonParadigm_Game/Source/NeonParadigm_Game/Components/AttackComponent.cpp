@@ -119,13 +119,19 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
 		MyCharacter->TestRhythmDelayEvent();
 		
+		//UAnimInstance* AnimInstance = MyCharacter->GetMesh()->GetAnimInstance();
+		//if (AnimInstance && AnimInstance->Montage_IsPlaying(Montage))
+		//{
+		//	return;
+		//}
+
 		if (IsValid(Montage))
 		{
 			UAnimMontage* LightAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
 			//AttackMovement(5.0f);
 			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
-			//MyCharacter->GetMesh()->GetAnimInstance()->Montage_SetBlendingOutDelegate(OnMontageBlendoutStarted, LightAttackMontage);
+			MyCharacter->GetMesh()->GetAnimInstance()->Montage_SetBlendingOutDelegate(OnMontageBlendoutStarted, LightAttackMontage);
 			
 			// Log the impact time for debugging
 			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
@@ -270,17 +276,9 @@ void UAttackComponent::SaveLightAttack()
 		{
 			//Reset Attack If Current State Is Equal To Attacking State
 			CharacterState->SetState(ECharacterStates::None);
-			LightAttackEvent();
-
 		}
-		else
-		{
-			LightAttackEvent();
-		}
-	}
-	else
-	{
-		return;
+		
+		LightAttackEvent();
 	}
 }
 
@@ -564,8 +562,8 @@ bool UAttackComponent::GetLaunched()
 void UAttackComponent::LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted)
 {
 	UE_LOG(LogTemp, Warning, TEXT("JK_Light attack blended out"))
-
-	CharacterState->ResetState();
+	//CharacterState->SetState(ECharacterStates::None);T
+	//CharacterState->ResetState();
 	//if AttackState not reset
 		//then resetState
 }

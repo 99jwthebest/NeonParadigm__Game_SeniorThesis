@@ -64,7 +64,7 @@ bool UCharacterStateComponent::IsCurrentStateEqualToAny(const TArray<ECharacterS
 
 	for (ECharacterStates State : StatesToCheck)
 	{
-		UE_LOG(LogTemp, Log, TEXT("State to Check: %d"), (int32)State);
+		//UE_LOG(LogTemp, Log, TEXT("State to Check: %d"), (int32)State);
 	}
 
 	return StatesToCheck.Contains(CurrentState);
@@ -77,6 +77,7 @@ void UCharacterStateComponent::ResetState()
 	{
 		bOnLandReset = true;
 		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		UE_LOG(LogTemp, Warning, TEXT("State is not reset IN AIR"))
 	}
 	else
 	{
@@ -96,6 +97,10 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->ResetDodgeCountAndMultiplier();
 			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 			MyCharacter->SetPerfectBeatHit(false);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("State is not reset"))
 		}
 	}
 }
