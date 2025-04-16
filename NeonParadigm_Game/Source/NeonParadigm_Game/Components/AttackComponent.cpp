@@ -125,7 +125,7 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 			CharacterState->SetState(ECharacterStates::Attack);
 			//AttackMovement(5.0f);
 			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
-			MyCharacter->GetMesh()->GetAnimInstance()->Montage_SetBlendingOutDelegate(OnMontageBlendoutStarted, LightAttackMontage);
+			//MyCharacter->GetMesh()->GetAnimInstance()->Montage_SetBlendingOutDelegate(OnMontageBlendoutStarted, LightAttackMontage);
 			
 			// Log the impact time for debugging
 			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
