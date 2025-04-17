@@ -379,7 +379,7 @@ void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adju
 
 void ANP_BaseEnemy::OnTargeted()
 {
-	if (bIsBoss || !bCanBeParried)
+	if (bIsBoss || !bCanBeParried || !bCanBeTargeted)
 		return;
 
 	HealthBarWidget->SetVisibility(true);

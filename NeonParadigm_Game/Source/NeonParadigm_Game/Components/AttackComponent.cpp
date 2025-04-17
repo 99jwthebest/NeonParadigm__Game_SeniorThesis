@@ -26,6 +26,7 @@ UAttackComponent::UAttackComponent()
 	DurationOfLaunch = 0;
 	bLaunched = false;
 	bCanAerialAttack = true;
+	bNotifyLaunchAttackPassed = true;
 
 	OnMontageBlendoutStarted.BindUObject(this, &UAttackComponent::LightAttackBlendedOut);
 }
@@ -557,6 +558,26 @@ void UAttackComponent::ResetLaunched()
 bool UAttackComponent::GetLaunched()
 {
 	return bLaunched;
+}
+
+bool UAttackComponent::GetSaveLaunchAttack()
+{
+	return bSaveLaunchAttack;
+}
+
+void UAttackComponent::SetSaveLaunchAttack(bool bSetSaveLaunchAttack)
+{
+	bSaveLaunchAttack = bSetSaveLaunchAttack;
+}
+
+void UAttackComponent::SetNotifyLaunchPassed(bool bNotifyLaunchPassed)
+{
+	bNotifyLaunchAttackPassed = bNotifyLaunchPassed;
+}
+
+bool UAttackComponent::GetNotifyLaunchPassed()
+{
+	return bNotifyLaunchAttackPassed;
 }
 
 void UAttackComponent::LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted)

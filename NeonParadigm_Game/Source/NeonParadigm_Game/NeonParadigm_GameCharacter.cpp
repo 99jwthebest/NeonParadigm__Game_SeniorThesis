@@ -435,6 +435,18 @@ void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 
 void ANeonParadigm_GameCharacter::LightAttack()
 {
+
+	TArray<ECharacterStates> CurrentCharacterState2;
+	CurrentCharacterState2.Add(ECharacterStates::Dodge);
+
+	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState2) &&
+		!AttackComp->GetNotifyLaunchPassed())
+	{
+		AttackComp->SetSaveLaunchAttack(true);
+		return;
+	}
+
+
 	AttackComp->SetSaveHeavyAttack(false);
 	
 	TArray<ECharacterStates> CurrentCharacterState;
@@ -1303,15 +1315,15 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 			switch (GameInstance->GetCurrentDifficultyMode())
 			{
 			case 0:
-				DamageMultiplier = 1.0f; // Reduce damage
+				DamageMultiplier = .2f; // Reduce damage
 				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Boring"));
 				break;
 			case 1:
-				DamageMultiplier = 6.0f;  // Normal damage
+				DamageMultiplier = 1.0f;  // Normal damage
 				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's MID"));
 				break;
 			case 2:
-				DamageMultiplier = 16.0f;  // Increase damage
+				DamageMultiplier = 5.0f;  // Increase damage
 				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Hard"));
 				break;
 			}

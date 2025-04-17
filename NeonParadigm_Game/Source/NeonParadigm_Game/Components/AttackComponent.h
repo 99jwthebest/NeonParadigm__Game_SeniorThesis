@@ -68,6 +68,13 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool GetLaunched();
 
+	bool GetSaveLaunchAttack();
+
+	void SetSaveLaunchAttack(bool bSetSaveLaunchAttack);
+
+	void SetNotifyLaunchPassed(bool bNotifyLaunchPassed);
+	bool GetNotifyLaunchPassed();
+
 	UPROPERTY(VisibleAnywhere)
 	ANeonParadigm_GameCharacter* MyCharacter;
 private:
@@ -102,6 +109,10 @@ private:
 	int DurationOfLaunch;
 	bool bLaunched;
 	bool bCanAerialAttack;
+
+	bool bSaveLaunchAttack;
+	bool bNotifyLaunchAttackPassed;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	TArray<UAnimMontage*> LightAerialAttackMontages;
