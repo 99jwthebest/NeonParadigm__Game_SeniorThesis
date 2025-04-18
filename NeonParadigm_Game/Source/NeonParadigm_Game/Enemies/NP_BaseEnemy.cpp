@@ -124,11 +124,11 @@ void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, cons
 
 	// Handle the damage taken event here
 
-	float FinalDamage = Damage * DamageMultiplier;
+	//Damage * DamageMultiplier;
 
-	CurrentHealth -= FinalDamage;
+	CurrentHealth -= Damage;
 
-	UE_LOG(LogTemp, Warning, TEXT("Actor %s took %f damage (Multiplied: %f)"), *DamagedActor->GetName(), Damage, FinalDamage);
+	UE_LOG(LogTemp, Warning, TEXT("Z_Actor %s took %f damage"), *DamagedActor->GetName(), Damage);
 
 
 	if (CurrentHealth > 0.0f)
