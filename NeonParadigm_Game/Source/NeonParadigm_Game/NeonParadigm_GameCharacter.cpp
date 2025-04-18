@@ -1315,7 +1315,7 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 			switch (GameInstance->GetCurrentDifficultyMode())
 			{
 			case 0:
-				DamageMultiplier = .2f; // Reduce damage
+				DamageMultiplier = .5f; // Reduce damage
 				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Boring"));
 				break;
 			case 1:
@@ -1323,7 +1323,7 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's MID"));
 				break;
 			case 2:
-				DamageMultiplier = 5.0f;  // Increase damage
+				DamageMultiplier = 2.0f;  // Increase damage
 				UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Hard"));
 				break;
 			}
