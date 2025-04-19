@@ -13,6 +13,8 @@
 
 namespace Markers {
     FString SectionA = TEXT("SectionA_Transition");
+    FString SectionC = TEXT("SectionC_Transition");
+    FString SectionD = TEXT("SectionD_Transition");
 }
 
 // Sets default values
@@ -186,7 +188,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 {
     // Example marker: if marker name is "StartAction", set the parameter to some value
-    if (Name == Markers::SectionA || Name == "SectionB_Transition")
+    if (Name == Markers::SectionA || Name == "SectionB_Transition" || Name == Markers::SectionC)
     {
         if (FMODAudioComponent)
         {
