@@ -20,6 +20,7 @@ class ANP_BaseEnemy;
 class UScoreComponent;
 class UNP_GameInstance;
 struct FInputActionValue;
+struct FInputActionInstance;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -185,6 +186,8 @@ protected:
 	FVector2D LookAxisVector;
 
 	void LightAttack();
+
+	void LaunchAttack(const FInputActionInstance& Instance);
 
 	void HeavyAttack();
 

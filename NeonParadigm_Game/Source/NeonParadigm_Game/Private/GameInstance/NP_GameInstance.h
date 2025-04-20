@@ -65,4 +65,8 @@ private:
     TMap<int32, EDifficultySetting> IntSettings;
 
     int CurrentDifficultyMode;
+
+    UPROPERTY(BlueprintReadOnly, Category = Targeting, meta = (AllowPrivateAccess = "true"))
+    bool bIsUsingGamepad = false;
+
 };

@@ -74,11 +74,8 @@ void UAttackComponent::LightAttackEvent()
 {
 	if (CanAttack())
 	{
-		if (!DetermineDesiredAttack())
-		{
-			ResetHeavyAttack();
-			PerformLightAttack(LightAttackIndex);
-		}
+		ResetHeavyAttack();
+		PerformLightAttack(LightAttackIndex);
 	}
 	else
 	{
@@ -504,6 +501,8 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 		//Reset Light Attack Index If Index Is Equal Or Greater Than Length Of Light Attack Sequence
 		LightAttackIndex = 0;
 	}
+
+	UE_LOG(LogTemp, Error, TEXT("BAY_AIRRRRRR Attack %d: "), LightAttackIndex);
 
 	if (LightAerialAttackMontages.IsValidIndex(LightAttackIndex))
 	{

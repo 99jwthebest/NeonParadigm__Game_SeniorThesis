@@ -330,8 +330,11 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Look);
 		
 		// Light Attack
-		EnhancedInputComponent->BindAction(LightAttackAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::LightAttack);
-
+		EnhancedInputComponent->BindAction(LightAttackAction, ETriggerEvent::Completed, this, &ANeonParadigm_GameCharacter::LightAttack);
+		
+		// Launch Attack
+		EnhancedInputComponent->BindAction(LightAttackAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::LaunchAttack);
+		
 		// Heavy Attack
 		EnhancedInputComponent->BindAction(HeavyAttackAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::HeavyAttack);
 
@@ -465,6 +468,20 @@ void ANeonParadigm_GameCharacter::LightAttack()
 		AttackComp->LightAttackEvent();
 	}
 
+
+}
+
+void ANeonParadigm_GameCharacter::LaunchAttack(const FInputActionInstance& Instance)
+{
+
+	float HeldDuration = Instance.GetElapsedTime();
+	if (HeldDuration >= 0.5f && AttackComp->CanAttack())
+	{
+		AttackComp->LaunchAttack();
+		HeldDuration = 0.0f;
+		UE_LOG(LogTemp, Warning, TEXT("BAY_Launch!!!!!!!!"));
+
+	}
 }
 
 void ANeonParadigm_GameCharacter::HeavyAttack()
