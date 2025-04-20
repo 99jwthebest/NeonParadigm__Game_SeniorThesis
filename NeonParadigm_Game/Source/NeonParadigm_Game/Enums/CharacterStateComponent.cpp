@@ -97,6 +97,7 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->ResetDodgeCountAndMultiplier();
 			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 			MyCharacter->SetPerfectBeatHit(false);
+			AttackComp->SetSaveLaunchAttack(false);
 		}
 		else
 		{

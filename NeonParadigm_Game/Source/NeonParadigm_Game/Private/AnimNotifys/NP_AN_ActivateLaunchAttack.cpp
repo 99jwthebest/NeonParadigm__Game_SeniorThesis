@@ -24,7 +24,10 @@ void UNP_AN_ActivateLaunchAttack::Notify(USkeletalMeshComponent* MeshComp, UAnim
 
 	UE_LOG(LogTemp, Warning, TEXT("INitializing ATTACK COMP IN AttackMovement NOTIFY!!!!!!!!"));
 
-	if(AttackComp->GetSaveLaunchAttack())
+	if (AttackComp->GetSaveLaunchAttack())
+	{
 		AttackComp->LaunchAttack();
+		AttackComp->SetSaveLaunchAttack(false);
+	}
 
 }
