@@ -322,13 +322,13 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ANeonParadigm_GameCharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
-
+		
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Move);
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::Look);
-		
+		//LookAction->bTriggerWhenPaused = true;
 		// Light Attack
 		EnhancedInputComponent->BindAction(LightAttackAction, ETriggerEvent::Completed, this, &ANeonParadigm_GameCharacter::LightAttack);
 		
@@ -355,6 +355,14 @@ void ANeonParadigm_GameCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		
 		// Projectile Weapon Stun
 		EnhancedInputComponent->BindAction(ProjectileWeaponStunAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::ProjectileWeaponStun);
+
+		// Moving
+		EnhancedInputComponent->BindAction(NavigateAction, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::NavigateMenus);
+		NavigateAction->bTriggerWhenPaused = true;
+
+		// Moving
+		EnhancedInputComponent->BindAction(NavigateActionKeyboard, ETriggerEvent::Triggered, this, &ANeonParadigm_GameCharacter::NavigateMenusKeyBor);
+		NavigateActionKeyboard->bTriggerWhenPaused = true;
 
 	}
 	else
@@ -2620,4 +2628,16 @@ void ANeonParadigm_GameCharacter::OnSettingsChanged()
 {
 	bAutoTargetCamera = GameInstance->GetOptionBooleanValue(EGameSetting::AutoTargetCamera);
 	UE_LOG(LogTemp, Warning, TEXT("DUE, BT Work Delegate Because I'm ancy grancy"));
+}
+
+void ANeonParadigm_GameCharacter::NavigateMenus()
+{
+	UE_LOG(LogTemp, Error, TEXT("X_AHHHHHHH_YAAAAHH, IT Better Work!!!"));
+
+}
+
+void ANeonParadigm_GameCharacter::NavigateMenusKeyBor()
+{
+	UE_LOG(LogTemp, Error, TEXT("X_AHHHHHHH_YAAAAHH, KEYSSSSSS!!!"));
+
 }

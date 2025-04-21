@@ -66,7 +66,7 @@ private:
 
     int CurrentDifficultyMode;
 
-    UPROPERTY(BlueprintReadOnly, Category = Targeting, meta = (AllowPrivateAccess = "true"))
+    UPROPERTY(BlueprintReadWrite, Category = Targeting, meta = (AllowPrivateAccess = "true"))
     bool bIsUsingGamepad = false;
 
 };

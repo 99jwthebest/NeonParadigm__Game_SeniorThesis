@@ -84,7 +84,15 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Projectile Weapon Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ProjectileWeaponStunAction;
-	
+
+	/** Navigate Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* NavigateAction;
+
+	/** Navigate Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* NavigateActionKeyboard;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
 
@@ -640,6 +648,9 @@ private:
 public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayDamageCameraShake();
+
+	void NavigateMenus();
+	void NavigateMenusKeyBor();
 
 };
 
