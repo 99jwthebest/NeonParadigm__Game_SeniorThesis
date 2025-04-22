@@ -15,6 +15,8 @@ namespace Markers {
     FString SectionA = TEXT("SectionA_Transition");
     FString SectionC = TEXT("SectionC_Transition");
     FString SectionD = TEXT("SectionD_Transition");
+    FString SectionE = TEXT("SectionE_Transition");
+    FString SectionF = TEXT("SectionF_Transition");
 }
 
 // Sets default values
