@@ -190,7 +190,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 {
     // Example marker: if marker name is "StartAction", set the parameter to some value
-    if (Name == Markers::SectionA || Name == "SectionB_Transition" || Name == Markers::SectionC)
+    if (Name == Markers::SectionA || Name == "SectionB_Transition" || 
+        Name == Markers::SectionC || Name == Markers::SectionD ||
+        Name == Markers::SectionE || Name == Markers::SectionF)
     {
         if (FMODAudioComponent)
         {
