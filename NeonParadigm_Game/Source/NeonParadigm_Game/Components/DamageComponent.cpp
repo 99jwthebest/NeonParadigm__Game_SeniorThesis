@@ -397,19 +397,18 @@ void UDamageComponent::SpawnRagePickups(FHitResult& HitResult)
 
 			// Spawn the actor
 			AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(RagePickup, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
-			if (SpawnedActor)
-			{
-				// Add impulse to the spawned actor
-				UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(SpawnedActor->GetComponentByClass(UStaticMeshComponent::StaticClass()));
-				if (MeshComp && MeshComp->IsSimulatingPhysics())
-				{
-					// Calculate explosion force direction and apply impulse
-					FVector ExplosionForceDirection = RandomDirection;
-					MeshComp->AddImpulse(ExplosionForceDirection * ExplosionForce, NAME_None, true);
+			if (!SpawnedActor) continue;
 
-					// Apply optional upward force
-					MeshComp->AddImpulse(FVector(0, 0, UpwardForce), NAME_None, true);
-				}
+			// Add impulse to the spawned actor
+			UStaticMeshComponent* MeshComp = Cast<UStaticMeshComponent>(SpawnedActor->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+			if (MeshComp && MeshComp->IsSimulatingPhysics())
+			{
+				// Calculate explosion force direction and apply impulse
+				FVector ExplosionForceDirection = RandomDirection;
+				MeshComp->AddImpulse(ExplosionForceDirection * ExplosionForce, NAME_None, true);
+
+				// Apply optional upward force
+				MeshComp->AddImpulse(FVector(0, 0, UpwardForce), NAME_None, true);
 			}
 		}
 	}
