@@ -516,6 +516,7 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 		{
 			UAnimMontage* LightAerialAttackMontage = Montage;
 			MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+			MyCharacter->GetCharacterMovement()->GravityScale = 0.0f;
 
 			CharacterState->SetState(ECharacterStates::Attack);
 			//AttackMovement(5.0f); // we probably don't need this!!!! ********

@@ -77,6 +77,8 @@ void UCharacterStateComponent::ResetState()
 	{
 		bOnLandReset = true;
 		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		MyCharacter->GetCharacterMovement()->GravityScale = 2.5f;
+
 		UE_LOG(LogTemp, Warning, TEXT("State is not reset IN AIR"))
 	}
 	else
@@ -98,6 +100,7 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 			MyCharacter->SetPerfectBeatHit(false);
 			AttackComp->SetSaveLaunchAttack(false);
+			MyCharacter->GetCharacterMovement()->GravityScale = 2.5f;
 		}
 		else
 		{
