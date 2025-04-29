@@ -562,6 +562,9 @@ void ANeonParadigm_GameCharacter::ResetDoubleJump()
 
 void ANeonParadigm_GameCharacter::Dodge()
 {
+	//if(CanDodge())
+		TestRhythmDelayEvent();
+	
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
@@ -574,6 +577,7 @@ void ANeonParadigm_GameCharacter::Dodge()
 	{
 		DodgeEvent();
 	}
+
 }
 
 void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over this for the perfect timing, i might be causing some glitches, maybe ********
@@ -589,7 +593,6 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 		}
 
 		CharacterState->SetState(ECharacterStates::Dodge);
-		TestRhythmDelayEvent();
 
 		if (bPerfectBeatHit)
 		{
