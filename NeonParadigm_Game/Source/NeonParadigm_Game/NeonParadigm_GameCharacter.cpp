@@ -974,7 +974,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		ActorsToIgnore.Add(this); // Ignore self
 
 		// Debug draw type
-		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::ForDuration; // ForDuration
+		EDrawDebugTrace::Type DrawDebugType = EDrawDebugTrace::None; // ForDuration
 
 		// Output hit result
 		FHitResult OutHit;
@@ -1056,7 +1056,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			ActorsToIgnore2.Add(this); // Ignore self
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
 
 			// Output hit result
 			FHitResult OutHit2;
@@ -1126,7 +1126,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 		bool bTraceComplex2 = false;
 		TArray<AActor*> ActorsToIgnore2;
 		ActorsToIgnore2.Add(this); 
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
+		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
 		TArray<FHitResult> OutHits2;
 
 		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
