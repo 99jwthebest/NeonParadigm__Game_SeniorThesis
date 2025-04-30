@@ -1152,19 +1152,21 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 
 			for (const FHitResult& Hit : OutHits2)
 			{
-				if (AActor* HitActor = Hit.GetActor())
+				if(AActor* HitActor = Hit.GetActor())
 				{
-					// Calculate distance
-					float Distance = FVector::Dist(StartVec2, Hit.GetActor()->GetActorLocation());
-
-					// Debug log
-					UE_LOG(LogTemp, Warning, TEXT("PR3_Detected Actor: %s, Distance: %f"), *HitActor->GetName(), Distance);
-
-					// Find the closest actor
-					if (Distance < ClosestDistance)
+					ANP_BaseEnemy* HitEnemy = Cast<ANP_BaseEnemy>(HitActor);
+					if (HitEnemy && HitEnemy->GetMesh())
 					{
-						ClosestDistance = Distance;
-						ClosestActor = HitActor;
+						FVector MeshLocation = HitEnemy->GetMesh()->GetComponentLocation();
+						float Distance = FVector::Dist(StartVec2, MeshLocation);
+
+						UE_LOG(LogTemp, Warning, TEXT("PR3_Detected Enemy: %s, SkeletalMesh Distance: %f"), *HitActor->GetName(), Distance);
+
+						if (Distance < ClosestDistance)
+						{
+							ClosestDistance = Distance;
+							ClosestActor = HitActor;
+						}
 					}
 				}
 			}
