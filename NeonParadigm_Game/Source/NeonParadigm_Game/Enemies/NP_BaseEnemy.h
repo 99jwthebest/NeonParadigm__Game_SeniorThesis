@@ -236,4 +236,6 @@ public:
 	bool GetCanBeTargeted();
 	bool GetbIsBoss();
 
+	bool GetCanBeParried();
+
 };

@@ -1056,7 +1056,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			ActorsToIgnore2.Add(this); // Ignore self
 
 			// Debug draw type
-			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+			EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::ForDuration; // ForDuration
 
 			// Output hit result
 			FHitResult OutHit2;
@@ -1117,16 +1117,15 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 	else
 	{
 		FVector StartVec2 = GetActorLocation();
-		FVector EndVec2 = StartVec2; 
+		FVector EndVec2 = StartVec2;
+		float Radius2 = 500.0f;
 
-		float Radius2 = 500.0f; 
 		TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes2;
 		ObjectTypes2.Add(UEngineTypes::ConvertToObjectType(ECC_Pawn));
 
-		bool bTraceComplex2 = false;
 		TArray<AActor*> ActorsToIgnore2;
-		ActorsToIgnore2.Add(this); 
-		EDrawDebugTrace::Type DrawDebugType2 = EDrawDebugTrace::None; // ForDuration
+		ActorsToIgnore2.Add(this);
+
 		TArray<FHitResult> OutHits2;
 
 		bool bSphereTrace2 = UKismetSystemLibrary::SphereTraceMultiForObjects(
@@ -1135,11 +1134,11 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			EndVec2,
 			Radius2,
 			ObjectTypes2,
-			bTraceComplex2,
+			false,
 			ActorsToIgnore2,
-			DrawDebugType2,
+			EDrawDebugTrace::None,
 			OutHits2,
-			true, // Ignore self
+			true,
 			FLinearColor::Red,
 			FLinearColor::Green,
 			5.0f
@@ -1147,62 +1146,80 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 
 		if (bSphereTrace2)
 		{
-			float ClosestDistance = FLT_MAX; // Adjust To be small
-			AActor* ClosestActor = nullptr;
+			float ClosestDistance = FLT_MAX;
+			AActor* ClosestTarget = nullptr;
 
+			// Check if player is in the air or doing aerial combo
+			bool bPlayerIsAirborne = GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying();
+			UE_LOG(LogTemp, Warning, TEXT("FUCK_Player airborne: %s, Comboing: %s"),
+				GetCharacterMovement()->IsFalling() ? TEXT("true") : TEXT("false"),
+				GetCharacterMovement()->IsFlying() ? TEXT("true") : TEXT("false"));
 			for (const FHitResult& Hit : OutHits2)
 			{
-				if(AActor* HitActor = Hit.GetActor())
+				AActor* HitActor = Hit.GetActor();
+				ANP_BaseEnemy* HitEnemy = Cast<ANP_BaseEnemy>(HitActor);
+				if (HitEnemy && HitEnemy->GetMesh())
 				{
-					ANP_BaseEnemy* HitEnemy = Cast<ANP_BaseEnemy>(HitActor);
-					if (HitEnemy && HitEnemy->GetMesh())
+					FVector MeshLocation = HitEnemy->GetMesh()->GetComponentLocation();
+					float Distance = FVector::Dist(StartVec2, MeshLocation);
+
+					// Define flying enemy as: bCanBeParried == false
+					bool bIsFlyingEnemy = !HitEnemy->GetCanBeParried();
+
+					UE_LOG(LogTemp, Warning, TEXT("FUCK_%s - bCanBeParried: %s"),
+						*HitEnemy->GetName(),
+						HitEnemy->GetCanBeParried() ? TEXT("true") : TEXT("false"));
+
+
+					// Ignore melee enemies while in air
+					if (bPlayerIsAirborne && !bIsFlyingEnemy)
 					{
-						FVector MeshLocation = HitEnemy->GetMesh()->GetComponentLocation();
-						float Distance = FVector::Dist(StartVec2, MeshLocation);
+						UE_LOG(LogTemp, Warning, TEXT("FUCK_Skipping GROUND enemy while airborne: %s"), *HitEnemy->GetName());
+						continue;
+					}
 
-						UE_LOG(LogTemp, Warning, TEXT("PR3_Detected Enemy: %s, SkeletalMesh Distance: %f"), *HitActor->GetName(), Distance);
+					// Accept only flying enemies if airborne
+					// Accept any enemy if grounded
 
-						if (Distance < ClosestDistance)
-						{
-							ClosestDistance = Distance;
-							ClosestActor = HitActor;
-						}
+					if (Distance < ClosestDistance)
+					{
+						ClosestDistance = Distance;
+						ClosestTarget = HitActor;
 					}
 				}
 			}
 
-			// Check if the current target is valid (alive and within range)
-			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
+			// Final targeting logic
+			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy) && 
+				!GetCharacterMovement()->IsFlying() &&
+				!SoftTargetEnemy->GetCanBeParried())
 			{
-				// Do nothing, keep the current target
-				UE_LOG(LogTemp, Warning, TEXT("PR4_Current target is valid, keeping target: %s"), *SoftTargetActor->GetName());
+				UE_LOG(LogTemp, Warning, TEXT("FUCK_Keeping valid soft target: %s"), *SoftTargetActor->GetName());
+			}
+			else if (ClosestTarget)
+			{
+				ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestTarget);
+				if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
+				{
+					LastSoftTargetActor = SoftTargetActor;
+					SoftTargetActor = ClosestTarget;
+					CameraTargetActor = SoftTargetActor;
+					SoftTargetEnemy = ClosestEnemy;
+
+					UE_LOG(LogTemp, Warning, TEXT("FUCK_NEW soft target: %s (Flying: %s)"),
+						*ClosestTarget->GetName(),
+						(!ClosestEnemy->GetCanBeParried() ? TEXT("Yes") : TEXT("No")));
+				}
+				else
+				{
+					SoftTargetActor = nullptr;
+					SoftTargetEnemy = nullptr;
+				}
 			}
 			else
 			{
-				// Set the closest actor as the target
-				if (ClosestActor)
-				{
-					ANP_BaseEnemy* ClosestEnemy = Cast<ANP_BaseEnemy>(ClosestActor);
-					if (ClosestEnemy && ClosestEnemy->GetState() != ECharacterStates::Death)
-					{
-						UE_LOG(LogTemp, Warning, TEXT("PR5_Previous SoftTargetActor: %s"),
-							SoftTargetActor ? *SoftTargetActor->GetName() : TEXT("None"));
-						UE_LOG(LogTemp, Warning, TEXT("PR5_New SoftTargetActor Candidate: %s"),
-							ClosestActor ? *ClosestActor->GetName() : TEXT("None"));
-
-						LastSoftTargetActor = SoftTargetActor;
-						SoftTargetActor = ClosestActor;
-						CameraTargetActor = SoftTargetActor;
-						SoftTargetEnemy = ClosestEnemy;
-
-						UE_LOG(LogTemp, Warning, TEXT("PR6_Locking onto Closest Actor: %s, Distance: %f"), *ClosestActor->GetName(), ClosestDistance);
-					}
-					else
-					{
-						SoftTargetActor = nullptr;
-						SoftTargetEnemy = nullptr;
-					}
-				}
+				SoftTargetActor = nullptr;
+				SoftTargetEnemy = nullptr;
 			}
 		}
 		else

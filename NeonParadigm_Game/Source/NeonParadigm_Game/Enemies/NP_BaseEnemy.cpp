@@ -310,7 +310,7 @@ void ANP_BaseEnemy::PerformDeath()
 	SetState(ECharacterStates::Death);
 	PlayAnimMontage(DeathMontage);
 	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
@@ -655,5 +655,10 @@ bool ANP_BaseEnemy::GetCanBeTargeted()
 bool ANP_BaseEnemy::GetbIsBoss()
 {
 	return bIsBoss;
+}
+
+bool ANP_BaseEnemy::GetCanBeParried()
+{
+	return bCanBeParried;
 }
 
