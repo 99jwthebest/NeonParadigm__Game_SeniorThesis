@@ -1197,7 +1197,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			// Final targeting logic
 			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Keeping valid soft target: %s"), *SoftTargetActor->GetName());
+				UE_LOG(LogTemp, Log, TEXT("FUCK_Keeping valid soft target: %s"), *SoftTargetActor->GetName());
 			}
 			else if (ClosestTarget)
 			{
@@ -1209,7 +1209,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					CameraTargetActor = SoftTargetActor;
 					SoftTargetEnemy = ClosestEnemy;
 
-					UE_LOG(LogTemp, Warning, TEXT("NEW soft target: %s (Flying: %s)"),
+					UE_LOG(LogTemp, Warning, TEXT("FUCK_NEW soft target: %s (Flying: %s)"),
 						*ClosestTarget->GetName(),
 						(!ClosestEnemy->GetCanBeParried() ? TEXT("Yes") : TEXT("No")));
 				}
