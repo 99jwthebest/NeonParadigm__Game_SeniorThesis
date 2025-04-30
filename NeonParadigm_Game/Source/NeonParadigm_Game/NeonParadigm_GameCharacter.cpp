@@ -1149,11 +1149,11 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			float ClosestDistance = FLT_MAX;
 			AActor* ClosestTarget = nullptr;
 
-			// Check if player is in the air or doing aerial combo
 			bool bPlayerIsAirborne = GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying();
-			UE_LOG(LogTemp, Warning, TEXT("FUCK_Player airborne: %s, Comboing: %s"),
+			UE_LOG(LogTemp, Warning, TEXT("Player airborne: %s, Flying: %s"),
 				GetCharacterMovement()->IsFalling() ? TEXT("true") : TEXT("false"),
 				GetCharacterMovement()->IsFlying() ? TEXT("true") : TEXT("false"));
+
 			for (const FHitResult& Hit : OutHits2)
 			{
 				AActor* HitActor = Hit.GetActor();
@@ -1163,23 +1163,19 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					FVector MeshLocation = HitEnemy->GetMesh()->GetComponentLocation();
 					float Distance = FVector::Dist(StartVec2, MeshLocation);
 
-					// Define flying enemy as: bCanBeParried == false
 					bool bIsFlyingEnemy = !HitEnemy->GetCanBeParried();
+					bool bIsCurrentTarget = (HitEnemy == SoftTargetEnemy);
 
-					UE_LOG(LogTemp, Warning, TEXT("FUCK_%s - bCanBeParried: %s"),
+					UE_LOG(LogTemp, Warning, TEXT("%s - bCanBeParried: %s"),
 						*HitEnemy->GetName(),
 						HitEnemy->GetCanBeParried() ? TEXT("true") : TEXT("false"));
 
-
-					// Ignore melee enemies while in air
-					if (bPlayerIsAirborne && !bIsFlyingEnemy)
+					// Skip ground enemies while airborne unless it's the current target
+					if (bPlayerIsAirborne && HitEnemy->GetCanBeParried() && !bIsCurrentTarget)
 					{
-						UE_LOG(LogTemp, Warning, TEXT("FUCK_Skipping GROUND enemy while airborne: %s"), *HitEnemy->GetName());
+						UE_LOG(LogTemp, Warning, TEXT("Skipping other ground enemy while airborne: %s"), *HitEnemy->GetName());
 						continue;
 					}
-
-					// Accept only flying enemies if airborne
-					// Accept any enemy if grounded
 
 					if (Distance < ClosestDistance)
 					{
@@ -1189,12 +1185,19 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 				}
 			}
 
-			// Final targeting logic
-			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy) && 
-				!GetCharacterMovement()->IsFlying() &&
-				!SoftTargetEnemy->GetCanBeParried())
+			// Reject old ground target if we're airborne and it's not flying
+			if (SoftTargetEnemy && SoftTargetEnemy->GetCanBeParried() && bPlayerIsAirborne)
 			{
-				UE_LOG(LogTemp, Warning, TEXT("FUCK_Keeping valid soft target: %s"), *SoftTargetActor->GetName());
+				UE_LOG(LogTemp, Warning, TEXT("Clearing ground SoftTarget because player is airborne."));
+				SoftTargetActor = nullptr;
+				SoftTargetEnemy = nullptr;
+				LastSoftTargetActor = nullptr;
+			}
+
+			// Final targeting logic
+			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Keeping valid soft target: %s"), *SoftTargetActor->GetName());
 			}
 			else if (ClosestTarget)
 			{
@@ -1206,7 +1209,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					CameraTargetActor = SoftTargetActor;
 					SoftTargetEnemy = ClosestEnemy;
 
-					UE_LOG(LogTemp, Warning, TEXT("FUCK_NEW soft target: %s (Flying: %s)"),
+					UE_LOG(LogTemp, Warning, TEXT("NEW soft target: %s (Flying: %s)"),
 						*ClosestTarget->GetName(),
 						(!ClosestEnemy->GetCanBeParried() ? TEXT("Yes") : TEXT("No")));
 				}
