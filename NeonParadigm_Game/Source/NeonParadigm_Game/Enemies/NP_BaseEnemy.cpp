@@ -308,7 +308,8 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 void ANP_BaseEnemy::PerformDeath()
 {
 	SetState(ECharacterStates::Death);
-	PlayAnimMontage(DeathMontage);
+	if(!bIsBoss)
+		PlayAnimMontage(DeathMontage);
 	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	//GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
