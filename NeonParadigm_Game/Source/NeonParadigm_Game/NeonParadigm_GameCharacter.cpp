@@ -151,7 +151,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UE_LOG(LogTemp, Log, TEXT("SUCK_CurrentState: %d"), (int32)CharacterState->GetState());
+	//UE_LOG(LogTemp, Log, TEXT("SUCK_CurrentState: %d"), (int32)CharacterState->GetState());
 
 	if (!bAutoTargetCamera)
 		return;
@@ -553,6 +553,7 @@ void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded bl
 		CharacterState->ResetState();
 	}
 	AttackComp->ResetLaunched();  
+	UE_LOG(LogTemp, Log, TEXT("SHUCK_CurrentState: %d"), (int32)CharacterState->GetState());
 
 }
 
