@@ -76,7 +76,7 @@ void UCharacterStateComponent::ResetState()
 		MyCharacter->GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
 	{
 		bOnLandReset = true;
-		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
 		MyCharacter->GetCharacterMovement()->GravityScale = 2.5f;
 
 		UE_LOG(LogTemp, Warning, TEXT("State is not reset IN AIR"))

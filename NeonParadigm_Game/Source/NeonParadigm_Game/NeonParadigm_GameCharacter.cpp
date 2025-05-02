@@ -1416,12 +1416,13 @@ void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, floa
 				// Step 2: Ensure the instance is valid
 				if (IsValid(NP_DamageType))
 				{
-					UE_LOG(LogTemp, Warning, TEXT("DC_vALID Is IT valid!!"));
+					UE_LOG(LogTemp, Warning, TEXT("BUCK_vALID Is IT valid!!"));
 
 					if (IsValid(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType)))
 					{
 						CharacterState->SetState(ECharacterStates::Disabled);
 						PlayAnimMontage(DamageComp->GetHitReactionMontage(NP_DamageType->DamageType));
+						UE_LOG(LogTemp, Warning, TEXT("BUCK_vALID Is IT valid!!"));
 					}
 					else
 					{

@@ -79,7 +79,7 @@ void UAttackComponent::LightAttackEvent()
 	}
 	else
 	{
-		if (CanAerialAttack()) 
+		if (CanAerialAttack() && CharacterState->GetState() != ECharacterStates::Disabled) 
 		{
 			PerformAerialLightAttack(LightAttackIndex);
 		}
