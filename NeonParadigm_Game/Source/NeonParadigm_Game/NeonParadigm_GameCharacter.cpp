@@ -151,7 +151,8 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+	UE_LOG(LogTemp, Log, TEXT("SUCK_CurrentState: %d"), (int32)CharacterState->GetState());
+
 	if (!bAutoTargetCamera)
 		return;
 
