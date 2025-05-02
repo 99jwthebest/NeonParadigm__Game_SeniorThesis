@@ -1170,13 +1170,21 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 						*HitEnemy->GetName(),
 						HitEnemy->GetCanBeParried() ? TEXT("true") : TEXT("false"));
 
-					// Skip ground enemies while airborne unless it's the current target
-					if (bPlayerIsAirborne && HitEnemy->GetCanBeParried() && !bIsCurrentTarget)
+					//  Skip flying enemies while grounded
+					if (!bPlayerIsAirborne && bIsFlyingEnemy)
 					{
-						UE_LOG(LogTemp, Warning, TEXT("Skipping other ground enemy while airborne: %s"), *HitEnemy->GetName());
+						UE_LOG(LogTemp, Warning, TEXT("Skipping flying enemy while grounded: %s"), *HitEnemy->GetName());
 						continue;
 					}
 
+					//  Skip other melee enemies while airborne unless it's the current target
+					if (bPlayerIsAirborne && !bIsFlyingEnemy && !bIsCurrentTarget)
+					{
+						UE_LOG(LogTemp, Warning, TEXT("Skipping non-target ground enemy while airborne: %s"), *HitEnemy->GetName());
+						continue;
+					}
+
+					//  This enemy is valid
 					if (Distance < ClosestDistance)
 					{
 						ClosestDistance = Distance;
@@ -1197,7 +1205,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 			// Final targeting logic
 			if (SoftTargetActor && IsTargetValid(SoftTargetEnemy))
 			{
-				UE_LOG(LogTemp, Log, TEXT("FUCK_Keeping valid soft target: %s"), *SoftTargetActor->GetName());
+				UE_LOG(LogTemp, Log, TEXT("DUCK_Keeping valid soft target: %s"), *SoftTargetActor->GetName());
 			}
 			else if (ClosestTarget)
 			{
@@ -1209,7 +1217,7 @@ void ANeonParadigm_GameCharacter::FindSoftLockTarget()
 					CameraTargetActor = SoftTargetActor;
 					SoftTargetEnemy = ClosestEnemy;
 
-					UE_LOG(LogTemp, Warning, TEXT("FUCK_NEW soft target: %s (Flying: %s)"),
+					UE_LOG(LogTemp, Warning, TEXT("DUCK_NEW soft target: %s (Flying: %s)"),
 						*ClosestTarget->GetName(),
 						(!ClosestEnemy->GetCanBeParried() ? TEXT("Yes") : TEXT("No")));
 				}
