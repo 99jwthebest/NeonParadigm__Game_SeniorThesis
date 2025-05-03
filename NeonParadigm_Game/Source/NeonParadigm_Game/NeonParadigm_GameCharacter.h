@@ -344,7 +344,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TestRhythmDelayEvent();
 
-
+	UFUNCTION(BlueprintCallable)
+	void RhythmCheckEvent();
 
 private:
 

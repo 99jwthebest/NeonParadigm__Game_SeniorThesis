@@ -448,6 +448,8 @@ void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 void ANeonParadigm_GameCharacter::LightAttack()
 {
 
+	RhythmCheckEvent();
+
 	TArray<ECharacterStates> CurrentCharacterState2;
 	CurrentCharacterState2.Add(ECharacterStates::Dodge);
 
@@ -495,6 +497,8 @@ void ANeonParadigm_GameCharacter::LaunchAttack(const FInputActionInstance& Insta
 
 void ANeonParadigm_GameCharacter::HeavyAttack()
 {
+	RhythmCheckEvent();
+
 	AttackComp->SetSaveLightAttack(false);
 
 	TArray<ECharacterStates> CurrentCharacterState;
@@ -565,7 +569,7 @@ void ANeonParadigm_GameCharacter::ResetDoubleJump()
 void ANeonParadigm_GameCharacter::Dodge()
 {
 	//if(CanDodge())
-		TestRhythmDelayEvent();
+	RhythmCheckEvent();
 	
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
@@ -1634,10 +1638,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / DelayFromNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
-		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
-		TogglePerfectHitTextBox();
-
 	}
 	else if (DelayFromNextBeat <= 0.13f && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
@@ -1650,10 +1651,7 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 		PlayRateForAnimMontages = CurrentAnimTimeDelay / TotalTimeDelayToNextBeat;
 
 		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
-		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
 		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
-		TogglePerfectHitTextBox();
-
 	}
 	else if (DelayFromLastBeat <= GetCurrentTempoDelay() / 2 && GetCurrentAnimTimeDelay() <= 1.1f)
 	{
@@ -1698,6 +1696,76 @@ void ANeonParadigm_GameCharacter::TestRhythmDelayEvent()
 
 	//DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
 	//UE_LOG(LogTemp, Error, TEXT("A_Delay 2 From Next Beat: %f"), DelayFromNextBeat);
+
+}
+
+void ANeonParadigm_GameCharacter::RhythmCheckEvent()
+{
+	UE_LOG(LogTemp, Error, TEXT("CD_Player Input Tick: %f"), GetWorld()->GetTimeSeconds());
+
+	DelayFromLastBeat = GetWorld()->GetTimeSeconds() - LastBeatTime;
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay From Last Beat: %f"), DelayFromLastBeat);
+
+	DelayFromNextBeat = NextBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay From Next Beat: %f"), DelayFromNextBeat);
+
+	DelayFromThirdBeat = ThirdBeatTime - GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay 1 From Third Beat: %f"), DelayFromThirdBeat);
+
+	UE_LOG(LogTemp, Error, TEXT("CD_Delay Tempo Delay Threshold From Third Beat: %f"), GetCurrentTempoDelay() / 2);
+
+
+	if (DelayFromLastBeat <= 0.13f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was PERFECT to LAST Beat: %f"), DelayFromLastBeat);
+
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		SetPerfectBeatHit(true);  // ***** find references to see if this bool gets reset when supposed to!!!!!
+		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+		TogglePerfectHitTextBox();
+
+	}
+	else if (DelayFromNextBeat <= 0.13f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was PERFECT to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+		SetPerfectBeatHit(true);   // ***** find references to see if this bool gets reset when supposed to!!!!!
+		//ScoreComp->IncrementScore(100);  // *****  score to Add!!!!
+		TogglePerfectHitTextBox();
+
+	}
+	else if (DelayFromLastBeat <= GetCurrentTempoDelay() / 2 && GetCurrentAnimTimeDelay() <= 1.1f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to LAST Beat: %f"), DelayFromLastBeat);
+
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+
+	}
+	else if (GetCurrentAnimTimeDelay() <= 1.1f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay(); // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CD_Player Input Was CLOSER to NEXT Beat: %f"), DelayFromNextBeat);
+
+		TotalTimeDelayToNextBeat = DelayFromNextBeat + GetCurrentTempoDelay() * 2; // need to get time delay from tempo in music component
+
+		UE_LOG(LogTemp, Warning, TEXT("CD_Total Time Delay To Next Beat: %f"), TotalTimeDelayToNextBeat);
+
+		UE_LOG(LogTemp, Error, TEXT("CD_Play Rate For AnimMontage: %f"), PlayRateForAnimMontages);
+	}
 
 }
 
@@ -1969,6 +2037,8 @@ void ANeonParadigm_GameCharacter::EndEnemyEncounter()
 
 void ANeonParadigm_GameCharacter::ProjectileWeapon()
 {
+	RhythmCheckEvent();
+
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
@@ -2117,6 +2187,8 @@ void ANeonParadigm_GameCharacter::SaveShoot()
 
 void ANeonParadigm_GameCharacter::ProjectileWeaponStun()
 {
+	RhythmCheckEvent();
+
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
 	CurrentCharacterState.Add(ECharacterStates::Dodge);
