@@ -423,11 +423,11 @@ float UDamageComponent::DifficultyModeDamageModifier()
 	{
 	case 0:
 		UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Boring"));
-		DamageMultiplier = 5.0f;  // Increase damage
+		DamageMultiplier = 1.0f;  // Increase damage
 		break;
 	case 1:
 		UE_LOG(LogTemp, Error, TEXT("DOOOOM It's MID"));
-		DamageMultiplier = 1.0f;  // Normal damage
+		DamageMultiplier = .5f;  // Normal damage
 		break;
 	case 2:
 		UE_LOG(LogTemp, Error, TEXT("DOOOOM It's Hard"));
