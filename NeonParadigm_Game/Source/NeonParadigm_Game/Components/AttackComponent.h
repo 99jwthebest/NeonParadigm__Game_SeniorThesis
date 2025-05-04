@@ -75,6 +75,10 @@ public:
 	void SetNotifyLaunchPassed(bool bNotifyLaunchPassed);
 	bool GetNotifyLaunchPassed();
 
+	bool GetSaveLightAttack();
+
+	bool GetSaveHeavyAttack();
+
 	UPROPERTY(VisibleAnywhere)
 	ANeonParadigm_GameCharacter* MyCharacter;
 private:

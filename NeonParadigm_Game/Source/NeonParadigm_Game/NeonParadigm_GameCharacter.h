@@ -645,6 +645,8 @@ private:
 
 	bool bAutoTargetCamera;
 
+	bool bHasAirDodged;
+
 
 public:
 	UFUNCTION(BlueprintImplementableEvent)

@@ -109,6 +109,8 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	DefaultCameraFOV = 90.0f;
 
 	DodgeBaseForce = 1500.0f;
+
+	bHasAirDodged = false;
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -151,7 +153,7 @@ void ANeonParadigm_GameCharacter::BeginPlay()
 void ANeonParadigm_GameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//UE_LOG(LogTemp, Log, TEXT("SUCK_CurrentState: %d"), (int32)CharacterState->GetState());
+	//UE_LOG(LogTemp, Log, TEXT("YUCK_CurrentState: %d"), (int32)CharacterState->GetState());
 
 	if (!bAutoTargetCamera)
 		return;
@@ -447,8 +449,10 @@ void ANeonParadigm_GameCharacter::Look(const FInputActionValue& Value)
 
 void ANeonParadigm_GameCharacter::LightAttack()
 {
-
-	RhythmCheckEvent();
+	if(AttackComp->CanAttack())
+		RhythmCheckEvent();
+	else if (AttackComp->CanAerialAttack())
+		RhythmCheckEvent();
 
 	TArray<ECharacterStates> CurrentCharacterState2;
 	CurrentCharacterState2.Add(ECharacterStates::Dodge);
@@ -468,8 +472,11 @@ void ANeonParadigm_GameCharacter::LightAttack()
 
 	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
 	{
+		if (!AttackComp->GetSaveLightAttack())
+			RhythmCheckEvent();
+
 		//If Current State is Equal to Attack Then Save The Input
-		UE_LOG(LogTemp, Warning, TEXT("Light ATTACKING!!!!!!!!"));
+		UE_LOG(LogTemp, Warning, TEXT("TRUCK_Light ATTACKING!!!!!!!!"));
 		AttackComp->SetSaveLightAttack(true);
 	}
 	else
@@ -497,7 +504,8 @@ void ANeonParadigm_GameCharacter::LaunchAttack(const FInputActionInstance& Insta
 
 void ANeonParadigm_GameCharacter::HeavyAttack()
 {
-	RhythmCheckEvent();
+	if(AttackComp->CanAttack())
+		RhythmCheckEvent();
 
 	AttackComp->SetSaveLightAttack(false);
 
@@ -506,6 +514,9 @@ void ANeonParadigm_GameCharacter::HeavyAttack()
 
 	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
 	{
+		if (!AttackComp->GetSaveHeavyAttack())
+			RhythmCheckEvent();
+
 		//If Current State is Equal to Attack Then Save The Input
 		UE_LOG(LogTemp, Warning, TEXT("Heavy ATTACKING!!!!!!!!"));
 		AttackComp->SetSaveHeavyAttack(true);
@@ -549,6 +560,8 @@ void ANeonParadigm_GameCharacter::Landed(const FHitResult& Hit)   // OnLanded bl
 	Super::Landed(Hit);
 
 	ResetDoubleJump();
+	bHasAirDodged = false;
+
 	if (CharacterState->GetOnLandReset())  // On Landed Reset
 	{
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
@@ -568,8 +581,8 @@ void ANeonParadigm_GameCharacter::ResetDoubleJump()
 
 void ANeonParadigm_GameCharacter::Dodge()
 {
-	//if(CanDodge())
-	RhythmCheckEvent();
+	if(CanDodge())
+		RhythmCheckEvent();
 	
 	TArray<ECharacterStates> CurrentCharacterState;
 	CurrentCharacterState.Add(ECharacterStates::Attack);
@@ -577,6 +590,8 @@ void ANeonParadigm_GameCharacter::Dodge()
 
 	if (CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState))
 	{
+		if (!bIsDodgeSaved)
+			RhythmCheckEvent();
 		bIsDodgeSaved = true;
 	}
 	else
@@ -590,6 +605,11 @@ void ANeonParadigm_GameCharacter::DodgeEvent()  //   ******  Have to look over t
 {
 	if (CanDodge())
 	{
+		if (GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying())
+		{
+			bHasAirDodged = true;
+		}
+
 		AttackComp->ResetLightAttack();
 		AttackComp->ResetHeavyAttack();
 
@@ -663,6 +683,14 @@ bool ANeonParadigm_GameCharacter::CanDodge()
 
 	// Check if cooldown has ended
 	const bool bCooldownComplete = GetWorld()->GetTimeSeconds() >= DodgeCooldownEndTime;
+
+	bool bIsAirborne = GetCharacterMovement()->IsFalling() || GetCharacterMovement()->IsFlying();
+
+	// If in air and already dodged, block further dodges
+	if (bIsAirborne && bHasAirDodged)
+	{
+		return false;
+	}
 
 	return bCooldownComplete && !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState); //&& !GetCharacterMovement()->IsFalling();
 }

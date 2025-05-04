@@ -79,7 +79,7 @@ void UAttackComponent::LightAttackEvent()
 	}
 	else
 	{
-		if (CanAerialAttack() && CharacterState->GetState() != ECharacterStates::Disabled) 
+		if (CanAerialAttack()) 
 		{
 			PerformAerialLightAttack(LightAttackIndex);
 		}
@@ -491,7 +491,15 @@ void UAttackComponent::StopLaunchMovement()
 
 bool UAttackComponent::CanAerialAttack()
 {
-	return bCanAerialAttack; //&& bLaunched;
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && bCanAerialAttack; //&& bLaunched;
 }
 
 void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
@@ -578,6 +586,16 @@ void UAttackComponent::SetNotifyLaunchPassed(bool bNotifyLaunchPassed)
 bool UAttackComponent::GetNotifyLaunchPassed()
 {
 	return bNotifyLaunchAttackPassed;
+}
+
+bool UAttackComponent::GetSaveLightAttack()
+{
+	return bSaveLightAttack;
+}
+
+bool UAttackComponent::GetSaveHeavyAttack()
+{
+	return bSaveHeavyAttack;
 }
 
 void UAttackComponent::LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted)
