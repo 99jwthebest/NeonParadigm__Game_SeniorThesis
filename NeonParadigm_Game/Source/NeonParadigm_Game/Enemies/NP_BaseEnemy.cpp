@@ -389,7 +389,9 @@ void ANP_BaseEnemy::OnTargeted()
 
 void ANP_BaseEnemy::EndTarget()
 {
+	if(HealthBarWidget)
 	HealthBarWidget->SetVisibility(false);
+	if(LockOnWidget)
 	LockOnWidget->SetVisibility(false);
 }
 
