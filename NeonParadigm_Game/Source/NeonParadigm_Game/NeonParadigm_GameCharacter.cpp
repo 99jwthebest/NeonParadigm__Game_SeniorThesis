@@ -1822,18 +1822,6 @@ void ANeonParadigm_GameCharacter::RageEvent()
 	SetIFrames(true);
 
 	//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
-	RageParticleComponent = UGameplayStatics::SpawnEmitterAttached(
-		RageEmitter,        // The particle system you want to spawn
-		GetMesh(),                 // The component to attach the particle system to (could be character mesh)
-		FName("root"),           // Socket name or bone to attach to (can be NAME_None if not using sockets)
-		FVector(0.0f, 0.0f, 200.0f),     // Optional location (relative offset)
-		FRotator(0.0f, 0.0f, 0.0f),    // Optional rotation
-		FVector(1.0f, 1.0f, 1.0f),     // Optional scale
-		EAttachLocation::KeepRelativeOffset,  // Keep relative or snap to target
-		true,                          // Auto-destroy when finished
-		EPSCPoolMethod::None,          // No pooling
-		true                           // Auto-activate);
-	);
 
 	CharacterState->SetState(ECharacterStates::Attack);
 
@@ -1844,17 +1832,12 @@ void ANeonParadigm_GameCharacter::RageEvent()
 
 void ANeonParadigm_GameCharacter::RageComplete() 
 {
-	if (RageParticleComponent)
+	bRage = true;
+	if (RageOverlayMaterial)
 	{
-		RageParticleComponent->DestroyComponent();
-		RageParticleComponent = nullptr;
-		bRage = true;
-		if (RageOverlayMaterial)
-		{
-			GetMesh()->SetOverlayMaterial(RageOverlayMaterial);
-		}
-		GetWorld()->GetTimerManager().SetTimer(RageDepletionTimerHandle, this, &ANeonParadigm_GameCharacter::DepleteRage, RageDepletionRate, true);
+		GetMesh()->SetOverlayMaterial(RageOverlayMaterial);
 	}
+	GetWorld()->GetTimerManager().SetTimer(RageDepletionTimerHandle, this, &ANeonParadigm_GameCharacter::DepleteRage, RageDepletionRate, true);
 }
 
 void ANeonParadigm_GameCharacter::EndRage()
@@ -2766,7 +2749,7 @@ void ANeonParadigm_GameCharacter::OnSettingsChanged()
 	UE_LOG(LogTemp, Warning, TEXT("DUE, BT Work Delegate Because I'm ancy grancy"));
 }
 
-void ANeonParadigm_GameCharacter::NavigateMenus()
+void ANeonParadigm_GameCharacter::NavigateMenus(const FInputActionInstance& Instance)
 {
 	UE_LOG(LogTemp, Error, TEXT("X_AHHHHHHH_YAAAAHH, IT Better Work!!!"));
 

@@ -652,7 +652,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayDamageCameraShake();
 
-	void NavigateMenus();
+	void NavigateMenus(const FInputActionInstance& Instance);
 	void NavigateMenusKeyBor();
 
 };
