@@ -2752,7 +2752,6 @@ void ANeonParadigm_GameCharacter::OnSettingsChanged()
 void ANeonParadigm_GameCharacter::NavigateMenus(const FInputActionInstance& Instance)
 {
 	UE_LOG(LogTemp, Error, TEXT("X_AHHHHHHH_YAAAAHH, IT Better Work!!!"));
-
 }
 
 void ANeonParadigm_GameCharacter::NavigateMenusKeyBor()
