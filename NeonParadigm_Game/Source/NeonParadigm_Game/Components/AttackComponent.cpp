@@ -489,6 +489,11 @@ void UAttackComponent::StopLaunchMovement()
 	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
 }
 
+bool UAttackComponent::GetAerialAttackB()
+{
+	return bCanAerialAttack;
+}
+
 bool UAttackComponent::CanAerialAttack()
 {
 	TArray<ECharacterStates> CurrentCharacterState;

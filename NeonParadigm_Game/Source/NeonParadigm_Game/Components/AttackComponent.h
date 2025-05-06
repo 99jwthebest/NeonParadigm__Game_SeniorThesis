@@ -61,6 +61,9 @@ public:
 	void MovePlayerIntoAir();
 	void StopLaunchMovement();
 
+	UFUNCTION(BlueprintPure)
+	bool GetAerialAttackB();
+	UFUNCTION(BlueprintPure)
 	bool CanAerialAttack();
 	void PerformAerialLightAttack(int AttackIndex);
 	void ResetLightAerialAttack();
