@@ -646,7 +646,7 @@ private:
 	bool bAutoTargetCamera;
 
 	bool bHasAirDodged;
-
+	bool bPlayerInputEnabled;
 
 public:
 	UFUNCTION(BlueprintImplementableEvent)
@@ -655,5 +655,11 @@ public:
 	void NavigateMenus(const FInputActionInstance& Instance);
 	void NavigateMenusKeyBor();
 
+	UFUNCTION(BlueprintCallable)
+	void EnablePlayerInput();
+	UFUNCTION(BlueprintCallable)
+	void DisablePlayerInput();
+	UFUNCTION(BlueprintPure)
+	bool PlayerInputEnabled();
 };
 

@@ -111,6 +111,8 @@ ANeonParadigm_GameCharacter::ANeonParadigm_GameCharacter()
 	DodgeBaseForce = 1500.0f;
 
 	bHasAirDodged = false;
+	bPlayerInputEnabled = true;
+
 }
 
 void ANeonParadigm_GameCharacter::BeginPlay()
@@ -2758,4 +2760,33 @@ void ANeonParadigm_GameCharacter::NavigateMenusKeyBor()
 {
 	UE_LOG(LogTemp, Error, TEXT("X_AHHHHHHH_YAAAAHH, KEYSSSSSS!!!"));
 
+}
+
+void ANeonParadigm_GameCharacter::EnablePlayerInput()
+{
+	if (APlayerController* PC = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0); // Restore with same priority
+			bPlayerInputEnabled = true;
+		}
+	}
+}
+
+void ANeonParadigm_GameCharacter::DisablePlayerInput()
+{
+	if (APlayerController* PC = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
+		{
+			Subsystem->RemoveMappingContext(DefaultMappingContext);
+			bPlayerInputEnabled = false;
+		}
+	}
+}
+
+bool ANeonParadigm_GameCharacter::PlayerInputEnabled()
+{
+	return bPlayerInputEnabled;
 }

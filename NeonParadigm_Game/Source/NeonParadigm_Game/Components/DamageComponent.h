@@ -42,6 +42,8 @@ public:
 	void StartTimerProjectileWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
 
 	void DrawProjectileWeaponStunCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
+	void DrawEndComboWeaponCollision();
+	void StartTimerEndComboWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
 
 
 	void PerfectHitOperations();

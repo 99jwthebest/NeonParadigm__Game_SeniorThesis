@@ -165,52 +165,58 @@ void UDamageComponent::DrawWeaponCollision(float End, float Radius, float Amount
 
 void UDamageComponent::DrawProjectileWeaponCollision()
 {
-	if (MyCharacter->GetCameraTargetActor() == nullptr)
+	if (!MyCharacter)
 	{
 		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
 		return;
 	}
+
+	AActor* CameraTarget = MyCharacter->GetCameraTargetActor();
+	if (!CameraTarget)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+		return;
+	}
+
+
 
 	HitActors.Empty();
 
 	// Actors to ignore
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(MyCharacter);
-	// Object types to trace for
-	/*TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
-	ObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_Pawn)); */
-	// Add more ObjectTypes if needed
+
 	// Array to hold the hit results
 	TArray<FHitResult> OutHits;
 
 	// Perform the multi-sphere trace by channel
 	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
-		GetWorld(),                        // World context
-		MyCharacter->GetCameraTargetActor()->GetActorLocation(),                          // Start of the trace
-		MyCharacter->GetCameraTargetActor()->GetActorLocation(),                            // End of the trace
-		RadiusForProjectileWeapon,                            // Radius of the sphere
-		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1), // Use custom trace channel for weapon trace
-		false,                             // bTraceComplex - false unless you want complex collision
-		ActorsToIgnore,                    // Actors to ignore (MyCharacter)
-		EDrawDebugTrace::None,      // Draw the trace for debugging  // ForDuration *****************
-		OutHits,                           // Output array to store hit results
-		true,                              // Ignore the tracing actor (self)
-		FLinearColor::Red,               // Trace line color
-		FLinearColor::Green,                 // Hit color
-		2.0f                               // How long to draw the debug trace
+		GetWorld(),
+		CameraTarget->GetActorLocation(), // Start
+		CameraTarget->GetActorLocation(), // End (stationary)
+		RadiusForProjectileWeapon,
+		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1),
+		false, // bTraceComplex
+		ActorsToIgnore,
+		EDrawDebugTrace::None,
+		OutHits,
+		true, // Ignore self
+		FLinearColor::Red,
+		FLinearColor::Green,
+		2.0f
 	);
 
 	if (bMultiSphereHit)
 	{
 		for (FHitResult& Hit : OutHits)
 		{
-			// Handle each hit result here
-			UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *Hit.GetActor()->GetName());
-			if (!HitActors.Contains(Hit.GetActor()) && Hit.GetActor()->IsValidLowLevel())
+			AActor* HitActor = Hit.GetActor();
+			if (HitActor && !HitActors.Contains(HitActor) && HitActor->IsValidLowLevel())
 			{
-				//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.
-				float Damage = UGameplayStatics::ApplyDamage(Hit.GetActor(), AmountOfDamageForProjectileWeapon, MyCharacter->GetController(), MyCharacter, DamageTypeClassForProjectileWeapon);
-				HitActors.AddUnique(Hit.GetActor());
+				float Damage = UGameplayStatics::ApplyDamage(HitActor, AmountOfDamageForProjectileWeapon, MyCharacter->GetController(), MyCharacter, DamageTypeClassForProjectileWeapon);
+				HitActors.AddUnique(HitActor);
+
+				UE_LOG(LogTemp, Log, TEXT("Hit actor: %s"), *HitActor->GetName());
 				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
 
 				ScoreComp->TrackHit(MyCharacter->IsPerfectBeatHit());
@@ -219,7 +225,7 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 				{
 					SpawnRagePickups(Hit);
 
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);  // replace with another particle effect.  *****
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
 
 					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
 
@@ -231,6 +237,7 @@ void UDamageComponent::DrawProjectileWeaponCollision()
 			}
 		}
 	}
+
 	ProjectileCollisionSpawned++;
 	if (ProjectileCollisionSpawned >= 2)
 	{
@@ -315,6 +322,107 @@ void UDamageComponent::DrawProjectileWeaponStunCollision(float Radius, float Amo
 			}
 		}
 	}
+}
+
+void UDamageComponent::DrawEndComboWeaponCollision()
+{
+	if (!MyCharacter)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+		return;
+	}
+
+	AActor* CameraTarget = MyCharacter->GetCameraTargetActor();
+	if (!CameraTarget)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+		return;
+	}
+
+	ANP_BaseEnemy* EnemyTarget = Cast<ANP_BaseEnemy>(CameraTarget);
+	if (EnemyTarget && EnemyTarget->GetbIsBoss())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CameraTarget is a boss character. Skipping projectile hit check."));
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+		return;
+	}
+
+	HitActors.Empty();
+
+	// Actors to ignore
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(MyCharacter);
+
+	// Array to hold the hit results
+	TArray<FHitResult> OutHits;
+
+	// Perform the multi-sphere trace by channel
+	bool bMultiSphereHit = UKismetSystemLibrary::SphereTraceMulti(
+		GetWorld(),
+		CameraTarget->GetActorLocation(), // Start
+		CameraTarget->GetActorLocation(), // End (stationary)
+		RadiusForProjectileWeapon,
+		UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_GameTraceChannel1),
+		false, // bTraceComplex
+		ActorsToIgnore,
+		EDrawDebugTrace::None,
+		OutHits,
+		true, // Ignore self
+		FLinearColor::Red,
+		FLinearColor::Green,
+		2.0f
+	);
+
+	if (bMultiSphereHit)
+	{
+		for (FHitResult& Hit : OutHits)
+		{
+			AActor* HitActor = Hit.GetActor();
+			if (HitActor && !HitActors.Contains(HitActor) && HitActor->IsValidLowLevel())
+			{
+				float Damage = UGameplayStatics::ApplyDamage(HitActor, AmountOfDamageForProjectileWeapon, MyCharacter->GetController(), MyCharacter, DamageTypeClassForProjectileWeapon);
+				HitActors.AddUnique(HitActor);
+
+				UE_LOG(LogTemp, Log, TEXT("WOAHHit actor: %s"), *HitActor->GetName());
+				UE_LOG(LogTemp, Log, TEXT("Is this Firing??!?!!?! %f"), Damage);
+
+				ScoreComp->TrackHit(MyCharacter->IsPerfectBeatHit());
+
+				if (MyCharacter->IsPerfectBeatHit())
+				{
+					SpawnRagePickups(Hit);
+
+					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.ImpactPoint, FRotator::ZeroRotator);
+
+					UE_LOG(LogTemp, Error, TEXT("ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
+
+					PerfectHitOperations();
+					ScoreComp->IncrementScore(500);
+					MyCharacter->UpdateScoreEvent();
+					MyCharacter->SetPerfectBeatHit(false);
+				}
+			}
+		}
+	}
+
+	ProjectileCollisionSpawned++;
+	if (ProjectileCollisionSpawned >= 2)
+	{
+		ProjectileCollisionSpawned = 0;
+		GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+	}
+}
+
+void UDamageComponent::StartTimerEndComboWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass)
+{
+	RadiusForProjectileWeapon = Radius;
+	AmountOfDamageForProjectileWeapon = AmountOfDamage;
+	DamageTypeClassForProjectileWeapon = DamageTypeClass;
+
+	//GetWorld()->GetTimerManager().ClearTimer(TimerForProjectileWeaponCollision);
+	UE_LOG(LogTemp, Error, TEXT("B_ITHOUGHT THIS ONLY GET CALLED ON PERFECT HIT???"));
+
+	GetWorld()->GetTimerManager().SetTimer(TimerForProjectileWeaponCollision, this, &UDamageComponent::DrawEndComboWeaponCollision, MyCharacter->GetCurrentTempoDelay(), true); // 0.0167f
 }
 
 

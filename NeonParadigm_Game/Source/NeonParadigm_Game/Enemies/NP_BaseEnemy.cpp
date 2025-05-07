@@ -294,6 +294,8 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 				return HR_Stun;
 			case EDamageTypes::Explosion:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Explosion"));
+				if (bIsBoss)
+					return HR_Stun;
 				EnemyStunnedWithProjectiles();
 				AttackMovement(25.0f); //15.0f  should maybe be the value
 				PlayCameraShake();
