@@ -1393,7 +1393,9 @@ void ANeonParadigm_GameCharacter::SaveDodge()
 
 void ANeonParadigm_GameCharacter::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (!bEnabledIFrames)
+	ANP_BaseEnemy* EnemyBoss = Cast<ANP_BaseEnemy>(DamageCauser);
+
+	if (!bEnabledIFrames || (EnemyBoss && EnemyBoss->GetbIsBoss()))
 	{
 		TArray<ECharacterStates> CurrentCharacterState;
 		CurrentCharacterState.Add(ECharacterStates::Parry);
