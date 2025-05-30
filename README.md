@@ -1,15 +1,74 @@
-# Neon Paradigm
+# **Neon Paradigm**
 
-A hack-and-slash rhythm game where players must press inputs and land attacks on the beat to progress, using dynamic audio and custom shaders to enhance the experience.
+*A hack-and-slash rhythm game where players must strike and dodge to the beat, using dynamic audio and custom shaders to create a fast-paced, immersive experience.*
 
-## Table of Contents
-- [Project Description](#project-description)
+---
 
-## Project Description
-This project is a senior thesis developed for the University of the Incarnate Word (UIW), where I created an engaging hack-and-slash rhythm game using Unreal Engine C++/Blueprint. In the game, the player must press inputs on the beat, and the player's attacks must land on the beat to maximize effectiveness. This creates a dynamic and immersive gameplay experience, where timing and rhythm are essential for success.
+## 📑 Table of Contents
 
-The game integrates FMOD for dynamic audio handling, syncing music with in-game events to enhance the overall experience. Players will feel immersed in the game world as their actions, from attacks to movement, are in sync with the soundtrack.
+- [Project Description](#project-description)  
+- [Core Features](#core-features)  
+- [Technology Used](#technology-used)  
+- [Developer Role](#developer-role)  
+- [Screenshots / Videos](#screenshots--videos)  
+- [Getting Started](#getting-started)  
+- [License](#license)
 
-Additionally, I designed and implemented custom shaders to enhance visual effects, creating stunning visuals that complement the fast-paced, rhythmic gameplay. The combination of rhythm-based mechanics, responsive audio, and striking visual effects creates a unique and engaging experience for players.
+---
 
-This project demonstrates a strong blend of technical and creative skills, including advanced gameplay programming, audio integration, and visual design within Unreal Engine.
+## 📌 Project Description
+
+**Neon Paradigm** is a senior thesis project developed at the **University of the Incarnate Word**. Built in **Unreal Engine using C++ and Blueprints**, the game combines hack-and-slash action with rhythm mechanics. Players must perform attacks, dodges, and movements **on the beat** to maximize damage, combos, and style.
+
+The goal was to explore how music, timing, and feedback can merge into a deeply responsive combat system that rewards rhythm and precision.
+
+---
+
+## 🎮 Core Features
+
+- 🎵 **Rhythm-Based Combat** – Players must time inputs and attacks to the music for optimal effectiveness  
+- ⚔️ **Hack-and-Slash Gameplay** – Fast-paced melee combat with a fluid combo system  
+- 🔊 **FMOD Integration** – Dynamic audio driven by gameplay and beat events  
+- ✨ **Custom Shaders** – Visual effects react to music and gameplay to enhance immersion  
+- 🧠 **Gameplay Sync System** – Custom logic for detecting on-beat actions and syncing animations  
+- 🎓 **Academic Thesis** – Developed as a capstone project to demonstrate both technical and creative design skills
+
+---
+
+## 🛠️ Technology Used
+
+- **Unreal Engine (UE5)** – Core engine for gameplay, animation, and environment design  
+- **C++ / Blueprints** – Used for game logic, beat timing, and player input systems  
+- **FMOD Studio** – Handles beat callbacks, tempo-based events, and adaptive sound  
+- **HLSL / Custom Shaders** – Amplify rhythm feedback with visual flair  
+- **Git / GitHub** – Version control and project tracking
+
+---
+
+## 👤 Developer Role
+
+This game was developed by **Joseph Hernandez** as a solo developer and team lead. Responsibilities included:
+
+- Gameplay programming (C++, Blueprint)  
+- FMOD audio system integration  
+- Shader design and implementation  
+- Project planning and team coordination  
+- Sync logic for rhythm-based inputs and feedback  
+
+---
+
+## 🖼️ Screenshots / Videos
+
+*Coming soon*
+
+---
+
+## 🚀 Getting Started
+
+*Instructions to build and run the game (optional if needed)*
+
+---
+
+## 📄 License
+
+*Specify license if applicable (MIT, GPL, etc.)*
