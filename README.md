@@ -13,7 +13,7 @@
 - [Developer Role](#-developer-role)  
 - [Development Insights](#-development-insights)  
 - [Lessons Learned](#-lessons-learned)  
-- [Screenshots & Gameplay Preview](#-screenshots-&amp-gameplay-preview)  
+- [Screenshots & Gameplay Preview](#-screenshots-and-gameplay-preview)  
 
 ---
 
@@ -96,7 +96,7 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 
 ---
 
-## 🖼️ Screenshots & Gameplay Preview
+## 🖼️ Screenshots and Gameplay Preview
 
 ### 📸 Main Menu Screenshot  
 ![Main Menu](RepoAssets/NeonParadigm_MainMenu.png)
