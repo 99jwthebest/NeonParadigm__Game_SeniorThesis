@@ -102,7 +102,7 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 ## 🖼️ Screenshots & Gameplay Preview
 
 ### 📸 Main Menu Screenshot  
-![Main Menu](RepoAssets/main_menu.png)
+![Main Menu](RepoAssets/NeonParadigm_MainMenu.png)
 
 ---
 
