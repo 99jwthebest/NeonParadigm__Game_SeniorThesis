@@ -45,34 +45,33 @@ This project reflects a complete blend of **gameplay systems programming**, **re
 
 ## ⚙️ Feature Breakdown
 
-| Feature                  | Description                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| 🎯 Rhythm Input System   | Custom beat tracking and input timing logic synced to FMOD event timeline  |
-| 🧱 Modular Combo Chains  | Inheritance-based attack classes with timing-sensitive branching logic     |
-| 🧠 Enemy AI               | Telegraphed rhythm-based attacks with animation blending and sync logic     |
-| 🔄 FMOD Audio Triggers   | Music triggers FX, enemy waves, and beat-tied gameplay events               |
-| 💥 Shader FX             | Beat-reactive post-processing, emissive pulses, and combo visuals           |
+| Feature                | Description                                                                                  |
+|------------------------|----------------------------------------------------------------------------------------------|
+| 🎯 Rhythm Input System | Custom beat-tracking and input timing logic tied to FMOD's timeline for responsive gameplay |
+| 🧱 Modular Combo Chains| Inheritance-based attack system with rhythm-sensitive branching and combo logic             |
+| 🧠 Enemy AI            | Telegraphed attacks synced to beat phases, using animation blending and anticipation cues   |
+| 🔄 FMOD Audio Triggers | FMOD events drive game logic, triggering VFX, and UI feedback in sync with music |
+| 💥 Shader FX           | Custom-authored shaders including beat-reactive emissive pulses, and procedural textures driven by player movement or gameplay events |
 
 ---
 
 ## 🛠️ Technology Used
 
-- **Unreal Engine 5** – Core engine for game development  
-- **C++ & Blueprints** – Gameplay systems, animation control, combat logic  
-- **FMOD Studio** – Timeline callbacks, dynamic audio events, tempo syncing  
-- **HLSL / Material Editor** – Custom post-process and feedback shaders  
-- **GitHub** – Version control and development tracking  
-- **Perforce (optional)** – Used locally for backup and file locking (not shared)
+- **Unreal Engine 5** – Core game engine used for development and project integration  
+- **C++ & Blueprints** – Developed all gameplay systems, animation logic, and combat mechanics  
+- **FMOD Studio** – Integrated timeline callbacks and dynamic music-driven events with tempo syncing  
+- **HLSL / Material Editor** – Authored shaders for visual effects, beat-reactive elements, and procedural textures  
+- **GitHub** – Used for personal version control and off-campus development tracking  
+- **Perforce** – Team-based version control used during school with a shared server for asset locking and collaboration  
 
 ---
 
 ## 👤 Developer Role
 
-This game was developed by **Joseph Hernandez** as a solo programmer and team lead, with collaboration from other student artists and designers.
+This game was developed by **Joseph Hernandez** as a solo programmer with collaboration from other student artists and designers.
 
 - Designed and programmed all core systems (C++, Blueprint)  
 - Integrated FMOD and developed beat-based sync architecture  
-- Built combat systems using modular inheritance  
 - Implemented visual feedback using custom shaders and animation notifies  
 - Coordinated with teammates and managed scope/deliverables  
 - Optimized gameplay systems for feel, clarity, and audio sync reliability
@@ -90,40 +89,21 @@ This game was developed by **Joseph Hernandez** as a solo programmer and team le
 
 ---
 
+## 💡 Lessons Learned
+
+- Gained deeper understanding of real-time audio programming and event-driven systems  
+- Learned to balance creative vision with technical feasibility in a limited development cycle  
+- Strengthened communication and planning skills by collaborating cross-discipline  
+- Developed confidence in working with complex engine-level features like shader code and animation blueprints
+
+---
+
 ## 🎥 Demo Preview
 
 *Coming soon* – Video walkthrough or gameplay demo (YouTube or GIF recommended)
 
 ---
 
-## 📂 Key Code Samples
-
-*These will link to GitHub repo files once uploaded.*
-
-- `RhythmInputComponent.cpp` – Handles beat validation logic for player inputs  
-- `FMODSyncManager.cpp` – Listens to beat markers and triggers in-game events  
-- `BaseAttackAction.cpp` – Core attack inheritance class for light/heavy/finisher logic  
-- `EnemyAIController.cpp` – Rhythm-aware enemy behavior and telegraphed animations  
-
----
-
 ## 🖼️ Screenshots
 
 *Coming soon*
-
----
-
-## 🚀 Getting Started
-
-> _Note: This section is optional unless you're distributing the project._
-
-```bash
-# Requirements
-- Unreal Engine 5.1+
-- FMOD Plugin installed
-- Clone or fork repository
-
-# To run:
-1. Open project in Unreal Engine
-2. Regenerate Visual Studio files (if needed)
-3. Build and launch in editor
