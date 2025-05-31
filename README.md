@@ -95,6 +95,7 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 - Learned to balance creative vision with technical feasibility in a limited development cycle  
 - Strengthened communication and planning skills by collaborating cross-discipline  
 - Developed confidence in working with complex engine-level features like shader code and animation blueprints
+- Learned to solve an engine-level crash by reviewing crash logs across GitHub commits, narrowing it down to specific scene objects (e.g., lights or post-process volumes), and resolving the issue through targeted rollback and testing  
 
 ---
 
