@@ -22,11 +22,13 @@
 
 ## 📌 Project Description
 
-**Neon Paradigm** is a senior thesis project developed at the **University of the Incarnate Word**. Built in **Unreal Engine 5 using C++ and Blueprints**, the game combines hack-and-slash action with rhythm mechanics. Players must perform attacks, dodges, and movements **on the beat** to maximize damage, combos, and style.
+**Neon Paradigm** is a senior thesis project developed at the **University of the Incarnate Word**. Built in **Unreal Engine 5 using C++ and Blueprints**, the game combines hack-and-slash action with rhythm mechanics. Players must perform attacks, dodges, and movements on the beat to maximize damage, combos, and style.
 
-The game uses **FMOD Studio** for adaptive, dynamic audio — syncing gameplay actions and enemy behavior to music in real time. To further immerse players, **custom shaders** and visual effects react to beats and combos, enhancing moment-to-moment feedback and timing.
+The game uses **FMOD Studio** for adaptive, dynamic audio—syncing gameplay actions and enemy behavior to music in real time. To further immerse players, **custom shaders and visual effects** react to beats and combos, enhancing moment-to-moment feedback and timing.
 
-This project reflects a complete blend of **gameplay systems programming, real-time audio integration, team collaboration**, and **visual design**.
+The project was developed in collaboration with a team of **3D modelers and animators**, who helped bring the game world and its characters to life through stylized environments and expressive animation. Their creative contributions were tightly integrated into the gameplay systems to ensure rhythm and visuals worked in harmony.
+
+This project reflects a complete blend of **gameplay systems programming**, **real-time audio integration**, **team collaboration**, and **visual design**.
 
 ---
 
