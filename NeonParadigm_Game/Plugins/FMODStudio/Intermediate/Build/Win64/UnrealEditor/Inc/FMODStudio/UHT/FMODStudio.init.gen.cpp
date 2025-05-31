@@ -28,10 +28,14 @@ void EmptyLinkFunctionForGeneratedCodeFMODStudio_init() {}
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				0x886B48ED,
 =======
 				0xD4D6CB5D,
 >>>>>>> ForMergingIntoMain
+=======
+				0x3A78095B,
+>>>>>>> CorruptedFiles_NewBranch_2-17
 				0x4092B8F0,
 				METADATA_PARAMS(0, nullptr)
 			};
@@ -40,8 +44,12 @@ void EmptyLinkFunctionForGeneratedCodeFMODStudio_init() {}
 		return Z_Registration_Info_UPackage__Script_FMODStudio.OuterSingleton;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMODStudio(Z_Construct_UPackage__Script_FMODStudio, TEXT("/Script/FMODStudio"), Z_Registration_Info_UPackage__Script_FMODStudio, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x886B48ED, 0x4092B8F0));
 =======
 	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMODStudio(Z_Construct_UPackage__Script_FMODStudio, TEXT("/Script/FMODStudio"), Z_Registration_Info_UPackage__Script_FMODStudio, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xD4D6CB5D, 0x4092B8F0));
 >>>>>>> ForMergingIntoMain
+=======
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_FMODStudio(Z_Construct_UPackage__Script_FMODStudio, TEXT("/Script/FMODStudio"), Z_Registration_Info_UPackage__Script_FMODStudio, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x3A78095B, 0x4092B8F0));
+>>>>>>> CorruptedFiles_NewBranch_2-17
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

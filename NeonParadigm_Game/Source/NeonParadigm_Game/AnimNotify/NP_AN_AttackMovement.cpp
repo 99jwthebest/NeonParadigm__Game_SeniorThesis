@@ -25,6 +25,6 @@ void UNP_AN_AttackMovement::Notify(USkeletalMeshComponent* MeshComp, UAnimSequen
 	UE_LOG(LogTemp, Warning, TEXT("INitializing ATTACK COMP IN AttackMovement NOTIFY!!!!!!!!"));
 
 	if (AttackComp)
-		AttackComp->AttackMovement(AttackMovementForce);
+		AttackComp->DodgeMovement(AttackMovementForce);
 	UE_LOG(LogTemp, Warning, TEXT("INside Notify for AttackMovement!!!!"));
 }

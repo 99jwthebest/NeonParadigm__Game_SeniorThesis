@@ -81,6 +81,7 @@ void EmptyLinkFunctionForGeneratedCodeFMODEvent() {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UFMODEvent);
 	UFMODEvent::~UFMODEvent() {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	struct Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
@@ -92,15 +93,23 @@ void EmptyLinkFunctionForGeneratedCodeFMODEvent() {}
 		Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo),
 =======
 	struct Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics
+=======
+	struct Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo[] = {
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_UFMODEvent, UFMODEvent::StaticClass, TEXT("UFMODEvent"), &Z_Registration_Info_UClass_UFMODEvent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFMODEvent), 2694268342U) },
 	};
+<<<<<<< HEAD
 	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_3703911615(TEXT("/Script/FMODStudio"),
 		Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo),
 >>>>>>> ForMergingIntoMain
+=======
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_3703911615(TEXT("/Script/FMODStudio"),
+		Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODEvent_h_Statics::ClassInfo),
+>>>>>>> CorruptedFiles_NewBranch_2-17
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

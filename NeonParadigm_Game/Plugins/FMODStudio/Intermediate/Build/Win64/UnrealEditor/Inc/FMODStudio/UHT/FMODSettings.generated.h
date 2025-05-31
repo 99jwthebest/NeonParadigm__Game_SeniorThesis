@@ -15,10 +15,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FMODSTUDIO_FMODSettings_generated_h
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_110_GENERATED_BODY \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_110_GENERATED_BODY \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_110_GENERATED_BODY \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	friend struct Z_Construct_UScriptStruct_FCustomPoolSizes_Statics; \
 	FMODSTUDIO_API static class UScriptStruct* StaticStruct();
 
@@ -26,10 +30,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FCustomPoolSizes>();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_138_GENERATED_BODY \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_138_GENERATED_BODY \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_138_GENERATED_BODY \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	friend struct Z_Construct_UScriptStruct_FFMODPlatformSettings_Statics; \
 	FMODSTUDIO_API static class UScriptStruct* StaticStruct();
 
@@ -37,16 +45,21 @@ template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FCustomPoolSizes>()
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODPlatformSettings>();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_180_GENERATED_BODY \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_180_GENERATED_BODY \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_180_GENERATED_BODY \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	friend struct Z_Construct_UScriptStruct_FFMODProjectLocale_Statics; \
 	FMODSTUDIO_API static class UScriptStruct* StaticStruct();
 
 
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODProjectLocale>();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_SPARSE_DATA
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_SPARSE_DATA_PROPERTY_ACCESSORS
@@ -62,6 +75,14 @@ template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODProjectLocale>
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_ACCESSORS
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_INCLASS \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_SPARSE_DATA
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_SPARSE_DATA_PROPERTY_ACCESSORS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_RPC_WRAPPERS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_ACCESSORS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_INCLASS \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 private: \
 	static void StaticRegisterNativesUFMODSettings(); \
 	friend struct Z_Construct_UClass_UFMODSettings_Statics; \
@@ -73,10 +94,14 @@ public: \
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_STANDARD_CONSTRUCTORS \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_STANDARD_CONSTRUCTORS \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_STANDARD_CONSTRUCTORS \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UFMODSettings(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UFMODSettings) \
@@ -90,6 +115,7 @@ public: \
 	NO_API virtual ~UFMODSettings();
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_201_PROLOG
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_GENERATED_BODY_LEGACY \
@@ -115,6 +141,19 @@ public: \
 	FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_INCLASS \
 	FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_STANDARD_CONSTRUCTORS \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_201_PROLOG
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_GENERATED_BODY_LEGACY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_SPARSE_DATA \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_SPARSE_DATA_PROPERTY_ACCESSORS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_RPC_WRAPPERS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_ACCESSORS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_INCLASS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h_204_STANDARD_CONSTRUCTORS \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -123,10 +162,14 @@ template<> FMODSTUDIO_API UClass* StaticClass<class UFMODSettings>();
 
 #undef CURRENT_FILE_ID
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CURRENT_FILE_ID FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h
 =======
 #define CURRENT_FILE_ID FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h
 >>>>>>> ForMergingIntoMain
+=======
+#define CURRENT_FILE_ID FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Classes_FMODSettings_h
+>>>>>>> CorruptedFiles_NewBranch_2-17
 
 
 #define FOREACH_ENUM_EFMODLOGGING(op) \

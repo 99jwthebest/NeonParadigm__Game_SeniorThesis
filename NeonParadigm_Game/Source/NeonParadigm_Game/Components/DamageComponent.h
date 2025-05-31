@@ -13,6 +13,8 @@ class ANeonParadigm_GameCharacter;
 class UAnimMontage;
 class UScoreComponent;
 class UNiagaraSystem;
+class UNP_GameInstance;
+class ANP_BaseEnemy;
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -40,10 +42,13 @@ public:
 	void StartTimerProjectileWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
 
 	void DrawProjectileWeaponStunCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
+	void DrawEndComboWeaponCollision();
+	void StartTimerEndComboWeaponCollision(float Radius, float AmountOfDamage, TSubclassOf<UNP_DamageType> DamageTypeClass);
 
 
 	void PerfectHitOperations();
 	void SpawnRagePickups(FHitResult& HitResult);
+	float DifficultyModeDamageModifier();
 
 private:
 	
@@ -100,4 +105,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
 	FHitResult LastHitResult;
+
+	UNP_GameInstance* GameInstance;
+
 };

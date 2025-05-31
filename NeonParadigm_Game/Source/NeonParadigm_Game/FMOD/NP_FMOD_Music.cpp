@@ -13,6 +13,10 @@
 
 namespace Markers {
     FString SectionA = TEXT("SectionA_Transition");
+    FString SectionC = TEXT("SectionC_Transition");
+    FString SectionD = TEXT("SectionD_Transition");
+    FString SectionE = TEXT("SectionE_Transition");
+    FString SectionF = TEXT("SectionF_Transition");
 }
 
 // Sets default values
@@ -104,6 +108,10 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
         UE_LOG(LogTemp, Warning, TEXT("We the BEST music! Playing!!  BEATERS  TEMPO CHANGERS!!!!"));
         GlobalTempo = Tempo;
         PlayerCharacter->UpdateBPM_Visuals();
+        M_CurrentTempoDelay = 60 / Tempo;
+        PlayerCharacter->SetCurrentTempoDelay(M_CurrentTempoDelay);
+        PlayerCharacter->PlayBPM_FlipBook();
+
     }
 
     GlobalTempo = Tempo;
@@ -115,7 +123,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
     // Turn on the emission when the beat hits
     PlayerCharacter->ToggleOrbEmission();
 
-    GetWorld()->GetTimerManager().SetTimer(TimerForBPM, PlayerCharacter, &ANeonParadigm_GameCharacter::ToggleOrbEmissionOff, 0.2f, false); // 0.0167f
+    //GetWorld()->GetTimerManager().SetTimer(TimerForBPM, PlayerCharacter, &ANeonParadigm_GameCharacter::ToggleOrbEmissionOff, 0.2f, false); // 0.0167f
 
     //UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), TempBPMParticle, SpawnPoint, PlayerCharacter->GetActorRotation(), true, EPSCPoolMethod::None, true);
 
@@ -153,7 +161,7 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
        PlayerCharacter->BeginBPM_Bar();
         UE_LOG(LogTemp, Warning, TEXT("Timeline Beat Event Triggered: CurrentTempoDelay: Player Character: in What THE Crucke!!! %f"), PlayerCharacter->GetCurrentTempoDelay());
 
-
+        PlayerCharacter->PlayBPM_FlipBook();
 
         UE_LOG(LogTemp, Warning, TEXT("Timeline MARKER Event Triggered: Last Beat Time: %f"), PlayerCharacter->GetLastBeatTime());
         BPM_Started = true;
@@ -182,7 +190,9 @@ void ANP_FMOD_Music::OnTimelineBeat(int32 Bar, int32 Beat, int32 Position, float
 void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 {
     // Example marker: if marker name is "StartAction", set the parameter to some value
-    if (Name == Markers::SectionA || Name == "SectionB_Transition")
+    if (Name == Markers::SectionA || Name == "SectionB_Transition" || 
+        Name == Markers::SectionC || Name == Markers::SectionD ||
+        Name == Markers::SectionE || Name == Markers::SectionF)
     {
         if (FMODAudioComponent)
         {
@@ -252,7 +262,6 @@ void ANP_FMOD_Music::OnTimelineMarker(FString Name, int32 Position)
 
 void ANP_FMOD_Music::TryPlay()
 {
-    //FMODAudioComponent->Stop();
     FMOD_STUDIO_PLAYBACK_STATE PlayBackState = FMOD_STUDIO_PLAYBACK_STOPPED;
     if (!FMODAudioComponent->StudioInstance)
     {
@@ -268,21 +277,13 @@ void ANP_FMOD_Music::TryPlay()
     }
 
     FMODAudioComponent->Play();
-    /*
-    if (!FMODAudioComponent->IsPlaying())
-    {
-       
-    }
-    else
-    {
-    */
-        UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
-        UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
 
-    //}
+    UE_LOG(LogTemp, Error, TEXT("We the BEST music! Playing!!"));
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh %s"), FMODAudioComponent->IsPlaying() ? TEXT("true") : TEXT("false"));
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Paused %s"), FMODAudioComponent->GetPaused() ? TEXT("true") : TEXT("false"));
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Length %d"), FMODAudioComponent->GetLength());
+    UE_LOG(LogTemp, Log, TEXT("We the BEST music! Playing!?!? huh Timeline Position %d"), FMODAudioComponent->GetTimelinePosition());
+
 }
 
 

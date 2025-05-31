@@ -15,10 +15,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FMODSTUDIO_FMODBankLookup_generated_h
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_12_GENERATED_BODY \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_12_GENERATED_BODY \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_12_GENERATED_BODY \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	friend struct Z_Construct_UScriptStruct_FFMODLocalizedBankRow_Statics; \
 	static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -27,10 +31,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODLocalizedBankRow>();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_20_GENERATED_BODY \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_20_GENERATED_BODY \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_20_GENERATED_BODY \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	friend struct Z_Construct_UScriptStruct_FFMODLocalizedBankTable_Statics; \
 	static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -38,6 +46,7 @@ template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODLocalizedBankR
 
 template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODLocalizedBankTable>();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_SPARSE_DATA
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_SPARSE_DATA_PROPERTY_ACCESSORS
@@ -53,6 +62,14 @@ template<> FMODSTUDIO_API UScriptStruct* StaticStruct<struct FFMODLocalizedBankT
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_ACCESSORS
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_INCLASS \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_SPARSE_DATA
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_SPARSE_DATA_PROPERTY_ACCESSORS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_RPC_WRAPPERS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_ACCESSORS
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_INCLASS \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 private: \
 	static void StaticRegisterNativesUFMODBankLookup(); \
 	friend struct Z_Construct_UClass_UFMODBankLookup_Statics; \
@@ -62,10 +79,14 @@ public: \
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_STANDARD_CONSTRUCTORS \
 =======
 #define FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_STANDARD_CONSTRUCTORS \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_STANDARD_CONSTRUCTORS \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UFMODBankLookup(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UFMODBankLookup) \
@@ -79,6 +100,7 @@ public: \
 	NO_API virtual ~UFMODBankLookup();
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_25_PROLOG
 #define FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_GENERATED_BODY_LEGACY \
@@ -104,6 +126,19 @@ public: \
 	FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_INCLASS \
 	FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_STANDARD_CONSTRUCTORS \
 >>>>>>> ForMergingIntoMain
+=======
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_25_PROLOG
+#define FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_GENERATED_BODY_LEGACY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_SPARSE_DATA \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_SPARSE_DATA_PROPERTY_ACCESSORS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_RPC_WRAPPERS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_ACCESSORS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_INCLASS \
+	FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h_28_STANDARD_CONSTRUCTORS \
+>>>>>>> CorruptedFiles_NewBranch_2-17
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -112,10 +147,14 @@ template<> FMODSTUDIO_API UClass* StaticClass<class UFMODBankLookup>();
 
 #undef CURRENT_FILE_ID
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define CURRENT_FILE_ID FID_Angie_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h
 =======
 #define CURRENT_FILE_ID FID__J_Hernandez_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h
 >>>>>>> ForMergingIntoMain
+=======
+#define CURRENT_FILE_ID FID_Users_josep_Documents_Unreal_Projects_NeonParadigm__Game_SeniorThesis_NeonParadigm_Game_Plugins_FMODStudio_Source_FMODStudio_Private_FMODBankLookup_h
+>>>>>>> CorruptedFiles_NewBranch_2-17
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -64,7 +64,7 @@ bool UCharacterStateComponent::IsCurrentStateEqualToAny(const TArray<ECharacterS
 
 	for (ECharacterStates State : StatesToCheck)
 	{
-		UE_LOG(LogTemp, Log, TEXT("State to Check: %d"), (int32)State);
+		//UE_LOG(LogTemp, Log, TEXT("State to Check: %d"), (int32)State);
 	}
 
 	return StatesToCheck.Contains(CurrentState);
@@ -76,7 +76,10 @@ void UCharacterStateComponent::ResetState()
 		MyCharacter->GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying)
 	{
 		bOnLandReset = true;
-		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling);
+		MyCharacter->GetCharacterMovement()->GravityScale = 2.5f;
+
+		UE_LOG(LogTemp, Warning, TEXT("State is not reset IN AIR"))
 	}
 	else
 	{
@@ -96,6 +99,12 @@ void UCharacterStateComponent::ResetState()
 			MyCharacter->ResetDodgeCountAndMultiplier();
 			MyCharacter->TimerCameraFOV(MyCharacter->GetDefaultCameraFOV(), MyCharacter->GetDefaultCameraFOVSpeedChange());
 			MyCharacter->SetPerfectBeatHit(false);
+			AttackComp->SetSaveLaunchAttack(false);
+			MyCharacter->GetCharacterMovement()->GravityScale = 2.5f;
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("State is not reset"))
 		}
 	}
 }

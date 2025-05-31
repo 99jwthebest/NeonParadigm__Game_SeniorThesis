@@ -20,6 +20,7 @@ class ANP_BaseEnemy;
 class UScoreComponent;
 class UNP_GameInstance;
 struct FInputActionValue;
+struct FInputActionInstance;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -83,7 +84,15 @@ class ANeonParadigm_GameCharacter : public ACharacter
 	/** Projectile Weapon Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ProjectileWeaponStunAction;
-	
+
+	/** Navigate Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* NavigateAction;
+
+	/** Navigate Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* NavigateActionKeyboard;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = State, meta = (AllowPrivateAccess = "true"))
 	UCharacterStateComponent* CharacterState;
 
@@ -185,6 +194,8 @@ protected:
 	FVector2D LookAxisVector;
 
 	void LightAttack();
+
+	void LaunchAttack(const FInputActionInstance& Instance);
 
 	void HeavyAttack();
 
@@ -333,7 +344,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TestRhythmDelayEvent();
 
-
+	UFUNCTION(BlueprintCallable)
+	void RhythmCheckEvent();
 
 private:
 
@@ -389,6 +401,10 @@ public:
 	void ToggleOrbEmission();
 	void ToggleOrbEmissionOff();
 	UStaticMeshComponent* GetBPM_OrbMesh();
+	UFUNCTION(BlueprintCallable)
+	float UpdateFlipBookPlayRate();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayBPM_FlipBook();
 
 private:
 	UMaterialInterface* CurrentOrbMaterial;
@@ -441,6 +457,11 @@ public:
 	void UpdateDodgeBarEvent();
 	UFUNCTION(BlueprintImplementableEvent)
 	void SpawnWinMenuEvent();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayLightAttackShake();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayHeavyAttackShake();
 
 public:
 
@@ -591,6 +612,8 @@ private:
 
 	FTimerHandle CheckForTargetInCamViewTimerHandle;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Dodge, meta = (AllowPrivateAccess = "true"))
+	float DodgeBaseForce;
 
 public:
 
@@ -622,5 +645,21 @@ private:
 
 	bool bAutoTargetCamera;
 
+	bool bHasAirDodged;
+	bool bPlayerInputEnabled;
+
+public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayDamageCameraShake();
+
+	void NavigateMenus(const FInputActionInstance& Instance);
+	void NavigateMenusKeyBor();
+
+	UFUNCTION(BlueprintCallable)
+	void EnablePlayerInput();
+	UFUNCTION(BlueprintCallable)
+	void DisablePlayerInput();
+	UFUNCTION(BlueprintPure)
+	bool PlayerInputEnabled();
 };
 

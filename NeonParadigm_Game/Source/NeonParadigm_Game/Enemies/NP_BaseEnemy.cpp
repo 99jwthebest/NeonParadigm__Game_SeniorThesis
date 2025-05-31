@@ -119,13 +119,16 @@ void ANP_BaseEnemy::UpdateCharacterLocation()
 
 void ANP_BaseEnemy::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
+	if (bIsBoss)
+		return;
+
 	// Handle the damage taken event here
 
-	float FinalDamage = Damage * DamageMultiplier;
+	//Damage * DamageMultiplier;
 
-	CurrentHealth -= FinalDamage;
+	CurrentHealth -= Damage;
 
-	UE_LOG(LogTemp, Warning, TEXT("Actor %s took %f damage (Multiplied: %f)"), *DamagedActor->GetName(), Damage, FinalDamage);
+	UE_LOG(LogTemp, Warning, TEXT("Z_Actor %s took %f damage"), *DamagedActor->GetName(), Damage);
 
 
 	if (CurrentHealth > 0.0f)
@@ -231,6 +234,7 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 				GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Falling); // set to flying maybe
 				AttackMovement(40.0f); //15.0f  should maybe be the value
 				bAirKnockback = true;
+				EnemyStunnedWithProjectiles();
 				return HR_Air_Knockback;
 
 			case EDamageTypes::Launch:
@@ -290,6 +294,8 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 				return HR_Stun;
 			case EDamageTypes::Explosion:
 				UE_LOG(LogTemp, Error, TEXT("ENEMY HIT REACTION IS NOT Explosion"));
+				if (bIsBoss)
+					return HR_Stun;
 				EnemyStunnedWithProjectiles();
 				AttackMovement(25.0f); //15.0f  should maybe be the value
 				PlayCameraShake();
@@ -304,12 +310,17 @@ UAnimMontage* ANP_BaseEnemy::GetHitReactionMontage(EDamageTypes DamageType)  // 
 void ANP_BaseEnemy::PerformDeath()
 {
 	SetState(ECharacterStates::Death);
-	PlayAnimMontage(DeathMontage);
+	if(!bIsBoss)
+		PlayAnimMontage(DeathMontage);
 	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
+	
+	GetWorld()->GetTimerManager().SetTimer(TimerForLaunchMovement, this, &ANP_BaseEnemy::EndTarget, .25f, false); // 0.0167f
+
+	//EndTarget();
 
 	PerformThingsAfterDeath();
 }
@@ -371,13 +382,18 @@ void ANP_BaseEnemy::ResetState() // move reset state in anim notify to make adju
 
 void ANP_BaseEnemy::OnTargeted()
 {
+	if (bIsBoss || !bCanBeParried || !bCanBeTargeted)
+		return;
+
 	HealthBarWidget->SetVisibility(true);
 	LockOnWidget->SetVisibility(true);
 }
 
 void ANP_BaseEnemy::EndTarget()
 {
+	if(HealthBarWidget)
 	HealthBarWidget->SetVisibility(false);
+	if(LockOnWidget)
 	LockOnWidget->SetVisibility(false);
 }
 
@@ -600,7 +616,7 @@ void ANP_BaseEnemy::Landed(const FHitResult& Hit)
 	if (bAirKnockback)
 	{
 		bAirKnockback = false;
-		PlayAnimMontage(HR_Air_Knockback_OnLanded);
+		//PlayAnimMontage(HR_Air_Knockback_OnLanded);
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		GetCharacterMovement()->GravityScale = 2.5f;   // gravity scale **********************
 
@@ -639,5 +655,15 @@ UAnimMontage* ANP_BaseEnemy::GetGetupAnimMontage()
 bool ANP_BaseEnemy::GetCanBeTargeted()
 {
 	return bCanBeTargeted;
+}
+
+bool ANP_BaseEnemy::GetbIsBoss()
+{
+	return bIsBoss;
+}
+
+bool ANP_BaseEnemy::GetCanBeParried()
+{
+	return bCanBeParried;
 }
 

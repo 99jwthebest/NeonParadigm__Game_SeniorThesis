@@ -26,6 +26,9 @@ UAttackComponent::UAttackComponent()
 	DurationOfLaunch = 0;
 	bLaunched = false;
 	bCanAerialAttack = true;
+	bNotifyLaunchAttackPassed = true;
+
+	OnMontageBlendoutStarted.BindUObject(this, &UAttackComponent::LightAttackBlendedOut);
 }
 
 
@@ -71,11 +74,8 @@ void UAttackComponent::LightAttackEvent()
 {
 	if (CanAttack())
 	{
-		if (!DetermineDesiredAttack())
-		{
-			ResetHeavyAttack();
-			PerformLightAttack(LightAttackIndex);
-		}
+		ResetHeavyAttack();
+		PerformLightAttack(LightAttackIndex);
 	}
 	else
 	{
@@ -117,12 +117,20 @@ void UAttackComponent::PerformLightAttack(int AttackIndex)
 		MyCharacter->SetCurrentAnimTimeDelay(GetNotifyTriggerTime());
 		MyCharacter->TestRhythmDelayEvent();
 		
+		//UAnimInstance* AnimInstance = MyCharacter->GetMesh()->GetAnimInstance();
+		//if (AnimInstance && AnimInstance->Montage_IsPlaying(Montage))
+		//{
+		//	return;
+		//}
+
 		if (IsValid(Montage))
 		{
 			UAnimMontage* LightAttackMontage = Montage;
 			CharacterState->SetState(ECharacterStates::Attack);
 			//AttackMovement(5.0f);
 			MyCharacter->PlayAnimMontage(LightAttackMontage, MyCharacter->GetCurrentAnimPlayRate());
+			MyCharacter->GetMesh()->GetAnimInstance()->Montage_SetBlendingOutDelegate(OnMontageBlendoutStarted, LightAttackMontage);
+			
 			// Log the impact time for debugging
 			UE_LOG(LogTemp, Error, TEXT("Impact Time for Attack %d: %f seconds"), LightAttackIndex, GetNotifyTriggerTime());
 			LightAttackIndex++;
@@ -163,7 +171,7 @@ void UAttackComponent::AttackMovement(float Distance)
 	StopAttackMovement();
 	if (Distance != 0.0f)
 	{
-		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocation, 0.01f, true); // 0.0167f
+		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocationAttack, 0.01f, true); // 0.0167f
 	}
 }
 
@@ -172,7 +180,7 @@ void UAttackComponent::StopAttackMovement()
 	GetWorld()->GetTimerManager().ClearTimer(TimerForAttackMovement); // this might not work
 }
 
-void UAttackComponent::UpdateCharacterLocation()
+void UAttackComponent::UpdateCharacterLocationAttack()
 {
 	DurationOfMovement++;
 	UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement: %d"), DurationOfMovement);
@@ -186,44 +194,70 @@ void UAttackComponent::UpdateCharacterLocation()
 
 	FVector CurrentLocation = MyCharacter->GetActorLocation();
 	FVector ForwardMovement = MyCharacter->GetActorForwardVector() * gDistance;
-
-	// Trace forward to check for slope or small object
-	FHitResult HitResult;
-	FVector TraceStart = CurrentLocation + FVector(0, 0, 50); // Start a little above the character
-	FVector TraceEnd = TraceStart + MyCharacter->GetActorForwardVector() * gDistance;
-
-	FCollisionQueryParams QueryParams;
-	QueryParams.AddIgnoredActor(MyCharacter);
-
-	// Perform the forward trace
-	bool bHit = GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
-
-	bool bEnableSweep = false; // Default to no sweep
-	if (bHit)
-	{
-		// Check if the hit surface is too steep
-		FVector HitNormal = HitResult.Normal;
-		float SlopeAngle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(HitNormal, FVector(0, 0, 1))));
-
-		if (SlopeAngle > 70.f)
-		{
-			// If the slope is too steep, we enable sweep to avoid climbing it
-			bEnableSweep = true;
-			UE_LOG(LogTemp, Warning, TEXT("Slope too steep. Sweep enabled."));
-		}
-		else if (HitResult.Distance <= 10.0f)
-		{
-			// If the object is small, disable sweep to pass through it
-			bEnableSweep = false;
-			UE_LOG(LogTemp, Warning, TEXT("Small object detected. Sweep disabled."));
-		}
-	}
-
 	// Move the character based on the decision above
 	FVector TargetLocation = CurrentLocation + ForwardMovement;
 	FVector AttackMovementLocation = FMath::VInterpTo(CurrentLocation, TargetLocation, GetWorld()->GetDeltaSeconds(), SpeedOfAttackMovement);
 
-	MyCharacter->SetActorLocation(AttackMovementLocation, bEnableSweep);
+	MyCharacter->SetActorLocation(AttackMovementLocation, false);
+}
+
+void UAttackComponent::DodgeMovement(float Distance)
+{
+	gDistance = Distance;
+	StopAttackMovement();
+	if (Distance != 0.0f)
+	{
+		GetWorld()->GetTimerManager().SetTimer(TimerForAttackMovement, this, &UAttackComponent::UpdateCharacterLocationDodge, 0.01f, true); // 0.0167f
+	}
+}
+
+void UAttackComponent::StopDodgeMovement()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TimerForAttackMovement); // this might not work
+}
+
+void UAttackComponent::UpdateCharacterLocationDodge()
+{
+	// Increment the dodge duration
+	DurationOfMovement++;
+	UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement: %d"), DurationOfMovement);
+
+	// Check if the dodge duration has passed and stop the movement
+	if (DurationOfMovement >= 25)
+	{
+		// Reset MaxWalkSpeed to normal after dodge ends
+		MyCharacter->GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+
+		// Stop the dodge movement logic
+		StopAttackMovement();
+		DurationOfMovement = 0;
+
+		// Re-enable movement input after dodge
+		if (APlayerController* PlayerController = Cast<APlayerController>(MyCharacter->GetController()))
+		{
+			PlayerController->EnableInput(PlayerController);
+		}
+		UE_LOG(LogTemp, Warning, TEXT("Duration Of Movement Reset: %d"), DurationOfMovement);
+		return;
+	}
+
+	// Disable movement input during dodge (optional)
+	//if (DurationOfMovement == 1)
+	//{
+		/*if (APlayerController* PlayerController = Cast<APlayerController>(MyCharacter->GetController()))
+		{
+			PlayerController->DisableInput(PlayerController);
+		}*/
+
+		// Apply dodge movement by launching character in the forward direction
+		FVector DodgeDirection = MyCharacter->GetActorForwardVector();
+		FVector DodgeForce = DodgeDirection * gDistance; // You can tweak the force here
+
+		// Apply launch force to the character (gives immediate, fast movement)
+		MyCharacter->LaunchCharacter(DodgeForce, true, true);
+	//}
+
+	//MyCharacter->GetCharacterMovement()->MaxWalkSpeed = 10000.0f; // Extremely high speed during dodge
 }
 
 void UAttackComponent::SaveLightAttack()
@@ -240,17 +274,9 @@ void UAttackComponent::SaveLightAttack()
 		{
 			//Reset Attack If Current State Is Equal To Attacking State
 			CharacterState->SetState(ECharacterStates::None);
-			LightAttackEvent();
-
 		}
-		else
-		{
-			LightAttackEvent();
-		}
-	}
-	else
-	{
-		return;
+		
+		LightAttackEvent();
 	}
 }
 
@@ -463,9 +489,22 @@ void UAttackComponent::StopLaunchMovement()
 	GetWorld()->GetTimerManager().ClearTimer(TimerForLaunchMovement); // this might not work
 }
 
+bool UAttackComponent::GetAerialAttackB()
+{
+	return bCanAerialAttack;
+}
+
 bool UAttackComponent::CanAerialAttack()
 {
-	return bCanAerialAttack; //&& bLaunched;
+	TArray<ECharacterStates> CurrentCharacterState;
+	CurrentCharacterState.Add(ECharacterStates::Attack);
+	CurrentCharacterState.Add(ECharacterStates::Dodge);
+	CurrentCharacterState.Add(ECharacterStates::Disabled);
+	CurrentCharacterState.Add(ECharacterStates::Death);
+	CurrentCharacterState.Add(ECharacterStates::Parry);
+	//UE_LOG(LogTemp, Error, TEXT("LIGHT ATTACK MONTAGE INVALID"));
+
+	return !CharacterState->IsCurrentStateEqualToAny(CurrentCharacterState) && bCanAerialAttack; //&& bLaunched;
 }
 
 void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
@@ -475,6 +514,8 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 		//Reset Light Attack Index If Index Is Equal Or Greater Than Length Of Light Attack Sequence
 		LightAttackIndex = 0;
 	}
+
+	UE_LOG(LogTemp, Error, TEXT("BAY_AIRRRRRR Attack %d: "), LightAttackIndex);
 
 	if (LightAerialAttackMontages.IsValidIndex(LightAttackIndex))
 	{
@@ -488,6 +529,7 @@ void UAttackComponent::PerformAerialLightAttack(int AttackIndex)
 		{
 			UAnimMontage* LightAerialAttackMontage = Montage;
 			MyCharacter->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+			MyCharacter->GetCharacterMovement()->GravityScale = 0.0f;
 
 			CharacterState->SetState(ECharacterStates::Attack);
 			//AttackMovement(5.0f); // we probably don't need this!!!! ********
@@ -529,4 +571,43 @@ void UAttackComponent::ResetLaunched()
 bool UAttackComponent::GetLaunched()
 {
 	return bLaunched;
+}
+
+bool UAttackComponent::GetSaveLaunchAttack()
+{
+	return bSaveLaunchAttack;
+}
+
+void UAttackComponent::SetSaveLaunchAttack(bool bSetSaveLaunchAttack)
+{
+	bSaveLaunchAttack = bSetSaveLaunchAttack;
+}
+
+void UAttackComponent::SetNotifyLaunchPassed(bool bNotifyLaunchPassed)
+{
+	bNotifyLaunchAttackPassed = bNotifyLaunchPassed;
+}
+
+bool UAttackComponent::GetNotifyLaunchPassed()
+{
+	return bNotifyLaunchAttackPassed;
+}
+
+bool UAttackComponent::GetSaveLightAttack()
+{
+	return bSaveLightAttack;
+}
+
+bool UAttackComponent::GetSaveHeavyAttack()
+{
+	return bSaveHeavyAttack;
+}
+
+void UAttackComponent::LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted)
+{
+	UE_LOG(LogTemp, Warning, TEXT("JK_Light attack blended out"))
+	//CharacterState->SetState(ECharacterStates::None);T
+	//CharacterState->ResetState();
+	//if AttackState not reset
+		//then resetState
 }

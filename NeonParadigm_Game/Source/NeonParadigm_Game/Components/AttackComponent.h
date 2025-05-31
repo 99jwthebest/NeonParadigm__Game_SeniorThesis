@@ -36,7 +36,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AttackMovement(float Distance);
 	void StopAttackMovement();
-	void UpdateCharacterLocation();
+	void UpdateCharacterLocationAttack();
+	// High float values for Effectiveness, e.g. 1000.0f
+	UFUNCTION(BlueprintCallable)
+	void DodgeMovement(float Distance);
+	void StopDodgeMovement();
+	void UpdateCharacterLocationDodge();
 	FVector AdjustLocationToFloor(FVector TargetLocation);
 	void SaveLightAttack();
 	void ResetLightAttack();
@@ -56,12 +61,26 @@ public:
 	void MovePlayerIntoAir();
 	void StopLaunchMovement();
 
+	UFUNCTION(BlueprintPure)
+	bool GetAerialAttackB();
+	UFUNCTION(BlueprintPure)
 	bool CanAerialAttack();
 	void PerformAerialLightAttack(int AttackIndex);
 	void ResetLightAerialAttack();
 	void ResetLaunched();
 	UFUNCTION(BlueprintPure)
 	bool GetLaunched();
+
+	bool GetSaveLaunchAttack();
+
+	void SetSaveLaunchAttack(bool bSetSaveLaunchAttack);
+
+	void SetNotifyLaunchPassed(bool bNotifyLaunchPassed);
+	bool GetNotifyLaunchPassed();
+
+	bool GetSaveLightAttack();
+
+	bool GetSaveHeavyAttack();
 
 	UPROPERTY(VisibleAnywhere)
 	ANeonParadigm_GameCharacter* MyCharacter;
@@ -98,6 +117,14 @@ private:
 	bool bLaunched;
 	bool bCanAerialAttack;
 
+	bool bSaveLaunchAttack;
+	bool bNotifyLaunchAttackPassed;
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	TArray<UAnimMontage*> LightAerialAttackMontages;
+
+	FOnMontageBlendingOutStarted OnMontageBlendoutStarted;
+
+	void LightAttackBlendedOut(UAnimMontage* AttackMontage, bool bWasInterrupted);
 };

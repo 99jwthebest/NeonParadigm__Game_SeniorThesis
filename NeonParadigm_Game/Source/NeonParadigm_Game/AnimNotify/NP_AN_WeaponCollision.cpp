@@ -31,5 +31,5 @@ void UNP_AN_WeaponCollision::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
     if (!CharacterMoveComp->IsRaging())
         DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage, DamageTypeClass);
     else
-        DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage * 10, DamageTypeClass); // Rage mode damage
+        DamageComp->DrawWeaponCollision(End, Radius, AmountOfDamage * 2.5f, DamageTypeClass); // Rage mode damage
 }

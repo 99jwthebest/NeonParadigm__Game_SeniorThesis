@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4bc5a3ff-815d-439b-a08d-0c5dd542b789}">
+		<property name="assetPath">
+			<value>Music/speaker-blaster-capturez-main-version-02-48-10465 2 1.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>168.15020408163267</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{597a6ac2-ef8b-40c4-9dc4-6715dabb6983}</destination>
+		</relationship>
+	</object>
+</objects>

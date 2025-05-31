@@ -110,6 +110,7 @@ public:
 	void HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
 	UAnimMontage* GetHitReactionMontage(EDamageTypes DamageType);
+	UFUNCTION(BlueprintCallable, Category = "State")
 	void PerformDeath();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PerformThingsAfterDeath();
@@ -227,9 +228,14 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
 	bool bCanBeTargeted = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes", meta = (AllowPrivateAccess = "true"))
+	bool bIsBoss = false;
 
 public:
 
 	bool GetCanBeTargeted();
+	bool GetbIsBoss();
+
+	bool GetCanBeParried();
 
 };
