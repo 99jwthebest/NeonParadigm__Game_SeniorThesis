@@ -99,12 +99,37 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 
 ---
 
-## 🎥 Demo Preview
+## 🖼️ Screenshots & Gameplay Preview
 
-*Coming soon* – Video walkthrough or gameplay demo (YouTube or GIF recommended)
+### 📸 Main Menu Screenshot  
+![Main Menu](RepoAssets/main_menu.png)
 
 ---
 
-## 🖼️ Screenshots
+### 🎮 Gameplay GIFs
 
-*Coming soon*
+**⚔️ Combat: Light and Heavy Attack Chains**  
+![Combat](RepoAssets/combat.gif)  
+*Shows responsive attack chaining and rhythm-based inputs in action.*
+
+**🕺 Dodge on Beat**  
+![Dodge](RepoAssets/dodge.gif)  
+*Demonstrates precise on-beat dodge mechanics with visual/audio feedback.*
+
+**🎵 FMOD-Driven Enemy Waves**  
+![Enemy Waves](RepoAssets/enemy_waves.gif)  
+*Enemies spawn and behave in sync with the music timeline.*
+
+**✨ Shader Effects & Feedback**  
+![Shaders](RepoAssets/shaders.gif)  
+*Custom shaders responding to combos, movement, and rhythm data.*
+
+**💥 Combo Multiplier + Beat Score System**  
+![Scoring](RepoAssets/score_system.gif)  
+*Visual feedback for on-beat inputs and scoring streaks.*
+
+**🎬 Finishing the Encounter**  
+![Finisher](RepoAssets/finisher.gif)  
+*Example of encounter pacing and final score presentation.*
+
+---
