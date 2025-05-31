@@ -108,28 +108,19 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 
 ### 🎮 Gameplay GIFs
 
-**⚔️ Combat: Light and Heavy Attack Chains**  
-![Combat](RepoAssets/combat.gif)  
-*Shows responsive attack chaining and rhythm-based inputs in action.*
+**⚔️ Combat **  
+![Combat](RepoAssets/NeonP_Combat1.gif)  
 
-**🕺 Dodge on Beat**  
-![Dodge](RepoAssets/dodge.gif)  
-*Demonstrates precise on-beat dodge mechanics with visual/audio feedback.*
+![Dodge](RepoAssets/NeonP_Combat2.gif)  
 
-**🎵 FMOD-Driven Enemy Waves**  
-![Enemy Waves](RepoAssets/enemy_waves.gif)  
-*Enemies spawn and behave in sync with the music timeline.*
+![Enemy Waves](RepoAssets/NeonP_Combat3.gif)  
 
 **✨ Shader Effects & Feedback**  
-![Shaders](RepoAssets/shaders.gif)  
-*Custom shaders responding to combos, movement, and rhythm data.*
+![Shaders](RepoAssets/NeonP_Shader1.gif)  
 
-**💥 Combo Multiplier + Beat Score System**  
-![Scoring](RepoAssets/score_system.gif)  
-*Visual feedback for on-beat inputs and scoring streaks.*
+![Scoring](RepoAssets/NeonP_Shader2.gif)  
 
-**🎬 Finishing the Encounter**  
-![Finisher](RepoAssets/finisher.gif)  
-*Example of encounter pacing and final score presentation.*
+**🎬 Boss**  
+![Finisher](RepoAssets/NeonP_Boss.gif)  
 
 ---
