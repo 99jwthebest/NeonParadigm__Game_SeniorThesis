@@ -108,19 +108,18 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 
 ### 🎮 Gameplay GIFs
 
-*⚔️ Combat *  
 ![Combat](RepoAssets/NeonP_Combat1.gif)  
-
 ![Dodge](RepoAssets/NeonP_Combat2.gif)  
-
 ![Enemy Waves](RepoAssets/NeonP_Combat3.gif)  
 
-**✨ Shader Effects & Feedback**  
-![Shaders](RepoAssets/NeonP_Shader1.gif)  
+---
 
+![Shaders](RepoAssets/NeonP_Shader1.gif)  
 ![Scoring](RepoAssets/NeonP_Shader2.gif)  
 
-**🎬 Boss**  
-![Finisher](RepoAssets/NeonP_Boss.gif)  
+---
+
+![Finisher](RepoAssets/NeonP_Boss.gif)
 
 ---
+
