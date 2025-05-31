@@ -13,7 +13,7 @@
 - [Developer Role](#-developer-role)  
 - [Development Insights](#-development-insights)  
 - [Lessons Learned](#-lessons-learned)  
-- [Screenshots & Gameplay Preview](#-screenshots-and-gameplay-preview)  
+- [Screenshots and Gameplay Preview](#-screenshots-and-gameplay-preview)  
 
 ---
 
