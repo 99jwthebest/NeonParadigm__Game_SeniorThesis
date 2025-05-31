@@ -1,6 +1,6 @@
 # 🎮 Neon Paradigm
 
-*A hack-and-slash rhythm game where players must strike and dodge to the beat, using dynamic audio and custom shaders to create a fast-paced, immersive experience.*
+*Neon Paradigm is a hack-and-slash rhythm game that challenges players to time their attacks and dodges to the beat of the music. It features responsive combat, dynamic audio, and custom shaders that come together to create a fast-paced, immersive experience.*
 
 ---
 
