@@ -34,12 +34,12 @@ This project reflects a complete blend of **gameplay systems programming**, **re
 
 ## 🎮 Core Features
 
-- 🎵 **Rhythm-Based Combat** – Players attack/dodge on beat to deal more damage and trigger combo bonuses  
-- ⚔️ **Hack-and-Slash Mechanics** – Light/heavy attack chains and beat-timed executions  
-- 🔊 **FMOD Integration** – Syncs game events to music via timeline callbacks and beat data  
-- ✨ **Custom Shaders** – Post-process and particle effects timed to rhythm and combat events  
-- 🧠 **On-Beat Feedback System** – Real-time scoring and input window detection for rhythm accuracy  
-- 🎓 **Capstone-Level Scope** – Built for thesis completion, including full technical and creative ownership
+🎵 **Rhythm-Based Combat** – Players attack and dodge in sync with the beat to deal increased damage, build combos, and earn timing bonuses  
+⚔️ **Hack-and-Slash Mechanics** – Features responsive light/heavy attack chains tied to rhythmic input windows  
+🔊 **FMOD Integration** – Uses FMOD timeline callbacks and beat data to synchronize gameplay elements with music in real time  
+✨ **Custom Shader Work** – Authored shaders in Unreal Engine for both beat-reactive visuals and procedural effects, including textures that respond to player movement and gameplay events  
+🧠 **On-Beat Feedback System** – Implements real-time rhythm accuracy detection and scoring system for responsive player feedback  
+🎓 **Thesis-Level Scope** – Developed as part of a senior thesis, with full programming responsibilities handled independently in collaboration with artists and animators
 
 ---
 
