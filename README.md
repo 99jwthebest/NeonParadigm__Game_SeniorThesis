@@ -108,7 +108,7 @@ This game was developed by **Joseph Hernandez** as a solo programmer with collab
 
 ### 🎮 Gameplay GIFs
 
-**⚔️ Combat **  
+*⚔️ Combat *  
 ![Combat](RepoAssets/NeonP_Combat1.gif)  
 
 ![Dodge](RepoAssets/NeonP_Combat2.gif)  
