@@ -6,17 +6,14 @@
 
 ## 📑 Table of Contents
 
-- [Project Description](#project-description)  
-- [Core Features](#core-features)  
-- [Feature Breakdown](#feature-breakdown)  
-- [Technology Used](#technology-used)  
-- [Developer Role](#developer-role)  
-- [Development Insights](#development-insights)  
-- [Demo Preview](#demo-preview) *(optional)*  
-- [Key Code Samples](#key-code-samples) *(optional)*  
-- [Screenshots](#screenshots) *(optional)*  
-- [Getting Started](#getting-started) *(optional)*  
-- [License](#license)
+- [Project Description](#-project-description)  
+- [Core Features](#-core-features)  
+- [Feature Breakdown](#-feature-breakdown)  
+- [Technology Used](#-technology-used)  
+- [Developer Role](#-developer-role)  
+- [Development Insights](#-development-insights)  
+- [Lessons Learned](#-lessons-learned)  
+- [Screenshots & Gameplay Preview](#-screenshots--gameplay-preview)  
 
 ---
 
